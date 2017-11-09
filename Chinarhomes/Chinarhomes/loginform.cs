@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
 
 namespace Chinarhomes
 {
@@ -40,7 +41,7 @@ namespace Chinarhomes
             {
                 usernametxt.Text = "Username";
                 namelbl.Visible = false;
-                usernametxt.ForeColor = SystemColors.ActiveCaption ;
+                usernametxt.ForeColor = SystemColors.ActiveCaption;
             }
             else { namelbl.Visible = true; }
         }
@@ -69,74 +70,106 @@ namespace Chinarhomes
             }
 
         }
+        public static string md5hash(string input)
+        {
+
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input + "Zohan123"));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
 
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            /*
-                        if (usernametxt.Text.Contains("'") || pwdtxt.Text.Contains("'") || usernametxt.Text.Contains("\\") || pwdtxt.Text.Contains("\\"))
-                        {
+            string pwd = md5hash(pwdtxt.Text);
 
-                            error.Text = "Username incorrect";
-                            error.Visible = true;
-                            usernametxt.Text = "";
-                            pwdtxt.Text = "";
+            if (usernametxt.Text.Contains("'") || pwdtxt.Text.Contains("'") || usernametxt.Text.Contains("\\") || pwdtxt.Text.Contains("\\"))
+            {
+
+                error.Text = "Username incorrect";
+                error.Visible = true;
+                namelbl.Visible = true;
+                pwdlbl.Visible = true;
+                usernametxt.Text = "";
+                pwdtxt.Text = "";
+
+            }
+            else if (usernametxt.Text != "" && pwdtxt.Text != "")
+            {
+                int i;
+                i = obj.Count("Select Count(sid) from staff where username='" + usernametxt.Text + "';");
+                if (i == 1)
+                {
+                    MySqlDataReader dr;
+                    dr = obj.Query("Select username,password,admin from staff where username='" + usernametxt.Text + "';");
+                    dr.Read();
+                    if (dr[1].Equals(pwd))
+                    {
+                        userinfo.loggedin = true;
+                        userinfo.username = dr[0].ToString();
+
+                        mainform mf = new mainform(cn);
+                        mf.changelabel(dr[0].ToString());
+
+                        this.Close();
+                        if (dr[2].ToString() == "1")
+                        {
+                            MessageBox.Show("admin");
                         }
-                        else if (usernametxt.Text != "" && pwdtxt.Text != "")
+                        else
                         {
-                            int i;
-                            i = obj.Count("Select Count(*) from admin where username='" + usernametxt.Text + "';");
-                            if (i == 1)
-                            {
-                                MySqlDataReader dr;
-                                dr = obj.Query("Select * from admin where username='" + usernametxt.Text + "';");
-                                dr.Read();
-                                if (dr[4].Equals(pwdtxt.Text))
-                                {
-                                    userinfo.loggedin = true;
-                                    userinfo.username = dr[0].ToString(); */
+                            MessageBox.Show("agent");
+                        }
+                        cn.mainpnl.Controls.Clear();
+                        mf.TopLevel = false;
+                        cn.mainpnl.Controls.Add(mf);
 
-            mainform mf = new mainform(cn);
-            //   mf.changelabel("Welcome User");
-            //  mf.signout();
+                        mf.Show();
 
-            this.Close();
+                    }
+                    else
+                    {
+                        error.Text = "Please enter correct password";
+                        error.Visible = true;
+                        usernametxt.Text = "";
+                        pwdtxt.Text = "";
+                        namelbl.Visible = true;
+                        pwdlbl.Visible = true;
 
-            cn.mainpnl.Controls.Clear();
-            mf.TopLevel = false;
-            cn.mainpnl.Controls.Add(mf);
+                    }
 
-            mf.Show();
 
-            /*     }
-                 else
-                 {
-                     error.Text = "Please Enter Correct Password";
-                     error.Visible = true;
-                     usernametxt.Text = "";
-                     pwdtxt.Text = "";
+                    obj.closeConnection();
+                }
+                else
+                {
+                    error.Text = "Username does not exist";
+                    error.Visible = true;
+                    usernametxt.Text = "";
+                    pwdtxt.Text = "";
+                    namelbl.Visible = true;
+                    pwdlbl.Visible = true;
+                }
 
-                 }
-                 obj.closeConnection();
-             }
-             else
-             {
-                 error.Text = "Username does not exist";
-                 error.Visible = true;
-                 usernametxt.Text = "";
-                 pwdtxt.Text = "";
-             }
 
-         }
 
-             else
-             {
-                 error.Text = "Enter username and password";
-                 error.Visible = true;
-                 usernametxt.Text = "";
-                 pwdtxt.Text = "";
-             }
-         }
-        */
+            }
+
+            else
+            {
+                error.Text = "Enter username and password";
+                error.Visible = true;
+                usernametxt.Text = "";
+                pwdtxt.Text = "";
+                namelbl.Visible = true;
+                pwdlbl.Visible = true;
+            }
         }
     }
 }
+

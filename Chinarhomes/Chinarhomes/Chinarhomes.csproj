@@ -51,11 +51,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="agents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="agents.Designer.cs">
+      <DependentUpon>agents.cs</DependentUpon>
+    </Compile>
     <Compile Include="container.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="container.Designer.cs">
       <DependentUpon>container.cs</DependentUpon>
+    </Compile>
+    <Compile Include="customers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customers.Designer.cs">
+      <DependentUpon>customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogcontainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogcontainer.Designer.cs">
+      <DependentUpon>dialogcontainer.cs</DependentUpon>
     </Compile>
     <Compile Include="loginform.cs">
       <SubType>Form</SubType>
@@ -69,6 +87,24 @@
     <Compile Include="mainform.Designer.cs">
       <DependentUpon>mainform.cs</DependentUpon>
     </Compile>
+    <Compile Include="messages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="messages.Designer.cs">
+      <DependentUpon>messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="newproperty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="newproperty.Designer.cs">
+      <DependentUpon>newproperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="policy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="policy.Designer.cs">
+      <DependentUpon>policy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="properties.cs">
       <SubType>Form</SubType>
@@ -76,15 +112,35 @@
     <Compile Include="properties.Designer.cs">
       <DependentUpon>properties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\loginform.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="unverifiedproperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Resources\loginform.Designer.cs">
-      <DependentUpon>loginform.cs</DependentUpon>
+    <Compile Include="unverifiedproperties.Designer.cs">
+      <DependentUpon>unverifiedproperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="verifiedproperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="verifiedproperties.Designer.cs">
+      <DependentUpon>verifiedproperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="agents.resx">
+      <DependentUpon>agents.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="container.resx">
       <DependentUpon>container.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customers.resx">
+      <DependentUpon>customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogcontainer.resx">
+      <DependentUpon>dialogcontainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginform.resx">
       <DependentUpon>loginform.cs</DependentUpon>
@@ -92,21 +148,28 @@
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="messages.resx">
+      <DependentUpon>messages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="newproperty.resx">
+      <DependentUpon>newproperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="policy.resx">
+      <DependentUpon>policy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="properties.resx">
       <DependentUpon>properties.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="unverifiedproperties.resx">
+      <DependentUpon>unverifiedproperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verifiedproperties.resx">
+      <DependentUpon>verifiedproperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Resources\loginform.resx">
-      <DependentUpon>loginform.cs</DependentUpon>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -130,6 +193,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chinarhomes_cion.ico" />
+    <None Include="Resources\settings %281%29.png" />
+    <None Include="Resources\user-20.png" />
+    <None Include="Resources\detective.png" />
+    <None Include="Resources\email.png" />
+    <None Include="Resources\network.png" />
+    <None Include="Resources\file.png" />
+    <None Include="Resources\house %282%29.png" />
+    <None Include="Resources\house %281%29.png" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\ic_account_circle_black_18dp_1x.png" />
+    <None Include="Resources\ic_message_black_18dp_1x.png" />
+    <None Include="Resources\ic_people_black_18dp_1x.png" />
+    <None Include="Resources\ic_description_black_18dp_1x.png" />
+    <None Include="Resources\ic_home_black_18dp_1x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

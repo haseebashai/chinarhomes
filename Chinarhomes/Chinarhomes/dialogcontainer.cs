@@ -5,14 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Chinarhomes.Resources
+namespace Chinarhomes
 {
-    public partial class loginform : Form
+    public partial class dialogcontainer : Form
     {
-        public loginform()
+        public dialogcontainer()
         {
             InitializeComponent();
         }

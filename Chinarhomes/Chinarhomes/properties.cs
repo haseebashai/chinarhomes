@@ -14,8 +14,8 @@ namespace Chinarhomes
     {
         DBConnect obj = new DBConnect();
         MySqlDataReader dr;
-        BindingSource bsource;
-      
+        string tvp, tuvp;
+
 
         public properties()
         {
@@ -24,139 +24,73 @@ namespace Chinarhomes
             pageload.DoWork += Pageload_DoWork;
             pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
             pageload.RunWorkerAsync();
-
+            loading.Visible = true;
         }
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-           
-            propdataview.DataSource = bsource;
-            propdataview.Columns["ID"].Visible = false;
-            propdataview.Columns["description"].Visible = false;
-            propdataview.Columns["noofstories"].Visible = false;
-            propdataview.Columns["noofrooms"].Visible = false;
-            propdataview.Columns["areaofbuilt"].Visible = false;
-            propdataview.Columns["distancefrommain"].Visible = false;
-            propdataview.Columns["timestampp"].Visible = false;
-            propdataview.Columns["furnished"].Visible = false;
-            propdataview.Columns["tags"].Visible = false;
-
+            loadinglbl.Text = "Highlights";
+            loading.Visible = false;
+            tvplbl.Text = "Total Verified Properties currently added: " + tvp;
+            tuvplbl.Text = "Total Unverified Properties currently added: " + tuvp;
         }
-     
+
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
         {
-           
-                try
-                {
-                    dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
-                        +"price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, timestampp, furnished,tags,picture from properties");
-                    DataTable dt = new DataTable();
-                    dt.Load(dr);
-                    bsource = new BindingSource();
-                    bsource.DataSource = dt;
-
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-        }
-        private void loadpics()
-        {
-            dr = obj.Query("select properties.picture, pictures.picture from pictures inner join properties on properties.propertyid=pictures.propertyid where properties.propertyid='"+pidlbl.Text+"';");
+            dr = obj.Query("Select count(propertyid) from properties where verified='1'");
             dr.Read();
-            
+            tvp = dr[0].ToString();
+            obj.closeConnection();
+
+            dr = obj.Query("Select count(propertyid) from properties where verified='0'");
+            dr.Read();
+            tuvp = dr[0].ToString();
+            obj.closeConnection();
         }
-      
-        private void propdataview_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void verbtn_Click(object sender, EventArgs e)
         {
-            cancelbtn.Visible = false;
-            updbtn.Visible = false;
-            editpropbtn.Visible = true;
-            dpnl.Enabled = false;
-            dpnl.Visible = true;
-            bpnl.Visible = true;
-            if (e.RowIndex >= 0)
-            {
+            dialogcontainer dg = new dialogcontainer();
 
-                DataGridViewRow row = this.propdataview.Rows[e.RowIndex];
-                pidlbl.Text = row.Cells["id"].Value.ToString();
-                locationtxt.Text= row.Cells["location"].Value.ToString();
-                typetxt.Text= row.Cells["type"].Value.ToString();
-                pricetxt.Text= row.Cells["price"].Value.ToString();
-                string verify = row.Cells["verified"].Value.ToString();
-               
-                if (verify =="True")
-                {
-                    vyes.Checked = true;
-                }
-                else
-                {
-                    vno.Checked = true;
-                } 
-
-                floorstxt.Text= row.Cells["noofstories"].Value.ToString();
-                roomstxt.Text= row.Cells["noofrooms"].Value.ToString();
-                areatxt.Text = row.Cells["area"].Value.ToString();
-                areaptxt.Text= row.Cells["areaofbuilt"].Value.ToString();
-                timestamptxt.Text= row.Cells["timestampp"].Value.ToString();
-                desctxt.Text= row.Cells["description"].Value.ToString();
-                distancetxt.Text= row.Cells["distancefrommain"].Value.ToString();
-                furnishedtxt.Text= row.Cells["furnished"].Value.ToString();
-                tagstxt.Text= row.Cells["tags"].Value.ToString();
-
-            }
+            verifiedproperties ver = new verifiedproperties(dg);
+            ver.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(ver);
+            dg.Size = new Size(1206, 734);
+            dg.lbl.Text = "Verified Properties";
+            dg.Show();
+            ver.Show();
         }
 
-        private void editpropbtn_Click(object sender, EventArgs e)
+        private void addpbtn_Click(object sender, EventArgs e)
         {
-            editpropbtn.Visible = false;
-            cancelbtn.Visible = true;
-            updbtn.Visible = true;
-            dpnl.Enabled = true;
+            dialogcontainer dg = new dialogcontainer();
+
+            newproperty np = new newproperty(dg);
+            np.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(np);
+            dg.Size = new Size(1206, 734);
+            dg.lbl.Text = "Unverified Properties";
+            dg.Show();
+            np.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void unverbtn_Click(object sender, EventArgs e)
         {
-            PopulateListView();
+            dialogcontainer dg = new dialogcontainer();
+
+            unverifiedproperties ver = new unverifiedproperties(dg);
+            ver.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(ver);
+            dg.Size = new Size(1206, 734);
+            dg.lbl.Text = "Unverified Properties";
+            dg.Show();
+            ver.Show();
         }
 
-        private void PopulateListView()
-        {
-            ImageList images = new ImageList();
-            images.Images.Add(
-                LoadImage("https://lalchowk.in/lalchowk/pictures/14001-1.jpg"));
-            images.Images.Add(
-                LoadImage("https://lalchowk.in/lalchowk/pictures/14000-1.jpg"));
-
-            listView1.View = View.LargeIcon;
-
-           
-            images.ImageSize = new Size(96, 96);
-            images.ColorDepth = ColorDepth.Depth32Bit;
-            listView1.LargeImageList = images;
-            listView1.Items.Add("An item", 0);
-            listView1.Items.Add("Another item item", 1);
-        }
-        private Image LoadImage(string url)
-        {
-            System.Net.WebRequest request =
-                System.Net.WebRequest.Create(url);
-
-            System.Net.WebResponse response = request.GetResponse();
-            System.IO.Stream responseStream =
-                response.GetResponseStream();
-
-            Bitmap bmp = new Bitmap(responseStream);
-
-            responseStream.Dispose();
-
-            return bmp;
-        }
-
-        private void updbtn_Click(object sender, EventArgs e)
-        {
-        }
+  
+        
     }
- }
-
+}
