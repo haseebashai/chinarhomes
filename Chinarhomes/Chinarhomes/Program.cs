@@ -24,6 +24,8 @@ namespace Chinarhomes
     {
         public static bool loggedin;
         public static String username;
+        public static bool admin;
+        public static string email;
     }
 
 

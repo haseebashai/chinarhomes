@@ -117,6 +117,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="settings.Designer.cs">
+      <DependentUpon>settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="unverifiedproperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     <EmbeddedResource Include="properties.resx">
       <DependentUpon>properties.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="settings.resx">
+      <DependentUpon>settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="unverifiedproperties.resx">
       <DependentUpon>unverifiedproperties.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +202,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chinarhomes_cion.ico" />
+    <None Include="Resources\home %282%29.png" />
+    <None Include="Resources\home %281%29.png" />
+    <None Include="Resources\home.png" />
+    <None Include="Resources\house %281%291.png" />
+    <None Include="Resources\house.png" />
     <None Include="Resources\settings %281%29.png" />
     <None Include="Resources\user-20.png" />
     <None Include="Resources\detective.png" />

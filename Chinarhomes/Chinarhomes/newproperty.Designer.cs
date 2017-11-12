@@ -30,8 +30,8 @@
         {
             this.dpnl = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.saletypebox = new System.Windows.Forms.ComboBox();
+            this.ptypebox = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,13 +66,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.dppnl = new System.Windows.Forms.Panel();
+            this.cancelbtn = new System.Windows.Forms.Button();
             this.updbtn = new System.Windows.Forms.Button();
             this.clearpicbtn = new System.Windows.Forms.Button();
             this.flowpnl = new System.Windows.Forms.FlowLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
             this.updpicbtn = new System.Windows.Forms.Button();
             this.nopics = new System.Windows.Forms.Label();
-            this.cancelbtn = new System.Windows.Forms.Button();
             this.dpnl.SuspendLayout();
             this.panel4.SuspendLayout();
             this.dppnl.SuspendLayout();
@@ -89,8 +89,8 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.comboBox2);
-            this.panel4.Controls.Add(this.comboBox1);
+            this.panel4.Controls.Add(this.saletypebox);
+            this.panel4.Controls.Add(this.ptypebox);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.label21);
             this.panel4.Controls.Add(this.label3);
@@ -129,21 +129,21 @@
             this.panel4.Size = new System.Drawing.Size(1159, 348);
             this.panel4.TabIndex = 48;
             // 
-            // comboBox2
+            // saletypebox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(374, 294);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 49;
+            this.saletypebox.FormattingEnabled = true;
+            this.saletypebox.Location = new System.Drawing.Point(374, 294);
+            this.saletypebox.Name = "saletypebox";
+            this.saletypebox.Size = new System.Drawing.Size(121, 21);
+            this.saletypebox.TabIndex = 49;
             // 
-            // comboBox1
+            // ptypebox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(9, 154);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 48;
+            this.ptypebox.FormattingEnabled = true;
+            this.ptypebox.Location = new System.Drawing.Point(9, 154);
+            this.ptypebox.Name = "ptypebox";
+            this.ptypebox.Size = new System.Drawing.Size(121, 21);
+            this.ptypebox.TabIndex = 48;
             // 
             // label17
             // 
@@ -275,6 +275,7 @@
             this.vno.TabIndex = 31;
             this.vno.Text = "No";
             this.vno.UseVisualStyleBackColor = true;
+            this.vno.CheckedChanged += new System.EventHandler(this.vno_CheckedChanged);
             // 
             // vyes
             // 
@@ -286,6 +287,7 @@
             this.vyes.TabIndex = 30;
             this.vyes.Text = "Yes";
             this.vyes.UseVisualStyleBackColor = true;
+            this.vyes.CheckedChanged += new System.EventHandler(this.vyes_CheckedChanged);
             // 
             // desctxt
             // 
@@ -439,6 +441,16 @@
             this.dppnl.Size = new System.Drawing.Size(1158, 301);
             this.dppnl.TabIndex = 43;
             // 
+            // cancelbtn
+            // 
+            this.cancelbtn.Location = new System.Drawing.Point(977, 187);
+            this.cancelbtn.Name = "cancelbtn";
+            this.cancelbtn.Size = new System.Drawing.Size(166, 38);
+            this.cancelbtn.TabIndex = 101;
+            this.cancelbtn.Text = "Cancel";
+            this.cancelbtn.UseVisualStyleBackColor = false;
+            this.cancelbtn.Visible = false;
+            // 
             // updbtn
             // 
             this.updbtn.Location = new System.Drawing.Point(977, 128);
@@ -499,16 +511,6 @@
             this.nopics.TabIndex = 100;
             this.nopics.Text = "No Pictures selected";
             // 
-            // cancelbtn
-            // 
-            this.cancelbtn.Location = new System.Drawing.Point(977, 187);
-            this.cancelbtn.Name = "cancelbtn";
-            this.cancelbtn.Size = new System.Drawing.Size(166, 38);
-            this.cancelbtn.TabIndex = 101;
-            this.cancelbtn.Text = "Cancel";
-            this.cancelbtn.UseVisualStyleBackColor = false;
-            this.cancelbtn.Visible = false;
-            // 
             // newproperty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +521,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "newproperty";
             this.Text = "newproperty";
+            this.Load += new System.EventHandler(this.newproperty_Load);
             this.dpnl.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -532,7 +535,7 @@
 
         private System.Windows.Forms.Panel dpnl;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ptypebox;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label3;
@@ -569,7 +572,7 @@
         private System.Windows.Forms.Panel dppnl;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button updpicbtn;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox saletypebox;
         private System.Windows.Forms.FlowLayoutPanel flowpnl;
         private System.Windows.Forms.Button clearpicbtn;
         private System.Windows.Forms.Button updbtn;

@@ -230,5 +230,39 @@ namespace Chinarhomes
             cn.mainpnl.Controls.Add(lg);
             lg.Show();
         }
+
+        private void userbtn_Click(object sender, EventArgs e)
+        {
+            
+
+            dialogcontainer dg = new dialogcontainer();
+            settings st = new settings();
+            st.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(st);
+            dg.Size = new Size(630, 479);
+            dg.lbl.Text = "User Settings";
+            dg.Show();
+            st.Show();
+        }
+
+        private void addppic_Click(object sender, EventArgs e)
+        {
+            newproperty np = new newproperty(this);
+            np.TopLevel = false;
+            cntpnl.Controls.Clear();
+            cntpnl.Controls.Add(np);
+            np.Show();
+        }
+
+        private void homebtn_Click(object sender, EventArgs e)
+        {
+            mainform mf = new mainform(cn);
+            cn.mainpnl.Controls.Clear();
+            mf.TopLevel = false;
+            cn.mainpnl.Controls.Add(mf);
+            mf.changelabel(userinfo.username);
+            mf.Show();
+        }
     }
 }

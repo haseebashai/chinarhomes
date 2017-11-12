@@ -80,7 +80,7 @@
             // 
             this.error.AutoSize = true;
             this.error.ForeColor = System.Drawing.Color.Coral;
-            this.error.Location = new System.Drawing.Point(632, 369);
+            this.error.Location = new System.Drawing.Point(632, 362);
             this.error.Name = "error";
             this.error.Size = new System.Drawing.Size(123, 13);
             this.error.TabIndex = 17;
@@ -93,9 +93,9 @@
             this.label1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(681, 221);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 18);
+            this.label1.Size = new System.Drawing.Size(161, 18);
             this.label1.TabIndex = 16;
-            this.label1.Text = "LOGIN TO YOUR ACCOUNT.";
+            this.label1.Text = "LOGIN TO YOUR ACCOUNT";
             // 
             // usernametxt
             // 
@@ -107,6 +107,7 @@
             this.usernametxt.Size = new System.Drawing.Size(242, 16);
             this.usernametxt.TabIndex = 21;
             this.usernametxt.Text = "Username";
+            this.usernametxt.TextChanged += new System.EventHandler(this.usernametxt_TextChanged);
             this.usernametxt.Enter += new System.EventHandler(this.usrtxt_Enter);
             this.usernametxt.Leave += new System.EventHandler(this.usernametxt_Leave);
             // 
@@ -120,6 +121,7 @@
             this.pwdtxt.Size = new System.Drawing.Size(242, 16);
             this.pwdtxt.TabIndex = 22;
             this.pwdtxt.Text = "Password";
+            this.pwdtxt.TextChanged += new System.EventHandler(this.pwdtxt_TextChanged);
             this.pwdtxt.Enter += new System.EventHandler(this.pwdtxt_Enter);
             this.pwdtxt.Leave += new System.EventHandler(this.pwdtxt_Leave);
             // 
@@ -127,7 +129,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(789, 392);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 35);
+            this.button1.Size = new System.Drawing.Size(96, 35);
             this.button1.TabIndex = 23;
             this.button1.Text = "&LOGIN";
             this.button1.UseVisualStyleBackColor = false;
@@ -137,7 +139,7 @@
             // 
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.InactiveCaption;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(635, 404);
+            this.button2.Location = new System.Drawing.Point(635, 403);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 23);
             this.button2.TabIndex = 24;

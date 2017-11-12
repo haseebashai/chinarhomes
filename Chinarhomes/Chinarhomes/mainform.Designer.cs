@@ -32,11 +32,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.navpnl = new System.Windows.Forms.Panel();
-            this.userbtn = new System.Windows.Forms.Button();
             this.arrow5 = new System.Windows.Forms.Label();
             this.arrow4 = new System.Windows.Forms.Label();
             this.arrow3 = new System.Windows.Forms.Label();
@@ -44,12 +42,15 @@
             this.arrow1 = new System.Windows.Forms.Label();
             this.arrow = new System.Windows.Forms.Label();
             this.signoutlbl = new System.Windows.Forms.Label();
-            this.polpic = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.addppic = new System.Windows.Forms.PictureBox();
             this.agpic = new System.Windows.Forms.PictureBox();
             this.custpic = new System.Windows.Forms.PictureBox();
             this.msgpic = new System.Windows.Forms.PictureBox();
             this.unverpic = new System.Windows.Forms.PictureBox();
             this.verpic = new System.Windows.Forms.PictureBox();
+            this.homebtn = new System.Windows.Forms.Button();
+            this.userbtn = new System.Windows.Forms.Button();
             this.agentbtn = new System.Windows.Forms.Button();
             this.msgbtn = new System.Windows.Forms.Button();
             this.customerbtn = new System.Windows.Forms.Button();
@@ -57,7 +58,7 @@
             this.propbtn = new System.Windows.Forms.Button();
             this.cntpnl.SuspendLayout();
             this.navpnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.polpic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addppic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.agpic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.custpic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.msgpic)).BeginInit();
@@ -68,13 +69,13 @@
             // cntpnl
             // 
             this.cntpnl.BackColor = System.Drawing.Color.White;
+            this.cntpnl.Controls.Add(this.label7);
+            this.cntpnl.Controls.Add(this.addppic);
             this.cntpnl.Controls.Add(this.label6);
             this.cntpnl.Controls.Add(this.label5);
             this.cntpnl.Controls.Add(this.label4);
-            this.cntpnl.Controls.Add(this.label3);
             this.cntpnl.Controls.Add(this.label2);
             this.cntpnl.Controls.Add(this.label1);
-            this.cntpnl.Controls.Add(this.polpic);
             this.cntpnl.Controls.Add(this.agpic);
             this.cntpnl.Controls.Add(this.custpic);
             this.cntpnl.Controls.Add(this.msgpic);
@@ -112,19 +113,10 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Customers";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(714, 221);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Policies";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(464, 221);
+            this.label2.Location = new System.Drawing.Point(689, 225);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 13);
             this.label2.TabIndex = 7;
@@ -133,7 +125,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(253, 221);
+            this.label1.Location = new System.Drawing.Point(478, 225);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 6;
@@ -142,6 +134,7 @@
             // navpnl
             // 
             this.navpnl.BackColor = System.Drawing.Color.White;
+            this.navpnl.Controls.Add(this.homebtn);
             this.navpnl.Controls.Add(this.userbtn);
             this.navpnl.Controls.Add(this.arrow5);
             this.navpnl.Controls.Add(this.arrow4);
@@ -159,24 +152,6 @@
             this.navpnl.Name = "navpnl";
             this.navpnl.Size = new System.Drawing.Size(180, 705);
             this.navpnl.TabIndex = 13;
-            // 
-            // userbtn
-            // 
-            this.userbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.userbtn.FlatAppearance.BorderSize = 0;
-            this.userbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.userbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.userbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userbtn.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userbtn.Image = global::Chinarhomes.Properties.Resources.settings__1_;
-            this.userbtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userbtn.Location = new System.Drawing.Point(3, 643);
-            this.userbtn.Name = "userbtn";
-            this.userbtn.Size = new System.Drawing.Size(174, 32);
-            this.userbtn.TabIndex = 28;
-            this.userbtn.Text = "user";
-            this.userbtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.userbtn.UseVisualStyleBackColor = true;
             // 
             // arrow5
             // 
@@ -247,26 +222,36 @@
             // signoutlbl
             // 
             this.signoutlbl.AutoSize = true;
+            this.signoutlbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signoutlbl.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signoutlbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.signoutlbl.Location = new System.Drawing.Point(124, 680);
+            this.signoutlbl.Location = new System.Drawing.Point(119, 680);
             this.signoutlbl.Name = "signoutlbl";
             this.signoutlbl.Size = new System.Drawing.Size(55, 16);
             this.signoutlbl.TabIndex = 16;
             this.signoutlbl.Text = "SIGN OUT";
             this.signoutlbl.Click += new System.EventHandler(this.signoutlbl_Click);
             // 
-            // polpic
+            // label7
             // 
-            this.polpic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.polpic.Image = global::Chinarhomes.Properties.Resources.file;
-            this.polpic.Location = new System.Drawing.Point(662, 78);
-            this.polpic.Name = "polpic";
-            this.polpic.Size = new System.Drawing.Size(160, 142);
-            this.polpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.polpic.TabIndex = 5;
-            this.polpic.TabStop = false;
-            this.polpic.Click += new System.EventHandler(this.polpic_Click);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(260, 227);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Add Property";
+            // 
+            // addppic
+            // 
+            this.addppic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addppic.Image = global::Chinarhomes.Properties.Resources.house__1_1;
+            this.addppic.Location = new System.Drawing.Point(216, 82);
+            this.addppic.Name = "addppic";
+            this.addppic.Size = new System.Drawing.Size(155, 142);
+            this.addppic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.addppic.TabIndex = 12;
+            this.addppic.TabStop = false;
+            this.addppic.Click += new System.EventHandler(this.addppic_Click);
             // 
             // agpic
             // 
@@ -308,7 +293,7 @@
             // 
             this.unverpic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.unverpic.Image = global::Chinarhomes.Properties.Resources.house__2_;
-            this.unverpic.Location = new System.Drawing.Point(441, 78);
+            this.unverpic.Location = new System.Drawing.Point(666, 82);
             this.unverpic.Name = "unverpic";
             this.unverpic.Size = new System.Drawing.Size(155, 142);
             this.unverpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -320,13 +305,51 @@
             // 
             this.verpic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.verpic.Image = global::Chinarhomes.Properties.Resources.house__1_;
-            this.verpic.Location = new System.Drawing.Point(216, 78);
+            this.verpic.Location = new System.Drawing.Point(441, 82);
             this.verpic.Name = "verpic";
             this.verpic.Size = new System.Drawing.Size(155, 142);
             this.verpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.verpic.TabIndex = 0;
             this.verpic.TabStop = false;
             this.verpic.Click += new System.EventHandler(this.verpic_Click);
+            // 
+            // homebtn
+            // 
+            this.homebtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.homebtn.FlatAppearance.BorderSize = 0;
+            this.homebtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.homebtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.homebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homebtn.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homebtn.Image = global::Chinarhomes.Properties.Resources.home__2_;
+            this.homebtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.homebtn.Location = new System.Drawing.Point(3, 1);
+            this.homebtn.Name = "homebtn";
+            this.homebtn.Size = new System.Drawing.Size(65, 32);
+            this.homebtn.TabIndex = 29;
+            this.homebtn.Text = "Home";
+            this.homebtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.homebtn.UseVisualStyleBackColor = true;
+            this.homebtn.Click += new System.EventHandler(this.homebtn_Click);
+            // 
+            // userbtn
+            // 
+            this.userbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.userbtn.FlatAppearance.BorderSize = 0;
+            this.userbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.userbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.userbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userbtn.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userbtn.Image = global::Chinarhomes.Properties.Resources.settings__1_;
+            this.userbtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.userbtn.Location = new System.Drawing.Point(3, 643);
+            this.userbtn.Name = "userbtn";
+            this.userbtn.Size = new System.Drawing.Size(174, 32);
+            this.userbtn.TabIndex = 28;
+            this.userbtn.Text = "user";
+            this.userbtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.userbtn.UseVisualStyleBackColor = true;
+            this.userbtn.Click += new System.EventHandler(this.userbtn_Click);
             // 
             // agentbtn
             // 
@@ -443,7 +466,7 @@
             this.cntpnl.PerformLayout();
             this.navpnl.ResumeLayout(false);
             this.navpnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.polpic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addppic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.agpic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.custpic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.msgpic)).EndInit();
@@ -458,18 +481,9 @@
         private System.Windows.Forms.Panel navpnl;
         private System.Windows.Forms.Label signoutlbl;
         private System.Windows.Forms.Button propbtn;
-        private System.Windows.Forms.Button policybtn;
-        private System.Windows.Forms.Button customerbtn;
-        private System.Windows.Forms.Button msgbtn;
-        private System.Windows.Forms.Button agentbtn;
         private System.Windows.Forms.Label arrow;
         private System.Windows.Forms.Label arrow1;
-        private System.Windows.Forms.Label arrow5;
-        private System.Windows.Forms.Label arrow4;
-        private System.Windows.Forms.Label arrow3;
-        private System.Windows.Forms.Label arrow2;
         private System.Windows.Forms.PictureBox verpic;
-        private System.Windows.Forms.PictureBox polpic;
         private System.Windows.Forms.PictureBox agpic;
         private System.Windows.Forms.PictureBox custpic;
         private System.Windows.Forms.PictureBox msgpic;
@@ -477,9 +491,19 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button userbtn;
+        public System.Windows.Forms.Button policybtn;
+        public System.Windows.Forms.Button customerbtn;
+        public System.Windows.Forms.Button msgbtn;
+        public System.Windows.Forms.Button agentbtn;
+        public System.Windows.Forms.Label arrow5;
+        public System.Windows.Forms.Label arrow4;
+        public System.Windows.Forms.Label arrow3;
+        public System.Windows.Forms.Label arrow2;
+        private System.Windows.Forms.PictureBox addppic;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button homebtn;
     }
 }

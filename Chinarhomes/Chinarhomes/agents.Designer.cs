@@ -30,6 +30,8 @@
         {
             this.agentdataview = new System.Windows.Forms.DataGridView();
             this.dpnl = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.addnewbtn = new System.Windows.Forms.Button();
             this.usertxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -47,8 +49,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.nametxt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.addnewbtn = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.agentdataview)).BeginInit();
             this.dpnl.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +93,29 @@
             this.dpnl.Name = "dpnl";
             this.dpnl.Size = new System.Drawing.Size(1162, 355);
             this.dpnl.TabIndex = 4;
+            this.dpnl.Paint += new System.Windows.Forms.PaintEventHandler(this.dpnl_Paint);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label2.Location = new System.Drawing.Point(7, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 25);
+            this.label2.TabIndex = 104;
+            this.label2.Text = "Add Agent";
+            // 
+            // addnewbtn
+            // 
+            this.addnewbtn.Location = new System.Drawing.Point(801, 266);
+            this.addnewbtn.Name = "addnewbtn";
+            this.addnewbtn.Size = new System.Drawing.Size(94, 38);
+            this.addnewbtn.TabIndex = 103;
+            this.addnewbtn.Text = "Add New Agent";
+            this.addnewbtn.UseVisualStyleBackColor = false;
+            this.addnewbtn.Visible = false;
+            this.addnewbtn.Click += new System.EventHandler(this.addnewbtn_Click);
             // 
             // usertxt
             // 
@@ -183,6 +206,7 @@
             // 
             this.pwdtxt.Location = new System.Drawing.Point(516, 133);
             this.pwdtxt.Name = "pwdtxt";
+            this.pwdtxt.PasswordChar = '*';
             this.pwdtxt.Size = new System.Drawing.Size(169, 20);
             this.pwdtxt.TabIndex = 18;
             // 
@@ -243,28 +267,6 @@
             this.label6.Size = new System.Drawing.Size(66, 13);
             this.label6.TabIndex = 8;
             this.label6.Text = "Agent Name";
-            // 
-            // addnewbtn
-            // 
-            this.addnewbtn.Location = new System.Drawing.Point(801, 266);
-            this.addnewbtn.Name = "addnewbtn";
-            this.addnewbtn.Size = new System.Drawing.Size(94, 38);
-            this.addnewbtn.TabIndex = 103;
-            this.addnewbtn.Text = "Add New Agent";
-            this.addnewbtn.UseVisualStyleBackColor = false;
-            this.addnewbtn.Visible = false;
-            this.addnewbtn.Click += new System.EventHandler(this.addnewbtn_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(7, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 25);
-            this.label2.TabIndex = 104;
-            this.label2.Text = "Add Agent";
             // 
             // agents
             // 

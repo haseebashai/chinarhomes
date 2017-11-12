@@ -172,5 +172,10 @@ namespace Chinarhomes
             pwdtxt.Enabled = true;
 
         }
+
+        private void dpnl_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -75,7 +75,7 @@
             this.MaximizeBox = false;
             this.Name = "dialogcontainer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Chinarhomes";
+            this.Text = "Chinar Homes";
             ((System.ComponentModel.ISupportInitialize)(this.loadingimage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

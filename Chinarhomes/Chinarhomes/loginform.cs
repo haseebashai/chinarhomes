@@ -106,12 +106,14 @@ namespace Chinarhomes
                 if (i == 1)
                 {
                     MySqlDataReader dr;
-                    dr = obj.Query("Select username,password,admin from staff where username='" + usernametxt.Text + "';");
+                    dr = obj.Query("Select username,password,admin,mail from staff where username='" + usernametxt.Text + "';");
                     dr.Read();
                     if (dr[1].Equals(pwd))
                     {
                         userinfo.loggedin = true;
                         userinfo.username = dr[0].ToString();
+                        userinfo.email = dr[3].ToString();
+                        
 
                         mainform mf = new mainform(cn);
                         mf.changelabel(dr[0].ToString());
@@ -119,11 +121,23 @@ namespace Chinarhomes
                         this.Close();
                         if (dr[2].ToString() == "1")
                         {
+                            userinfo.admin = true;
+                           
                             MessageBox.Show("admin");
                         }
-                        else
+                        else if(dr[2].ToString() == "0")
                         {
+                            userinfo.admin = false;
+                            mf.policybtn.Visible = false;
+                            mf.customerbtn.Visible = false;
+                            mf.msgbtn.Visible = false;
+                            mf.agentbtn.Visible = false;
+                            mf.arrow2.Visible = false;
+                            mf.arrow3.Visible = false;
+                            mf.arrow4.Visible = false;
+                            mf.arrow5.Visible = false;
                             MessageBox.Show("agent");
+
                         }
                         cn.mainpnl.Controls.Clear();
                         mf.TopLevel = false;
@@ -169,6 +183,16 @@ namespace Chinarhomes
                 namelbl.Visible = true;
                 pwdlbl.Visible = true;
             }
+        }
+
+        private void usernametxt_TextChanged(object sender, EventArgs e)
+        {
+            error.Visible = false;
+        }
+
+        private void pwdtxt_TextChanged(object sender, EventArgs e)
+        {
+            error.Visible = false;
         }
     }
 }
