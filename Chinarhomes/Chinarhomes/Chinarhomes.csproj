@@ -75,6 +75,12 @@
     <Compile Include="dialogcontainer.Designer.cs">
       <DependentUpon>dialogcontainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="interests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interests.Designer.cs">
+      <DependentUpon>interests.cs</DependentUpon>
+    </Compile>
     <Compile Include="loginform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     <EmbeddedResource Include="dialogcontainer.resx">
       <DependentUpon>dialogcontainer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="interests.resx">
+      <DependentUpon>interests.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="loginform.resx">
       <DependentUpon>loginform.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,6 +211,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chinarhomes_cion.ico" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\pageload.gif" />
+    <None Include="Resources\loading1.gif" />
+    <None Include="Resources\animation.gif" />
+    <None Include="Resources\thumbs-up.png" />
+    <None Include="Resources\industrial-safety-1492046_640.png" />
+    <None Include="Resources\staff-symbol.png" />
     <None Include="Resources\home %282%29.png" />
     <None Include="Resources\home %281%29.png" />
     <None Include="Resources\home.png" />

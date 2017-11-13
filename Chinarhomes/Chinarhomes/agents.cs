@@ -57,6 +57,7 @@ namespace Chinarhomes
             agentdataview.DataSource = bsource;
             agentdataview.Columns["mail"].Visible = false;
             agentdataview.Columns["password"].Visible = false;
+            agentdataview.Columns["admin"].Visible = false;
         }
 
         private void contacttxt_KeyPress(object sender, KeyPressEventArgs e)

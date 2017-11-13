@@ -35,11 +35,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.usernametxt = new System.Windows.Forms.TextBox();
             this.pwdtxt = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.loginbtn = new System.Windows.Forms.Button();
+            this.forgotbtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.loading = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -104,10 +106,9 @@
             this.usernametxt.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.usernametxt.Location = new System.Drawing.Point(635, 277);
             this.usernametxt.Name = "usernametxt";
-            this.usernametxt.Size = new System.Drawing.Size(242, 16);
+            this.usernametxt.Size = new System.Drawing.Size(246, 16);
             this.usernametxt.TabIndex = 21;
             this.usernametxt.Text = "Username";
-            this.usernametxt.TextChanged += new System.EventHandler(this.usernametxt_TextChanged);
             this.usernametxt.Enter += new System.EventHandler(this.usrtxt_Enter);
             this.usernametxt.Leave += new System.EventHandler(this.usernametxt_Leave);
             // 
@@ -118,33 +119,32 @@
             this.pwdtxt.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.pwdtxt.Location = new System.Drawing.Point(635, 336);
             this.pwdtxt.Name = "pwdtxt";
-            this.pwdtxt.Size = new System.Drawing.Size(242, 16);
+            this.pwdtxt.Size = new System.Drawing.Size(246, 16);
             this.pwdtxt.TabIndex = 22;
             this.pwdtxt.Text = "Password";
-            this.pwdtxt.TextChanged += new System.EventHandler(this.pwdtxt_TextChanged);
             this.pwdtxt.Enter += new System.EventHandler(this.pwdtxt_Enter);
             this.pwdtxt.Leave += new System.EventHandler(this.pwdtxt_Leave);
             // 
-            // button1
+            // loginbtn
             // 
-            this.button1.Location = new System.Drawing.Point(789, 392);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 35);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "&LOGIN";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.loginbtn_Click);
+            this.loginbtn.Location = new System.Drawing.Point(789, 392);
+            this.loginbtn.Name = "loginbtn";
+            this.loginbtn.Size = new System.Drawing.Size(96, 35);
+            this.loginbtn.TabIndex = 23;
+            this.loginbtn.Text = "&LOGIN";
+            this.loginbtn.UseVisualStyleBackColor = false;
+            this.loginbtn.Click += new System.EventHandler(this.loginbtn_Click);
             // 
-            // button2
+            // forgotbtn
             // 
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(635, 403);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 23);
-            this.button2.TabIndex = 24;
-            this.button2.Text = "&Forgot Password?";
-            this.button2.UseVisualStyleBackColor = true;
+            this.forgotbtn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.forgotbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.forgotbtn.Location = new System.Drawing.Point(635, 403);
+            this.forgotbtn.Name = "forgotbtn";
+            this.forgotbtn.Size = new System.Drawing.Size(104, 23);
+            this.forgotbtn.TabIndex = 24;
+            this.forgotbtn.Text = "&Forgot Password?";
+            this.forgotbtn.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -166,14 +166,26 @@
             this.label3.TabIndex = 26;
             this.label3.Text = "_________________________________________";
             // 
+            // loading
+            // 
+            this.loading.Image = global::Chinarhomes.Properties.Resources.pageload;
+            this.loading.Location = new System.Drawing.Point(614, 337);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(309, 141);
+            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.loading.TabIndex = 27;
+            this.loading.TabStop = false;
+            this.loading.Visible = false;
+            // 
             // loginform
             // 
+            this.AcceptButton = this.loginbtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1350, 683);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.forgotbtn);
+            this.Controls.Add(this.loginbtn);
             this.Controls.Add(this.pwdtxt);
             this.Controls.Add(this.usernametxt);
             this.Controls.Add(this.pictureBox1);
@@ -183,11 +195,13 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.loading);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "loginform";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,9 +216,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox usernametxt;
         private System.Windows.Forms.TextBox pwdtxt;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button loginbtn;
+        private System.Windows.Forms.Button forgotbtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox loading;
     }
 }

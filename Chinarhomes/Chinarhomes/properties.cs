@@ -71,7 +71,8 @@ namespace Chinarhomes
             dg.dialogpnl.Controls.Clear();
             dg.dialogpnl.Controls.Add(np);
             dg.Size = new Size(1206, 734);
-            dg.lbl.Text = "Unverified Properties";
+            dg.lbl.Text = "Add New Property";
+            np.dpnl.Location = new Point(4, 5);
             dg.Show();
             np.Show();
         }

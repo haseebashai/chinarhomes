@@ -86,113 +86,180 @@ namespace Chinarhomes
 
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            string pwd = md5hash(pwdtxt.Text);
+            usernametxt.Enabled = false;
+            pwdtxt.Enabled = false;
+            error.Visible = false;
+            loginbtn.Enabled = false;
+            forgotbtn.Enabled = false;
+            loading.Visible = true;
+            BackgroundWorker login = new BackgroundWorker();
+            login.DoWork += Login_DoWork;
+            login.RunWorkerCompleted += Login_RunWorkerCompleted;
+            login.RunWorkerAsync();
 
-            if (usernametxt.Text.Contains("'") || pwdtxt.Text.Contains("'") || usernametxt.Text.Contains("\\") || pwdtxt.Text.Contains("\\"))
+           
+        }
+
+
+        private void Login_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            usernametxt.Enabled = true;
+            pwdtxt.Enabled = true;
+            loading.Visible = false;
+            string result = e.Result.ToString();
+           
+            if (result == "404")
             {
-
+            
                 error.Text = "Username incorrect";
                 error.Visible = true;
                 namelbl.Visible = true;
                 pwdlbl.Visible = true;
                 usernametxt.Text = "";
                 pwdtxt.Text = "";
-
+                usernametxt.Focus();
             }
-            else if (usernametxt.Text != "" && pwdtxt.Text != "")
+            else if (result == "incorrect password")
             {
-                int i;
-                i = obj.Count("Select Count(sid) from staff where username='" + usernametxt.Text + "';");
-                if (i == 1)
-                {
-                    MySqlDataReader dr;
-                    dr = obj.Query("Select username,password,admin,mail from staff where username='" + usernametxt.Text + "';");
-                    dr.Read();
-                    if (dr[1].Equals(pwd))
-                    {
-                        userinfo.loggedin = true;
-                        userinfo.username = dr[0].ToString();
-                        userinfo.email = dr[3].ToString();
-                        
-
-                        mainform mf = new mainform(cn);
-                        mf.changelabel(dr[0].ToString());
-
-                        this.Close();
-                        if (dr[2].ToString() == "1")
-                        {
-                            userinfo.admin = true;
-                           
-                            MessageBox.Show("admin");
-                        }
-                        else if(dr[2].ToString() == "0")
-                        {
-                            userinfo.admin = false;
-                            mf.policybtn.Visible = false;
-                            mf.customerbtn.Visible = false;
-                            mf.msgbtn.Visible = false;
-                            mf.agentbtn.Visible = false;
-                            mf.arrow2.Visible = false;
-                            mf.arrow3.Visible = false;
-                            mf.arrow4.Visible = false;
-                            mf.arrow5.Visible = false;
-                            MessageBox.Show("agent");
-
-                        }
-                        cn.mainpnl.Controls.Clear();
-                        mf.TopLevel = false;
-                        cn.mainpnl.Controls.Add(mf);
-
-                        mf.Show();
-
-                    }
-                    else
-                    {
-                        error.Text = "Please enter correct password";
-                        error.Visible = true;
-                        usernametxt.Text = "";
-                        pwdtxt.Text = "";
-                        namelbl.Visible = true;
-                        pwdlbl.Visible = true;
-
-                    }
-
-
-                    obj.closeConnection();
-                }
-                else
-                {
-                    error.Text = "Username does not exist";
-                    error.Visible = true;
-                    usernametxt.Text = "";
-                    pwdtxt.Text = "";
-                    namelbl.Visible = true;
-                    pwdlbl.Visible = true;
-                }
-
-
-
-            }
-
-            else
+               
+                error.Text = "Please enter correct password";
+                error.Visible = true;
+                pwdtxt.Text = "";
+                pwdtxt.Focus();
+                namelbl.Visible = true;
+                pwdlbl.Visible = true;
+            }else if (result == "Username")
             {
+               
+                error.Text = "Username does not exist";
+                error.Visible = true;
+                usernametxt.Text = "";
+                pwdtxt.Text = "";
+                namelbl.Visible = true;
+                pwdlbl.Visible = true;
+                usernametxt.Focus();
+            }else if(result=="enter details")
+            {
+               
                 error.Text = "Enter username and password";
                 error.Visible = true;
                 usernametxt.Text = "";
                 pwdtxt.Text = "";
                 namelbl.Visible = true;
                 pwdlbl.Visible = true;
+            }else if (result == "connection")
+            {
+                error.Text = "Please check your internet connection.";
+                error.Visible = true;
             }
+            else if (result == "success")
+            {
+               
+                userinfo.loggedin = true;
+                userinfo.username = username;
+                userinfo.email = email;
+
+
+                mainform mf = new mainform(cn);
+                mf.changelabel(username);
+
+                this.Close();
+                if (usertype == "1")
+                {
+                    userinfo.admin = true;
+
+                    MessageBox.Show("admin");
+                }
+                else if (usertype == "0")
+                {
+                    userinfo.admin = false;
+                    mf.policybtn.Visible = false;
+                    mf.customerbtn.Visible = false;
+                    mf.msgbtn.Visible = false;
+                    mf.agentbtn.Visible = false;
+                    mf.arrow2.Visible = false;
+                    mf.arrow3.Visible = false;
+                    mf.arrow4.Visible = false;
+                    mf.arrow5.Visible = false;
+                    MessageBox.Show("agent");
+
+                }
+                cn.mainpnl.Controls.Clear();
+                mf.TopLevel = false;
+                cn.mainpnl.Controls.Add(mf);
+
+                mf.Show();
+
+            }
+            loginbtn.Enabled = true;
+            forgotbtn.Enabled = true;
+          
+
         }
 
-        private void usernametxt_TextChanged(object sender, EventArgs e)
+        string usertype,username,email;
+        private void Login_DoWork(object sender, DoWorkEventArgs e)
         {
-            error.Visible = false;
-        }
+            try
+            {
+                string pwd = md5hash(pwdtxt.Text);
 
-        private void pwdtxt_TextChanged(object sender, EventArgs e)
-        {
-            error.Visible = false;
+                if (usernametxt.Text.Contains("'") || pwdtxt.Text.Contains("'") || usernametxt.Text.Contains("\\") || pwdtxt.Text.Contains("\\"))
+                {
+                    e.Result = "404";
+                    return;
+                }
+                else if (usernametxt.Text != "" && pwdtxt.Text != "")
+                {
+                   
+                        int i;
+                        i = obj.Count("Select Count(sid) from staff where username='" + usernametxt.Text + "';");
+                        if (i == 1)
+                        {
+
+                            MySqlDataReader dr;
+                            dr = obj.Query("Select username,password,admin,email from staff where username='" + usernametxt.Text + "';");
+                            dr.Read();
+                            if (dr[1].Equals(pwd))
+                            {
+                                usertype = dr[2].ToString();
+                                username = dr[0].ToString();
+                                email = dr[3].ToString();
+                                e.Result = "success";
+                                obj.closeConnection();
+                                return;
+                            }
+                            else
+                            {
+                                obj.closeConnection();
+                                e.Result = "incorrect password";
+
+                                return;
+
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            e.Result = "Username";
+                            return;
+                        }
+                    
+                    }
+
+                else
+                {
+                    e.Result = "enter details";
+                    return;
+                }
+            }
+            catch
+            {
+                e.Result = "connection";
+                return;
+            }
         }
     }
 }

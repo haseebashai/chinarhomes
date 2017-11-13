@@ -43,7 +43,7 @@
             // 
             // unverbtn
             // 
-            this.unverbtn.Location = new System.Drawing.Point(253, 145);
+            this.unverbtn.Location = new System.Drawing.Point(44, 179);
             this.unverbtn.Name = "unverbtn";
             this.unverbtn.Size = new System.Drawing.Size(162, 35);
             this.unverbtn.TabIndex = 39;
@@ -53,7 +53,7 @@
             // 
             // verbtn
             // 
-            this.verbtn.Location = new System.Drawing.Point(44, 145);
+            this.verbtn.Location = new System.Drawing.Point(44, 125);
             this.verbtn.Name = "verbtn";
             this.verbtn.Size = new System.Drawing.Size(162, 35);
             this.verbtn.TabIndex = 40;
@@ -77,7 +77,7 @@
             this.loadinglbl.AutoSize = true;
             this.loadinglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadinglbl.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.loadinglbl.Location = new System.Drawing.Point(-2, 247);
+            this.loadinglbl.Location = new System.Drawing.Point(-2, 261);
             this.loadinglbl.Name = "loadinglbl";
             this.loadinglbl.Size = new System.Drawing.Size(172, 25);
             this.loadinglbl.TabIndex = 42;
@@ -87,7 +87,7 @@
             // 
             this.dpnl.Controls.Add(this.tuvplbl);
             this.dpnl.Controls.Add(this.tvplbl);
-            this.dpnl.Location = new System.Drawing.Point(3, 275);
+            this.dpnl.Location = new System.Drawing.Point(3, 289);
             this.dpnl.Name = "dpnl";
             this.dpnl.Size = new System.Drawing.Size(650, 306);
             this.dpnl.TabIndex = 43;
@@ -95,7 +95,7 @@
             // tuvplbl
             // 
             this.tuvplbl.AutoSize = true;
-            this.tuvplbl.Location = new System.Drawing.Point(10, 88);
+            this.tuvplbl.Location = new System.Drawing.Point(10, 69);
             this.tuvplbl.Name = "tuvplbl";
             this.tuvplbl.Size = new System.Drawing.Size(0, 13);
             this.tuvplbl.TabIndex = 1;
@@ -110,7 +110,7 @@
             // 
             // addpbtn
             // 
-            this.addpbtn.Location = new System.Drawing.Point(149, 68);
+            this.addpbtn.Location = new System.Drawing.Point(44, 70);
             this.addpbtn.Name = "addpbtn";
             this.addpbtn.Size = new System.Drawing.Size(162, 35);
             this.addpbtn.TabIndex = 45;
@@ -121,7 +121,7 @@
             // loading
             // 
             this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
-            this.loading.Location = new System.Drawing.Point(165, 245);
+            this.loading.Location = new System.Drawing.Point(165, 259);
             this.loading.Name = "loading";
             this.loading.Size = new System.Drawing.Size(31, 32);
             this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
