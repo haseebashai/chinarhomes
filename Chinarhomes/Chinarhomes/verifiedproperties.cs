@@ -34,6 +34,8 @@ namespace Chinarhomes
             dg = dgcopy as dialogcontainer;
 
             InitializeComponent();
+            loading.Visible = true;
+            formlbl.Visible = true;
             BackgroundWorker pageload = new BackgroundWorker();
             pageload.DoWork += Pageload_DoWork;
             pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
@@ -43,24 +45,26 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-           
-            propdataview.DataSource = bsource;
-            propdataview.Columns["ID"].Visible = false;
-            propdataview.Columns["description"].Visible = false;
-            propdataview.Columns["noofstories"].Visible = false;
-            propdataview.Columns["noofrooms"].Visible = false;
-            propdataview.Columns["areaofbuilt"].Visible = false;
-            propdataview.Columns["distancefrommain"].Visible = false;
-            propdataview.Columns["timestampp"].Visible = false;
-            propdataview.Columns["furnished"].Visible = false;
-            propdataview.Columns["tags"].Visible = false;
-            propdataview.Columns["picture"].Visible = false;
-            propdataview.Columns["saletype"].Visible = false;
-            propdataview.Columns["priority"].Visible = false;
-            if (!userinfo.admin) 
-            propdataview.Columns["verifiedby"].Visible = false;
-           
-
+            if (Application.OpenForms.OfType<verifiedproperties>().Count() == 1)
+            {
+                propdataview.DataSource = bsource;
+                propdataview.Columns["ID"].Visible = false;
+                propdataview.Columns["description"].Visible = false;
+                propdataview.Columns["noofstories"].Visible = false;
+                propdataview.Columns["noofrooms"].Visible = false;
+                propdataview.Columns["areaofbuilt"].Visible = false;
+                propdataview.Columns["distancefrommain"].Visible = false;
+                propdataview.Columns["furnished"].Visible = false;
+                propdataview.Columns["tags"].Visible = false;
+                propdataview.Columns["picture"].Visible = false;
+                propdataview.Columns["saletype"].Visible = false;
+                propdataview.Columns["priority"].Visible = false;
+                if (!userinfo.admin)
+                    propdataview.Columns["verifiedby"].Visible = false;
+                loading.Visible = false;
+                formlbl.Visible = false;
+                proppnl.Visible = true;
+            }
         }
      
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
@@ -72,7 +76,7 @@ namespace Chinarhomes
             try
             {
                 dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
-                    + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, timestampp, "
+                    + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain,"
                     + "furnished,tags,picture,saletype,priority,verifiedby,name from properties where verified='1'");
                 DataTable dt = new DataTable();
                 dt.Load(dr);
@@ -117,6 +121,7 @@ namespace Chinarhomes
    
         private void propdataview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            nopicslbl.Visible = false;
             loadpicbtn.Visible = false;
             cancelbtn.Visible = false;
             updbtn.Visible = false;
@@ -131,17 +136,13 @@ namespace Chinarhomes
                 DataGridViewRow row = this.propdataview.Rows[e.RowIndex];
                 pidlbl.Text = row.Cells["id"].Value.ToString();
                 locationtxt.Text = row.Cells["location"].Value.ToString();
-                ptypebox.SelectedItem = row.Cells["type"].Value.ToString();
+                ptypebox.Text = row.Cells["type"].Value.ToString();
                 pricetxt.Text = row.Cells["price"].Value.ToString();
                 string verify = row.Cells["verified"].Value.ToString();
 
                 if (verify == "True")
                 {
                     vyes.Checked = true;
-                }
-                else
-                {
-                    vno.Checked = true;
                 }
 
                 floorstxt.Text = row.Cells["noofstories"].Value.ToString();
@@ -151,9 +152,9 @@ namespace Chinarhomes
                 prioritytxt.Text = row.Cells["priority"].Value.ToString();
                 desctxt.Text = row.Cells["description"].Value.ToString();
                 distancetxt.Text = row.Cells["distancefrommain"].Value.ToString();
-                furnishedtxt.SelectedItem = row.Cells["furnished"].Value.ToString();
+                furnishedtxt.Text = row.Cells["furnished"].Value.ToString();
                 tagstxt.Text = row.Cells["tags"].Value.ToString();
-                saletypebox.SelectedItem = row.Cells["saletype"].Value.ToString();
+                saletypebox.Text = row.Cells["saletype"].Value.ToString();
                 pnametxt.Text = row.Cells["name"].Value.ToString();
                 
             }
@@ -170,13 +171,27 @@ namespace Chinarhomes
 
         private void loadpicbtn_Click(object sender, EventArgs e)
         {
-           
+            loadpicbtn.Enabled = false;
+            nopicslbl.Text = "Loading Pictures...";
+            nopicslbl.Visible = true;
+            nopicslbl.BringToFront();
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.RunWorkerCompleted += Bg_RunWorkerCompleted1;
+            bg.DoWork += Bg_DoWork1;
+            bg.WorkerSupportsCancellation = true;
+            bg.RunWorkerAsync();
+          
+        }
+
+        private void Bg_DoWork1(object sender, DoWorkEventArgs e)
+        {
             try
             {
                 dr = obj.Query("select picture from properties where propertyid='" + pidlbl.Text + "'");
                 dr.Read();
                 dp = dr[0].ToString();
-                dpbox.ImageLocation = address + dp;
+                pathurl.Add(dr[0].ToString());
+                i++;
 
                 obj.closeConnection();
 
@@ -189,28 +204,77 @@ namespace Chinarhomes
 
                 obj.closeConnection();
                 total = i;
+
                 if (i == 0)
                 {
-                    nopicslbl.Visible = true;
-                    nopicslbl.BringToFront();
+                    e.Result = "404";
+
                 }
                 else
-                    PopulateListView();
-            
-                dppnl.Visible = true;
-            }catch(Exception ex)
+                {
+                    e.Result = "success";
+                }
+
+            }
+            catch (Exception ex)
             {
-                dppnl.Visible = false;
+                e.Result = "fail";
                 MessageBox.Show(ex.Message);
             }
         }
 
+        private void Bg_RunWorkerCompleted1(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string result = (string)e.Result;
+
+
+            if (result == "404")
+            {
+                nopicslbl.Visible = true;
+                nopicslbl.BringToFront();
+                dppnl.Visible = false;
+
+            }
+            else if (result == "success")
+            {
+                Cursor = Cursors.WaitCursor;
+                PopulateListView();
+                nopicslbl.Text = "No Pictures found.";
+                nopicslbl.Visible = false;
+                Cursor = Cursors.Arrow;
+                if (picfailed)
+                {
+                    MessageBox.Show("pic failed");
+                    nopicslbl.Visible = true;
+                    nopicslbl.BringToFront();
+                    dppnl.Visible = false;
+                    loadpicbtn.Enabled = true;
+                }
+                else if (picfailed == false)
+                {
+                    MessageBox.Show("pic true");
+                    dppnl.Visible = true;
+                    loadpicbtn.Visible = false;
+                    loadpicbtn.Enabled = true;
+                }
+            }
+            else if (result == "fail")
+            {
+                dppnl.Visible = false;
+            }
+            progressBar1.Visible = false;
+
+            i = 0;
+            total = 0;
+            pathurl.Clear();
+        }
+
         private void PopulateListView()
         {
+    
             try
             {
-               
-                
+                piclist.Clear();
                 ImageList images = new ImageList();
                 images.Images.Clear();
                 piclist.View = View.LargeIcon;
@@ -219,15 +283,15 @@ namespace Chinarhomes
                 images.ImageSize = new Size(112, 112);
                 images.ColorDepth = ColorDepth.Depth32Bit;
                 piclist.LargeImageList = images;
+               
 
-                
                 foreach (string str in pathurl)
                 {
 
+                   
                     images.Images.Add(LoadImage(address + str));
 
                 }
-
                 for (i = 0; i < total;)
                 {
 
@@ -235,15 +299,19 @@ namespace Chinarhomes
                     i++;
 
                 }
-                
-            
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+
+
             }
-            
+            catch (Exception ex)
+            {
+                picfailed = true;
+            }
+           
+           
+
         }
 
+        bool picfailed = false;
         private Image LoadImage(string url)
         {
             try
@@ -260,14 +328,22 @@ namespace Chinarhomes
                 return bmp;
             }catch(WebException ex)
             {
-              
-                MessageBox.Show(ex.Message);
+
+                picfailed = true;
                 return null;
             }
         }
 
         private void updbtn_Click(object sender, EventArgs e)
         {
+            progressBar1.Visible = true;
+            dppnl.Visible = false;
+            nopicslbl.Visible = false;
+
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
+            bg.DoWork += Bg_DoWork;
+            bg.WorkerSupportsCancellation = true;
 
             StringBuilder loc = new StringBuilder(locationtxt.Text);
             loc.Replace(@"\", @"\\").Replace("'", "\\'");
@@ -297,108 +373,273 @@ namespace Chinarhomes
             furnished.Replace(@"\", @"\\").Replace("'", "\\'");
             StringBuilder saletype = new StringBuilder(saletypebox.Text);
             saletype.Replace(@"\", @"\\").Replace("'", "\\'");
+            StringBuilder pname = new StringBuilder(pnametxt.Text);
+            pname.Replace(@"\", @"\\").Replace("'", "\\'");
 
 
-            string ver;
-            if (vyes.Checked == false && vno.Checked == false)
+
+            if (vyes.Checked == false )
             {
                 MessageBox.Show("Please check verify first.");
+                progressBar1.Visible = false;
+                dppnl.Visible = true;
+
             } else {
                 if (verified)
-                    ver = "1";
-                else
-                    ver = "0";
-
-                cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
-                    + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
-                    + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='"+pnametxt.Text+"' WHERE `propertyid`='" + pidlbl.Text + "'";
-                obj.nonQuery(cmd);
-                obj.closeConnection();
-                MessageBox.Show("Property Updated succesfully.", "Success");
-            }
-            dpnl.Enabled = false;
-            editpropbtn.Visible = true;
-            loadpicbtn.Visible = false;
-            cancelbtn.Visible = false;
-            updbtn.Visible = false;
-            readproperties();
-            propdataview.DataSource = bsource;
-
-        }
-
-        private void delbtn_Click(object sender, EventArgs e)
-        {
-            DialogResult dgr = MessageBox.Show("Do you want to delete foloowing picture?\n" + piclist.SelectedItems[0].Text, "Confirm!", MessageBoxButtons.YesNo);
-
-            if (dgr == DialogResult.Yes)
-            {
-                DeleteFileOnFtpServer(new Uri(ftpadd + dp));
-            }
-        }
-       
-        private void delpicsbtn_Click(object sender, EventArgs e)
-        {
-            DialogResult dgr = MessageBox.Show("Do you want to delete following picture?\n" + piclist.SelectedItems[0].Text, "Confirm!", MessageBoxButtons.YesNo);
-            
-                if (dgr == DialogResult.Yes)
                 {
-                DeleteFileOnFtpServer(new Uri(ftpadd + piclist.SelectedItems[0].Text));
-                try
-                {
-                    cmd = "delete from pictures where picture='" + piclist.SelectedItems[0].Text + "'&& propertyid='" + pidlbl.Text + "'";
-                    MessageBox.Show(cmd);
-                    obj.nonQuery(cmd);
-                    obj.closeConnection();
-                }
-                catch (MySqlException ex)
-                {
-                    obj.closeConnection();
-                    MessageBox.Show(ex.Message);
+                    object[] arg = { loc, tags, type, floors, rooms, area, areap, price, priority, desc, distance, age, furnished, saletype, pname};
+                    bg.RunWorkerAsync(arg);
                 }
             }
-            
-           
+
         }
-        public static bool DeleteFileOnFtpServer(Uri serverUri)
+
+        private void Bg_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
+                object[] arg = e.Argument as object[];
+                StringBuilder loc = (StringBuilder)arg[0];
+                StringBuilder tags = (StringBuilder)arg[1];
+                StringBuilder type = (StringBuilder)arg[2];
+                StringBuilder floors = (StringBuilder)arg[3];
+                StringBuilder rooms = (StringBuilder)arg[4];
+                StringBuilder area = (StringBuilder)arg[5];
+                StringBuilder areap = (StringBuilder)arg[6];
+                StringBuilder price = (StringBuilder)arg[7];
+                StringBuilder priority = (StringBuilder)arg[8];
+                StringBuilder desc = (StringBuilder)arg[9];
+                StringBuilder distance = (StringBuilder)arg[10];
+                StringBuilder age = (StringBuilder)arg[11];
+                StringBuilder furnished = (StringBuilder)arg[12];
+                StringBuilder saletype = (StringBuilder)arg[13];
+                StringBuilder pname = (StringBuilder)arg[14];
+               
 
-                if (serverUri.Scheme != Uri.UriSchemeFtp)
-                {
-                    return false;
-                }
-                // Get the object used to communicate with the server.
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverUri);
-                request.Credentials = new NetworkCredential("Chinarhomes", "Chinar@123");
-                request.Method = WebRequestMethods.Ftp.DeleteFile;
 
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                MessageBox.Show("Picture deleted successfully.","Removed!");
-                response.Close();
-                return true;
+               
+                    cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
+                       + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
+                       + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `saletype`='" + saletype + "',`name`='" + pnametxt.Text + "' WHERE `propertyid`='" + pidlbl.Text + "'";
+                    obj.nonQuery(cmd);
+                    obj.closeConnection();
+                    MessageBox.Show("Property Updated succesfully.", "Success");
+                    e.Result = "success";
+                
+               
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("Something happened, please try again.\n\n" + ex.Message, "Error!");
-                return false;
+                e.Result = "fail";
+                MessageBox.Show(ex.Message);
             }
         }
 
-        bool verified;
+        private void Bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string result = (string)e.Result;
+            if (result == "success")
+            {
+                MessageBox.Show("Property Updated succesfully.", "Success");
+                dpnl.Enabled = false;
+                dppnl.Visible = false;
+                editpropbtn.Visible = true;
+                loadpicbtn.Visible = false;
+                cancelbtn.Visible = false;
+                updbtn.Visible = false;
+                progressBar1.Visible = false;
+                readproperties();
+                propdataview.DataSource = bsource;
+
+            }
+            progressBar1.Visible = false;
+        }
+
+
+
+
+        bool verified=false;
         private void vyes_CheckedChanged(object sender, EventArgs e)
         {
             if (vyes.Checked)
-                vno.Checked = false;
+              
             verified = true;
         }
 
-        private void vno_CheckedChanged(object sender, EventArgs e)
+
+        private void pricetxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (vno.Checked)
-                vyes.Checked = false;
-            verified = false;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void floorstxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void roomstxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void areatxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void areaptxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void agetxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void distancetxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void prioritytxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void pricetxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(pricetxt.Text, @"^([0-9]+)$") && pricetxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct amount.", "Error!");
+                pricetxt.Focus();
+
+            }
+        }
+
+        private void locationtxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(locationtxt.Text, @"^([a-zA-Z0-9@#$%&*+\-_(),+':;?.,![\]\s\\/{}""|]+)$") && locationtxt.Text != "")
+            {
+
+                MessageBox.Show("Please remove special characters like:\n\n© ™ ® ` etc.", "Error!");
+                locationtxt.Focus();
+
+            }
+        }
+
+        private void pnametxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(pnametxt.Text, @"^([a-zA-Z0-9@#$%&*+\-_(),+':;?.,![\]\s\\/{}""|]+)$") && pnametxt.Text != "")
+            {
+
+                MessageBox.Show("Please remove special characters like:\n\n© ™ ® ` etc.", "Error!");
+                pnametxt.Focus();
+
+            }
+        }
+
+        private void floorstxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(floorstxt.Text, @"^([0-9]+)$") && floorstxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                floorstxt.Focus();
+
+            }
+        }
+
+        private void roomstxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(roomstxt.Text, @"^([0-9]+)$") && roomstxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                roomstxt.Focus();
+
+            }
+        }
+
+        private void areatxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(areatxt.Text, @"^([0-9]+)$") && areatxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                areatxt.Focus();
+
+            }
+        }
+
+        private void areaptxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(areaptxt.Text, @"^([0-9]+)$") && areaptxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                areaptxt.Focus();
+
+            }
+        }
+
+        private void agetxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(agetxt.Text, @"^([0-9]+)$") && agetxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                agetxt.Focus();
+
+            }
+        }
+
+        private void distancetxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(distancetxt.Text, @"^([0-9]+)$") && distancetxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                distancetxt.Focus();
+
+            }
+        }
+
+        private void prioritytxt_Leave(object sender, EventArgs e)
+        {
+
+            if (!Regex.IsMatch(prioritytxt.Text, @"^([0-9]+)$") && prioritytxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                prioritytxt.Focus();
+
+            }
         }
 
         private void desctxt_Leave(object sender, EventArgs e)
@@ -406,15 +647,25 @@ namespace Chinarhomes
             if (!Regex.IsMatch(desctxt.Text, @"^([a-zA-Z0-9@#$%&*+\-_(),+':;?.,![\]\s\\/{}""|]+)$") && desctxt.Text != "")
             {
 
-                MessageBox.Show("Abnormal Special Character found, Please remove it and proceed.\nCheck for any special symbols like trademark, copyright etc. and remove it.");
+                MessageBox.Show("Please remove special characters like:\n\n© ™ ® ` etc.", "Error!");
+                desctxt.Focus();
 
             }
         }
 
-        private void updpicbtn_Click(object sender, EventArgs e)
+        private void cancelbtn_Click(object sender, EventArgs e)
         {
 
+            nopicslbl.Visible = false;
+            loadpicbtn.Visible = false;
+            cancelbtn.Visible = false;
+            updbtn.Visible = false;
+            editpropbtn.Visible = true;
+            dpnl.Enabled = false;
+            dpnl.Visible = true;
+            dppnl.Visible = false;
+            bpnl.Visible = true;
         }
     }
- }
+}
 

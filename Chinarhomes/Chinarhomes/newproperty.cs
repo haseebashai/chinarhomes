@@ -108,7 +108,6 @@ namespace Chinarhomes
                 }
               
             }
-             MessageBox.Show("Picture upload failed. Please try after sometime.");
             ppnl.Visible = false;
             updbtn.Enabled = true;
             clearpicbtn.Enabled = true;

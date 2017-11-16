@@ -38,79 +38,87 @@ namespace Chinarhomes
             BackgroundWorker pageload = new BackgroundWorker();
             pageload.DoWork += Pageload_DoWork;
             pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
+            pageload.WorkerSupportsCancellation = true;
             pageload.RunWorkerAsync();
         }
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (Application.OpenForms.OfType<unverifiedproperties>().Count() == 1)
+            {
+                propdataview.DataSource = bsource;
+                propdataview.Columns["ID"].Visible = false;
+                propdataview.Columns["description"].Visible = false;
+                propdataview.Columns["noofstories"].Visible = false;
+                propdataview.Columns["noofrooms"].Visible = false;
+                propdataview.Columns["areaofbuilt"].Visible = false;
+                propdataview.Columns["distancefrommain"].Visible = false;
 
-            propdataview.DataSource = bsource;
-            propdataview.Columns["ID"].Visible = false;
-            propdataview.Columns["description"].Visible = false;
-            propdataview.Columns["noofstories"].Visible = false;
-            propdataview.Columns["noofrooms"].Visible = false;
-            propdataview.Columns["areaofbuilt"].Visible = false;
-            propdataview.Columns["distancefrommain"].Visible = false;
-            
-            propdataview.Columns["furnished"].Visible = false;
-            propdataview.Columns["tags"].Visible = false;
-            propdataview.Columns["picture"].Visible = false;
-            propdataview.Columns["saletype"].Visible = false;
-            propdataview.Columns["priority"].Visible = false;
-            loading.Visible = false;
-            formlbl.Visible = false;
-            proppnl.Visible = true;
-
+                propdataview.Columns["furnished"].Visible = false;
+                propdataview.Columns["tags"].Visible = false;
+                propdataview.Columns["picture"].Visible = false;
+                propdataview.Columns["saletype"].Visible = false;
+                propdataview.Columns["priority"].Visible = false;
+                loading.Visible = false;
+                formlbl.Visible = false;
+                proppnl.Visible = true;
+            }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
         {
-            readproperties();
+            
+                readproperties();
+          
         }
         private void readproperties()
         {
-            try
-            {
-                dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
-                    + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, "
-                    + "furnished,tags,picture,saletype,priority,name from properties where verified='0'");
-                DataTable dt = new DataTable();
-                dt.Load(dr);
-                obj.closeConnection();
-                bsource = new BindingSource();
-                bsource.DataSource = dt;
+           
+                try
+                {
 
-                dr = obj.Query("select distinct type from properties ");
-                DataTable dt1 = new DataTable();
-                dt1.Columns.Add("type", typeof(String));
-                dt1.Load(dr);
-                obj.closeConnection();
-                ptypebox.DisplayMember = "type";
-                ptypebox.DataSource = dt1;
+                    dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
+                        + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, "
+                        + "furnished,tags,picture,saletype,priority,name from properties where verified='0'");
+                    DataTable dt = new DataTable();
+                    dt.Load(dr);
+                    obj.closeConnection();
+                    bsource = new BindingSource();
+                    bsource.DataSource = dt;
 
-
-                dr = obj.Query("select distinct saletype from properties ");
-                DataTable dt2 = new DataTable();
-                dt2.Columns.Add("saletype", typeof(String));
-                dt2.Load(dr);
-                obj.closeConnection();
-                saletypebox.DisplayMember = "saletype";
-                saletypebox.DataSource = dt2;
+                    dr = obj.Query("select distinct type from properties ");
+                    DataTable dt1 = new DataTable();
+                    dt1.Columns.Add("type", typeof(String));
+                    dt1.Load(dr);
+                    obj.closeConnection();
+                    ptypebox.DisplayMember = "type";
+                    ptypebox.DataSource = dt1;
 
 
-                dr = obj.Query("select distinct furnished from properties ");
-                DataTable dt3 = new DataTable();
-                dt3.Columns.Add("furnished", typeof(String));
-                dt3.Load(dr);
-                obj.closeConnection();
-                furnishedtxt.DisplayMember = "furnished";
-                furnishedtxt.DataSource = dt3;
+                    dr = obj.Query("select distinct saletype from properties ");
+                    DataTable dt2 = new DataTable();
+                    dt2.Columns.Add("saletype", typeof(String));
+                    dt2.Load(dr);
+                    obj.closeConnection();
+                    saletypebox.DisplayMember = "saletype";
+                    saletypebox.DataSource = dt2;
 
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+                    dr = obj.Query("select distinct furnished from properties ");
+                    DataTable dt3 = new DataTable();
+                    dt3.Columns.Add("furnished", typeof(String));
+                    dt3.Load(dr);
+                    obj.closeConnection();
+                    furnishedtxt.DisplayMember = "furnished";
+                    furnishedtxt.DataSource = dt3;
+
+
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            
         }
 
         private void propdataview_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -153,6 +161,7 @@ namespace Chinarhomes
                 furnishedtxt.Text = row.Cells["furnished"].Value.ToString();
                 tagstxt.Text = row.Cells["tags"].Value.ToString();
                 saletypebox.Text = row.Cells["saletype"].Value.ToString();
+                pnametxt.Text = row.Cells["name"].Value.ToString();
 
             }
         }
@@ -186,7 +195,8 @@ namespace Chinarhomes
                 dr.Read();
                 dp = dr[0].ToString();
 
-                dpbox.ImageLocation = address + dp;
+                pathurl.Add(dr[0].ToString());
+                i++;
 
                 obj.closeConnection();
 
@@ -372,6 +382,9 @@ namespace Chinarhomes
             if (vyes.Checked == false && vno.Checked == false)
             {
                 MessageBox.Show("Please check verify first.");
+                progressBar1.Visible = false;
+                dppnl.Visible = true;
+                
             }
             else
             {
@@ -456,6 +469,7 @@ namespace Chinarhomes
                 e.Result = "success";
             }catch(Exception ex)
             {
+                e.Result = "fail";
                 MessageBox.Show(ex.Message);
             }
             }
@@ -682,6 +696,19 @@ namespace Chinarhomes
             }
         }
 
+        private void cancelbtn_Click(object sender, EventArgs e)
+        {
+
+            nopicslbl.Visible = false;
+            loadpicbtn.Visible = false;
+            cancelbtn.Visible = false;
+            updbtn.Visible = false;
+            editpropbtn.Visible = true;
+            dpnl.Enabled = false;
+            dpnl.Visible = true;
+            dppnl.Visible = false;
+            bpnl.Visible = true;
+        }
     }
     }
 

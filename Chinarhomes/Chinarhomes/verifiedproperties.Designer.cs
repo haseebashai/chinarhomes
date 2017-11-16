@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.propdataview = new System.Windows.Forms.DataGridView();
             this.proppnl = new System.Windows.Forms.Panel();
             this.loadpicbtn = new System.Windows.Forms.Button();
@@ -37,12 +37,15 @@
             this.updbtn = new System.Windows.Forms.Button();
             this.cancelbtn = new System.Windows.Forms.Button();
             this.dpnl = new System.Windows.Forms.Panel();
+            this.furnishedtxt = new System.Windows.Forms.ComboBox();
+            this.saletypebox = new System.Windows.Forms.ComboBox();
+            this.ptypebox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnametxt = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.dppnl = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.updpicbtn = new System.Windows.Forms.Button();
-            this.dpbox = new System.Windows.Forms.PictureBox();
             this.piclist = new System.Windows.Forms.ListView();
             this.label19 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -50,7 +53,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pidlbl = new System.Windows.Forms.Label();
-            this.vno = new System.Windows.Forms.CheckBox();
             this.vyes = new System.Windows.Forms.CheckBox();
             this.distancetxt = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -79,17 +81,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.nopicslbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pnametxt = new System.Windows.Forms.TextBox();
-            this.furnishedtxt = new System.Windows.Forms.ComboBox();
-            this.saletypebox = new System.Windows.Forms.ComboBox();
-            this.ptypebox = new System.Windows.Forms.ComboBox();
+            this.loading = new System.Windows.Forms.PictureBox();
+            this.formlbl = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).BeginInit();
             this.proppnl.SuspendLayout();
             this.bpnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.dppnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dpbox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // propdataview
@@ -98,14 +98,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(11, 4);
             this.propdataview.MultiSelect = false;
@@ -125,6 +125,7 @@
             this.proppnl.Name = "proppnl";
             this.proppnl.Size = new System.Drawing.Size(1165, 662);
             this.proppnl.TabIndex = 2;
+            this.proppnl.Visible = false;
             // 
             // loadpicbtn
             // 
@@ -151,7 +152,7 @@
             // 
             // editpropbtn
             // 
-            this.editpropbtn.Location = new System.Drawing.Point(3, 3);
+            this.editpropbtn.Location = new System.Drawing.Point(3, 4);
             this.editpropbtn.Name = "editpropbtn";
             this.editpropbtn.Size = new System.Drawing.Size(130, 35);
             this.editpropbtn.TabIndex = 40;
@@ -179,6 +180,7 @@
             this.cancelbtn.Text = "Cancel";
             this.cancelbtn.UseVisualStyleBackColor = false;
             this.cancelbtn.Visible = false;
+            this.cancelbtn.Click += new System.EventHandler(this.cancelbtn_Click);
             // 
             // dpnl
             // 
@@ -195,7 +197,6 @@
             this.dpnl.Controls.Add(this.label17);
             this.dpnl.Controls.Add(this.panel1);
             this.dpnl.Controls.Add(this.pidlbl);
-            this.dpnl.Controls.Add(this.vno);
             this.dpnl.Controls.Add(this.vyes);
             this.dpnl.Controls.Add(this.distancetxt);
             this.dpnl.Controls.Add(this.label16);
@@ -224,11 +225,52 @@
             this.dpnl.Controls.Add(this.label3);
             this.dpnl.Controls.Add(this.label2);
             this.dpnl.Controls.Add(this.nopicslbl);
+            this.dpnl.Controls.Add(this.progressBar1);
             this.dpnl.Location = new System.Drawing.Point(0, 261);
             this.dpnl.Name = "dpnl";
             this.dpnl.Size = new System.Drawing.Size(1162, 355);
             this.dpnl.TabIndex = 2;
             this.dpnl.Visible = false;
+            // 
+            // furnishedtxt
+            // 
+            this.furnishedtxt.FormattingEnabled = true;
+            this.furnishedtxt.Location = new System.Drawing.Point(381, 58);
+            this.furnishedtxt.Name = "furnishedtxt";
+            this.furnishedtxt.Size = new System.Drawing.Size(89, 21);
+            this.furnishedtxt.TabIndex = 52;
+            // 
+            // saletypebox
+            // 
+            this.saletypebox.FormattingEnabled = true;
+            this.saletypebox.Location = new System.Drawing.Point(207, 305);
+            this.saletypebox.Name = "saletypebox";
+            this.saletypebox.Size = new System.Drawing.Size(121, 21);
+            this.saletypebox.TabIndex = 51;
+            // 
+            // ptypebox
+            // 
+            this.ptypebox.FormattingEnabled = true;
+            this.ptypebox.Location = new System.Drawing.Point(16, 165);
+            this.ptypebox.Name = "ptypebox";
+            this.ptypebox.Size = new System.Drawing.Size(148, 21);
+            this.ptypebox.TabIndex = 50;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 197);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 49;
+            this.label1.Text = "Property Name";
+            // 
+            // pnametxt
+            // 
+            this.pnametxt.Location = new System.Drawing.Point(16, 214);
+            this.pnametxt.Name = "pnametxt";
+            this.pnametxt.Size = new System.Drawing.Size(148, 20);
+            this.pnametxt.TabIndex = 48;
             // 
             // label21
             // 
@@ -243,8 +285,6 @@
             // 
             this.dppnl.Controls.Add(this.label20);
             this.dppnl.Controls.Add(this.panel3);
-            this.dppnl.Controls.Add(this.updpicbtn);
-            this.dppnl.Controls.Add(this.dpbox);
             this.dppnl.Controls.Add(this.piclist);
             this.dppnl.Location = new System.Drawing.Point(802, 7);
             this.dppnl.Name = "dppnl";
@@ -270,31 +310,12 @@
             this.panel3.Size = new System.Drawing.Size(5, 300);
             this.panel3.TabIndex = 45;
             // 
-            // updpicbtn
-            // 
-            this.updpicbtn.Location = new System.Drawing.Point(97, 57);
-            this.updpicbtn.Name = "updpicbtn";
-            this.updpicbtn.Size = new System.Drawing.Size(79, 20);
-            this.updpicbtn.TabIndex = 42;
-            this.updpicbtn.Text = "Upload New";
-            this.updpicbtn.UseVisualStyleBackColor = false;
-            this.updpicbtn.Click += new System.EventHandler(this.updpicbtn_Click);
-            // 
-            // dpbox
-            // 
-            this.dpbox.Location = new System.Drawing.Point(182, 2);
-            this.dpbox.Name = "dpbox";
-            this.dpbox.Size = new System.Drawing.Size(172, 123);
-            this.dpbox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.dpbox.TabIndex = 39;
-            this.dpbox.TabStop = false;
-            // 
             // piclist
             // 
             this.piclist.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.piclist.Location = new System.Drawing.Point(20, 128);
+            this.piclist.Location = new System.Drawing.Point(20, 37);
             this.piclist.Name = "piclist";
-            this.piclist.Size = new System.Drawing.Size(331, 191);
+            this.piclist.Size = new System.Drawing.Size(331, 282);
             this.piclist.TabIndex = 38;
             this.piclist.UseCompatibleStateImageBehavior = false;
             // 
@@ -352,18 +373,6 @@
             this.pidlbl.Size = new System.Drawing.Size(0, 13);
             this.pidlbl.TabIndex = 32;
             // 
-            // vno
-            // 
-            this.vno.AutoSize = true;
-            this.vno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vno.Location = new System.Drawing.Point(73, 318);
-            this.vno.Name = "vno";
-            this.vno.Size = new System.Drawing.Size(45, 21);
-            this.vno.TabIndex = 31;
-            this.vno.Text = "No";
-            this.vno.UseVisualStyleBackColor = true;
-            this.vno.CheckedChanged += new System.EventHandler(this.vno_CheckedChanged);
-            // 
             // vyes
             // 
             this.vyes.AutoSize = true;
@@ -382,6 +391,8 @@
             this.distancetxt.Name = "distancetxt";
             this.distancetxt.Size = new System.Drawing.Size(148, 20);
             this.distancetxt.TabIndex = 29;
+            this.distancetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.distancetxt_KeyPress);
+            this.distancetxt.Leave += new System.EventHandler(this.distancetxt_Leave);
             // 
             // label16
             // 
@@ -398,6 +409,8 @@
             this.prioritytxt.Name = "prioritytxt";
             this.prioritytxt.Size = new System.Drawing.Size(148, 20);
             this.prioritytxt.TabIndex = 27;
+            this.prioritytxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prioritytxt_KeyPress);
+            this.prioritytxt.Leave += new System.EventHandler(this.prioritytxt_Leave);
             // 
             // label15
             // 
@@ -423,6 +436,8 @@
             this.agetxt.Name = "agetxt";
             this.agetxt.Size = new System.Drawing.Size(148, 20);
             this.agetxt.TabIndex = 23;
+            this.agetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.agetxt_KeyPress);
+            this.agetxt.Leave += new System.EventHandler(this.agetxt_Leave);
             // 
             // label13
             // 
@@ -457,6 +472,8 @@
             this.floorstxt.Name = "floorstxt";
             this.floorstxt.Size = new System.Drawing.Size(87, 20);
             this.floorstxt.TabIndex = 18;
+            this.floorstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.floorstxt_KeyPress);
+            this.floorstxt.Leave += new System.EventHandler(this.floorstxt_Leave);
             // 
             // label9
             // 
@@ -473,6 +490,8 @@
             this.roomstxt.Name = "roomstxt";
             this.roomstxt.Size = new System.Drawing.Size(87, 20);
             this.roomstxt.TabIndex = 16;
+            this.roomstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomstxt_KeyPress);
+            this.roomstxt.Leave += new System.EventHandler(this.roomstxt_Leave);
             // 
             // label10
             // 
@@ -489,6 +508,8 @@
             this.pricetxt.Name = "pricetxt";
             this.pricetxt.Size = new System.Drawing.Size(148, 20);
             this.pricetxt.TabIndex = 13;
+            this.pricetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pricetxt_KeyPress);
+            this.pricetxt.Leave += new System.EventHandler(this.pricetxt_Leave);
             // 
             // label7
             // 
@@ -539,6 +560,8 @@
             this.areatxt.Name = "areatxt";
             this.areatxt.Size = new System.Drawing.Size(124, 20);
             this.areatxt.TabIndex = 7;
+            this.areatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areatxt_KeyPress);
+            this.areatxt.Leave += new System.EventHandler(this.areatxt_Leave);
             // 
             // label5
             // 
@@ -571,6 +594,8 @@
             this.areaptxt.Name = "areaptxt";
             this.areaptxt.Size = new System.Drawing.Size(124, 20);
             this.areaptxt.TabIndex = 3;
+            this.areaptxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaptxt_KeyPress);
+            this.areaptxt.Leave += new System.EventHandler(this.areaptxt_Leave);
             // 
             // label3
             // 
@@ -601,45 +626,37 @@
             this.nopicslbl.Text = "No Pictures found.";
             this.nopicslbl.Visible = false;
             // 
-            // label1
+            // loading
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 197);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 49;
-            this.label1.Text = "Property Name";
+            this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
+            this.loading.Location = new System.Drawing.Point(113, -4);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(31, 32);
+            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.loading.TabIndex = 47;
+            this.loading.TabStop = false;
+            this.loading.Visible = false;
             // 
-            // pnametxt
+            // formlbl
             // 
-            this.pnametxt.Location = new System.Drawing.Point(16, 214);
-            this.pnametxt.Name = "pnametxt";
-            this.pnametxt.Size = new System.Drawing.Size(148, 20);
-            this.pnametxt.TabIndex = 48;
+            this.formlbl.AutoSize = true;
+            this.formlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formlbl.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.formlbl.Location = new System.Drawing.Point(-2, 2);
+            this.formlbl.Name = "formlbl";
+            this.formlbl.Size = new System.Drawing.Size(119, 20);
+            this.formlbl.TabIndex = 46;
+            this.formlbl.Text = "Gathering Data";
+            this.formlbl.Visible = false;
             // 
-            // furnishedtxt
+            // progressBar1
             // 
-            this.furnishedtxt.FormattingEnabled = true;
-            this.furnishedtxt.Location = new System.Drawing.Point(381, 58);
-            this.furnishedtxt.Name = "furnishedtxt";
-            this.furnishedtxt.Size = new System.Drawing.Size(89, 21);
-            this.furnishedtxt.TabIndex = 52;
-            // 
-            // saletypebox
-            // 
-            this.saletypebox.FormattingEnabled = true;
-            this.saletypebox.Location = new System.Drawing.Point(207, 305);
-            this.saletypebox.Name = "saletypebox";
-            this.saletypebox.Size = new System.Drawing.Size(121, 21);
-            this.saletypebox.TabIndex = 51;
-            // 
-            // ptypebox
-            // 
-            this.ptypebox.FormattingEnabled = true;
-            this.ptypebox.Location = new System.Drawing.Point(16, 165);
-            this.ptypebox.Name = "ptypebox";
-            this.ptypebox.Size = new System.Drawing.Size(148, 21);
-            this.ptypebox.TabIndex = 50;
+            this.progressBar1.Location = new System.Drawing.Point(901, 185);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(155, 10);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar1.TabIndex = 53;
+            this.progressBar1.Visible = false;
             // 
             // verifiedproperties
             // 
@@ -648,6 +665,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1167, 665);
             this.Controls.Add(this.proppnl);
+            this.Controls.Add(this.loading);
+            this.Controls.Add(this.formlbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "verifiedproperties";
             this.Text = "properties";
@@ -658,8 +677,9 @@
             this.dpnl.PerformLayout();
             this.dppnl.ResumeLayout(false);
             this.dppnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dpbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -678,7 +698,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label pidlbl;
-        private System.Windows.Forms.CheckBox vno;
         private System.Windows.Forms.CheckBox vyes;
         private System.Windows.Forms.TextBox distancetxt;
         private System.Windows.Forms.Label label16;
@@ -708,9 +727,7 @@
         private System.Windows.Forms.Button editpropbtn;
         private System.Windows.Forms.Button loadpicbtn;
         private System.Windows.Forms.ListView piclist;
-        private System.Windows.Forms.Button updpicbtn;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.PictureBox dpbox;
         private System.Windows.Forms.Panel dppnl;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label21;
@@ -720,5 +737,8 @@
         private System.Windows.Forms.ComboBox furnishedtxt;
         private System.Windows.Forms.ComboBox saletypebox;
         private System.Windows.Forms.ComboBox ptypebox;
+        private System.Windows.Forms.PictureBox loading;
+        private System.Windows.Forms.Label formlbl;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

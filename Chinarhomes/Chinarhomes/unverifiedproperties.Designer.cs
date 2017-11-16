@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.proppnl = new System.Windows.Forms.Panel();
             this.loadpicbtn = new System.Windows.Forms.Button();
             this.bpnl = new System.Windows.Forms.Panel();
@@ -45,7 +45,6 @@
             this.dppnl = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dpbox = new System.Windows.Forms.PictureBox();
             this.piclist = new System.Windows.Forms.ListView();
             this.label19 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -90,7 +89,6 @@
             this.bpnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.dppnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dpbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
@@ -160,6 +158,7 @@
             this.cancelbtn.Text = "Cancel";
             this.cancelbtn.UseVisualStyleBackColor = false;
             this.cancelbtn.Visible = false;
+            this.cancelbtn.Click += new System.EventHandler(this.cancelbtn_Click);
             // 
             // dpnl
             // 
@@ -265,7 +264,6 @@
             // 
             this.dppnl.Controls.Add(this.label20);
             this.dppnl.Controls.Add(this.panel3);
-            this.dppnl.Controls.Add(this.dpbox);
             this.dppnl.Controls.Add(this.piclist);
             this.dppnl.Location = new System.Drawing.Point(802, 7);
             this.dppnl.Name = "dppnl";
@@ -291,21 +289,12 @@
             this.panel3.Size = new System.Drawing.Size(5, 300);
             this.panel3.TabIndex = 45;
             // 
-            // dpbox
-            // 
-            this.dpbox.Location = new System.Drawing.Point(182, 2);
-            this.dpbox.Name = "dpbox";
-            this.dpbox.Size = new System.Drawing.Size(172, 123);
-            this.dpbox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.dpbox.TabIndex = 39;
-            this.dpbox.TabStop = false;
-            // 
             // piclist
             // 
             this.piclist.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.piclist.Location = new System.Drawing.Point(20, 128);
+            this.piclist.Location = new System.Drawing.Point(20, 37);
             this.piclist.Name = "piclist";
-            this.piclist.Size = new System.Drawing.Size(331, 191);
+            this.piclist.Size = new System.Drawing.Size(331, 282);
             this.piclist.TabIndex = 38;
             this.piclist.UseCompatibleStateImageBehavior = false;
             // 
@@ -358,7 +347,7 @@
             // pidlbl
             // 
             this.pidlbl.AutoSize = true;
-            this.pidlbl.Location = new System.Drawing.Point(13, 68);
+            this.pidlbl.Location = new System.Drawing.Point(13, 65);
             this.pidlbl.Name = "pidlbl";
             this.pidlbl.Size = new System.Drawing.Size(0, 13);
             this.pidlbl.TabIndex = 32;
@@ -643,14 +632,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(14, 2);
             this.propdataview.MultiSelect = false;
@@ -701,7 +690,6 @@
             this.dpnl.PerformLayout();
             this.dppnl.ResumeLayout(false);
             this.dppnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dpbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
@@ -722,7 +710,6 @@
         private System.Windows.Forms.Panel dppnl;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox dpbox;
         private System.Windows.Forms.ListView piclist;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel panel2;
