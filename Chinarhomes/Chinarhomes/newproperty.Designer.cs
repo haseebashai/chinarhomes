@@ -75,9 +75,15 @@
             this.label20 = new System.Windows.Forms.Label();
             this.nopics = new System.Windows.Forms.Label();
             this.formlbl = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.piclbl = new System.Windows.Forms.Label();
+            this.ppnl = new System.Windows.Forms.Panel();
+            this.sizelbl = new System.Windows.Forms.Label();
             this.dpnl.SuspendLayout();
             this.panel4.SuspendLayout();
             this.dppnl.SuspendLayout();
+            this.ppnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // dpnl
@@ -470,6 +476,7 @@
             // 
             // dppnl
             // 
+            this.dppnl.Controls.Add(this.ppnl);
             this.dppnl.Controls.Add(this.updpicbtn);
             this.dppnl.Controls.Add(this.updbtn);
             this.dppnl.Controls.Add(this.clearpicbtn);
@@ -496,7 +503,7 @@
             this.updbtn.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
             this.updbtn.FlatAppearance.BorderSize = 2;
             this.updbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.updbtn.Location = new System.Drawing.Point(975, 202);
+            this.updbtn.Location = new System.Drawing.Point(975, 107);
             this.updbtn.Name = "updbtn";
             this.updbtn.Size = new System.Drawing.Size(140, 103);
             this.updbtn.TabIndex = 20;
@@ -556,6 +563,52 @@
             this.formlbl.Text = "Add New Property";
             this.formlbl.Visible = false;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(11, 32);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(140, 10);
+            this.progressBar1.TabIndex = 101;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 9);
+            this.label1.TabIndex = 102;
+            this.label1.Text = "uploading";
+            // 
+            // piclbl
+            // 
+            this.piclbl.ForeColor = System.Drawing.Color.Green;
+            this.piclbl.Location = new System.Drawing.Point(43, 11);
+            this.piclbl.Name = "piclbl";
+            this.piclbl.Size = new System.Drawing.Size(104, 14);
+            this.piclbl.TabIndex = 103;
+            // 
+            // ppnl
+            // 
+            this.ppnl.Controls.Add(this.sizelbl);
+            this.ppnl.Controls.Add(this.progressBar1);
+            this.ppnl.Controls.Add(this.piclbl);
+            this.ppnl.Controls.Add(this.label1);
+            this.ppnl.Location = new System.Drawing.Point(964, 41);
+            this.ppnl.Name = "ppnl";
+            this.ppnl.Size = new System.Drawing.Size(163, 60);
+            this.ppnl.TabIndex = 104;
+            this.ppnl.Visible = false;
+            // 
+            // sizelbl
+            // 
+            this.sizelbl.AutoSize = true;
+            this.sizelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizelbl.Location = new System.Drawing.Point(11, 43);
+            this.sizelbl.Name = "sizelbl";
+            this.sizelbl.Size = new System.Drawing.Size(0, 13);
+            this.sizelbl.TabIndex = 104;
+            // 
             // newproperty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -573,6 +626,8 @@
             this.panel4.PerformLayout();
             this.dppnl.ResumeLayout(false);
             this.dppnl.PerformLayout();
+            this.ppnl.ResumeLayout(false);
+            this.ppnl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,5 +681,10 @@
         private System.Windows.Forms.ComboBox furnishedtxt;
         public System.Windows.Forms.Panel dpnl;
         public System.Windows.Forms.Label formlbl;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Panel ppnl;
+        private System.Windows.Forms.Label piclbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label sizelbl;
     }
 }

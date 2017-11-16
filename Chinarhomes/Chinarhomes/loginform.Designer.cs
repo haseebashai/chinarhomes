@@ -169,7 +169,7 @@
             // loading
             // 
             this.loading.Image = global::Chinarhomes.Properties.Resources.pageload;
-            this.loading.Location = new System.Drawing.Point(614, 337);
+            this.loading.Location = new System.Drawing.Point(613, 337);
             this.loading.Name = "loading";
             this.loading.Size = new System.Drawing.Size(309, 141);
             this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

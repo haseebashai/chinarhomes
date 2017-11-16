@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.proppnl = new System.Windows.Forms.Panel();
             this.loadpicbtn = new System.Windows.Forms.Button();
             this.bpnl = new System.Windows.Forms.Panel();
@@ -36,16 +36,17 @@
             this.updbtn = new System.Windows.Forms.Button();
             this.cancelbtn = new System.Windows.Forms.Button();
             this.dpnl = new System.Windows.Forms.Panel();
-            this.saletypetxt = new System.Windows.Forms.TextBox();
+            this.furnishedtxt = new System.Windows.Forms.ComboBox();
+            this.saletypebox = new System.Windows.Forms.ComboBox();
+            this.ptypebox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnametxt = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.dppnl = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.delpicsbtn = new System.Windows.Forms.Button();
-            this.updpicbtn = new System.Windows.Forms.Button();
             this.dpbox = new System.Windows.Forms.PictureBox();
             this.piclist = new System.Windows.Forms.ListView();
-            this.deldpbtn = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
@@ -61,14 +62,12 @@
             this.label12 = new System.Windows.Forms.Label();
             this.agetxt = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.furnishedtxt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.floorstxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.roomstxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.typetxt = new System.Windows.Forms.TextBox();
             this.pricetxt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.desctxt = new System.Windows.Forms.TextBox();
@@ -83,13 +82,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.nopicslbl = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.propdataview = new System.Windows.Forms.DataGridView();
+            this.formlbl = new System.Windows.Forms.Label();
+            this.loading = new System.Windows.Forms.PictureBox();
             this.proppnl.SuspendLayout();
             this.bpnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.dppnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dpbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // proppnl
@@ -98,10 +101,11 @@
             this.proppnl.Controls.Add(this.bpnl);
             this.proppnl.Controls.Add(this.dpnl);
             this.proppnl.Controls.Add(this.propdataview);
-            this.proppnl.Location = new System.Drawing.Point(1, 0);
+            this.proppnl.Location = new System.Drawing.Point(1, 1);
             this.proppnl.Name = "proppnl";
             this.proppnl.Size = new System.Drawing.Size(1165, 660);
             this.proppnl.TabIndex = 3;
+            this.proppnl.Visible = false;
             // 
             // loadpicbtn
             // 
@@ -128,7 +132,7 @@
             // 
             // editpropbtn
             // 
-            this.editpropbtn.Location = new System.Drawing.Point(3, 3);
+            this.editpropbtn.Location = new System.Drawing.Point(3, 4);
             this.editpropbtn.Name = "editpropbtn";
             this.editpropbtn.Size = new System.Drawing.Size(130, 35);
             this.editpropbtn.TabIndex = 40;
@@ -159,7 +163,11 @@
             // 
             // dpnl
             // 
-            this.dpnl.Controls.Add(this.saletypetxt);
+            this.dpnl.Controls.Add(this.furnishedtxt);
+            this.dpnl.Controls.Add(this.saletypebox);
+            this.dpnl.Controls.Add(this.ptypebox);
+            this.dpnl.Controls.Add(this.label1);
+            this.dpnl.Controls.Add(this.pnametxt);
             this.dpnl.Controls.Add(this.label21);
             this.dpnl.Controls.Add(this.dppnl);
             this.dpnl.Controls.Add(this.label19);
@@ -177,14 +185,12 @@
             this.dpnl.Controls.Add(this.label12);
             this.dpnl.Controls.Add(this.agetxt);
             this.dpnl.Controls.Add(this.label13);
-            this.dpnl.Controls.Add(this.furnishedtxt);
             this.dpnl.Controls.Add(this.label14);
             this.dpnl.Controls.Add(this.label11);
             this.dpnl.Controls.Add(this.floorstxt);
             this.dpnl.Controls.Add(this.label9);
             this.dpnl.Controls.Add(this.roomstxt);
             this.dpnl.Controls.Add(this.label10);
-            this.dpnl.Controls.Add(this.typetxt);
             this.dpnl.Controls.Add(this.pricetxt);
             this.dpnl.Controls.Add(this.label7);
             this.dpnl.Controls.Add(this.desctxt);
@@ -199,18 +205,52 @@
             this.dpnl.Controls.Add(this.label3);
             this.dpnl.Controls.Add(this.label2);
             this.dpnl.Controls.Add(this.nopicslbl);
+            this.dpnl.Controls.Add(this.progressBar1);
             this.dpnl.Location = new System.Drawing.Point(3, 259);
             this.dpnl.Name = "dpnl";
             this.dpnl.Size = new System.Drawing.Size(1162, 355);
             this.dpnl.TabIndex = 2;
             this.dpnl.Visible = false;
             // 
-            // saletypetxt
+            // furnishedtxt
             // 
-            this.saletypetxt.Location = new System.Drawing.Point(207, 304);
-            this.saletypetxt.Name = "saletypetxt";
-            this.saletypetxt.Size = new System.Drawing.Size(124, 20);
-            this.saletypetxt.TabIndex = 47;
+            this.furnishedtxt.FormattingEnabled = true;
+            this.furnishedtxt.Location = new System.Drawing.Point(381, 61);
+            this.furnishedtxt.Name = "furnishedtxt";
+            this.furnishedtxt.Size = new System.Drawing.Size(89, 21);
+            this.furnishedtxt.TabIndex = 57;
+            // 
+            // saletypebox
+            // 
+            this.saletypebox.FormattingEnabled = true;
+            this.saletypebox.Location = new System.Drawing.Point(207, 306);
+            this.saletypebox.Name = "saletypebox";
+            this.saletypebox.Size = new System.Drawing.Size(121, 21);
+            this.saletypebox.TabIndex = 56;
+            // 
+            // ptypebox
+            // 
+            this.ptypebox.FormattingEnabled = true;
+            this.ptypebox.Location = new System.Drawing.Point(16, 206);
+            this.ptypebox.Name = "ptypebox";
+            this.ptypebox.Size = new System.Drawing.Size(148, 21);
+            this.ptypebox.TabIndex = 55;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "Property Name";
+            // 
+            // pnametxt
+            // 
+            this.pnametxt.Location = new System.Drawing.Point(16, 157);
+            this.pnametxt.Name = "pnametxt";
+            this.pnametxt.Size = new System.Drawing.Size(148, 20);
+            this.pnametxt.TabIndex = 53;
             // 
             // label21
             // 
@@ -225,11 +265,8 @@
             // 
             this.dppnl.Controls.Add(this.label20);
             this.dppnl.Controls.Add(this.panel3);
-            this.dppnl.Controls.Add(this.delpicsbtn);
-            this.dppnl.Controls.Add(this.updpicbtn);
             this.dppnl.Controls.Add(this.dpbox);
             this.dppnl.Controls.Add(this.piclist);
-            this.dppnl.Controls.Add(this.deldpbtn);
             this.dppnl.Location = new System.Drawing.Point(802, 7);
             this.dppnl.Name = "dppnl";
             this.dppnl.Size = new System.Drawing.Size(360, 348);
@@ -254,25 +291,6 @@
             this.panel3.Size = new System.Drawing.Size(5, 300);
             this.panel3.TabIndex = 45;
             // 
-            // delpicsbtn
-            // 
-            this.delpicsbtn.Location = new System.Drawing.Point(294, 325);
-            this.delpicsbtn.Name = "delpicsbtn";
-            this.delpicsbtn.Size = new System.Drawing.Size(64, 20);
-            this.delpicsbtn.TabIndex = 44;
-            this.delpicsbtn.Text = "Delete Picture";
-            this.delpicsbtn.UseVisualStyleBackColor = false;
-            this.delpicsbtn.Click += new System.EventHandler(this.delpicsbtn_Click);
-            // 
-            // updpicbtn
-            // 
-            this.updpicbtn.Location = new System.Drawing.Point(97, 42);
-            this.updpicbtn.Name = "updpicbtn";
-            this.updpicbtn.Size = new System.Drawing.Size(79, 20);
-            this.updpicbtn.TabIndex = 42;
-            this.updpicbtn.Text = "Upload New";
-            this.updpicbtn.UseVisualStyleBackColor = false;
-            // 
             // dpbox
             // 
             this.dpbox.Location = new System.Drawing.Point(182, 2);
@@ -290,16 +308,6 @@
             this.piclist.Size = new System.Drawing.Size(331, 191);
             this.piclist.TabIndex = 38;
             this.piclist.UseCompatibleStateImageBehavior = false;
-            // 
-            // deldpbtn
-            // 
-            this.deldpbtn.Location = new System.Drawing.Point(97, 76);
-            this.deldpbtn.Name = "deldpbtn";
-            this.deldpbtn.Size = new System.Drawing.Size(79, 20);
-            this.deldpbtn.TabIndex = 41;
-            this.deldpbtn.Text = "Delete DP";
-            this.deldpbtn.UseVisualStyleBackColor = false;
-            this.deldpbtn.Click += new System.EventHandler(this.delbtn_Click);
             // 
             // label19
             // 
@@ -358,22 +366,26 @@
             // vno
             // 
             this.vno.AutoSize = true;
-            this.vno.Location = new System.Drawing.Point(66, 306);
+            this.vno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vno.Location = new System.Drawing.Point(73, 306);
             this.vno.Name = "vno";
-            this.vno.Size = new System.Drawing.Size(40, 17);
+            this.vno.Size = new System.Drawing.Size(45, 21);
             this.vno.TabIndex = 31;
             this.vno.Text = "No";
             this.vno.UseVisualStyleBackColor = true;
+            this.vno.CheckedChanged += new System.EventHandler(this.vno_CheckedChanged);
             // 
             // vyes
             // 
             this.vyes.AutoSize = true;
+            this.vyes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vyes.Location = new System.Drawing.Point(16, 306);
             this.vyes.Name = "vyes";
-            this.vyes.Size = new System.Drawing.Size(44, 17);
+            this.vyes.Size = new System.Drawing.Size(51, 21);
             this.vyes.TabIndex = 30;
             this.vyes.Text = "Yes";
             this.vyes.UseVisualStyleBackColor = true;
+            this.vyes.CheckedChanged += new System.EventHandler(this.vyes_CheckedChanged);
             // 
             // distancetxt
             // 
@@ -381,6 +393,8 @@
             this.distancetxt.Name = "distancetxt";
             this.distancetxt.Size = new System.Drawing.Size(148, 20);
             this.distancetxt.TabIndex = 29;
+            this.distancetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.distancetxt_KeyPress);
+            this.distancetxt.Leave += new System.EventHandler(this.distancetxt_Leave);
             // 
             // label16
             // 
@@ -397,6 +411,8 @@
             this.prioritytxt.Name = "prioritytxt";
             this.prioritytxt.Size = new System.Drawing.Size(148, 20);
             this.prioritytxt.TabIndex = 27;
+            this.prioritytxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prioritytxt_KeyPress);
+            this.prioritytxt.Leave += new System.EventHandler(this.prioritytxt_Leave);
             // 
             // label15
             // 
@@ -422,6 +438,8 @@
             this.agetxt.Name = "agetxt";
             this.agetxt.Size = new System.Drawing.Size(148, 20);
             this.agetxt.TabIndex = 23;
+            this.agetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.agetxt_KeyPress);
+            this.agetxt.Leave += new System.EventHandler(this.agetxt_Leave);
             // 
             // label13
             // 
@@ -431,13 +449,6 @@
             this.label13.Size = new System.Drawing.Size(68, 13);
             this.label13.TabIndex = 22;
             this.label13.Text = "Property Age";
-            // 
-            // furnishedtxt
-            // 
-            this.furnishedtxt.Location = new System.Drawing.Point(381, 61);
-            this.furnishedtxt.Name = "furnishedtxt";
-            this.furnishedtxt.Size = new System.Drawing.Size(148, 20);
-            this.furnishedtxt.TabIndex = 21;
             // 
             // label14
             // 
@@ -451,7 +462,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 168);
+            this.label11.Location = new System.Drawing.Point(13, 190);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 13);
             this.label11.TabIndex = 19;
@@ -463,6 +474,8 @@
             this.floorstxt.Name = "floorstxt";
             this.floorstxt.Size = new System.Drawing.Size(87, 20);
             this.floorstxt.TabIndex = 18;
+            this.floorstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.floorstxt_KeyPress);
+            this.floorstxt.Leave += new System.EventHandler(this.floorstxt_Leave);
             // 
             // label9
             // 
@@ -479,6 +492,8 @@
             this.roomstxt.Name = "roomstxt";
             this.roomstxt.Size = new System.Drawing.Size(87, 20);
             this.roomstxt.TabIndex = 16;
+            this.roomstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomstxt_KeyPress);
+            this.roomstxt.Leave += new System.EventHandler(this.roomstxt_Leave);
             // 
             // label10
             // 
@@ -489,24 +504,19 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "No. of Rooms";
             // 
-            // typetxt
-            // 
-            this.typetxt.Location = new System.Drawing.Point(16, 185);
-            this.typetxt.Name = "typetxt";
-            this.typetxt.Size = new System.Drawing.Size(148, 20);
-            this.typetxt.TabIndex = 14;
-            // 
             // pricetxt
             // 
-            this.pricetxt.Location = new System.Drawing.Point(16, 247);
+            this.pricetxt.Location = new System.Drawing.Point(16, 256);
             this.pricetxt.Name = "pricetxt";
             this.pricetxt.Size = new System.Drawing.Size(148, 20);
             this.pricetxt.TabIndex = 13;
+            this.pricetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pricetxt_KeyPress);
+            this.pricetxt.Leave += new System.EventHandler(this.pricetxt_Leave);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 230);
+            this.label7.Location = new System.Drawing.Point(13, 239);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(31, 13);
             this.label7.TabIndex = 12;
@@ -532,7 +542,7 @@
             // 
             // locationtxt
             // 
-            this.locationtxt.Location = new System.Drawing.Point(16, 123);
+            this.locationtxt.Location = new System.Drawing.Point(16, 106);
             this.locationtxt.Name = "locationtxt";
             this.locationtxt.Size = new System.Drawing.Size(148, 20);
             this.locationtxt.TabIndex = 9;
@@ -540,7 +550,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 106);
+            this.label6.Location = new System.Drawing.Point(13, 89);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(90, 13);
             this.label6.TabIndex = 8;
@@ -552,6 +562,8 @@
             this.areatxt.Name = "areatxt";
             this.areatxt.Size = new System.Drawing.Size(124, 20);
             this.areatxt.TabIndex = 7;
+            this.areatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areatxt_KeyPress);
+            this.areatxt.Leave += new System.EventHandler(this.areatxt_Leave);
             // 
             // label5
             // 
@@ -584,6 +596,8 @@
             this.areaptxt.Name = "areaptxt";
             this.areaptxt.Size = new System.Drawing.Size(124, 20);
             this.areaptxt.TabIndex = 3;
+            this.areaptxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaptxt_KeyPress);
+            this.areaptxt.Leave += new System.EventHandler(this.areaptxt_Leave);
             // 
             // label3
             // 
@@ -614,20 +628,29 @@
             this.nopicslbl.Text = "No Pictures found.";
             this.nopicslbl.Visible = false;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(894, 185);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(162, 10);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar1.TabIndex = 46;
+            this.progressBar1.Visible = false;
+            // 
             // propdataview
             // 
             this.propdataview.AllowUserToAddRows = false;
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(14, 2);
             this.propdataview.MultiSelect = false;
@@ -637,6 +660,29 @@
             this.propdataview.TabIndex = 0;
             this.propdataview.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.propdataview_CellClick);
             // 
+            // formlbl
+            // 
+            this.formlbl.AutoSize = true;
+            this.formlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formlbl.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.formlbl.Location = new System.Drawing.Point(-2, 2);
+            this.formlbl.Name = "formlbl";
+            this.formlbl.Size = new System.Drawing.Size(119, 20);
+            this.formlbl.TabIndex = 35;
+            this.formlbl.Text = "Gathering Data";
+            this.formlbl.Visible = false;
+            // 
+            // loading
+            // 
+            this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
+            this.loading.Location = new System.Drawing.Point(113, -3);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(31, 32);
+            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.loading.TabIndex = 45;
+            this.loading.TabStop = false;
+            this.loading.Visible = false;
+            // 
             // unverifiedproperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -644,6 +690,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1167, 664);
             this.Controls.Add(this.proppnl);
+            this.Controls.Add(this.loading);
+            this.Controls.Add(this.formlbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "unverifiedproperties";
             this.Text = "unverifiedproperties";
@@ -655,7 +703,9 @@
             this.dppnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dpbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -668,16 +718,12 @@
         private System.Windows.Forms.Button updbtn;
         private System.Windows.Forms.Button cancelbtn;
         private System.Windows.Forms.Panel dpnl;
-        private System.Windows.Forms.TextBox saletypetxt;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Panel dppnl;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button delpicsbtn;
-        private System.Windows.Forms.Button updpicbtn;
         private System.Windows.Forms.PictureBox dpbox;
         private System.Windows.Forms.ListView piclist;
-        private System.Windows.Forms.Button deldpbtn;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label18;
@@ -693,14 +739,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox agetxt;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox furnishedtxt;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox floorstxt;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox roomstxt;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox typetxt;
         private System.Windows.Forms.TextBox pricetxt;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox desctxt;
@@ -716,5 +760,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label nopicslbl;
         private System.Windows.Forms.DataGridView propdataview;
+        private System.Windows.Forms.ComboBox furnishedtxt;
+        private System.Windows.Forms.ComboBox saletypebox;
+        private System.Windows.Forms.ComboBox ptypebox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox pnametxt;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label formlbl;
+        private System.Windows.Forms.PictureBox loading;
     }
 }

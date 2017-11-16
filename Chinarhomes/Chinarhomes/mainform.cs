@@ -355,9 +355,12 @@ namespace Chinarhomes
         private void signoutlbl_Click(object sender, EventArgs e)
         {
             userinfo.loggedin = false;
+            userinfo.admin = false;
+            userinfo.email = "";
+            userinfo.username = "";
             this.Close();
             MessageBox.Show("Logged out successfully.\n\nPlease Login to continue.");
-            loginform lg = new loginform(this, this);
+            loginform lg = new loginform(cn);
             lg.TopLevel = false;
             cn.mainpnl.Controls.Clear();
             cn.mainpnl.Controls.Add(lg);

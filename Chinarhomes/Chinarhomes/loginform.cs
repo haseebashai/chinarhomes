@@ -18,11 +18,11 @@ namespace Chinarhomes
         MySqlDataReader dr;
 
         private container cn = null;
-        private mainform mf = null;
+    //    private mainform mf = null;
 
-        public loginform(Form cncopy, Form mfcopy)
+        public loginform(Form cncopy)
         {
-            mf = mfcopy as mainform;
+         //   mf = mfcopy as mainform;
             cn = cncopy as container;
             InitializeComponent();
         }
@@ -154,46 +154,39 @@ namespace Chinarhomes
             }
             else if (result == "success")
             {
-               
+                
+                if (usertype == "1")
+                {
+                    userinfo.admin = true;
+                }
+                else if (usertype == "0")
+                {
+                    userinfo.admin = false;
+                }
+
+
+                
                 userinfo.loggedin = true;
                 userinfo.username = username;
                 userinfo.email = email;
 
 
+               
                 mainform mf = new mainform(cn);
+                mf.TopLevel = false;
+                cn.mainpnl.Controls.Clear();
+                
+                cn.mainpnl.Controls.Add(mf);
+               
+                this.Close();
+                mf.Show();
                 mf.changelabel(username);
 
-                this.Close();
-                if (usertype == "1")
-                {
-                    userinfo.admin = true;
-
-                    MessageBox.Show("admin");
-                }
-                else if (usertype == "0")
-                {
-                    userinfo.admin = false;
-                    mf.policybtn.Visible = false;
-                    mf.customerbtn.Visible = false;
-                    mf.msgbtn.Visible = false;
-                    mf.agentbtn.Visible = false;
-                    mf.arrow2.Visible = false;
-                    mf.arrow3.Visible = false;
-                    mf.arrow4.Visible = false;
-                    mf.arrow5.Visible = false;
-                    MessageBox.Show("agent");
-
-                }
-                cn.mainpnl.Controls.Clear();
-                mf.TopLevel = false;
-                cn.mainpnl.Controls.Add(mf);
-
-                mf.Show();
-
+               
             }
             loginbtn.Enabled = true;
             forgotbtn.Enabled = true;
-          
+
 
         }
 

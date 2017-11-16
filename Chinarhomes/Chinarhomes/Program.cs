@@ -23,9 +23,10 @@ namespace Chinarhomes
     class userinfo
     {
         public static bool loggedin;
-        public static String username;
+        public static string username;
         public static bool admin;
         public static string email;
+        public static long lastid;
     }
 
 
@@ -76,6 +77,7 @@ namespace Chinarhomes
             {
                 MySqlCommand cmd = new MySqlCommand(command, conn);
                 cmd.ExecuteNonQuery();
+                userinfo.lastid = cmd.LastInsertedId;
                 this.closeConnection();
             }
 

@@ -57,6 +57,9 @@ namespace Chinarhomes
             propdataview.Columns["picture"].Visible = false;
             propdataview.Columns["saletype"].Visible = false;
             propdataview.Columns["priority"].Visible = false;
+            if (!userinfo.admin) 
+            propdataview.Columns["verifiedby"].Visible = false;
+           
 
         }
      
@@ -70,12 +73,40 @@ namespace Chinarhomes
             {
                 dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
                     + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, timestampp, "
-                    + "furnished,tags,picture,saletype,priority from properties where verified='1'");
+                    + "furnished,tags,picture,saletype,priority,verifiedby,name from properties where verified='1'");
                 DataTable dt = new DataTable();
                 dt.Load(dr);
                 obj.closeConnection();
                 bsource = new BindingSource();
                 bsource.DataSource = dt;
+
+
+                dr = obj.Query("select distinct type from properties ");
+                DataTable dt1 = new DataTable();
+                dt1.Columns.Add("type", typeof(String));
+                dt1.Load(dr);
+                obj.closeConnection();
+                ptypebox.DisplayMember = "type";
+                ptypebox.DataSource = dt1;
+
+
+                dr = obj.Query("select distinct saletype from properties ");
+                DataTable dt2 = new DataTable();
+                dt2.Columns.Add("saletype", typeof(String));
+                dt2.Load(dr);
+                obj.closeConnection();
+                saletypebox.DisplayMember = "saletype";
+                saletypebox.DataSource = dt2;
+
+
+                dr = obj.Query("select distinct furnished from properties ");
+                DataTable dt3 = new DataTable();
+                dt3.Columns.Add("furnished", typeof(String));
+                dt3.Load(dr);
+                obj.closeConnection();
+                furnishedtxt.DisplayMember = "furnished";
+                furnishedtxt.DataSource = dt3;
+
 
             }
             catch (MySqlException ex)
@@ -100,7 +131,7 @@ namespace Chinarhomes
                 DataGridViewRow row = this.propdataview.Rows[e.RowIndex];
                 pidlbl.Text = row.Cells["id"].Value.ToString();
                 locationtxt.Text = row.Cells["location"].Value.ToString();
-                typetxt.Text = row.Cells["type"].Value.ToString();
+                ptypebox.SelectedItem = row.Cells["type"].Value.ToString();
                 pricetxt.Text = row.Cells["price"].Value.ToString();
                 string verify = row.Cells["verified"].Value.ToString();
 
@@ -120,9 +151,10 @@ namespace Chinarhomes
                 prioritytxt.Text = row.Cells["priority"].Value.ToString();
                 desctxt.Text = row.Cells["description"].Value.ToString();
                 distancetxt.Text = row.Cells["distancefrommain"].Value.ToString();
-                furnishedtxt.Text = row.Cells["furnished"].Value.ToString();
+                furnishedtxt.SelectedItem = row.Cells["furnished"].Value.ToString();
                 tagstxt.Text = row.Cells["tags"].Value.ToString();
-                saletypetxt.Text = row.Cells["saletype"].Value.ToString();
+                saletypebox.SelectedItem = row.Cells["saletype"].Value.ToString();
+                pnametxt.Text = row.Cells["name"].Value.ToString();
                 
             }
         }
@@ -241,7 +273,7 @@ namespace Chinarhomes
             loc.Replace(@"\", @"\\").Replace("'", "\\'");
             StringBuilder tags = new StringBuilder(tagstxt.Text);
             tags.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder type = new StringBuilder(typetxt.Text);
+            StringBuilder type = new StringBuilder(ptypebox.Text);
             type.Replace(@"\", @"\\").Replace("'", "\\'");
             StringBuilder floors = new StringBuilder(floorstxt.Text);
             floors.Replace(@"\", @"\\").Replace("'", "\\'");
@@ -263,7 +295,7 @@ namespace Chinarhomes
             age.Replace(@"\", @"\\").Replace("'", "\\'");
             StringBuilder furnished = new StringBuilder(furnishedtxt.Text);
             furnished.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder saletype = new StringBuilder(saletypetxt.Text);
+            StringBuilder saletype = new StringBuilder(saletypebox.Text);
             saletype.Replace(@"\", @"\\").Replace("'", "\\'");
 
 
@@ -279,7 +311,7 @@ namespace Chinarhomes
 
                 cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
                     + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
-                    + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "' WHERE `propertyid`='" + pidlbl.Text + "'";
+                    + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='"+pnametxt.Text+"' WHERE `propertyid`='" + pidlbl.Text + "'";
                 obj.nonQuery(cmd);
                 obj.closeConnection();
                 MessageBox.Show("Property Updated succesfully.", "Success");

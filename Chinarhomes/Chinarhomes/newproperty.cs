@@ -27,9 +27,32 @@ namespace Chinarhomes
             dg = dgcopy as dialogcontainer;
             InitializeComponent();
         }
-        int propertyid;
+
+        int dp = 1;
+        string ext;
+        long propertyid;
         private void updbtn_Click(object sender, EventArgs e)
         {
+            updpicbtn.Enabled = false;
+            updbtn.Enabled = false;
+            clearpicbtn.Enabled = false;
+            StringBuilder loc = new StringBuilder(locationtxt.Text);
+            loc.Replace(@"\", @"\\").Replace("'", "\\'");
+            StringBuilder pname = new StringBuilder(pnametxt.Text);
+            pname.Replace(@"\", @"\\").Replace("'", "\\'");
+            StringBuilder desc = new StringBuilder(desctxt.Text);
+            desc.Replace(@"\", @"\\").Replace("'", "\\'");   
+                   
+            
+            object[] arg = {loc,pname,desc,ptypebox.Text,saletypebox.Text,furnishedtxt.Text};
+
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += Bg_DoWork;
+            bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
+            bg.WorkerSupportsCancellation = true;
+           
+
+
             DialogResult dgr = MessageBox.Show("Please ensure all the details are filled and correct before proceeding.", "Confirm!", MessageBoxButtons.OKCancel);
             if (dgr == DialogResult.OK)
             {
@@ -40,75 +63,154 @@ namespace Chinarhomes
                 }
                 else
                 {
-                    int ver = 0;
-
-                    if (verified)
-                        ver = 1;
-                    else
-                        ver = 0;
-                    try
-                    {
-                        StringBuilder loc = new StringBuilder(locationtxt.Text);
-                        loc.Replace(@"\", @"\\").Replace("'", "\\'");
-                        StringBuilder pname = new StringBuilder(pnametxt.Text);
-                        pname.Replace(@"\", @"\\").Replace("'", "\\'");
-                        StringBuilder desc = new StringBuilder(desctxt.Text);
-                        desc.Replace(@"\", @"\\").Replace("'", "\\'");
-
-
-
-                        cmd = "INSERT INTO `chinarhomes`.`properties` (`location`, `tags`, `type`, `noofstories`, `noofrooms`, `area`,`areaofbuilt`, " +
-                      "`price`, `priority`, `description`, `distancefrommain`, `age`, `furnished`, `verified`, `email`, `saletype`,`verifiedby`,`name`)" +
-                      " VALUES ('" + loc + "', '"+pname+" " + loc + " " + tagstxt.Text + "', '" + ptypebox.Text + "', '" + floorstxt.Text + "', '" + roomstxt.Text + "', '" + areatxt.Text + "', '" + areaptxt.Text + "','" + pricetxt.Text + "'," +
-                      " '" + prioritytxt.Text + "', '" + desc + "', '" + distancetxt.Text + "', '" + agetxt.Text + "', '" + furnishedtxt.Text + "', '" + ver + "','258efdc003a5c43825f73ff845ca1348', '" + saletypebox.Text + "','" + userinfo.email + "','" + pname + "')";
-                        obj.nonQuery(cmd);
-                        propertyid = obj.Count("SELECT LAST_INSERT_ID()");
-
-                        obj.closeConnection();
-
-                        int dp = 0;
-                        foreach (string adr in pics)
-                        {
-                            UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/", adr);
-                            if (dp == 0)
-                            {
-                                MessageBox.Show(adr);
-                                string dpname = adr.Substring(adr.LastIndexOf("\\"));
-                                cmd = "update properties set picture='" + dpname + "' where propertyid='" + propertyid + "'";
-                                obj.nonQuery(cmd);
-                                obj.closeConnection();
-                                MessageBox.Show(dpname);
-                                dp++;
-                            }
-                            else if (dp > 0)
-                            {
-                                string picsname = adr.Substring(adr.LastIndexOf("\\"));
-                                cmd = "insert into pictures (`propertyid`,`picture`)values('" + propertyid + "','" + picsname + "')";
-                                obj.nonQuery(cmd);
-                                obj.closeConnection();
-                                MessageBox.Show(picsname);
-                            }
-
-                        }
-                        MessageBox.Show("added.");
-
-                    }
-                    catch (MySqlException ex)
-                    {
-                        obj.closeConnection();
-                        MessageBox.Show(ex.Message);
-                    }
+                    ppnl.Visible = true;
+                    bg.RunWorkerAsync(arg);
+                  
                 }
+            }else
+            {
+                ppnl.Visible = false;
+                updbtn.Enabled = true;
+                clearpicbtn.Enabled = true;
+                updpicbtn.Enabled = true;
             }
         }
-       
+        
+        private void Bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            ppnl.Visible = false;
+            if(!e.Cancelled)
+            {
+                string result = (string)e.Result;
+                if (result == "success")
+                {
+                    MessageBox.Show("Property added successfully.");
+                    pics.Clear();
+                    flowpnl.Controls.Clear();
+                    flowpnl.Visible = false;
+                    updbtn.Visible = false;
+
+                    clearpicbtn.Visible = false;
+                    updpicbtn.Location = new Point(491, 90);
+                    updpicbtn.Text = "Select Pictures";
+                }
+                else
+                {
+                    if (picfailed)
+                    {
+                        MessageBox.Show("Picture upload failed. Please try after sometime.");
+                    }
+                    else if (result == "fail")
+                    {
+                        MessageBox.Show("Failed to add property, please try again.");
+                    }
+
+                }
+              
+            }
+             MessageBox.Show("Picture upload failed. Please try after sometime.");
+            ppnl.Visible = false;
+            updbtn.Enabled = true;
+            clearpicbtn.Enabled = true;
+            updpicbtn.Enabled = true;
+        }
+
+        private void Bg_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            Object[] arg = e.Argument as Object[];
+            StringBuilder loc = (StringBuilder)arg[0];
+            StringBuilder pname = (StringBuilder)arg[1];
+            StringBuilder desc = (StringBuilder)arg[2];
+            string ptype = (string)arg[3];
+            string saletype = (string)arg[4];
+            string furnished = (string)arg[5];
+
+
+
+            int ver = 0;
+
+        if (verified)
+            ver = 1;
+        else
+            ver = 0;
+        try
+        {
+           
+
+
+
+            cmd = "INSERT INTO `chinarhomes`.`properties` (`location`, `tags`, `type`, `noofstories`, `noofrooms`, `area`,`areaofbuilt`, " +
+          "`price`, `priority`, `description`, `distancefrommain`, `age`, `furnished`, `verified`, `email`, `saletype`,`verifiedby`,`name`)" +
+          " VALUES ('" + loc + "', '" + pname + " " + loc + " " + tagstxt.Text + "', '" + ptype + "', '" + floorstxt.Text + "', '" + roomstxt.Text + "', '" + areatxt.Text + "', '" + areaptxt.Text + "','" + pricetxt.Text + "'," +
+          " '" + prioritytxt.Text + "', '" + desc + "', '" + distancetxt.Text + "', '" + agetxt.Text + "', '" + furnished + "', '" + ver + "','258efdc003a5c43825f73ff845ca1348', '" + saletype + "','" + userinfo.email + "','" + pname + "')";
+            obj.nonQuery(cmd);
+
+            propertyid = userinfo.lastid;
+
+                foreach (string adr in pics)
+                {
+                    if (picfailed)
+                    {
+                        e.Result = "fail";
+                        e.Cancel = true;
+                        
+                    }
+                    else
+                    {
+
+                        ext = adr.Substring(adr.LastIndexOf("."));
+                        if (ver == 1)
+                        {
+                            UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/", adr);
+                        }
+                        else if (ver == 0)
+                        {
+                            UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/uploads/", adr);
+
+                        }
+
+                        if (dp == 1)
+                        {
+
+                            string dpname = adr.Substring(adr.LastIndexOf("\\"));
+                            cmd = "update properties set picture='" + propertyid + "-" + dp + ext + "' where propertyid='" + propertyid + "'";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+
+                            dp++;
+                        }
+                        else if (dp > 1)
+                        {
+
+                            string picsname = adr.Substring(adr.LastIndexOf("\\"));
+                            cmd = "insert into pictures (`propertyid`,`picture`)values('" + propertyid + "','" + propertyid + "-" + dp + ext + "')";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            dp++;
+
+                        }
+                        e.Result = "success";
+                    }
+                }
+                
+                dp = 1;
+            }
+            catch (MySqlException ex)
+            {
+                e.Result =  "fail";
+                obj.closeConnection();
+              
+            }
+        }
+
         private void clearpicbtn_Click(object sender, EventArgs e)
         {
             pics.Clear();
             flowpnl.Controls.Clear();
             flowpnl.Visible = false;
             updbtn.Visible = false;
-           
+
             clearpicbtn.Visible = false;
             updpicbtn.Location = new Point(491, 90);
             updpicbtn.Text = "Select Pictures";
@@ -119,7 +221,7 @@ namespace Chinarhomes
             OpenFileDialog fd = new OpenFileDialog();
             fd.Filter = "Images (*.JPG;*.PNG)|*.JPG;*.PNG|" + "All files (*.*)|*.*";
 
-         
+
             fd.Multiselect = true;
             fd.Title = "Image Browser";
             DialogResult dr = fd.ShowDialog();
@@ -161,19 +263,22 @@ namespace Chinarhomes
                         updpicbtn.Location = new Point(43, 128);
                         flowpnl.Visible = true;
                         updbtn.Visible = true;
-                       
+
                         clearpicbtn.Visible = true;
                         updpicbtn.Text = "Add more Pictures";
                     }
                 }
             }
         }
+
+
+        bool picfailed = false;
         public void UploadFileToFtp(string url, string filePath)
         {
             try
             {
                 var fileName = Path.GetFileName(filePath);
-                var request = (FtpWebRequest)WebRequest.Create(url + fileName);
+                var request = (FtpWebRequest)WebRequest.Create(url + propertyid + "-" + dp + ext);
 
                 request.Method = WebRequestMethods.Ftp.UploadFile;
                 request.Credentials = new NetworkCredential("Chinarhomes", "Chinar@123");
@@ -181,15 +286,35 @@ namespace Chinarhomes
                 request.UseBinary = true;
                 request.KeepAlive = true;
 
-                using (var fileStream = File.OpenRead(filePath))
-                {
-                    using (var requestStream = request.GetRequestStream())
-                    {
-                        fileStream.CopyTo(requestStream);
-                        requestStream.Close();
-                    }
-                }
+                //using (var fileStream = File.OpenRead(filePath))
+                //{
+                //    using (var requestStream = request.GetRequestStream())
+                //    {
+                //        fileStream.CopyTo(requestStream);
+                //        requestStream.Close();
+                //    }
+                //}
 
+                Stream ftpStream = request.GetRequestStream();
+                FileStream file = File.OpenRead(filePath);
+                progressBar1.Invoke(
+                  (MethodInvoker)delegate { progressBar1.Value = 0; progressBar1.Maximum = (int)file.Length/1000;piclbl.Text = fileName; });
+                
+                byte[] buffer = new byte[10240];
+                int bytesRead = 0;
+               
+
+
+                while ((bytesRead = file.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    
+                    ftpStream.Write(buffer, 0, bytesRead);
+                    progressBar1.Invoke((MethodInvoker)delegate {progressBar1.Value = (int)file.Position/1000;sizelbl.Text = progressBar1.Value.ToString() + "/" + progressBar1.Maximum+ " KB"; });
+                }
+             
+                file.Close();
+                ftpStream.Close();
+                progressBar1.Invoke((MethodInvoker)delegate { progressBar1.Value = 0; sizelbl.Text = ""; });
 
                 //      var response = (FtpWebResponse)request.GetResponse();
                 //    MessageBox.Show("Image uploaded successfully.\nSuccess Response code: " + response.StatusDescription);
@@ -200,7 +325,7 @@ namespace Chinarhomes
             }
             catch (Exception ex)
             {
-               
+                picfailed = true;
                 MessageBox.Show(ex.Message, "Error!");
             }
         }
@@ -228,7 +353,7 @@ namespace Chinarhomes
                 new {Text="Houses"},
                  new {Text="Lands & Plots"},
                 new {Text="Commercial Space"},
-                 new {Text="Other"}             
+                 new {Text="Other"}
             };
             ptypebox.DataSource = items;
 
@@ -237,7 +362,7 @@ namespace Chinarhomes
             {
                 new {Text="Sale"},
                 new {Text="Rent"}
-                 
+
             };
             saletypebox.DataSource = items2;
 
@@ -320,7 +445,7 @@ namespace Chinarhomes
             if (!Regex.IsMatch(pricetxt.Text, @"^([0-9]+)$") && pricetxt.Text != "")
             {
 
-                MessageBox.Show("Please enter correct amount.","Error!");
+                MessageBox.Show("Please enter correct amount.", "Error!");
                 pricetxt.Focus();
 
             }
