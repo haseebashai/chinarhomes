@@ -30,29 +30,29 @@
         {
             this.proppnl = new System.Windows.Forms.Panel();
             this.dpnl = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pidlbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rmpbtn = new System.Windows.Forms.Button();
+            this.verlbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pricelbl = new System.Windows.Forms.Label();
             this.addedbylbl = new System.Windows.Forms.Label();
             this.iflowpnl = new System.Windows.Forms.FlowLayoutPanel();
             this.loclbl = new System.Windows.Forms.Label();
             this.namelbl = new System.Windows.Forms.Label();
             this.proplist = new System.Windows.Forms.ListBox();
+            this.loadinglbl = new System.Windows.Forms.Label();
+            this.proploading = new System.Windows.Forms.PictureBox();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.verlbl = new System.Windows.Forms.Label();
-            this.proploading = new System.Windows.Forms.PictureBox();
-            this.loadinglbl = new System.Windows.Forms.Label();
-            this.rmpbtn = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pidlbl = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.proppnl.SuspendLayout();
             this.dpnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.proploading)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // proppnl
@@ -88,6 +88,103 @@
             this.dpnl.Size = new System.Drawing.Size(782, 537);
             this.dpnl.TabIndex = 1;
             this.dpnl.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(36, 237);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(148, 25);
+            this.label6.TabIndex = 53;
+            this.label6.Text = "Property Name:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(36, 269);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 25);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "Location:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(36, 336);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 25);
+            this.label4.TabIndex = 51;
+            this.label4.Text = "Price:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(36, 302);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 25);
+            this.label3.TabIndex = 50;
+            this.label3.Text = "Added by:";
+            // 
+            // pidlbl
+            // 
+            this.pidlbl.AutoSize = true;
+            this.pidlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pidlbl.ForeColor = System.Drawing.Color.Silver;
+            this.pidlbl.Location = new System.Drawing.Point(704, 473);
+            this.pidlbl.Name = "pidlbl";
+            this.pidlbl.Size = new System.Drawing.Size(0, 13);
+            this.pidlbl.TabIndex = 49;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label2.Location = new System.Drawing.Point(640, 473);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.TabIndex = 48;
+            this.label2.Text = "Property ID:";
+            // 
+            // rmpbtn
+            // 
+            this.rmpbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rmpbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.rmpbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.rmpbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.rmpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rmpbtn.Location = new System.Drawing.Point(594, 489);
+            this.rmpbtn.Name = "rmpbtn";
+            this.rmpbtn.Size = new System.Drawing.Size(162, 35);
+            this.rmpbtn.TabIndex = 47;
+            this.rmpbtn.Text = "Remove Property";
+            this.rmpbtn.UseVisualStyleBackColor = false;
+            this.rmpbtn.Click += new System.EventHandler(this.rmpbtn_Click);
+            // 
+            // verlbl
+            // 
+            this.verlbl.AutoSize = true;
+            this.verlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verlbl.ForeColor = System.Drawing.Color.Firebrick;
+            this.verlbl.Location = new System.Drawing.Point(126, 393);
+            this.verlbl.Name = "verlbl";
+            this.verlbl.Size = new System.Drawing.Size(0, 25);
+            this.verlbl.TabIndex = 41;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label1.Location = new System.Drawing.Point(36, 393);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 25);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Verified:";
             // 
             // pricelbl
             // 
@@ -149,6 +246,29 @@
             this.proplist.TabIndex = 0;
             this.proplist.SelectedIndexChanged += new System.EventHandler(this.proplist_SelectedIndexChanged);
             // 
+            // loadinglbl
+            // 
+            this.loadinglbl.AutoSize = true;
+            this.loadinglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadinglbl.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.loadinglbl.Location = new System.Drawing.Point(516, 283);
+            this.loadinglbl.Name = "loadinglbl";
+            this.loadinglbl.Size = new System.Drawing.Size(160, 25);
+            this.loadinglbl.TabIndex = 45;
+            this.loadinglbl.Text = "Loading Property";
+            this.loadinglbl.Visible = false;
+            // 
+            // proploading
+            // 
+            this.proploading.Image = global::Chinarhomes.Properties.Resources.loading1;
+            this.proploading.Location = new System.Drawing.Point(606, 199);
+            this.proploading.Name = "proploading";
+            this.proploading.Size = new System.Drawing.Size(214, 178);
+            this.proploading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.proploading.TabIndex = 46;
+            this.proploading.TabStop = false;
+            this.proploading.Visible = false;
+            // 
             // loading
             // 
             this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
@@ -172,126 +292,6 @@
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Location = new System.Drawing.Point(36, 393);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 25);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Verified:";
-            // 
-            // verlbl
-            // 
-            this.verlbl.AutoSize = true;
-            this.verlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.verlbl.ForeColor = System.Drawing.Color.Firebrick;
-            this.verlbl.Location = new System.Drawing.Point(126, 393);
-            this.verlbl.Name = "verlbl";
-            this.verlbl.Size = new System.Drawing.Size(0, 25);
-            this.verlbl.TabIndex = 41;
-            // 
-            // proploading
-            // 
-            this.proploading.Image = global::Chinarhomes.Properties.Resources.loading1;
-            this.proploading.Location = new System.Drawing.Point(606, 199);
-            this.proploading.Name = "proploading";
-            this.proploading.Size = new System.Drawing.Size(214, 178);
-            this.proploading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.proploading.TabIndex = 46;
-            this.proploading.TabStop = false;
-            this.proploading.Visible = false;
-            // 
-            // loadinglbl
-            // 
-            this.loadinglbl.AutoSize = true;
-            this.loadinglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadinglbl.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.loadinglbl.Location = new System.Drawing.Point(516, 283);
-            this.loadinglbl.Name = "loadinglbl";
-            this.loadinglbl.Size = new System.Drawing.Size(160, 25);
-            this.loadinglbl.TabIndex = 45;
-            this.loadinglbl.Text = "Loading Property";
-            this.loadinglbl.Visible = false;
-            // 
-            // rmpbtn
-            // 
-            this.rmpbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rmpbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.rmpbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
-            this.rmpbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.rmpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rmpbtn.Location = new System.Drawing.Point(594, 489);
-            this.rmpbtn.Name = "rmpbtn";
-            this.rmpbtn.Size = new System.Drawing.Size(162, 35);
-            this.rmpbtn.TabIndex = 47;
-            this.rmpbtn.Text = "Remove Property";
-            this.rmpbtn.UseVisualStyleBackColor = false;
-            this.rmpbtn.Click += new System.EventHandler(this.rmpbtn_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(640, 473);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 48;
-            this.label2.Text = "Property ID:";
-            // 
-            // pidlbl
-            // 
-            this.pidlbl.AutoSize = true;
-            this.pidlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pidlbl.ForeColor = System.Drawing.Color.Silver;
-            this.pidlbl.Location = new System.Drawing.Point(704, 473);
-            this.pidlbl.Name = "pidlbl";
-            this.pidlbl.Size = new System.Drawing.Size(0, 13);
-            this.pidlbl.TabIndex = 49;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(36, 302);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 25);
-            this.label3.TabIndex = 50;
-            this.label3.Text = "Added by:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(36, 336);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 25);
-            this.label4.TabIndex = 51;
-            this.label4.Text = "Price:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(36, 269);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 25);
-            this.label5.TabIndex = 52;
-            this.label5.Text = "Location:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(36, 237);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(148, 25);
-            this.label6.TabIndex = 53;
-            this.label6.Text = "Property Name:";
-            // 
             // removeproperty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,8 +308,8 @@
             this.proppnl.PerformLayout();
             this.dpnl.ResumeLayout(false);
             this.dpnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.proploading)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -252,7 +252,7 @@ namespace Chinarhomes
                 Cursor = Cursors.Arrow;
                 if (picfailed)
                 {
-                    MessageBox.Show("pic failed");
+                  
                     nopicslbl.Visible = true;
                     nopicslbl.BringToFront();
                     dppnl.Visible = false;
@@ -260,7 +260,7 @@ namespace Chinarhomes
                 }
                 else if (picfailed == false)
                 {
-                    MessageBox.Show("pic true");
+                   
                     dppnl.Visible = true;
                     loadpicbtn.Visible = false;
                     loadpicbtn.Enabled = true;
@@ -296,7 +296,7 @@ namespace Chinarhomes
                 foreach (string str in pathurl)
                 {
 
-                    MessageBox.Show(str);
+                   
                     images.Images.Add(LoadImage(address + str));
 
                 }
@@ -313,7 +313,7 @@ namespace Chinarhomes
             catch (Exception ex)
             {
                 picfailed = true;
-                MessageBox.Show("populate"+ex.Message);
+               
             }
 
 
@@ -341,71 +341,79 @@ namespace Chinarhomes
             {
 
                 picfailed = true;
-                MessageBox.Show("loadfunct" + ex.Message);
+                
                 return null;
             }
         }
 
         private void updbtn_Click(object sender, EventArgs e)
         {
-            progressBar1.Visible = true;
-            dppnl.Visible = false;
-            nopicslbl.Visible = false;
-
-            BackgroundWorker bg = new BackgroundWorker();
-            bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
-            bg.DoWork += Bg_DoWork;
-            bg.WorkerSupportsCancellation = true;
-
-            StringBuilder loc = new StringBuilder(locationtxt.Text);
-            loc.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder tags = new StringBuilder(tagstxt.Text);
-            tags.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder type = new StringBuilder(ptypebox.Text);
-            type.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder floors = new StringBuilder(floorstxt.Text);
-            floors.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder rooms = new StringBuilder(roomstxt.Text);
-            rooms.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder area = new StringBuilder(areatxt.Text);
-            area.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder areap = new StringBuilder(areaptxt.Text);
-            areap.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder price = new StringBuilder(pricetxt.Text);
-            price.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder priority = new StringBuilder(prioritytxt.Text);
-            priority.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder desc = new StringBuilder(desctxt.Text);
-            desc.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder distance = new StringBuilder(distancetxt.Text);
-            distance.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder age = new StringBuilder(agetxt.Text);
-            age.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder furnished = new StringBuilder(furnishedtxt.Text);
-            furnished.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder saletype = new StringBuilder(saletypebox.Text);
-            saletype.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder pname = new StringBuilder(pnametxt.Text);
-            pname.Replace(@"\", @"\\").Replace("'", "\\'");
-
-
-
-            if (vyes.Checked == false)
+            if (locationtxt.Text == "")
             {
-                MessageBox.Show("Please check verify first.");
-                progressBar1.Visible = false;
-                dppnl.Visible = true;
-
+                MessageBox.Show("Please enter location first.", "Error!");
             }
             else
             {
-                if (verified)
+
+
+                progressBar1.Visible = true;
+                dppnl.Visible = false;
+                nopicslbl.Visible = false;
+
+                BackgroundWorker bg = new BackgroundWorker();
+                bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
+                bg.DoWork += Bg_DoWork;
+                bg.WorkerSupportsCancellation = true;
+
+                StringBuilder loc = new StringBuilder(locationtxt.Text);
+                loc.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder tags = new StringBuilder(tagstxt.Text);
+                tags.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder type = new StringBuilder(ptypebox.Text);
+                type.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder floors = new StringBuilder(floorstxt.Text);
+                floors.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder rooms = new StringBuilder(roomstxt.Text);
+                rooms.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder area = new StringBuilder(areatxt.Text);
+                area.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder areap = new StringBuilder(areaptxt.Text);
+                areap.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder price = new StringBuilder(pricetxt.Text);
+                price.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder priority = new StringBuilder(prioritytxt.Text);
+                priority.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder desc = new StringBuilder(desctxt.Text);
+                desc.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder distance = new StringBuilder(distancetxt.Text);
+                distance.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder age = new StringBuilder(agetxt.Text);
+                age.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder furnished = new StringBuilder(furnishedtxt.Text);
+                furnished.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder saletype = new StringBuilder(saletypebox.Text);
+                saletype.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder pname = new StringBuilder(pnametxt.Text);
+                pname.Replace(@"\", @"\\").Replace("'", "\\'");
+
+
+
+                if (vyes.Checked == false)
                 {
-                    object[] arg = { loc, tags, type, floors, rooms, area, areap, price, priority, desc, distance, age, furnished, saletype, pname };
-                    bg.RunWorkerAsync(arg);
+                    MessageBox.Show("Please check verify first.");
+                    progressBar1.Visible = false;
+                    dppnl.Visible = true;
+
+                }
+                else
+                {
+                    if (verified)
+                    {
+                        object[] arg = { loc, tags, type, floors, rooms, area, areap, price, priority, desc, distance, age, furnished, saletype, pname };
+                        bg.RunWorkerAsync(arg);
+                    }
                 }
             }
-
         }
 
         private void Bg_DoWork(object sender, DoWorkEventArgs e)
@@ -815,7 +823,7 @@ namespace Chinarhomes
                         {
 
                             ext = pic.Substring(pic.LastIndexOf("."));
-                            MessageBox.Show(pic);
+                          
 
                             UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/", pic);
 
@@ -823,7 +831,7 @@ namespace Chinarhomes
                             if (p == 1)
                             {
 
-                                MessageBox.Show(p.ToString());
+                              
                                 cmd = "update properties set picture='" + pidlbl.Text + "-" + p + ext + "' where propertyid='" + pidlbl.Text + "'";
                                 obj.nonQuery(cmd);
                                 obj.closeConnection();
@@ -834,7 +842,7 @@ namespace Chinarhomes
                             else if (p > 1)
                             {
 
-                                MessageBox.Show(p.ToString());
+                                
                                 //  INSERT INTO table(id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name = "A", age = 19
 
                                 cmd = "insert into pictures (propertyid,picture)values('" + pidlbl.Text + "','" + pidlbl.Text + "-" + p + ext + "') on duplicate key update `picture`='" + pidlbl.Text + "-" + p + ext + "'"; //where propertyid='" + pidlbl.Text + "'";

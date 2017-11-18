@@ -15,85 +15,169 @@ namespace Chinarhomes
         DBConnect obj = new DBConnect();
         MySqlDataReader dr;
         string name,contact,encemail,url="http://chinarhomes.com/chinarhomes/pictures/";
+        DataTable dt;
 
         public interests()
         {
             InitializeComponent();
+            loading.Visible = true;
+            formlbl.Visible = true;
+            BackgroundWorker pageload = new BackgroundWorker();
+            pageload.DoWork += Pageload_DoWork;
+            pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
+            pageload.RunWorkerAsync();
+           
+
         }
+
+        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            formlbl.Visible = false;
+            loading.Visible = false;
+            titlelbl.Location = new Point(1, 1);
+            titlelbl.Visible = true;
+            custlist.DisplayMember = "mail";
+            custlist.DataSource = dt;
+            ipnl.Visible = true;
+        }
+
+        private void Pageload_DoWork(object sender, DoWorkEventArgs e)
+        {
+            readinterests();
+        }
+
         private void readinterests()
         {
-            dr = obj.Query("select mail from customer");
+            dr = obj.Query("select distinct interested.email, customer.mail from customer inner join interested on interested.email=customer.email;");
            
-            DataTable dt = new DataTable();
+            dt = new DataTable();
             dt.Columns.Add("mail", typeof(String));
             dt.Load(dr);
             
            
             obj.closeConnection();
-            custlist.DisplayMember = "mail";
-            custlist.DataSource = dt;
-            custlist.SelectedItem = 0;
+           
 
 
         }
+
+        List<string> properties = new List<string>();
+        int i = 0;
+        BackgroundWorker bg;
+        List<string> details = new List<string>();
 
         private void custlist_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<string> properties = new List<string>();
 
-            dr = obj.Query("select name,contact,email from customer");
-            dr.Read();
-            name = dr[0].ToString();
-            contact = dr[1].ToString();
-            encemail = dr[2].ToString();
-            obj.closeConnection();
-            
-            namelbl.Text = name;
-            conlbl.Text = contact;
-            emaillbl.Text = custlist.Text;
-
-            dr = obj.Query("select propertyid from interested where email ='" + encemail + "'");
-            while (dr.Read())
-            {
-                properties.Add(dr[0].ToString());
-
-            }
-          
-            obj.closeConnection();
-           
-
-            foreach (String property in properties)
-            {
-                
-                dr = obj.Query("select location,picture,area,price from properties where propertyid='" + property + "' ");
-                dr.Read();
-
-
-                CustomControl c = new CustomControl(
-                new PictureBox {
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                    ImageLocation = url + dr[1].ToString(),
-                    Height = 150,
-                    Width = 220, },
-                new TextBox {
-                    Text = dr[0].ToString() + "\r\n" + "Area: " + dr[2].ToString() + "\r\n" + "Price: " + dr[3].ToString(), Size = new Size(220, 70),
-                    Multiline = true, ReadOnly = true});
-
-                    iflowpnl.AutoScroll = true;
-                    iflowpnl.Controls.Add(c);
-                    obj.closeConnection();
-      
-            }
-            dpnl.Visible = true;
+            dpnl.Visible = false;
+            custlist.Enabled = false;
+            loadinglbl.Visible = true;
+            proploading.Visible = true;
+            iflowpnl.Controls.Clear();
+            properties.Clear();
+            i = 0;
+            string custname = custlist.Text;
+            bg = new BackgroundWorker();
+            bg.DoWork += bg_DoWork;
+            bg.RunWorkerCompleted += bg_RunWorkerCompleted;
+            bg.WorkerSupportsCancellation = true;
+            bg.RunWorkerAsync(custname);
+       
         }
 
-        private void interests_Load(object sender, EventArgs e)
+        private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            readinterests();
-           
-            
+            if (Application.OpenForms.OfType<interests>().Count() == 1)
+            {
+                loadinglbl.Visible = false;
+                proploading.Visible = false;
+                custlist.Enabled = true;
+
+                if (success)
+                {
+                    namelbl.Text = name;
+                    conlbl.Text = contact;
+                    emaillbl.Text = custlist.Text;
+                    List<details> dobj= (List<details>)e.Result;
+                  
+                    foreach (var details in dobj)
+                    {
+
+                        CustomControl c = new CustomControl(
+                      new PictureBox
+                      {
+                          SizeMode = PictureBoxSizeMode.StretchImage,
+                          ImageLocation = url + details.Picture,
+                          Height = 150,
+                          Width = 220,
+                      },
+                      new TextBox
+                      {
+                          Text = details.Loc + "\r\n" + "Area: " + details.Area + "\r\n" + "Price: " + details.Price,
+                          Size = new Size(220, 60),
+                          Multiline = true,
+                          ReadOnly = true
+                      });
+
+                        iflowpnl.AutoScroll = true;
+                        iflowpnl.Controls.Add(c);
+                    }
+                    dpnl.Visible = true;
+                }
+            }
+        }
+
+        string loc, picture, area, price;
+        bool success = false;
+        private void bg_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string custname = e.Argument as string;
+
+                dr = obj.Query("select name,contact,email from customer where mail='"+custname+"' ");
+                dr.Read();
+                name = dr[0].ToString();
+                contact = dr[1].ToString();
+                encemail = dr[2].ToString();
+                obj.closeConnection();
+              
+
+                dr = obj.Query("select propertyid from interested where email ='" + encemail + "'");
+                while (dr.Read())
+                {
+                    properties.Add(dr[0].ToString());
+
+                }
+
+                obj.closeConnection();
+
+                List<details> dobj = new List<details>();
+                foreach (String property in properties)
+                {
+
+                    dr = obj.Query("select location,picture,area,price from properties where propertyid='" + property + "' ");
+                    dr.Read();
+                    loc = dr[0].ToString();
+                    area = dr[2].ToString();
+                    price = dr[3].ToString();
+                    picture = dr[1].ToString();
+                    obj.closeConnection();
+                   
+                    dobj.Add(new details(loc, area, price,picture));
+  
+                }
+                success = true;
+                e.Result = dobj;
+               
+            }catch
+            {
+                success = false;
+                e.Result = "fail";
+            }
         }
     }
+
     public class CustomControl : Control
     {
         private PictureBox pb;
@@ -112,4 +196,44 @@ namespace Chinarhomes
            
         }
     }
+
+    public class details
+    {
+        private string loc;
+        private string area;
+        private string price;
+        private string picture;
+
+        public details(string loc, string area, string price, string picture)
+        {
+            this.loc = loc;
+            this.area = area;
+            this.price = price;
+            this.picture = picture;
+        }
+
+        public string Loc
+        {
+            get { return loc; }
+            set { loc = value; }
+        }
+
+        public string Area
+        {
+            get { return area; }
+            set { area = value; }
+        }
+        public string Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+        public string Picture
+        {
+            get { return picture; }
+            set { picture = value; }
+        }
+
+    }
+
 }
