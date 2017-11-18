@@ -37,13 +37,14 @@
             this.tvplbl = new System.Windows.Forms.Label();
             this.addpbtn = new System.Windows.Forms.Button();
             this.loading = new System.Windows.Forms.PictureBox();
+            this.rmpbtn = new System.Windows.Forms.Button();
             this.dpnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // unverbtn
             // 
-            this.unverbtn.Location = new System.Drawing.Point(44, 179);
+            this.unverbtn.Location = new System.Drawing.Point(44, 178);
             this.unverbtn.Name = "unverbtn";
             this.unverbtn.Size = new System.Drawing.Size(162, 35);
             this.unverbtn.TabIndex = 39;
@@ -53,7 +54,7 @@
             // 
             // verbtn
             // 
-            this.verbtn.Location = new System.Drawing.Point(44, 125);
+            this.verbtn.Location = new System.Drawing.Point(44, 124);
             this.verbtn.Name = "verbtn";
             this.verbtn.Size = new System.Drawing.Size(162, 35);
             this.verbtn.TabIndex = 40;
@@ -129,12 +130,28 @@
             this.loading.TabStop = false;
             this.loading.Visible = false;
             // 
+            // rmpbtn
+            // 
+            this.rmpbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rmpbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.rmpbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.rmpbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.rmpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rmpbtn.Location = new System.Drawing.Point(263, 70);
+            this.rmpbtn.Name = "rmpbtn";
+            this.rmpbtn.Size = new System.Drawing.Size(162, 35);
+            this.rmpbtn.TabIndex = 46;
+            this.rmpbtn.Text = "Remove Property";
+            this.rmpbtn.UseVisualStyleBackColor = false;
+            this.rmpbtn.Click += new System.EventHandler(this.rmpbtn_Click);
+            // 
             // properties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1167, 705);
+            this.Controls.Add(this.rmpbtn);
             this.Controls.Add(this.addpbtn);
             this.Controls.Add(this.loading);
             this.Controls.Add(this.dpnl);
@@ -164,5 +181,6 @@
         private System.Windows.Forms.Label tvplbl;
         private System.Windows.Forms.PictureBox loading;
         private System.Windows.Forms.Button addpbtn;
+        public System.Windows.Forms.Button rmpbtn;
     }
 }

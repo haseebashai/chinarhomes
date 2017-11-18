@@ -29,23 +29,31 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            loadinglbl.Text = "Highlights";
-            loading.Visible = false;
-            tvplbl.Text = "Total Verified Properties currently added: " + tvp;
-            tuvplbl.Text = "Total Unverified Properties currently added: " + tuvp;
+            if (Application.OpenForms.OfType<properties>().Count() == 1)
+            {
+                loadinglbl.Text = "Highlights";
+                loading.Visible = false;
+                tvplbl.Text = "Total Verified Properties currently added: " + tvp;
+                tuvplbl.Text = "Total Unverified Properties currently added: " + tuvp;
+            }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
-        {
-            dr = obj.Query("Select count(propertyid) from properties where verified='1'");
-            dr.Read();
-            tvp = dr[0].ToString();
-            obj.closeConnection();
-
-            dr = obj.Query("Select count(propertyid) from properties where verified='0'");
-            dr.Read();
-            tuvp = dr[0].ToString();
-            obj.closeConnection();
+        {try
+            {
+                dr = obj.Query("Select count(propertyid) from properties where verified='1'");
+                dr.Read();
+                tvp = dr[0].ToString();
+                obj.closeConnection();
+            }
+            catch{}
+            try
+            {
+                dr = obj.Query("Select count(propertyid) from properties where verified='0'");
+                dr.Read();
+                tuvp = dr[0].ToString();
+                obj.closeConnection();
+            }catch { }
         }
 
         private void verbtn_Click(object sender, EventArgs e)
@@ -75,6 +83,20 @@ namespace Chinarhomes
             np.dpnl.Location = new Point(4, 5);
             dg.Show();
             np.Show();
+        }
+
+        private void rmpbtn_Click(object sender, EventArgs e)
+        {
+            dialogcontainer dg = new dialogcontainer();
+
+            removeproperty rmp = new removeproperty(dg);
+            rmp.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(rmp);
+            dg.Size = new Size(1206, 734);
+            dg.lbl.Text = "Remove Property";
+            dg.Show();
+            rmp.Show();
         }
 
         private void unverbtn_Click(object sender, EventArgs e)

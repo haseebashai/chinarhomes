@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.propdataview = new System.Windows.Forms.DataGridView();
             this.proppnl = new System.Windows.Forms.Panel();
+            this.imgtxt = new System.Windows.Forms.TextBox();
+            this.addpicsbtn = new System.Windows.Forms.Button();
             this.loadpicbtn = new System.Windows.Forms.Button();
             this.bpnl = new System.Windows.Forms.Panel();
             this.editpropbtn = new System.Windows.Forms.Button();
@@ -81,15 +83,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.nopicslbl = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.ppnl = new System.Windows.Forms.Panel();
+            this.sizelbl = new System.Windows.Forms.Label();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.piclbl = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.addnewbtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).BeginInit();
             this.proppnl.SuspendLayout();
             this.bpnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.dppnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
+            this.ppnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // propdataview
@@ -98,14 +107,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(11, 4);
             this.propdataview.MultiSelect = false;
@@ -117,6 +126,9 @@
             // 
             // proppnl
             // 
+            this.proppnl.Controls.Add(this.addnewbtn);
+            this.proppnl.Controls.Add(this.imgtxt);
+            this.proppnl.Controls.Add(this.addpicsbtn);
             this.proppnl.Controls.Add(this.loadpicbtn);
             this.proppnl.Controls.Add(this.bpnl);
             this.proppnl.Controls.Add(this.dpnl);
@@ -126,6 +138,34 @@
             this.proppnl.Size = new System.Drawing.Size(1165, 662);
             this.proppnl.TabIndex = 2;
             this.proppnl.Visible = false;
+            // 
+            // imgtxt
+            // 
+            this.imgtxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.imgtxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imgtxt.Location = new System.Drawing.Point(822, 621);
+            this.imgtxt.Multiline = true;
+            this.imgtxt.Name = "imgtxt";
+            this.imgtxt.ReadOnly = true;
+            this.imgtxt.Size = new System.Drawing.Size(204, 35);
+            this.imgtxt.TabIndex = 48;
+            this.imgtxt.Visible = false;
+            // 
+            // addpicsbtn
+            // 
+            this.addpicsbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addpicsbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.addpicsbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.addpicsbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.addpicsbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addpicsbtn.Location = new System.Drawing.Point(1041, 621);
+            this.addpicsbtn.Name = "addpicsbtn";
+            this.addpicsbtn.Size = new System.Drawing.Size(113, 35);
+            this.addpicsbtn.TabIndex = 47;
+            this.addpicsbtn.Text = "Upload";
+            this.addpicsbtn.UseVisualStyleBackColor = false;
+            this.addpicsbtn.Visible = false;
+            this.addpicsbtn.Click += new System.EventHandler(this.addpicsbtn_Click);
             // 
             // loadpicbtn
             // 
@@ -226,6 +266,7 @@
             this.dpnl.Controls.Add(this.label2);
             this.dpnl.Controls.Add(this.nopicslbl);
             this.dpnl.Controls.Add(this.progressBar1);
+            this.dpnl.Controls.Add(this.ppnl);
             this.dpnl.Location = new System.Drawing.Point(0, 261);
             this.dpnl.Name = "dpnl";
             this.dpnl.Size = new System.Drawing.Size(1162, 355);
@@ -315,7 +356,7 @@
             this.piclist.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.piclist.Location = new System.Drawing.Point(20, 37);
             this.piclist.Name = "piclist";
-            this.piclist.Size = new System.Drawing.Size(331, 282);
+            this.piclist.Size = new System.Drawing.Size(331, 295);
             this.piclist.TabIndex = 38;
             this.piclist.UseCompatibleStateImageBehavior = false;
             // 
@@ -626,6 +667,15 @@
             this.nopicslbl.Text = "No Pictures found.";
             this.nopicslbl.Visible = false;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(901, 185);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(155, 10);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar1.TabIndex = 53;
+            this.progressBar1.Visible = false;
+            // 
             // loading
             // 
             this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
@@ -649,14 +699,67 @@
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
             // 
-            // progressBar1
+            // ppnl
             // 
-            this.progressBar1.Location = new System.Drawing.Point(901, 185);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(155, 10);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar1.TabIndex = 53;
-            this.progressBar1.Visible = false;
+            this.ppnl.Controls.Add(this.sizelbl);
+            this.ppnl.Controls.Add(this.progressBar2);
+            this.ppnl.Controls.Add(this.piclbl);
+            this.ppnl.Controls.Add(this.label22);
+            this.ppnl.Location = new System.Drawing.Point(999, 294);
+            this.ppnl.Name = "ppnl";
+            this.ppnl.Size = new System.Drawing.Size(163, 60);
+            this.ppnl.TabIndex = 105;
+            this.ppnl.Visible = false;
+            // 
+            // sizelbl
+            // 
+            this.sizelbl.AutoSize = true;
+            this.sizelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizelbl.Location = new System.Drawing.Point(11, 43);
+            this.sizelbl.Name = "sizelbl";
+            this.sizelbl.Size = new System.Drawing.Size(0, 13);
+            this.sizelbl.TabIndex = 104;
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(11, 32);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(140, 10);
+            this.progressBar2.TabIndex = 101;
+            // 
+            // piclbl
+            // 
+            this.piclbl.ForeColor = System.Drawing.Color.Green;
+            this.piclbl.Location = new System.Drawing.Point(43, 11);
+            this.piclbl.Name = "piclbl";
+            this.piclbl.Size = new System.Drawing.Size(104, 14);
+            this.piclbl.TabIndex = 103;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(8, 16);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(37, 9);
+            this.label22.TabIndex = 102;
+            this.label22.Text = "uploading";
+            // 
+            // addnewbtn
+            // 
+            this.addnewbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addnewbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.addnewbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.addnewbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.addnewbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addnewbtn.Location = new System.Drawing.Point(1032, 621);
+            this.addnewbtn.Name = "addnewbtn";
+            this.addnewbtn.Size = new System.Drawing.Size(122, 35);
+            this.addnewbtn.TabIndex = 49;
+            this.addnewbtn.Text = "Upload New Pictures";
+            this.addnewbtn.UseVisualStyleBackColor = false;
+            this.addnewbtn.Visible = false;
+            this.addnewbtn.Click += new System.EventHandler(this.addnewbtn_Click);
             // 
             // verifiedproperties
             // 
@@ -672,12 +775,15 @@
             this.Text = "properties";
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).EndInit();
             this.proppnl.ResumeLayout(false);
+            this.proppnl.PerformLayout();
             this.bpnl.ResumeLayout(false);
             this.dpnl.ResumeLayout(false);
             this.dpnl.PerformLayout();
             this.dppnl.ResumeLayout(false);
             this.dppnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
+            this.ppnl.ResumeLayout(false);
+            this.ppnl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -740,5 +846,13 @@
         private System.Windows.Forms.PictureBox loading;
         private System.Windows.Forms.Label formlbl;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TextBox imgtxt;
+        public System.Windows.Forms.Button addpicsbtn;
+        private System.Windows.Forms.Panel ppnl;
+        private System.Windows.Forms.Label sizelbl;
+        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Label piclbl;
+        private System.Windows.Forms.Label label22;
+        public System.Windows.Forms.Button addnewbtn;
     }
 }

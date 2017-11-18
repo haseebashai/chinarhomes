@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Security;
 
 namespace Chinarhomes
 {
@@ -66,7 +67,7 @@ namespace Chinarhomes
                 proppnl.Visible = true;
             }
         }
-     
+
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
         {
             readproperties();
@@ -118,9 +119,14 @@ namespace Chinarhomes
                 MessageBox.Show(ex.Message);
             }
         }
-   
+
         private void propdataview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            imgtxt.Text = "";
+            imgtxt.Visible = false;
+            newpics.Clear();
+            addnewbtn.Visible = false;
+            addpicsbtn.Visible = false;
             nopicslbl.Visible = false;
             loadpicbtn.Visible = false;
             cancelbtn.Visible = false;
@@ -130,6 +136,7 @@ namespace Chinarhomes
             dpnl.Visible = true;
             dppnl.Visible = false;
             bpnl.Visible = true;
+           
             if (e.RowIndex >= 0)
             {
 
@@ -156,7 +163,7 @@ namespace Chinarhomes
                 tagstxt.Text = row.Cells["tags"].Value.ToString();
                 saletypebox.Text = row.Cells["saletype"].Value.ToString();
                 pnametxt.Text = row.Cells["name"].Value.ToString();
-                
+
             }
         }
 
@@ -165,6 +172,7 @@ namespace Chinarhomes
             loadpicbtn.Visible = true;
             editpropbtn.Visible = false;
             cancelbtn.Visible = true;
+            addnewbtn.Visible = true;
             updbtn.Visible = true;
             dpnl.Enabled = true;
         }
@@ -180,7 +188,7 @@ namespace Chinarhomes
             bg.DoWork += Bg_DoWork1;
             bg.WorkerSupportsCancellation = true;
             bg.RunWorkerAsync();
-          
+
         }
 
         private void Bg_DoWork1(object sender, DoWorkEventArgs e)
@@ -189,10 +197,10 @@ namespace Chinarhomes
             {
                 dr = obj.Query("select picture from properties where propertyid='" + pidlbl.Text + "'");
                 dr.Read();
-                dp = dr[0].ToString();
+
                 pathurl.Add(dr[0].ToString());
                 i++;
-
+               
                 obj.closeConnection();
 
                 dr = obj.Query("select picture from pictures where propertyid='" + pidlbl.Text + "'");
@@ -201,7 +209,7 @@ namespace Chinarhomes
                     pathurl.Add(dr[0].ToString());
                     i++;
                 }
-
+                MessageBox.Show(string.Join("", pathurl));
                 obj.closeConnection();
                 total = i;
 
@@ -268,10 +276,10 @@ namespace Chinarhomes
             total = 0;
             pathurl.Clear();
         }
-
+        bool picfailed = false;
         private void PopulateListView()
         {
-    
+
             try
             {
                 piclist.Clear();
@@ -283,12 +291,12 @@ namespace Chinarhomes
                 images.ImageSize = new Size(112, 112);
                 images.ColorDepth = ColorDepth.Depth32Bit;
                 piclist.LargeImageList = images;
-               
+
 
                 foreach (string str in pathurl)
                 {
 
-                   
+                    MessageBox.Show(str);
                     images.Images.Add(LoadImage(address + str));
 
                 }
@@ -305,17 +313,19 @@ namespace Chinarhomes
             catch (Exception ex)
             {
                 picfailed = true;
+                MessageBox.Show("populate"+ex.Message);
             }
-           
-           
+
+
 
         }
 
-        bool picfailed = false;
+        
         private Image LoadImage(string url)
         {
             try
             {
+                MessageBox.Show(url);
                 WebRequest request = WebRequest.Create(url);
 
                 WebResponse response = request.GetResponse();
@@ -326,10 +336,12 @@ namespace Chinarhomes
                 responseStream.Dispose();
 
                 return bmp;
-            }catch(WebException ex)
+            }
+            catch (WebException ex)
             {
 
                 picfailed = true;
+                MessageBox.Show("loadfunct" + ex.Message);
                 return null;
             }
         }
@@ -378,16 +390,18 @@ namespace Chinarhomes
 
 
 
-            if (vyes.Checked == false )
+            if (vyes.Checked == false)
             {
                 MessageBox.Show("Please check verify first.");
                 progressBar1.Visible = false;
                 dppnl.Visible = true;
 
-            } else {
+            }
+            else
+            {
                 if (verified)
                 {
-                    object[] arg = { loc, tags, type, floors, rooms, area, areap, price, priority, desc, distance, age, furnished, saletype, pname};
+                    object[] arg = { loc, tags, type, floors, rooms, area, areap, price, priority, desc, distance, age, furnished, saletype, pname };
                     bg.RunWorkerAsync(arg);
                 }
             }
@@ -414,19 +428,19 @@ namespace Chinarhomes
                 StringBuilder furnished = (StringBuilder)arg[12];
                 StringBuilder saletype = (StringBuilder)arg[13];
                 StringBuilder pname = (StringBuilder)arg[14];
-               
 
 
-               
-                    cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
-                       + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
-                       + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `saletype`='" + saletype + "',`name`='" + pnametxt.Text + "' WHERE `propertyid`='" + pidlbl.Text + "'";
-                    obj.nonQuery(cmd);
-                    obj.closeConnection();
-                    MessageBox.Show("Property Updated succesfully.", "Success");
-                    e.Result = "success";
-                
-               
+
+
+                cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
+                   + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
+                   + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `saletype`='" + saletype + "',`name`='" + pnametxt.Text + "' WHERE `propertyid`='" + pidlbl.Text + "'";
+                obj.nonQuery(cmd);
+                obj.closeConnection();
+ 
+                e.Result = "success";
+
+
             }
             catch (Exception ex)
             {
@@ -441,6 +455,11 @@ namespace Chinarhomes
             if (result == "success")
             {
                 MessageBox.Show("Property Updated succesfully.", "Success");
+                addpicsbtn.Visible = false;
+                addnewbtn.Visible = false;
+                imgtxt.Text = "";
+                imgtxt.Visible = false;
+                newpics.Clear();
                 dpnl.Enabled = false;
                 dppnl.Visible = false;
                 editpropbtn.Visible = true;
@@ -458,12 +477,12 @@ namespace Chinarhomes
 
 
 
-        bool verified=false;
+        bool verified = false;
         private void vyes_CheckedChanged(object sender, EventArgs e)
         {
             if (vyes.Checked)
-              
-            verified = true;
+
+                verified = true;
         }
 
 
@@ -665,6 +684,268 @@ namespace Chinarhomes
             dpnl.Visible = true;
             dppnl.Visible = false;
             bpnl.Visible = true;
+            addpicsbtn.Visible = false;
+            addnewbtn.Visible = false;
+            imgtxt.Text = "";
+            imgtxt.Visible = false;
+            newpics.Clear();
+        }
+
+        List<string> newpics = new List<string>();
+        private void addpicsbtn_Click(object sender, EventArgs e)
+        {
+
+            BackgroundWorker bgpic = new BackgroundWorker();
+            bgpic.DoWork += Bg_DoWork2;
+            bgpic.RunWorkerCompleted += Bg_RunWorkerCompleted2; ;
+            bgpic.WorkerSupportsCancellation = true;
+
+
+
+            DialogResult dgr = MessageBox.Show("Do you want to upload the pictures now ?", "Confirm!", MessageBoxButtons.YesNo);
+            if (dgr == DialogResult.Yes)
+            {
+                ppnl.Visible = true;
+                bpnl.Enabled = false;
+                loadpicbtn.Enabled = false;
+                addpicsbtn.Enabled = false;
+                bgpic.RunWorkerAsync();
+            }
+            else
+            {
+
+            }
+
+
+        }
+
+        private void Bg_RunWorkerCompleted2(object sender, RunWorkerCompletedEventArgs e)
+        {
+            p = 1;
+            if (!e.Cancelled)
+            {
+                string result = (string)e.Result;
+                if (result == "success")
+                {
+                    MessageBox.Show("Pictures updated successfully.");
+                    newpics.Clear();
+
+                    ppnl.Visible = false;
+
+
+                    imgtxt.Text = "";
+                    imgtxt.Visible = false;
+                    addnewbtn.Visible = true;
+                    addpicsbtn.Visible = false;
+                    addpicsbtn.Enabled = true;
+                    bpnl.Enabled = true;
+                    loadpicbtn.Enabled = true;
+                    loadpicbtn_Click(null, null);
+                    editpropbtn.Visible = false;
+                    cancelbtn.Visible = true;
+                   
+                    updbtn.Visible = true;
+                    dpnl.Enabled = true;
+
+                }
+                else
+                {
+                    if (picupload)
+                    {
+                        MessageBox.Show("Picture upload failed. Please try after sometime.");
+                        loadpicbtn.Visible = true;
+                        editpropbtn.Visible = false;
+                        cancelbtn.Visible = true;
+                        addnewbtn.Visible = true;
+                        updbtn.Visible = true;
+                        dpnl.Enabled = true;
+                        addpicsbtn.Visible = true;
+                    }
+                    else if (result == "fail")
+                    {
+                        MessageBox.Show("Failed to add pictures, please try again.");
+                        loadpicbtn.Visible = true;
+                        editpropbtn.Visible = false;
+                        cancelbtn.Visible = true;
+                        addnewbtn.Visible = true;
+                        updbtn.Visible = true;
+                        dpnl.Enabled = true;
+                        addpicsbtn.Visible = true;
+                    }
+
+                }
+
+            }
+            ppnl.Visible = false;
+            bpnl.Enabled = true;
+
+
+        }
+
+        string ext;
+        int p = 1;
+        private void Bg_DoWork2(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                int count = newpics.Count;
+                if (count > 1)
+                {
+                    try
+                    {
+                        cmd = "delete from pictures where propertyid='" + pidlbl.Text + "'";
+                        obj.nonQuery(cmd);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Something happened, please try again.", "Error!");
+                        return;
+                    }
+                }
+               
+                    foreach (string pic in newpics)
+                    {
+                        if (picupload)
+                        {
+                            e.Result = "fail";
+                            e.Cancel = true;
+
+                        }
+                        else
+                        {
+
+                            ext = pic.Substring(pic.LastIndexOf("."));
+                            MessageBox.Show(pic);
+
+                            UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/", pic);
+
+
+                            if (p == 1)
+                            {
+
+                                MessageBox.Show(p.ToString());
+                                cmd = "update properties set picture='" + pidlbl.Text + "-" + p + ext + "' where propertyid='" + pidlbl.Text + "'";
+                                obj.nonQuery(cmd);
+                                obj.closeConnection();
+
+                                p++;
+
+                            }
+                            else if (p > 1)
+                            {
+
+                                MessageBox.Show(p.ToString());
+                                //  INSERT INTO table(id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name = "A", age = 19
+
+                                cmd = "insert into pictures (propertyid,picture)values('" + pidlbl.Text + "','" + pidlbl.Text + "-" + p + ext + "') on duplicate key update `picture`='" + pidlbl.Text + "-" + p + ext + "'"; //where propertyid='" + pidlbl.Text + "'";
+                                obj.nonQuery(cmd);
+                                obj.closeConnection();
+
+                                p++;
+
+                            }
+
+                        }
+                        e.Result = "success";
+                    }
+                
+               
+            }
+            catch (MySqlException ex)
+            {
+                e.Result = "fail";
+                obj.closeConnection();
+
+            }
+        }
+
+        bool picupload = false;
+        public void UploadFileToFtp(string url, string filePath)
+        {
+            try
+            {
+                var fileName = Path.GetFileName(filePath);
+                var request = (FtpWebRequest)WebRequest.Create(url + pidlbl.Text + "-" + p + ext);
+
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential("Chinarhomes", "Chinar@123");
+                request.UsePassive = true;
+                request.UseBinary = true;
+                request.KeepAlive = true;
+
+                Stream ftpStream = request.GetRequestStream();
+                FileStream file = File.OpenRead(filePath);
+                progressBar2.Invoke(
+                  (MethodInvoker)delegate { progressBar2.Value = 0; progressBar2.Maximum = (int)file.Length / 1000; piclbl.Text = fileName; });
+
+                byte[] buffer = new byte[10240];
+                int bytesRead = 0;
+
+
+
+                while ((bytesRead = file.Read(buffer, 0, buffer.Length)) > 0)
+                {
+
+                    ftpStream.Write(buffer, 0, bytesRead);
+                    progressBar2.Invoke((MethodInvoker)delegate { progressBar2.Value = (int)file.Position / 1000; sizelbl.Text = progressBar2.Value.ToString() + "/" + progressBar2.Maximum + " KB"; });
+                }
+
+                file.Close();
+                ftpStream.Close();
+                progressBar1.Invoke((MethodInvoker)delegate { progressBar2.Value = 0; sizelbl.Text = ""; });
+
+
+
+            }
+            catch (Exception ex)
+            {
+                picupload = true;
+                MessageBox.Show(ex.Message, "Error!");
+            }
+        }
+
+        
+        private void addnewbtn_Click(object sender, EventArgs e)
+        {
+            imgtxt.Text = "";
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "Images (*.JPG;*.PNG)|*.JPG;*.PNG|" + "All files (*.*)|*.*";
+            fd.Multiselect = true;
+            fd.Title = "Image Browser";
+            DialogResult dr = fd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+
+                foreach (String file in fd.FileNames)
+                {
+
+                    try
+                    {
+                        imgtxt.Text = imgtxt.Text + "' " + file.Substring(file.LastIndexOf(@"\")) + " '";
+                        newpics.Add(file);
+                    }
+                    catch (SecurityException ex)
+                    {
+
+                        MessageBox.Show("Security error. Please contact your administrator for details.\n\n" +
+                        "Error message: " + ex.Message + "\n\n" +
+                        "Details (send to Support):\n\n" + ex.StackTrace);
+                        newpics.Remove(newpics.Last());
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\'))
+                         + ". You may not have permission to read the file, or " +
+                        "it may be corrupt.\n\nReported error: " + ex.Message);
+                        newpics.Remove(newpics.Last());
+
+                    }
+                }
+                imgtxt.Visible = true;
+                addnewbtn.Visible = false;
+                addpicsbtn.Visible = true;
+            }
         }
     }
 }

@@ -41,38 +41,45 @@ namespace Chinarhomes
             StringBuilder pname = new StringBuilder(pnametxt.Text);
             pname.Replace(@"\", @"\\").Replace("'", "\\'");
             StringBuilder desc = new StringBuilder(desctxt.Text);
-            desc.Replace(@"\", @"\\").Replace("'", "\\'");   
-                   
-            
-            object[] arg = {loc,pname,desc,ptypebox.Text,saletypebox.Text,furnishedtxt.Text};
+            desc.Replace(@"\", @"\\").Replace("'", "\\'");
 
-            BackgroundWorker bg = new BackgroundWorker();
-            bg.DoWork += Bg_DoWork;
-            bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
-            bg.WorkerSupportsCancellation = true;
-           
-
-
-            DialogResult dgr = MessageBox.Show("Please ensure all the details are filled and correct before proceeding.", "Confirm!", MessageBoxButtons.OKCancel);
-            if (dgr == DialogResult.OK)
+            if (locationtxt.Text == "")
             {
-                if (vyes.Checked == false && vno.Checked == false)
+                MessageBox.Show("Please enter location first.", "Error!");
+            }
+            else
+            {
+                object[] arg = { loc, pname, desc, ptypebox.Text, saletypebox.Text, furnishedtxt.Text };
+
+                BackgroundWorker bg = new BackgroundWorker();
+                bg.DoWork += Bg_DoWork;
+                bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
+                bg.WorkerSupportsCancellation = true;
+
+
+
+                DialogResult dgr = MessageBox.Show("Please ensure all the details are filled and correct before proceeding.", "Confirm!", MessageBoxButtons.OKCancel);
+                if (dgr == DialogResult.OK)
                 {
-                    MessageBox.Show("Please check verification type.", "Error!");
-                    vyes.Focus();
+                    if (vyes.Checked == false && vno.Checked == false)
+                    {
+                        MessageBox.Show("Please check verification type.", "Error!");
+                        vyes.Focus();
+                    }
+                    else
+                    {
+                        ppnl.Visible = true;
+                        bg.RunWorkerAsync(arg);
+
+                    }
                 }
                 else
                 {
-                    ppnl.Visible = true;
-                    bg.RunWorkerAsync(arg);
-                  
+                    ppnl.Visible = false;
+                    updbtn.Enabled = true;
+                    clearpicbtn.Enabled = true;
+                    updpicbtn.Enabled = true;
                 }
-            }else
-            {
-                ppnl.Visible = false;
-                updbtn.Enabled = true;
-                clearpicbtn.Enabled = true;
-                updpicbtn.Enabled = true;
             }
         }
         
