@@ -36,6 +36,7 @@ namespace Chinarhomes
             loading.Visible = false;
             titlelbl.Location = new Point(1, 1);
             titlelbl.Visible = true;
+            custlist.SelectedIndex = -1;
             custlist.DisplayMember = "mail";
             custlist.DataSource = dt;
             ipnl.Visible = true;
@@ -125,6 +126,24 @@ namespace Chinarhomes
                     dpnl.Visible = true;
                 }
             }
+        }
+
+        private void mailbtn_Click(object sender, EventArgs e)
+        {
+
+            dialogcontainer dg = new dialogcontainer();
+
+            mail ml = new mail(emaillbl.Text);
+            ml.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(ml);
+            dg.Size = new Size(638, 550);
+            dg.lbl.Text = "Send Mail";
+            
+            dg.Show();
+            ml.Show();
+           
+
         }
 
         string loc, picture, area, price;

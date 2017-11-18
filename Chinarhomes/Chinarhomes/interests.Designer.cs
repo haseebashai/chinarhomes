@@ -41,9 +41,9 @@
             this.namelbl = new System.Windows.Forms.Label();
             this.loadinglbl = new System.Windows.Forms.Label();
             this.proploading = new System.Windows.Forms.PictureBox();
-            this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
             this.titlelbl = new System.Windows.Forms.Label();
+            this.loading = new System.Windows.Forms.PictureBox();
             this.ipnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.proploading)).BeginInit();
@@ -100,6 +100,7 @@
             this.mailbtn.TabIndex = 37;
             this.mailbtn.Text = "Send Mail";
             this.mailbtn.UseVisualStyleBackColor = true;
+            this.mailbtn.Click += new System.EventHandler(this.mailbtn_Click);
             // 
             // label3
             // 
@@ -175,8 +176,8 @@
             // 
             this.loadinglbl.AutoSize = true;
             this.loadinglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadinglbl.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.loadinglbl.Location = new System.Drawing.Point(500, 254);
+            this.loadinglbl.ForeColor = System.Drawing.Color.Silver;
+            this.loadinglbl.Location = new System.Drawing.Point(510, 254);
             this.loadinglbl.Name = "loadinglbl";
             this.loadinglbl.Size = new System.Drawing.Size(117, 25);
             this.loadinglbl.TabIndex = 47;
@@ -186,23 +187,13 @@
             // proploading
             // 
             this.proploading.Image = global::Chinarhomes.Properties.Resources.loading1;
-            this.proploading.Location = new System.Drawing.Point(579, 180);
+            this.proploading.Location = new System.Drawing.Point(569, 170);
             this.proploading.Name = "proploading";
             this.proploading.Size = new System.Drawing.Size(214, 178);
             this.proploading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.proploading.TabIndex = 48;
             this.proploading.TabStop = false;
             this.proploading.Visible = false;
-            // 
-            // loading
-            // 
-            this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
-            this.loading.Location = new System.Drawing.Point(117, -4);
-            this.loading.Name = "loading";
-            this.loading.Size = new System.Drawing.Size(31, 32);
-            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.loading.TabIndex = 46;
-            this.loading.TabStop = false;
             // 
             // formlbl
             // 
@@ -226,6 +217,16 @@
             this.titlelbl.TabIndex = 47;
             this.titlelbl.Text = "Customers who have shown interest in the properties";
             this.titlelbl.Visible = false;
+            // 
+            // loading
+            // 
+            this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
+            this.loading.Location = new System.Drawing.Point(117, -4);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(31, 32);
+            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.loading.TabIndex = 46;
+            this.loading.TabStop = false;
             // 
             // interests
             // 

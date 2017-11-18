@@ -112,12 +112,6 @@ namespace Chinarhomes
             }
         }
 
-        private void mainform_Load(object sender, EventArgs e)
-        {
-           
-
-        }
-
 
         private void propbtn_Click(object sender, EventArgs e)
         {
@@ -127,7 +121,7 @@ namespace Chinarhomes
             arrow4.Visible = false;
             arrow5.Visible = false;
             arrow6.Visible = false;
-
+            arrow7.Visible = false;
             properties prop = new properties();
             prop.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -145,7 +139,7 @@ namespace Chinarhomes
             arrow4.Visible = false;
             arrow5.Visible = false;
             arrow6.Visible = false;
-
+            arrow7.Visible = false;
             policy pol = new policy();
             pol.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -161,6 +155,7 @@ namespace Chinarhomes
             arrow4.Visible = false;
             arrow5.Visible = false;
             arrow6.Visible = false;
+            arrow7.Visible = false;
             customers cust = new customers();
             cust.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -173,9 +168,10 @@ namespace Chinarhomes
             arrow1.Visible = false;
             arrow2.Visible = false;
             arrow3.Visible = false;
-            arrow4.Visible = true;
+            arrow4.Visible = false;
             arrow5.Visible = false;
-            arrow6.Visible = false;
+            arrow6.Visible = true;
+            arrow7.Visible = false;
             messages msg = new messages();
             msg.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -191,6 +187,7 @@ namespace Chinarhomes
             arrow4.Visible = false;
             arrow5.Visible = true;
             arrow6.Visible = false;
+            arrow7.Visible = false;
             agents ag = new agents();
             ag.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -203,9 +200,10 @@ namespace Chinarhomes
             arrow1.Visible = false;
             arrow2.Visible = false;
             arrow3.Visible = false;
-            arrow4.Visible = false;
+            arrow4.Visible = true;
             arrow5.Visible = false;
-            arrow6.Visible = true;
+            arrow6.Visible = false;
+            arrow7.Visible = false;
             interests inte = new interests();
             inte.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -251,7 +249,7 @@ namespace Chinarhomes
 
         private void msgbtn_MouseEnter(object sender, EventArgs e)
         {
-            arrow.Location = new Point(145, 212);
+            arrow.Location = new Point(145, 113);
             arrow.Visible = true;
         }
 
@@ -272,7 +270,7 @@ namespace Chinarhomes
         }
         private void intbtn_MouseEnter(object sender, EventArgs e)
         {
-            arrow.Location = new Point(145, 113);
+            arrow.Location = new Point(145, 212);
             arrow.Visible = true;
            
         }
@@ -412,6 +410,39 @@ namespace Chinarhomes
             mf.Show();
         }
 
-       
+        private void mailbtn_MouseEnter(object sender, EventArgs e)
+        {
+            arrow.Location = new Point(145, 362);
+            arrow.Visible = true;
+        }
+
+        private void mailbtn_Click(object sender, EventArgs e)
+        {
+            arrow1.Visible = false;
+            arrow2.Visible = false;
+            arrow3.Visible = false;
+            arrow4.Visible = false;
+            arrow5.Visible = false;
+            arrow6.Visible = false;
+            arrow7.Visible = false;
+
+
+            dialogcontainer dg = new dialogcontainer();
+
+            mail ml = new mail("");
+            ml.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(ml);
+            dg.Size = new Size(638, 550);
+            dg.lbl.Text = "Send Mail";
+
+            dg.Show();
+            ml.Show();
+        }
+
+        private void mailbtn_MouseLeave(object sender, EventArgs e)
+        {
+            arrow.Visible = false;
+        }
     }
 }

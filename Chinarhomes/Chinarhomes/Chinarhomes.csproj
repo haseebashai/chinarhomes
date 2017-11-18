@@ -229,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chinarhomes_cion.ico" />
+    <None Include="Resources\opened-email-envelope.png" />
     <None Include="Resources\refresh.png" />
     <None Include="Resources\pageload.gif" />
     <None Include="Resources\loading1.gif" />

@@ -283,6 +283,16 @@ namespace Chinarhomes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap opened_email_envelope {
+            get {
+                object obj = ResourceManager.GetObject("opened-email-envelope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pageload {
             get {
                 object obj = ResourceManager.GetObject("pageload", resourceCulture);
