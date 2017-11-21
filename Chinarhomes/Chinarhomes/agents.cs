@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace Chinarhomes
 {
@@ -16,10 +17,60 @@ namespace Chinarhomes
         DBConnect obj = new DBConnect();
         MySqlDataReader dr;
         DataTable dt;
+        BindingSource bsource;
 
         public agents()
         {
             InitializeComponent();
+            loading.Visible = true;
+            formlbl.Visible = true;
+            BackgroundWorker pageload = new BackgroundWorker();
+            pageload.DoWork += Pageload_DoWork;
+            pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
+            pageload.RunWorkerAsync();
+
+
+        }
+
+        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+
+            if (Application.OpenForms.OfType<agents>().Count() == 1)
+            {
+                agentdataview.DataSource = bsource;
+                agentdataview.Columns["mail"].Visible = false;
+                agentdataview.Columns["password"].Visible = false;
+                agentdataview.Columns["admin"].Visible = false;
+                agentdataview.Columns["sid"].Visible = false;
+                loading.Visible = false;
+                formlbl.Text= "Agents";
+                formlbl.BringToFront();
+                apnl.Visible = true;
+            }
+
+
+        }
+
+        private void Pageload_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            readagents();
+            
+        }
+
+        private void readagents()
+        {
+            try
+            {
+                dr = obj.Query("select * from staff");
+                dt = new DataTable();
+                dt.Load(dr);
+                obj.closeConnection();
+                bsource = new BindingSource();
+                bsource.DataSource = dt;
+            }
+            catch { }
         }
 
         public static string md5hash(string input)
@@ -48,16 +99,7 @@ namespace Chinarhomes
             };
             genderbox.DataSource = items;
 
-            dr = obj.Query("select * from staff");
-            dt = new DataTable();
-            dt.Load(dr);
-            obj.closeConnection();
-            BindingSource bsource = new BindingSource();
-            bsource.DataSource = dt;
-            agentdataview.DataSource = bsource;
-            agentdataview.Columns["mail"].Visible = false;
-            agentdataview.Columns["password"].Visible = false;
-            agentdataview.Columns["admin"].Visible = false;
+           
         }
 
         private void contacttxt_KeyPress(object sender, KeyPressEventArgs e)
@@ -71,6 +113,16 @@ namespace Chinarhomes
 
         private void addbtn_Click(object sender, EventArgs e)
         {
+
+            StringBuilder email = new StringBuilder(mailtxt.Text);
+            email.Replace(@"\", @"\\").Replace("'", "\\'");
+            StringBuilder name = new StringBuilder(nametxt.Text);
+            name.Replace(@"\", @"\\").Replace("'", "\\'");
+            StringBuilder user = new StringBuilder(usertxt.Text);
+            user.Replace(@"\", @"\\").Replace("'", "\\'");
+            StringBuilder add = new StringBuilder(addtxt.Text);
+            add.Replace(@"\", @"\\").Replace("'", "\\'");
+
             int admin;
             string encmail, encpassword;
 
@@ -78,34 +130,66 @@ namespace Chinarhomes
                 admin = 1;
             else
                 admin = 0;
-            if (update == false)
+            try
             {
-                encmail = md5hash(mailtxt.Text);
-                encpassword = md5hash(pwdtxt.Text);
-        
-                if (ayes.Checked == false && ano.Checked == false)
+                if (update == false)
                 {
-                    MessageBox.Show("Please select if admin or not.", "Select Option");
-                }
-                else if (mailtxt.Text == "" || nametxt.Text == "" || usertxt.Text == "" || contacttxt.Text == "" || pwdtxt.Text == "" || nametxt.Text == "")
-                {
-                    MessageBox.Show("Please enter all details.", "Error!");
+
+                    encmail = md5hash(mailtxt.Text);
+                    encpassword = md5hash(pwdtxt.Text);
+
+                    if (ayes.Checked == false && ano.Checked == false)
+                    {
+                        MessageBox.Show("Please select if admin or not.", "Select Option");
+                    }
+                    else if (mailtxt.Text == "" || nametxt.Text == "" || usertxt.Text == "" || contacttxt.Text == "" || pwdtxt.Text == "" || addtxt.Text == "")
+                    {
+                        MessageBox.Show("Please enter all details.", "Error!");
+                    }
+                    else
+                    {
+                        Cursor = Cursors.WaitCursor;
+                        if (errlbl.Visible == false)
+                        {
+                            string cmd = "INSERT INTO `staff` (`email`, `mail`, `name`, `contact`, `password`, `gender`, `admin`,`username`,`address`) VALUES ('" + email + "', '" + encmail + "', '" + name + "', '" + contacttxt.Text + "', '" + encpassword + "', '" + genderbox.Text + "', '" + admin + "','" + user + "','" + add + "')";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+
+                            MessageBox.Show("Agent added Successfully.", "Success!");
+                            readagents();
+                            agentdataview.DataSource = bsource;
+                            agentdataview.Columns["mail"].Visible = false;
+                            agentdataview.Columns["password"].Visible = false;
+                            agentdataview.Columns["admin"].Visible = false;
+                            agentdataview.Columns["sid"].Visible = false;
+                            Cursor = Cursors.Arrow;
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("new");
-                    string cmd = "INSERT INTO `staff` (`email`, `mail`, `name`, `contact`, `password`, `gender`, `admin`,`username`) VALUES ('" + mailtxt.Text + "', '" + encmail + "', '" + nametxt.Text + "', '" + contacttxt.Text + "', '" + encpassword + "', '" + genderbox.Text + "', '" + admin + "','" + usertxt.Text + "')";
-                    obj.nonQuery(cmd);
-                    obj.closeConnection();
+                    if (errlbl.Visible == false)
+                    {
+                        Cursor = Cursors.WaitCursor;
+                        encmail = md5hash(mailtxt.Text);
+                        string cmd = "update staff set `email`='" + email + "',`mail`='" + encmail + "', `name`='" + name + "', `contact`='" + contacttxt.Text + "', `gender`='" + genderbox.Text + "', `admin`='" + admin + "',`username`='" + user + "',`address`='" + add + "' where mail='" + mail + "'";
+                        obj.nonQuery(cmd);
+                        obj.closeConnection();
+
+                        MessageBox.Show("Agent updated Successfully.", "Success!");
+                        readagents();
+                        agentdataview.DataSource = bsource;
+                        agentdataview.Columns["mail"].Visible = false;
+                        agentdataview.Columns["password"].Visible = false;
+                        agentdataview.Columns["admin"].Visible = false;
+                        agentdataview.Columns["sid"].Visible = false;
+                        Cursor = Cursors.Arrow;
+                    }
                 }
-            }
-            else
+            }catch(Exception ex)
             {
-                MessageBox.Show("update");
-                encmail = md5hash(mailtxt.Text);
-                string cmd = "update staff set `email`='" + mailtxt.Text + "',`mail`='"+encmail+"', `name`='" + nametxt.Text + "', `contact`='" + contacttxt.Text + "', `gender`='" + genderbox.Text + "', `admin`='" + admin + "',`username`='" + usertxt.Text + "' where mail='"+mail+"'";
-                obj.nonQuery(cmd);
-                obj.closeConnection();
+                Cursor = Cursors.Arrow;
+                MessageBox.Show(ex.Message);
             }
         }
         private void ayes_CheckedChanged(object sender, EventArgs e)
@@ -166,17 +250,85 @@ namespace Chinarhomes
             usertxt.Text = "";
             contacttxt.Text = "";
             pwdtxt.Text="";
+            addtxt.Text = "";
             ayes.Checked = false;
             ano.Checked = false;
             addbtn.Text = "Add Agent";
             addnewbtn.Visible = false;
             pwdtxt.Enabled = true;
+            errlbl.Visible = false;
 
         }
 
-        private void dpnl_Paint(object sender, PaintEventArgs e)
+        private void contacttxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(contacttxt.Text, @"^([0-9]+)$") && contacttxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+                contacttxt.Focus();
+
+            }
+        }
+
+        private void canbtn_Click(object sender, EventArgs e)
         {
 
+            update = false;
+            nametxt.Text = "";
+            mailtxt.Text = "";
+            usertxt.Text = "";
+            contacttxt.Text = "";
+            pwdtxt.Text = "";
+            addtxt.Text = "";
+            ayes.Checked = false;
+            ano.Checked = false;
+            addbtn.Text = "Add Agent";
+            addnewbtn.Visible = false;
+            pwdtxt.Enabled = true;
+            errlbl.Visible = false;
+        }
+
+        private void usertxt_Leave(object sender, EventArgs e)
+        {
+            errlbl.Visible = false;
+            BackgroundWorker username = new BackgroundWorker();
+            username.DoWork += Username_DoWork;
+            username.RunWorkerCompleted += Username_RunWorkerCompleted;
+            username.RunWorkerAsync(usertxt.Text);
+        }
+
+        private void Username_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            if (success)
+            {               
+                    errlbl.Visible = true;
+                
+            }else if (success == false)
+            {
+             errlbl.Visible = false;
+            }
+        }
+
+        bool success = false;
+        private void Username_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string usertxt = (string)e.Argument;
+            try
+            {
+                int i = 0;
+                i = obj.Count("Select Count(sid) from staff where username='" + usertxt+ "';");
+                MessageBox.Show(i.ToString());
+                if (i == 1)
+                {
+                    success = true;
+                }
+                else
+                    success = false;
+               
+               
+            }catch { success = false; }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace Chinarhomes
 {
@@ -20,20 +21,45 @@ namespace Chinarhomes
         public settings()
         {
             InitializeComponent();
+            loading.Visible = true;
+            loadinglbl.Visible = true;
+            BackgroundWorker pageload = new BackgroundWorker();
+            pageload.DoWork += Pageload_DoWork;
+            pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
+            pageload.RunWorkerAsync();
+
         }
 
-        private void settings_Load(object sender, EventArgs e)
+        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            dr = obj.Query("select * from staff where username='"+userinfo.username+"'");
-            dr.Read();
-            nametxt.Text = dr["name"].ToString();
-            mailtxt.Text = dr["email"].ToString();
-            usertxt.Text = dr["username"].ToString();
-            contacttxt.Text = dr["contact"].ToString();
-            mail = dr["mail"].ToString();
-            obj.closeConnection();
+            nametxt.Text = name;
+            mailtxt.Text = vmail;
+            contacttxt.Text = con;
+            addtxt.Text = add;
+            loading.Visible = false;
+            loadinglbl.Visible = false;
+            spnl.Visible = true;
+        }
+        string name, vmail, con, add;
+        private void Pageload_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                dr = obj.Query("select * from staff where username='" + userinfo.username + "'");
+                dr.Read();
+                name = dr["name"].ToString();
+                vmail = dr["email"].ToString();
+                con = dr["contact"].ToString();
+                add = dr["address"].ToString();
+                mail = dr["mail"].ToString();
+                obj.closeConnection();
+            }catch
+            {
+
+            }
         }
 
+       
         private void contacttxt_KeyPress(object sender, KeyPressEventArgs e)
         {
             contacttxt.MaxLength = 10;
@@ -59,19 +85,70 @@ namespace Chinarhomes
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            string encmail = md5hash(mailtxt.Text);
-            string encpwd = md5hash(pwdtxt.Text);
-            if (pwdtxt.Text == cpwdtxt.Text)
+            try
             {
-                errorlbl.Visible = false;
-                string cmd = "update staff set `email`='" + mailtxt.Text + "',`mail`='" + encmail + "',`password`='"+encpwd+"', `name`='" + nametxt.Text + "', `contact`='" + contacttxt.Text + "',`username`='" + usertxt.Text + "' where mail='" + mail + "'";
-                obj.nonQuery(cmd);
-                obj.closeConnection();
-            }else
-            {
-                errorlbl.Visible = true;
+                string encmail = md5hash(mailtxt.Text);
+                Cursor = Cursors.WaitCursor;
+                if (pwdtxt.Text == "" && cpwdtxt.Text == "")
+                {
+
+                    StringBuilder trumail = new StringBuilder(mailtxt.Text);
+                    mail.Replace(@"\", @"\\").Replace("'", "\\'");
+                    StringBuilder name = new StringBuilder(nametxt.Text);
+                    name.Replace(@"\", @"\\").Replace("'", "\\'");
+                    StringBuilder add = new StringBuilder(addtxt.Text);
+                    add.Replace(@"\", @"\\").Replace("'", "\\'");
+
+
+                    errorlbl.Visible = false;
+                    string cmd = "update staff set `email`='" + trumail + "',`mail`='" + encmail + "', `name`='" + name + "', `contact`='" + contacttxt.Text + "',`address`='" + add + "' where mail='" + mail + "'";
+                    obj.nonQuery(cmd);
+                    obj.closeConnection();
+                    MessageBox.Show("Successfully Updated.", "Success!");
+                }
+                else if (pwdtxt.Text != "" || cpwdtxt.Text != "")
+                {
+                    if (pwdtxt.Text == cpwdtxt.Text)
+                    {
+                        string encpwd = md5hash(pwdtxt.Text);
+                        StringBuilder trumail = new StringBuilder(mailtxt.Text);
+                        mail.Replace(@"\", @"\\").Replace("'", "\\'");
+                        StringBuilder name = new StringBuilder(nametxt.Text);
+                        name.Replace(@"\", @"\\").Replace("'", "\\'");
+                        StringBuilder add = new StringBuilder(addtxt.Text);
+                        add.Replace(@"\", @"\\").Replace("'", "\\'");
+
+
+                        errorlbl.Visible = false;
+                        string cmd = "update staff set `email`='" + trumail + "',`mail`='" + encmail + "',`password`='" + encpwd + "', `name`='" + name + "', `contact`='" + contacttxt.Text + "',`address`='" + add + "' where mail='" + mail + "'";
+                        obj.nonQuery(cmd);
+                        obj.closeConnection();
+                        MessageBox.Show("Successfully Updated.", "Success!");
+
+                    }
+
+                    else
+                    {
+                        errorlbl.Visible = true;
+                    }
+                }
+                Cursor = Cursors.Arrow;
             }
-          
+            catch
+            {
+                Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void contacttxt_Leave(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(contacttxt.Text, @"^([0-9]+)$") && contacttxt.Text != "")
+            {
+
+                MessageBox.Show("Please enter correct number.", "Error!");
+               contacttxt.Focus();
+
+            }
         }
     }
 }

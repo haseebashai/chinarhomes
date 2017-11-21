@@ -20,19 +20,22 @@ namespace Chinarhomes
         BindingSource bsource;
         DataTable dt;
         MySqlCommandBuilder cmdbl;
-        bool terms = true, faq = false, about = false;
+        bool terms = true, faq = false, about = false, contact = false;
         string id,cmd;
 
         public policy()
         {
             InitializeComponent();
+            
+           
         }
+
 
         public void readterms()
         {
             try
             {
-               
+                Cursor = Cursors.WaitCursor;
                 dr = obj.Query("select * from terms");
                 dt = new DataTable();
                 dt.Load(dr);
@@ -41,12 +44,12 @@ namespace Chinarhomes
                 bsource.DataSource = dt;
                 policydataview.DataSource = bsource;
                 policydataview.Columns["termsid"].Visible = false;
+                Cursor = Cursors.Arrow;
             }
 
             catch (Exception ex)
             {
-
-                MessageBox.Show("Something happened, please try again.\n\n" + ex.Message.ToString(), "Error!");
+                Cursor = Cursors.Arrow;
             }
         }
 
@@ -54,6 +57,7 @@ namespace Chinarhomes
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
                 dr=obj.Query("select * from faq");
                 dt = new DataTable();
                 dt.Load(dr);
@@ -62,12 +66,13 @@ namespace Chinarhomes
                 bsource.DataSource = dt;
                 policydataview.DataSource = bsource;
                 policydataview.Columns["faqid"].Visible = false;
+                Cursor = Cursors.Arrow;
             }
 
             catch (Exception ex)
             {
-
-                MessageBox.Show("Something happened, please try again.\n\n" + ex.Message.ToString(), "Error!");
+                Cursor = Cursors.Arrow;
+               
             }
         }
 
@@ -75,6 +80,7 @@ namespace Chinarhomes
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
                 dr = obj.Query("select * from about");
                 dt = new DataTable();
                 dt.Load(dr);
@@ -83,18 +89,38 @@ namespace Chinarhomes
                 bsource.DataSource = dt;
                 policydataview.DataSource = bsource;
                 policydataview.Columns["aboutid"].Visible = false;
+                Cursor = Cursors.Arrow;
             }
 
             catch (Exception ex)
             {
+                Cursor = Cursors.Arrow;
+            }
+        }
 
-                MessageBox.Show("Something happened, please try again.\n\n" + ex.Message.ToString(), "Error!");
+        public void readcontacts()
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                dr = obj.Query("select * from contacts");
+                dt = new DataTable();
+                dt.Load(dr);
+                obj.closeConnection();
+                bsource = new BindingSource();
+                bsource.DataSource = dt;
+                policydataview.DataSource = bsource;
+                policydataview.Columns["id"].Visible = false;
+                Cursor = Cursors.Arrow;
+            }
+
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Arrow;
             }
         }
 
 
-
-       
         private void loadingshow()
         {
             loadinglbl.Visible = true;
@@ -103,9 +129,11 @@ namespace Chinarhomes
 
         private void termsbtn_Click(object sender, EventArgs e)
         {
+            epnl.Visible = false;
             terms = true;
             faq = false;
             about = false;
+            contact = false;
 
             readterms();
 
@@ -116,101 +144,69 @@ namespace Chinarhomes
        
         private void faqbtn_Click(object sender, EventArgs e)
         {
+            epnl.Visible = false;
             terms = false;
             faq = true;
             about = false;
+            contact = false;
 
             readfaq();
            
 
         }
 
-        private void policy_Load(object sender, EventArgs e)
-        {
-            readterms();
-        }
-
-        private void updbtn_Click(object sender, EventArgs e)
-        {
-
-            if (!Regex.IsMatch(desctxt.Text, @"^([a-zA-Z0-9@#$%&*+\-_(),+':;?.,![\]\s\\/{}""|]+)$") && desctxt.Text != "")
-            {
-
-                MessageBox.Show("Abnormal Special Character found, Please remove it and proceed.");
-
-            }
-            else
-            {
-                try
-                {
-                    if (terms)
-                    {
-                        cmd = ("UPDATE terms SET `heading`= '" + headtxt.Text + "', `description`= '" + desctxt.Text + "' WHERE `termsid`= '" + id + "'");
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        MessageBox.Show("Successfully Updated.");
-                        readterms();
-                    }else if (faq)
-                    {
-                        cmd = ("UPDATE faq SET `question`= '" + headtxt.Text + "', `answer`= '" + desctxt.Text + "' WHERE `faqid`= '" + id + "'");
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        MessageBox.Show("Successfully Updated.");
-                        readfaq();
-                    }else if (about)
-                    {
-                        cmd = ("UPDATE about SET `heading`= '" + headtxt.Text + "', `description`= '" + desctxt.Text + "' WHERE `aboutid`= '" + id + "'");
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        MessageBox.Show("Successfully Updated.");
-                        readabout();
-                    }
-                
-                }
-
-                catch (Exception ex)
-                {
-                    obj.closeConnection();
-                    MessageBox.Show(ex.Message);
-                }
-             
-            }
-        }
 
         private void headtxt_Enter(object sender, EventArgs e)
         {
-            if (headtxt.Text == "heading")
+            if (headtxt.Text == "heading"||headtxt.Text=="Name")
                 headtxt.Text = "";
         }
 
         private void headtxt_Leave(object sender, EventArgs e)
         {
-            if (headtxt.Text == "")
+            if (!contact)
             {
-                headtxt.Text = "heading";
+                if (headtxt.Text == "")
+                {
+                    headtxt.Text = "heading";
+                }
             }
         }
 
         private void desctxt_Enter(object sender, EventArgs e)
         {
-            if (desctxt.Text == "description")
+            if (desctxt.Text == "description"||desctxt.Text=="Number")
                 desctxt.Text = "";
         }
 
         private void desctxt_Leave(object sender, EventArgs e)
         {
-            if (desctxt.Text == "")
+            if (!contact)
             {
-                desctxt.Text = "description";
+                if (desctxt.Text == "")
+                {
+                    desctxt.Text = "description";
+                }
             }
         }
 
+        bool newentry=false;
         private void addnewbtn_Click(object sender, EventArgs e)
         {
-            epnl.Location = new Point(300, 288);
+            newentry = true;
             epnl.Visible = true;
-            addbtn.Visible = true;
-            updbtn.Visible = false;
+            if (contact)
+            {
+                headtxt.Text = "Name";
+                desctxt.Text = "Number";
+                desctxt.MaxLength = 10;
+            }else
+            {
+                headtxt.Text = "heading";
+                desctxt.Text = "description";
+                desctxt.MaxLength = 32767;
+            }
+            addbtn.Text = "Add new entry";
              
         }
 
@@ -219,47 +215,134 @@ namespace Chinarhomes
             if (!Regex.IsMatch(desctxt.Text, @"^([a-zA-Z0-9@#$%&*+\-_(),+':;?.,![\]\s\\/{}""|]+)$") && desctxt.Text != "")
             {
 
-                MessageBox.Show("Abnormal Special Character found, Please remove it and proceed.");
+                MessageBox.Show("Please remove special characters like:\n\n© ™ ® ` etc.", "Error!");
 
             }
             else
             {
                 try
                 {
+                    Cursor = Cursors.WaitCursor;
                     if (terms)
                     {
-                        cmd = ("insert into terms (`heading`,`description`)values('" + headtxt.Text + "','" + desctxt.Text + "')");
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        MessageBox.Show("Successfully added.","Success");
-                        readterms();
+                        if (newentry)
+                        {
+                            cmd = "insert into terms (`heading`,`description`)values('" + headtxt.Text + "','" + desctxt.Text + "')";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully added.", "Success");
+                            readterms();
+                        }
+                        else
+                        {
+                            cmd = "UPDATE terms set heading='" + headtxt.Text + "',description='" + desctxt.Text + "' where termsid='"+id+"'";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully updated.", "Success");
+                            readterms();
+                        }
                     }
                     else if (faq)
                     {
-                        cmd = ("insert into faq (`question`,`answer`)values('" + headtxt.Text + "','" + desctxt.Text + "')");
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        MessageBox.Show("Successfully added.", "Success");
-                        readfaq();
+                        if (newentry)
+                        {
+                            cmd = "insert into faq (`question`,`answer`)values('" + headtxt.Text + "','" + desctxt.Text + "')";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully added.", "Success");
+                            readfaq();
+                        }else
+                        {
+                            cmd = "UPDATE faq set question='" + headtxt.Text + "',answer='" + desctxt.Text + "' where faqid='"+id+"'";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully updated.", "Success");
+                            readfaq();
+                        }
                     }
                     else if (about)
                     {
-                        cmd = ("insert into about (`heading`,`description`)values('" + headtxt.Text + "', '" + desctxt.Text + "')");
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        MessageBox.Show("Successfully added.", "Success");
-                        readabout();
+                        if (newentry)
+                        {
+                            cmd = "insert into about (`heading`,`description`)values('" + headtxt.Text + "', '" + desctxt.Text + "') ";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully added.", "Success");
+                            readabout();
+                        }else
+                        {
+                            cmd = "UPDATE about set heading='" + headtxt.Text + "',description='" + desctxt.Text + "' where aboutid='"+id+"'";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully updated.", "Success");
+                            readabout();
+                        }
+                    }else if (contact)
+                    {
+                        if (newentry)
+                        {
+                            cmd = "insert into contacts (`name`,`contact`)values('" + headtxt.Text + "', '" + desctxt.Text + "')";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully updated.", "Success");
+                            readcontacts();
+                        }else
+                        {
+                            cmd = "UPDATE contacts set name='" + headtxt.Text + "',contact='" + desctxt.Text + "' where id='"+id+"'";
+                            obj.nonQuery(cmd);
+                            obj.closeConnection();
+                            MessageBox.Show("Successfully updated.", "Success");
+                            readcontacts();
+                        }
                     }
-
+                    Cursor = Cursors.Arrow;
                 }
 
                 catch (Exception ex)
                 {
+                    Cursor = Cursors.Arrow;
                     obj.closeConnection();
                     MessageBox.Show(ex.Message);
                 }
 
             }
+        }
+
+        private void desctxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (contact)
+            {
+                MessageBox.Show("contact");
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+                desctxt.MaxLength = 10;
+            }else
+            {
+                desctxt.MaxLength = 32767;
+            }
+        }
+
+
+        private void conbtn_Click(object sender, EventArgs e)
+        {
+            epnl.Visible = false;
+            terms = false;
+            faq = false;
+            about = false;
+            contact = true;
+
+            readcontacts();
+        }
+
+        private void policy_Load(object sender, EventArgs e)
+        {
+            
+            readterms();
+            Cursor = Cursors.Arrow;
+            polpnl.Visible = true;
         }
 
         private void policydataview_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -295,40 +378,33 @@ namespace Chinarhomes
                     headtxt.Text = row.Cells["heading"].Value.ToString();
                     desctxt.Text = row.Cells["description"].Value.ToString();
                 }
+            }else if (contact)
+            {
+                if (e.RowIndex >= 0)
+                {
+
+                    DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
+                    id = row.Cells["id"].Value.ToString();
+                    headtxt.Text = row.Cells["name"].Value.ToString();
+                    desctxt.Text = row.Cells["contact"].Value.ToString();
+                }
             }
             epnl.Visible = true;
-         }
+            addbtn.Text = "Update";
+            newentry = false;
+        }
 
         private void aboutbtn_Click(object sender, EventArgs e)
         {
+            epnl.Visible = false;
             terms = false;
             faq = false;
             about = true;
+            contact = false;
 
             readabout();
 
         }
-
-     
-      
-        private void addabtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                cmdbl = new MySqlCommandBuilder(adap);
-                adap.Update(dt);
-                MessageBox.Show("About entry added.");
-                readabout();
-                policydataview.DataSource = bsource;
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Something happened, please try again.\n\n" + ex.Message.ToString(), "Error!");
-            }
-        }
-
 
     }
 }

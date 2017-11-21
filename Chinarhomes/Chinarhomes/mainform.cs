@@ -140,11 +140,13 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = false;
             arrow7.Visible = false;
+            Cursor = Cursors.WaitCursor;
             policy pol = new policy();
             pol.TopLevel = false;
             cntpnl.Controls.Clear();
             cntpnl.Controls.Add(pol);
             pol.Show();
+            Cursor = Cursors.Arrow;
         }
 
         private void customerbtn_Click(object sender, EventArgs e)
@@ -357,7 +359,7 @@ namespace Chinarhomes
             userinfo.email = "";
             userinfo.username = "";
             this.Close();
-            MessageBox.Show("Logged out successfully.\n\nPlease Login to continue.");
+            MessageBox.Show("Logged out successfully.\n\nPlease Login to continue.","Success!");
             loginform lg = new loginform(cn);
             lg.TopLevel = false;
             cn.mainpnl.Controls.Clear();
@@ -374,7 +376,7 @@ namespace Chinarhomes
             st.TopLevel = false;
             dg.dialogpnl.Controls.Clear();
             dg.dialogpnl.Controls.Add(st);
-            dg.Size = new Size(630, 479);
+            dg.Size = new Size(620, 479);
             dg.lbl.Text = "User Settings";
             dg.Show();
             st.Show();

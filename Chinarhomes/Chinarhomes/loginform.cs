@@ -169,6 +169,7 @@ namespace Chinarhomes
                 userinfo.loggedin = true;
                 userinfo.username = username;
                 userinfo.email = email;
+                userinfo.encmail = encmail;
 
 
                
@@ -190,7 +191,7 @@ namespace Chinarhomes
 
         }
 
-        string usertype,username,email;
+        string usertype,username,email,encmail;
         private void Login_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -211,13 +212,14 @@ namespace Chinarhomes
                         {
 
                             MySqlDataReader dr;
-                            dr = obj.Query("Select username,password,admin,email from staff where username='" + usernametxt.Text + "';");
+                            dr = obj.Query("Select username,password,admin,email,mail from staff where username='" + usernametxt.Text + "';");
                             dr.Read();
                             if (dr[1].Equals(pwd))
                             {
                                 usertype = dr[2].ToString();
                                 username = dr[0].ToString();
                                 email = dr[3].ToString();
+                                encmail = dr[4].ToString();
                                 e.Result = "success";
                                 obj.closeConnection();
                                 return;

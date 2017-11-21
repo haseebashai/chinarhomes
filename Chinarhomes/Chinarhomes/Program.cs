@@ -27,6 +27,7 @@ namespace Chinarhomes
         public static bool admin;
         public static string email;
         public static long lastid;
+        public static string encmail;
     }
 
 

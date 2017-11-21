@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.propdataview = new System.Windows.Forms.DataGridView();
             this.proppnl = new System.Windows.Forms.Panel();
+            this.addnewbtn = new System.Windows.Forms.Button();
             this.imgtxt = new System.Windows.Forms.TextBox();
             this.addpicsbtn = new System.Windows.Forms.Button();
             this.loadpicbtn = new System.Windows.Forms.Button();
@@ -84,21 +85,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nopicslbl = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.loading = new System.Windows.Forms.PictureBox();
-            this.formlbl = new System.Windows.Forms.Label();
             this.ppnl = new System.Windows.Forms.Panel();
             this.sizelbl = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.piclbl = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.addnewbtn = new System.Windows.Forms.Button();
+            this.loading = new System.Windows.Forms.PictureBox();
+            this.formlbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).BeginInit();
             this.proppnl.SuspendLayout();
             this.bpnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.dppnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.ppnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // propdataview
@@ -107,14 +107,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(11, 4);
             this.propdataview.MultiSelect = false;
@@ -138,6 +138,22 @@
             this.proppnl.Size = new System.Drawing.Size(1165, 662);
             this.proppnl.TabIndex = 2;
             this.proppnl.Visible = false;
+            // 
+            // addnewbtn
+            // 
+            this.addnewbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addnewbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.addnewbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.addnewbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.addnewbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addnewbtn.Location = new System.Drawing.Point(1032, 621);
+            this.addnewbtn.Name = "addnewbtn";
+            this.addnewbtn.Size = new System.Drawing.Size(122, 35);
+            this.addnewbtn.TabIndex = 49;
+            this.addnewbtn.Text = "Upload New Pictures";
+            this.addnewbtn.UseVisualStyleBackColor = false;
+            this.addnewbtn.Visible = false;
+            this.addnewbtn.Click += new System.EventHandler(this.addnewbtn_Click);
             // 
             // imgtxt
             // 
@@ -275,6 +291,7 @@
             // 
             // furnishedtxt
             // 
+            this.furnishedtxt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.furnishedtxt.FormattingEnabled = true;
             this.furnishedtxt.Location = new System.Drawing.Point(381, 58);
             this.furnishedtxt.Name = "furnishedtxt";
@@ -283,6 +300,7 @@
             // 
             // saletypebox
             // 
+            this.saletypebox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.saletypebox.FormattingEnabled = true;
             this.saletypebox.Location = new System.Drawing.Point(207, 305);
             this.saletypebox.Name = "saletypebox";
@@ -291,6 +309,7 @@
             // 
             // ptypebox
             // 
+            this.ptypebox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ptypebox.FormattingEnabled = true;
             this.ptypebox.Location = new System.Drawing.Point(16, 165);
             this.ptypebox.Name = "ptypebox";
@@ -676,29 +695,6 @@
             this.progressBar1.TabIndex = 53;
             this.progressBar1.Visible = false;
             // 
-            // loading
-            // 
-            this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
-            this.loading.Location = new System.Drawing.Point(113, -4);
-            this.loading.Name = "loading";
-            this.loading.Size = new System.Drawing.Size(31, 32);
-            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.loading.TabIndex = 47;
-            this.loading.TabStop = false;
-            this.loading.Visible = false;
-            // 
-            // formlbl
-            // 
-            this.formlbl.AutoSize = true;
-            this.formlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formlbl.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.formlbl.Location = new System.Drawing.Point(-2, 2);
-            this.formlbl.Name = "formlbl";
-            this.formlbl.Size = new System.Drawing.Size(119, 20);
-            this.formlbl.TabIndex = 46;
-            this.formlbl.Text = "Gathering Data";
-            this.formlbl.Visible = false;
-            // 
             // ppnl
             // 
             this.ppnl.Controls.Add(this.sizelbl);
@@ -745,21 +741,28 @@
             this.label22.TabIndex = 102;
             this.label22.Text = "uploading";
             // 
-            // addnewbtn
+            // loading
             // 
-            this.addnewbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addnewbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.addnewbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
-            this.addnewbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.addnewbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addnewbtn.Location = new System.Drawing.Point(1032, 621);
-            this.addnewbtn.Name = "addnewbtn";
-            this.addnewbtn.Size = new System.Drawing.Size(122, 35);
-            this.addnewbtn.TabIndex = 49;
-            this.addnewbtn.Text = "Upload New Pictures";
-            this.addnewbtn.UseVisualStyleBackColor = false;
-            this.addnewbtn.Visible = false;
-            this.addnewbtn.Click += new System.EventHandler(this.addnewbtn_Click);
+            this.loading.Image = global::Chinarhomes.Properties.Resources.loading;
+            this.loading.Location = new System.Drawing.Point(113, -4);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(31, 32);
+            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.loading.TabIndex = 47;
+            this.loading.TabStop = false;
+            this.loading.Visible = false;
+            // 
+            // formlbl
+            // 
+            this.formlbl.AutoSize = true;
+            this.formlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formlbl.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.formlbl.Location = new System.Drawing.Point(-2, 2);
+            this.formlbl.Name = "formlbl";
+            this.formlbl.Size = new System.Drawing.Size(119, 20);
+            this.formlbl.TabIndex = 46;
+            this.formlbl.Text = "Gathering Data";
+            this.formlbl.Visible = false;
             // 
             // verifiedproperties
             // 
@@ -781,9 +784,9 @@
             this.dpnl.PerformLayout();
             this.dppnl.ResumeLayout(false);
             this.dppnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ppnl.ResumeLayout(false);
             this.ppnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

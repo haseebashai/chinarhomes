@@ -36,9 +36,10 @@ namespace Chinarhomes
             loading.Visible = false;
             titlelbl.Location = new Point(1, 1);
             titlelbl.Visible = true;
-            custlist.SelectedIndex = -1;
+            
             custlist.DisplayMember = "mail";
             custlist.DataSource = dt;
+            custlist.SelectedIndex = -1;
             ipnl.Visible = true;
         }
 
