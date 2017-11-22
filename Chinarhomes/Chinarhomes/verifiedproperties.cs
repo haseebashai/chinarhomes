@@ -170,6 +170,7 @@ namespace Chinarhomes
         private void editpropbtn_Click(object sender, EventArgs e)
         {
             loadpicbtn.Visible = true;
+            loadpicbtn.Enabled = true;
             editpropbtn.Visible = false;
             cancelbtn.Visible = true;
             addnewbtn.Visible = true;
@@ -209,7 +210,7 @@ namespace Chinarhomes
                     pathurl.Add(dr[0].ToString());
                     i++;
                 }
-                MessageBox.Show(string.Join("", pathurl));
+               
                 obj.closeConnection();
                 total = i;
 
@@ -241,6 +242,7 @@ namespace Chinarhomes
                 nopicslbl.Visible = true;
                 nopicslbl.BringToFront();
                 dppnl.Visible = false;
+                loadpicbtn.Enabled = true;
 
             }
             else if (result == "success")
@@ -269,6 +271,7 @@ namespace Chinarhomes
             else if (result == "fail")
             {
                 dppnl.Visible = false;
+                loadpicbtn.Enabled = true;
             }
             progressBar1.Visible = false;
 
@@ -325,7 +328,7 @@ namespace Chinarhomes
         {
             try
             {
-                MessageBox.Show(url);
+               
                 WebRequest request = WebRequest.Create(url);
 
                 WebResponse response = request.GetResponse();
@@ -454,6 +457,7 @@ namespace Chinarhomes
             {
                 e.Result = "fail";
                 MessageBox.Show(ex.Message);
+                obj.closeConnection();
             }
         }
 

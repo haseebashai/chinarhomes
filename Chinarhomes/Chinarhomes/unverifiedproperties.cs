@@ -168,6 +168,7 @@ namespace Chinarhomes
         private void editpropbtn_Click(object sender, EventArgs e)
         {
             loadpicbtn.Visible = true;
+            loadpicbtn.Enabled = true;
             editpropbtn.Visible = false;
             cancelbtn.Visible = true;
             updbtn.Visible = true;
@@ -176,15 +177,18 @@ namespace Chinarhomes
 
         private void loadpicbtn_Click(object sender, EventArgs e)
         {
-            progressBar1.Visible = true;
+            nopicslbl.Text = "Loading Pictures...";
+            nopicslbl.Visible = true;
+            nopicslbl.BringToFront();
+            loadpicbtn.Enabled = false;
             BackgroundWorker bg = new BackgroundWorker();
             bg.RunWorkerCompleted += Bg_RunWorkerCompleted1;
             bg.DoWork += Bg_DoWork1;
             bg.WorkerSupportsCancellation = true;
             bg.RunWorkerAsync();
-            
+           
 
-            
+
         }
 
         private void Bg_DoWork1(object sender, DoWorkEventArgs e)
@@ -238,39 +242,50 @@ namespace Chinarhomes
                 nopicslbl.Visible = true;
                 nopicslbl.BringToFront();
                 dppnl.Visible = false;
-               
+                loadpicbtn.Enabled = true;
             }
             else if (result == "success")
             {
+                Cursor = Cursors.WaitCursor;
+                
                 PopulateListView();
+                nopicslbl.Text = "No Pictures found.";
+                nopicslbl.Visible = false;
+                Cursor = Cursors.Arrow;
                 if (picfailed)
                 {
                    
                     nopicslbl.Visible = true;
                     nopicslbl.BringToFront();
                     dppnl.Visible = false;
+                    loadpicbtn.Enabled = true;
                 }
                 else if(picfailed==false)
                 {
                   
                     dppnl.Visible = true;
                     loadpicbtn.Visible = false;
+                    loadpicbtn.Enabled = true;
                 }
             }
             else if (result == "fail")
             {
                 dppnl.Visible = false;
+                loadpicbtn.Enabled = true;
             }
-            progressBar1.Visible = false;
+           
             i = 0;
             total = 0;
             pathurl.Clear();
+            
         }
 
         private void PopulateListView()
         {
             try
             {
+               
+
                 piclist.Clear();
                 ImageList images = new ImageList();
                 piclist.View = View.LargeIcon;
@@ -283,16 +298,17 @@ namespace Chinarhomes
 
                 foreach (string str in pathurl)
                 {
-
                     images.Images.Add(LoadImage(address + str));
 
                 }
 
                 for (i = 0; i < total;)
                 {
-
+                   
                     piclist.Items.Add(pathurl[i], i);
                     i++;
+              
+                    
 
                 }
             }
@@ -394,6 +410,8 @@ namespace Chinarhomes
                 }
                 else
                 {
+                    bpnl.Enabled = false;
+                    loadpicbtn.Enabled = false;
                     object[] arg = { loc, tags, type, floors, rooms, area, areap, price, priority, desc, distance, age, furnished, saletype, pname, ver };
                     bg.RunWorkerAsync(arg);
 
@@ -423,12 +441,12 @@ namespace Chinarhomes
                 StringBuilder pname = (StringBuilder)arg[14];
                 string ver = (string)arg[15];
 
-
-                if (ver == "1")
+                DialogResult dgr = MessageBox.Show(loc + "\n\nProperty verified?", "Confirm!", MessageBoxButtons.YesNo);
+                if (dgr == DialogResult.Yes)
                 {
-                    DialogResult dgr = MessageBox.Show(loc + "\n\nProperty verified?", "Confirm!", MessageBoxButtons.YesNo);
-                    if (dgr == DialogResult.Yes)
-                    {
+                    if (ver == "1")
+                {
+                   
                         cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
                     + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
                     + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='" + pname + "',`verifiedby`='" + userinfo.email + "' WHERE propertyid='" + pidlbl.Text + "'";
@@ -461,18 +479,20 @@ namespace Chinarhomes
 
 
                         }
-
+                        e.Result = "success";
+                    }
+                    else if (ver == "0")
+                    {
+                        cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
+                            + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
+                            + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='" + pname + "' WHERE propertyid='" + pidlbl.Text + "'";
+                        obj.nonQuery(cmd);
+                        obj.closeConnection();
+                        e.Result = "success";
                     }
                 }
-                else if (ver == "0")
-                {
-                    cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
-                        + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
-                        + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='" + pname + "' WHERE propertyid='" + pidlbl.Text + "'";
-                    obj.nonQuery(cmd);
-                    obj.closeConnection();
-                }
-                e.Result = "success";
+               
+               
             }catch(Exception ex)
             {
                 e.Result = "fail";
@@ -487,6 +507,7 @@ namespace Chinarhomes
             {
                 MessageBox.Show("Property Updated succesfully.", "Success");
                 dpnl.Enabled = false;
+                dpnl.Visible = false;
                 dppnl.Visible = false;
                 editpropbtn.Visible = true;
                 loadpicbtn.Visible = false;
@@ -498,6 +519,10 @@ namespace Chinarhomes
                
             }
             progressBar1.Visible = false;
+            bpnl.Enabled = true;
+            loadpicbtn.Enabled = true;
+            bpnl.Visible = false;
+            loadpicbtn.Visible = false;
         }
 
       
