@@ -192,6 +192,24 @@ namespace Chinarhomes
         }
 
         string usertype,username,email,encmail;
+
+       
+
+        private void forgotbtn_Click(object sender, EventArgs e)
+        {
+            dialogcontainer dg = new dialogcontainer();
+            forgotpwd fgt = new forgotpwd(dg);
+            fgt.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(fgt);
+            dg.Size = new Size(470, 400);
+            dg.lbl.Text = "Reset Password";
+            dg.Show();
+            fgt.Show();
+            
+           
+        }
+
         private void Login_DoWork(object sender, DoWorkEventArgs e)
         {
             try

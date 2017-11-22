@@ -65,7 +65,7 @@
             this.pwdtxt.Name = "pwdtxt";
             this.pwdtxt.PasswordChar = '*';
             this.pwdtxt.Size = new System.Drawing.Size(169, 20);
-            this.pwdtxt.TabIndex = 110;
+            this.pwdtxt.TabIndex = 5;
             // 
             // label9
             // 
@@ -81,14 +81,14 @@
             this.mailtxt.Location = new System.Drawing.Point(239, 29);
             this.mailtxt.Name = "mailtxt";
             this.mailtxt.Size = new System.Drawing.Size(232, 20);
-            this.mailtxt.TabIndex = 107;
+            this.mailtxt.TabIndex = 2;
             // 
             // contacttxt
             // 
             this.contacttxt.Location = new System.Drawing.Point(239, 106);
             this.contacttxt.Name = "contacttxt";
             this.contacttxt.Size = new System.Drawing.Size(169, 20);
-            this.contacttxt.TabIndex = 106;
+            this.contacttxt.TabIndex = 4;
             this.contacttxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.contacttxt_KeyPress);
             this.contacttxt.Leave += new System.EventHandler(this.contacttxt_Leave);
             // 
@@ -106,7 +106,7 @@
             this.nametxt.Location = new System.Drawing.Point(17, 29);
             this.nametxt.Name = "nametxt";
             this.nametxt.Size = new System.Drawing.Size(169, 20);
-            this.nametxt.TabIndex = 104;
+            this.nametxt.TabIndex = 1;
             // 
             // label6
             // 
@@ -122,7 +122,7 @@
             this.addbtn.Location = new System.Drawing.Point(434, 302);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(94, 38);
-            this.addbtn.TabIndex = 115;
+            this.addbtn.TabIndex = 7;
             this.addbtn.Text = "Update";
             this.addbtn.UseVisualStyleBackColor = false;
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
@@ -134,7 +134,7 @@
             this.cpwdtxt.Name = "cpwdtxt";
             this.cpwdtxt.PasswordChar = '*';
             this.cpwdtxt.Size = new System.Drawing.Size(169, 20);
-            this.cpwdtxt.TabIndex = 118;
+            this.cpwdtxt.TabIndex = 6;
             // 
             // label2
             // 
@@ -161,7 +161,7 @@
             this.addtxt.Location = new System.Drawing.Point(17, 106);
             this.addtxt.Name = "addtxt";
             this.addtxt.Size = new System.Drawing.Size(169, 20);
-            this.addtxt.TabIndex = 121;
+            this.addtxt.TabIndex = 3;
             // 
             // label3
             // 

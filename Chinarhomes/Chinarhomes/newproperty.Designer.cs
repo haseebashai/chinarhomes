@@ -68,6 +68,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.dppnl = new System.Windows.Forms.Panel();
+            this.ppnl = new System.Windows.Forms.Panel();
+            this.sizelbl = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.piclbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.updpicbtn = new System.Windows.Forms.Button();
             this.updbtn = new System.Windows.Forms.Button();
             this.clearpicbtn = new System.Windows.Forms.Button();
@@ -75,11 +80,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.nopics = new System.Windows.Forms.Label();
             this.formlbl = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.piclbl = new System.Windows.Forms.Label();
-            this.ppnl = new System.Windows.Forms.Panel();
-            this.sizelbl = new System.Windows.Forms.Label();
             this.dpnl.SuspendLayout();
             this.panel4.SuspendLayout();
             this.dppnl.SuspendLayout();
@@ -141,11 +141,12 @@
             // 
             // furnishedtxt
             // 
+            this.furnishedtxt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.furnishedtxt.FormattingEnabled = true;
             this.furnishedtxt.Location = new System.Drawing.Point(547, 37);
             this.furnishedtxt.Name = "furnishedtxt";
             this.furnishedtxt.Size = new System.Drawing.Size(89, 21);
-            this.furnishedtxt.TabIndex = 12;
+            this.furnishedtxt.TabIndex = 11;
             // 
             // label2
             // 
@@ -166,19 +167,21 @@
             // 
             // saletypebox
             // 
+            this.saletypebox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.saletypebox.FormattingEnabled = true;
             this.saletypebox.Location = new System.Drawing.Point(374, 281);
             this.saletypebox.Name = "saletypebox";
             this.saletypebox.Size = new System.Drawing.Size(121, 21);
-            this.saletypebox.TabIndex = 11;
+            this.saletypebox.TabIndex = 10;
             // 
             // ptypebox
             // 
+            this.ptypebox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ptypebox.FormattingEnabled = true;
             this.ptypebox.Location = new System.Drawing.Point(9, 174);
             this.ptypebox.Name = "ptypebox";
             this.ptypebox.Size = new System.Drawing.Size(148, 21);
-            this.ptypebox.TabIndex = 3;
+            this.ptypebox.TabIndex = 2;
             // 
             // label17
             // 
@@ -213,7 +216,7 @@
             this.areaptxt.Location = new System.Drawing.Point(374, 224);
             this.areaptxt.Name = "areaptxt";
             this.areaptxt.Size = new System.Drawing.Size(124, 20);
-            this.areaptxt.TabIndex = 10;
+            this.areaptxt.TabIndex = 9;
             this.areaptxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaptxt_KeyPress);
             this.areaptxt.Leave += new System.EventHandler(this.areaptxt_Leave);
             // 
@@ -249,7 +252,7 @@
             this.tagstxt.Location = new System.Drawing.Point(547, 281);
             this.tagstxt.Name = "tagstxt";
             this.tagstxt.Size = new System.Drawing.Size(148, 20);
-            this.tagstxt.TabIndex = 16;
+            this.tagstxt.TabIndex = 15;
             // 
             // label18
             // 
@@ -275,7 +278,7 @@
             this.areatxt.Location = new System.Drawing.Point(374, 162);
             this.areatxt.Name = "areatxt";
             this.areatxt.Size = new System.Drawing.Size(124, 20);
-            this.areatxt.TabIndex = 9;
+            this.areatxt.TabIndex = 8;
             this.areatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areatxt_KeyPress);
             this.areatxt.Leave += new System.EventHandler(this.areatxt_Leave);
             // 
@@ -312,7 +315,7 @@
             this.vno.Location = new System.Drawing.Point(66, 279);
             this.vno.Name = "vno";
             this.vno.Size = new System.Drawing.Size(45, 21);
-            this.vno.TabIndex = 6;
+            this.vno.TabIndex = 5;
             this.vno.Text = "No";
             this.vno.UseVisualStyleBackColor = true;
             this.vno.CheckedChanged += new System.EventHandler(this.vno_CheckedChanged);
@@ -324,7 +327,7 @@
             this.vyes.Location = new System.Drawing.Point(9, 279);
             this.vyes.Name = "vyes";
             this.vyes.Size = new System.Drawing.Size(51, 21);
-            this.vyes.TabIndex = 5;
+            this.vyes.TabIndex = 4;
             this.vyes.Text = "Yes";
             this.vyes.UseVisualStyleBackColor = true;
             this.vyes.CheckedChanged += new System.EventHandler(this.vyes_CheckedChanged);
@@ -336,7 +339,7 @@
             this.desctxt.Name = "desctxt";
             this.desctxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.desctxt.Size = new System.Drawing.Size(321, 275);
-            this.desctxt.TabIndex = 17;
+            this.desctxt.TabIndex = 16;
             this.desctxt.Leave += new System.EventHandler(this.desctxt_Leave);
             // 
             // distancetxt
@@ -344,7 +347,7 @@
             this.distancetxt.Location = new System.Drawing.Point(547, 162);
             this.distancetxt.Name = "distancetxt";
             this.distancetxt.Size = new System.Drawing.Size(148, 20);
-            this.distancetxt.TabIndex = 14;
+            this.distancetxt.TabIndex = 13;
             this.distancetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.distancetxt_KeyPress);
             this.distancetxt.Leave += new System.EventHandler(this.distancetxt_Leave);
             // 
@@ -371,7 +374,7 @@
             this.pricetxt.Location = new System.Drawing.Point(9, 226);
             this.pricetxt.Name = "pricetxt";
             this.pricetxt.Size = new System.Drawing.Size(148, 20);
-            this.pricetxt.TabIndex = 4;
+            this.pricetxt.TabIndex = 3;
             this.pricetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pricetxt_KeyPress);
             this.pricetxt.Leave += new System.EventHandler(this.pricetxt_Leave);
             // 
@@ -380,7 +383,7 @@
             this.prioritytxt.Location = new System.Drawing.Point(547, 224);
             this.prioritytxt.Name = "prioritytxt";
             this.prioritytxt.Size = new System.Drawing.Size(148, 20);
-            this.prioritytxt.TabIndex = 15;
+            this.prioritytxt.TabIndex = 14;
             this.prioritytxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prioritytxt_KeyPress);
             this.prioritytxt.Leave += new System.EventHandler(this.prioritytxt_Leave);
             // 
@@ -416,7 +419,7 @@
             this.roomstxt.Location = new System.Drawing.Point(374, 100);
             this.roomstxt.Name = "roomstxt";
             this.roomstxt.Size = new System.Drawing.Size(87, 20);
-            this.roomstxt.TabIndex = 8;
+            this.roomstxt.TabIndex = 7;
             this.roomstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomstxt_KeyPress);
             this.roomstxt.Leave += new System.EventHandler(this.roomstxt_Leave);
             // 
@@ -425,7 +428,7 @@
             this.agetxt.Location = new System.Drawing.Point(547, 100);
             this.agetxt.Name = "agetxt";
             this.agetxt.Size = new System.Drawing.Size(148, 20);
-            this.agetxt.TabIndex = 13;
+            this.agetxt.TabIndex = 12;
             this.agetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.agetxt_KeyPress);
             this.agetxt.Leave += new System.EventHandler(this.agetxt_Leave);
             // 
@@ -452,7 +455,7 @@
             this.floorstxt.Location = new System.Drawing.Point(374, 38);
             this.floorstxt.Name = "floorstxt";
             this.floorstxt.Size = new System.Drawing.Size(87, 20);
-            this.floorstxt.TabIndex = 7;
+            this.floorstxt.TabIndex = 6;
             this.floorstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.floorstxt_KeyPress);
             this.floorstxt.Leave += new System.EventHandler(this.floorstxt_Leave);
             // 
@@ -488,12 +491,62 @@
             this.dppnl.Size = new System.Drawing.Size(1158, 318);
             this.dppnl.TabIndex = 43;
             // 
+            // ppnl
+            // 
+            this.ppnl.Controls.Add(this.sizelbl);
+            this.ppnl.Controls.Add(this.progressBar1);
+            this.ppnl.Controls.Add(this.piclbl);
+            this.ppnl.Controls.Add(this.label1);
+            this.ppnl.Location = new System.Drawing.Point(964, 41);
+            this.ppnl.Name = "ppnl";
+            this.ppnl.Size = new System.Drawing.Size(163, 60);
+            this.ppnl.TabIndex = 104;
+            this.ppnl.Visible = false;
+            // 
+            // sizelbl
+            // 
+            this.sizelbl.AutoSize = true;
+            this.sizelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizelbl.Location = new System.Drawing.Point(11, 43);
+            this.sizelbl.Name = "sizelbl";
+            this.sizelbl.Size = new System.Drawing.Size(0, 13);
+            this.sizelbl.TabIndex = 104;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(11, 32);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(140, 10);
+            this.progressBar1.TabIndex = 101;
+            // 
+            // piclbl
+            // 
+            this.piclbl.ForeColor = System.Drawing.Color.Green;
+            this.piclbl.Location = new System.Drawing.Point(43, 11);
+            this.piclbl.Name = "piclbl";
+            this.piclbl.Size = new System.Drawing.Size(104, 14);
+            this.piclbl.TabIndex = 103;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 9);
+            this.label1.TabIndex = 102;
+            this.label1.Text = "uploading";
+            // 
             // updpicbtn
             // 
+            this.updpicbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.updpicbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.updpicbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.updpicbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updpicbtn.Location = new System.Drawing.Point(491, 90);
             this.updpicbtn.Name = "updpicbtn";
             this.updpicbtn.Size = new System.Drawing.Size(131, 38);
-            this.updpicbtn.TabIndex = 18;
+            this.updpicbtn.TabIndex = 17;
             this.updpicbtn.Text = "Select Pictures";
             this.updpicbtn.UseVisualStyleBackColor = false;
             this.updpicbtn.Click += new System.EventHandler(this.updpicbtn_Click);
@@ -506,7 +559,7 @@
             this.updbtn.Location = new System.Drawing.Point(975, 107);
             this.updbtn.Name = "updbtn";
             this.updbtn.Size = new System.Drawing.Size(140, 103);
-            this.updbtn.TabIndex = 20;
+            this.updbtn.TabIndex = 19;
             this.updbtn.Text = "Add Property";
             this.updbtn.UseVisualStyleBackColor = false;
             this.updbtn.Visible = false;
@@ -514,10 +567,11 @@
             // 
             // clearpicbtn
             // 
+            this.clearpicbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearpicbtn.Location = new System.Drawing.Point(43, 187);
             this.clearpicbtn.Name = "clearpicbtn";
             this.clearpicbtn.Size = new System.Drawing.Size(131, 38);
-            this.clearpicbtn.TabIndex = 19;
+            this.clearpicbtn.TabIndex = 18;
             this.clearpicbtn.Text = "Clear Pictures";
             this.clearpicbtn.UseVisualStyleBackColor = false;
             this.clearpicbtn.Visible = false;
@@ -562,52 +616,6 @@
             this.formlbl.TabIndex = 35;
             this.formlbl.Text = "Add New Property";
             this.formlbl.Visible = false;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(11, 32);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(140, 10);
-            this.progressBar1.TabIndex = 101;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 9);
-            this.label1.TabIndex = 102;
-            this.label1.Text = "uploading";
-            // 
-            // piclbl
-            // 
-            this.piclbl.ForeColor = System.Drawing.Color.Green;
-            this.piclbl.Location = new System.Drawing.Point(43, 11);
-            this.piclbl.Name = "piclbl";
-            this.piclbl.Size = new System.Drawing.Size(104, 14);
-            this.piclbl.TabIndex = 103;
-            // 
-            // ppnl
-            // 
-            this.ppnl.Controls.Add(this.sizelbl);
-            this.ppnl.Controls.Add(this.progressBar1);
-            this.ppnl.Controls.Add(this.piclbl);
-            this.ppnl.Controls.Add(this.label1);
-            this.ppnl.Location = new System.Drawing.Point(964, 41);
-            this.ppnl.Name = "ppnl";
-            this.ppnl.Size = new System.Drawing.Size(163, 60);
-            this.ppnl.TabIndex = 104;
-            this.ppnl.Visible = false;
-            // 
-            // sizelbl
-            // 
-            this.sizelbl.AutoSize = true;
-            this.sizelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sizelbl.Location = new System.Drawing.Point(11, 43);
-            this.sizelbl.Name = "sizelbl";
-            this.sizelbl.Size = new System.Drawing.Size(0, 13);
-            this.sizelbl.TabIndex = 104;
             // 
             // newproperty
             // 

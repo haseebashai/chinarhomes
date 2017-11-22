@@ -408,7 +408,7 @@
             this.mailbtn.Location = new System.Drawing.Point(7, 354);
             this.mailbtn.Name = "mailbtn";
             this.mailbtn.Size = new System.Drawing.Size(124, 32);
-            this.mailbtn.TabIndex = 32;
+            this.mailbtn.TabIndex = 7;
             this.mailbtn.Text = "        SEND MAIL";
             this.mailbtn.UseVisualStyleBackColor = true;
             this.mailbtn.Click += new System.EventHandler(this.mailbtn_Click);
@@ -439,7 +439,7 @@
             this.intbtn.Location = new System.Drawing.Point(7, 204);
             this.intbtn.Name = "intbtn";
             this.intbtn.Size = new System.Drawing.Size(124, 32);
-            this.intbtn.TabIndex = 30;
+            this.intbtn.TabIndex = 4;
             this.intbtn.Text = "       INTERESTS";
             this.intbtn.UseVisualStyleBackColor = true;
             this.intbtn.Click += new System.EventHandler(this.intbtn_Click);
@@ -459,7 +459,7 @@
             this.homebtn.Location = new System.Drawing.Point(3, 1);
             this.homebtn.Name = "homebtn";
             this.homebtn.Size = new System.Drawing.Size(65, 32);
-            this.homebtn.TabIndex = 29;
+            this.homebtn.TabIndex = 8;
             this.homebtn.Text = "Home";
             this.homebtn.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.homebtn.UseVisualStyleBackColor = true;
@@ -478,7 +478,7 @@
             this.userbtn.Location = new System.Drawing.Point(3, 638);
             this.userbtn.Name = "userbtn";
             this.userbtn.Size = new System.Drawing.Size(174, 32);
-            this.userbtn.TabIndex = 28;
+            this.userbtn.TabIndex = 9;
             this.userbtn.Text = "user";
             this.userbtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.userbtn.UseVisualStyleBackColor = true;
@@ -563,7 +563,7 @@
             this.agentbtn.Location = new System.Drawing.Point(7, 254);
             this.agentbtn.Name = "agentbtn";
             this.agentbtn.Size = new System.Drawing.Size(124, 32);
-            this.agentbtn.TabIndex = 21;
+            this.agentbtn.TabIndex = 5;
             this.agentbtn.Text = "     AGENTS";
             this.agentbtn.UseVisualStyleBackColor = true;
             this.agentbtn.Click += new System.EventHandler(this.agentbtn_Click);
@@ -583,7 +583,7 @@
             this.msgbtn.Location = new System.Drawing.Point(7, 104);
             this.msgbtn.Name = "msgbtn";
             this.msgbtn.Size = new System.Drawing.Size(124, 32);
-            this.msgbtn.TabIndex = 20;
+            this.msgbtn.TabIndex = 2;
             this.msgbtn.Text = "        MESSAGES";
             this.msgbtn.UseVisualStyleBackColor = true;
             this.msgbtn.Click += new System.EventHandler(this.msgbtn_Click);
@@ -603,7 +603,7 @@
             this.customerbtn.Location = new System.Drawing.Point(7, 154);
             this.customerbtn.Name = "customerbtn";
             this.customerbtn.Size = new System.Drawing.Size(124, 32);
-            this.customerbtn.TabIndex = 19;
+            this.customerbtn.TabIndex = 3;
             this.customerbtn.Text = "          CUSTOMERS";
             this.customerbtn.UseVisualStyleBackColor = true;
             this.customerbtn.Click += new System.EventHandler(this.customerbtn_Click);
@@ -623,7 +623,7 @@
             this.policybtn.Location = new System.Drawing.Point(7, 304);
             this.policybtn.Name = "policybtn";
             this.policybtn.Size = new System.Drawing.Size(124, 32);
-            this.policybtn.TabIndex = 18;
+            this.policybtn.TabIndex = 6;
             this.policybtn.Text = "    POLICY";
             this.policybtn.UseVisualStyleBackColor = true;
             this.policybtn.Click += new System.EventHandler(this.policybtn_Click);
@@ -643,7 +643,7 @@
             this.propbtn.Location = new System.Drawing.Point(7, 54);
             this.propbtn.Name = "propbtn";
             this.propbtn.Size = new System.Drawing.Size(124, 32);
-            this.propbtn.TabIndex = 17;
+            this.propbtn.TabIndex = 1;
             this.propbtn.Text = "          PROPERTIES";
             this.propbtn.UseVisualStyleBackColor = true;
             this.propbtn.Click += new System.EventHandler(this.propbtn_Click);
@@ -659,7 +659,7 @@
             this.signoutlbl.Location = new System.Drawing.Point(119, 680);
             this.signoutlbl.Name = "signoutlbl";
             this.signoutlbl.Size = new System.Drawing.Size(55, 16);
-            this.signoutlbl.TabIndex = 16;
+            this.signoutlbl.TabIndex = 10;
             this.signoutlbl.Text = "SIGN OUT";
             this.signoutlbl.Click += new System.EventHandler(this.signoutlbl_Click);
             // 

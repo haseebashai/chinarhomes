@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.proppnl = new System.Windows.Forms.Panel();
             this.loadpicbtn = new System.Windows.Forms.Button();
             this.bpnl = new System.Windows.Forms.Panel();
@@ -108,10 +108,11 @@
             // loadpicbtn
             // 
             this.loadpicbtn.BackColor = System.Drawing.SystemColors.Control;
-            this.loadpicbtn.Location = new System.Drawing.Point(432, 619);
+            this.loadpicbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadpicbtn.Location = new System.Drawing.Point(420, 619);
             this.loadpicbtn.Name = "loadpicbtn";
-            this.loadpicbtn.Size = new System.Drawing.Size(81, 35);
-            this.loadpicbtn.TabIndex = 40;
+            this.loadpicbtn.Size = new System.Drawing.Size(93, 35);
+            this.loadpicbtn.TabIndex = 20;
             this.loadpicbtn.Text = "Load Pictures";
             this.loadpicbtn.UseVisualStyleBackColor = false;
             this.loadpicbtn.Visible = false;
@@ -130,20 +131,24 @@
             // 
             // editpropbtn
             // 
-            this.editpropbtn.Location = new System.Drawing.Point(3, 4);
+            this.editpropbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.editpropbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editpropbtn.Location = new System.Drawing.Point(2, 4);
             this.editpropbtn.Name = "editpropbtn";
             this.editpropbtn.Size = new System.Drawing.Size(130, 35);
-            this.editpropbtn.TabIndex = 40;
+            this.editpropbtn.TabIndex = 21;
             this.editpropbtn.Text = "Edit Property";
             this.editpropbtn.UseVisualStyleBackColor = false;
             this.editpropbtn.Click += new System.EventHandler(this.editpropbtn_Click);
             // 
             // updbtn
             // 
+            this.updbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.updbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updbtn.Location = new System.Drawing.Point(121, 4);
             this.updbtn.Name = "updbtn";
             this.updbtn.Size = new System.Drawing.Size(113, 35);
-            this.updbtn.TabIndex = 38;
+            this.updbtn.TabIndex = 18;
             this.updbtn.Text = "Update";
             this.updbtn.UseVisualStyleBackColor = false;
             this.updbtn.Visible = false;
@@ -151,10 +156,11 @@
             // 
             // cancelbtn
             // 
+            this.cancelbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelbtn.Location = new System.Drawing.Point(2, 4);
             this.cancelbtn.Name = "cancelbtn";
             this.cancelbtn.Size = new System.Drawing.Size(113, 35);
-            this.cancelbtn.TabIndex = 39;
+            this.cancelbtn.TabIndex = 19;
             this.cancelbtn.Text = "Cancel";
             this.cancelbtn.UseVisualStyleBackColor = false;
             this.cancelbtn.Visible = false;
@@ -218,7 +224,7 @@
             this.furnishedtxt.Location = new System.Drawing.Point(381, 61);
             this.furnishedtxt.Name = "furnishedtxt";
             this.furnishedtxt.Size = new System.Drawing.Size(89, 21);
-            this.furnishedtxt.TabIndex = 57;
+            this.furnishedtxt.TabIndex = 12;
             // 
             // saletypebox
             // 
@@ -227,7 +233,7 @@
             this.saletypebox.Location = new System.Drawing.Point(207, 306);
             this.saletypebox.Name = "saletypebox";
             this.saletypebox.Size = new System.Drawing.Size(121, 21);
-            this.saletypebox.TabIndex = 56;
+            this.saletypebox.TabIndex = 11;
             // 
             // ptypebox
             // 
@@ -236,7 +242,7 @@
             this.ptypebox.Location = new System.Drawing.Point(16, 206);
             this.ptypebox.Name = "ptypebox";
             this.ptypebox.Size = new System.Drawing.Size(148, 21);
-            this.ptypebox.TabIndex = 55;
+            this.ptypebox.TabIndex = 3;
             // 
             // label1
             // 
@@ -252,7 +258,7 @@
             this.pnametxt.Location = new System.Drawing.Point(16, 157);
             this.pnametxt.Name = "pnametxt";
             this.pnametxt.Size = new System.Drawing.Size(148, 20);
-            this.pnametxt.TabIndex = 53;
+            this.pnametxt.TabIndex = 2;
             // 
             // label21
             // 
@@ -362,7 +368,7 @@
             this.vno.Location = new System.Drawing.Point(73, 306);
             this.vno.Name = "vno";
             this.vno.Size = new System.Drawing.Size(45, 21);
-            this.vno.TabIndex = 31;
+            this.vno.TabIndex = 6;
             this.vno.Text = "No";
             this.vno.UseVisualStyleBackColor = true;
             this.vno.CheckedChanged += new System.EventHandler(this.vno_CheckedChanged);
@@ -374,7 +380,7 @@
             this.vyes.Location = new System.Drawing.Point(16, 306);
             this.vyes.Name = "vyes";
             this.vyes.Size = new System.Drawing.Size(51, 21);
-            this.vyes.TabIndex = 30;
+            this.vyes.TabIndex = 5;
             this.vyes.Text = "Yes";
             this.vyes.UseVisualStyleBackColor = true;
             this.vyes.CheckedChanged += new System.EventHandler(this.vyes_CheckedChanged);
@@ -384,7 +390,7 @@
             this.distancetxt.Location = new System.Drawing.Point(381, 185);
             this.distancetxt.Name = "distancetxt";
             this.distancetxt.Size = new System.Drawing.Size(148, 20);
-            this.distancetxt.TabIndex = 29;
+            this.distancetxt.TabIndex = 14;
             this.distancetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.distancetxt_KeyPress);
             this.distancetxt.Leave += new System.EventHandler(this.distancetxt_Leave);
             // 
@@ -402,7 +408,7 @@
             this.prioritytxt.Location = new System.Drawing.Point(381, 247);
             this.prioritytxt.Name = "prioritytxt";
             this.prioritytxt.Size = new System.Drawing.Size(148, 20);
-            this.prioritytxt.TabIndex = 27;
+            this.prioritytxt.TabIndex = 15;
             this.prioritytxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prioritytxt_KeyPress);
             this.prioritytxt.Leave += new System.EventHandler(this.prioritytxt_Leave);
             // 
@@ -429,7 +435,7 @@
             this.agetxt.Location = new System.Drawing.Point(381, 123);
             this.agetxt.Name = "agetxt";
             this.agetxt.Size = new System.Drawing.Size(148, 20);
-            this.agetxt.TabIndex = 23;
+            this.agetxt.TabIndex = 13;
             this.agetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.agetxt_KeyPress);
             this.agetxt.Leave += new System.EventHandler(this.agetxt_Leave);
             // 
@@ -465,7 +471,7 @@
             this.floorstxt.Location = new System.Drawing.Point(207, 61);
             this.floorstxt.Name = "floorstxt";
             this.floorstxt.Size = new System.Drawing.Size(87, 20);
-            this.floorstxt.TabIndex = 18;
+            this.floorstxt.TabIndex = 7;
             this.floorstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.floorstxt_KeyPress);
             this.floorstxt.Leave += new System.EventHandler(this.floorstxt_Leave);
             // 
@@ -483,7 +489,7 @@
             this.roomstxt.Location = new System.Drawing.Point(207, 123);
             this.roomstxt.Name = "roomstxt";
             this.roomstxt.Size = new System.Drawing.Size(87, 20);
-            this.roomstxt.TabIndex = 16;
+            this.roomstxt.TabIndex = 8;
             this.roomstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomstxt_KeyPress);
             this.roomstxt.Leave += new System.EventHandler(this.roomstxt_Leave);
             // 
@@ -501,7 +507,7 @@
             this.pricetxt.Location = new System.Drawing.Point(16, 256);
             this.pricetxt.Name = "pricetxt";
             this.pricetxt.Size = new System.Drawing.Size(148, 20);
-            this.pricetxt.TabIndex = 13;
+            this.pricetxt.TabIndex = 4;
             this.pricetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pricetxt_KeyPress);
             this.pricetxt.Leave += new System.EventHandler(this.pricetxt_Leave);
             // 
@@ -520,7 +526,7 @@
             this.desctxt.Multiline = true;
             this.desctxt.Name = "desctxt";
             this.desctxt.Size = new System.Drawing.Size(236, 265);
-            this.desctxt.TabIndex = 11;
+            this.desctxt.TabIndex = 17;
             this.desctxt.Leave += new System.EventHandler(this.desctxt_Leave);
             // 
             // label8
@@ -537,7 +543,7 @@
             this.locationtxt.Location = new System.Drawing.Point(16, 106);
             this.locationtxt.Name = "locationtxt";
             this.locationtxt.Size = new System.Drawing.Size(148, 20);
-            this.locationtxt.TabIndex = 9;
+            this.locationtxt.TabIndex = 1;
             // 
             // label6
             // 
@@ -553,7 +559,7 @@
             this.areatxt.Location = new System.Drawing.Point(207, 185);
             this.areatxt.Name = "areatxt";
             this.areatxt.Size = new System.Drawing.Size(124, 20);
-            this.areatxt.TabIndex = 7;
+            this.areatxt.TabIndex = 9;
             this.areatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areatxt_KeyPress);
             this.areatxt.Leave += new System.EventHandler(this.areatxt_Leave);
             // 
@@ -571,7 +577,7 @@
             this.tagstxt.Location = new System.Drawing.Point(381, 304);
             this.tagstxt.Name = "tagstxt";
             this.tagstxt.Size = new System.Drawing.Size(148, 20);
-            this.tagstxt.TabIndex = 5;
+            this.tagstxt.TabIndex = 16;
             // 
             // label4
             // 
@@ -587,7 +593,7 @@
             this.areaptxt.Location = new System.Drawing.Point(207, 247);
             this.areaptxt.Name = "areaptxt";
             this.areaptxt.Size = new System.Drawing.Size(124, 20);
-            this.areaptxt.TabIndex = 3;
+            this.areaptxt.TabIndex = 10;
             this.areaptxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaptxt_KeyPress);
             this.areaptxt.Leave += new System.EventHandler(this.areaptxt_Leave);
             // 
@@ -635,14 +641,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(14, 2);
             this.propdataview.MultiSelect = false;

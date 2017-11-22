@@ -78,7 +78,7 @@
             this.pwdtxt.Name = "pwdtxt";
             this.pwdtxt.PasswordChar = '*';
             this.pwdtxt.Size = new System.Drawing.Size(149, 20);
-            this.pwdtxt.TabIndex = 70;
+            this.pwdtxt.TabIndex = 5;
             this.pwdtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pwdtxt_KeyPress);
             // 
             // label1
@@ -102,7 +102,7 @@
             this.mailbtn.Location = new System.Drawing.Point(450, 424);
             this.mailbtn.Name = "mailbtn";
             this.mailbtn.Size = new System.Drawing.Size(149, 33);
-            this.mailbtn.TabIndex = 69;
+            this.mailbtn.TabIndex = 6;
             this.mailbtn.Text = "Send Mail";
             this.mailbtn.UseVisualStyleBackColor = true;
             this.mailbtn.Visible = false;
@@ -125,7 +125,7 @@
             this.totxt.Location = new System.Drawing.Point(12, 29);
             this.totxt.Name = "totxt";
             this.totxt.Size = new System.Drawing.Size(587, 20);
-            this.totxt.TabIndex = 60;
+            this.totxt.TabIndex = 1;
             // 
             // subtxt
             // 
@@ -133,7 +133,7 @@
             this.subtxt.Location = new System.Drawing.Point(12, 83);
             this.subtxt.Name = "subtxt";
             this.subtxt.Size = new System.Drawing.Size(587, 20);
-            this.subtxt.TabIndex = 62;
+            this.subtxt.TabIndex = 2;
             // 
             // label5
             // 
@@ -164,7 +164,7 @@
             this.frombox.Location = new System.Drawing.Point(229, 391);
             this.frombox.Name = "frombox";
             this.frombox.Size = new System.Drawing.Size(185, 21);
-            this.frombox.TabIndex = 67;
+            this.frombox.TabIndex = 4;
             this.frombox.SelectedIndexChanged += new System.EventHandler(this.frombox_SelectedIndexChanged);
             // 
             // bodytxt
@@ -174,7 +174,7 @@
             this.bodytxt.Name = "bodytxt";
             this.bodytxt.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.bodytxt.Size = new System.Drawing.Size(587, 219);
-            this.bodytxt.TabIndex = 64;
+            this.bodytxt.TabIndex = 3;
             // 
             // label4
             // 

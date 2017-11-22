@@ -161,7 +161,7 @@
             this.mailbtn.Location = new System.Drawing.Point(266, 28);
             this.mailbtn.Name = "mailbtn";
             this.mailbtn.Size = new System.Drawing.Size(209, 56);
-            this.mailbtn.TabIndex = 36;
+            this.mailbtn.TabIndex = 4;
             this.mailbtn.Text = "Send Mail";
             this.mailbtn.UseVisualStyleBackColor = true;
             this.mailbtn.Click += new System.EventHandler(this.mailbtn_Click);
@@ -218,7 +218,7 @@
             this.usertxt.Location = new System.Drawing.Point(388, 24);
             this.usertxt.Name = "usertxt";
             this.usertxt.Size = new System.Drawing.Size(178, 20);
-            this.usertxt.TabIndex = 17;
+            this.usertxt.TabIndex = 3;
             this.usertxt.TextChanged += new System.EventHandler(this.usertxt_TextChanged);
             this.usertxt.VisibleChanged += new System.EventHandler(this.usertxt_TextChanged);
             // 
@@ -236,7 +236,7 @@
             this.emailtxt.Location = new System.Drawing.Point(92, 25);
             this.emailtxt.Name = "emailtxt";
             this.emailtxt.Size = new System.Drawing.Size(178, 20);
-            this.emailtxt.TabIndex = 15;
+            this.emailtxt.TabIndex = 2;
             this.emailtxt.TextChanged += new System.EventHandler(this.emailtxt_TextChanged);
             // 
             // customerdataview
@@ -267,7 +267,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.customerdataview.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.customerdataview.Size = new System.Drawing.Size(637, 577);
-            this.customerdataview.TabIndex = 25;
+            this.customerdataview.TabIndex = 1;
             this.customerdataview.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerdataview_CellClick);
             this.customerdataview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerdataview_CellClick);
             // 

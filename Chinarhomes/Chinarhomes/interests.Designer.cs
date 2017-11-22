@@ -96,7 +96,7 @@
             this.mailbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mailbtn.Location = new System.Drawing.Point(251, 522);
             this.mailbtn.Name = "mailbtn";
-            this.mailbtn.Size = new System.Drawing.Size(102, 33);
+            this.mailbtn.Size = new System.Drawing.Size(148, 33);
             this.mailbtn.TabIndex = 37;
             this.mailbtn.Text = "Send Mail";
             this.mailbtn.UseVisualStyleBackColor = true;

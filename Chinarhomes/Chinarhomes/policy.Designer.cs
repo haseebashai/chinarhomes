@@ -73,7 +73,7 @@
             this.conbtn.Location = new System.Drawing.Point(360, 4);
             this.conbtn.Name = "conbtn";
             this.conbtn.Size = new System.Drawing.Size(113, 35);
-            this.conbtn.TabIndex = 42;
+            this.conbtn.TabIndex = 4;
             this.conbtn.Text = "Contacts";
             this.conbtn.UseVisualStyleBackColor = false;
             this.conbtn.Click += new System.EventHandler(this.conbtn_Click);
@@ -87,7 +87,7 @@
             this.termbtn.Location = new System.Drawing.Point(3, 4);
             this.termbtn.Name = "termbtn";
             this.termbtn.Size = new System.Drawing.Size(113, 35);
-            this.termbtn.TabIndex = 41;
+            this.termbtn.TabIndex = 1;
             this.termbtn.Text = "Terms";
             this.termbtn.UseVisualStyleBackColor = false;
             this.termbtn.Click += new System.EventHandler(this.termsbtn_Click);
@@ -101,7 +101,7 @@
             this.aboutbtn.Location = new System.Drawing.Point(241, 4);
             this.aboutbtn.Name = "aboutbtn";
             this.aboutbtn.Size = new System.Drawing.Size(113, 35);
-            this.aboutbtn.TabIndex = 40;
+            this.aboutbtn.TabIndex = 3;
             this.aboutbtn.Text = "About";
             this.aboutbtn.UseVisualStyleBackColor = false;
             this.aboutbtn.Click += new System.EventHandler(this.aboutbtn_Click);
@@ -115,7 +115,7 @@
             this.faqbtn.Location = new System.Drawing.Point(122, 4);
             this.faqbtn.Name = "faqbtn";
             this.faqbtn.Size = new System.Drawing.Size(113, 35);
-            this.faqbtn.TabIndex = 39;
+            this.faqbtn.TabIndex = 2;
             this.faqbtn.Text = "FAQ";
             this.faqbtn.UseVisualStyleBackColor = false;
             this.faqbtn.Click += new System.EventHandler(this.faqbtn_Click);
@@ -139,7 +139,7 @@
             this.addnewbtn.Location = new System.Drawing.Point(991, 293);
             this.addnewbtn.Name = "addnewbtn";
             this.addnewbtn.Size = new System.Drawing.Size(159, 49);
-            this.addnewbtn.TabIndex = 44;
+            this.addnewbtn.TabIndex = 5;
             this.addnewbtn.Text = "Add new clause";
             this.addnewbtn.UseVisualStyleBackColor = false;
             this.addnewbtn.Click += new System.EventHandler(this.addnewbtn_Click);
@@ -160,10 +160,11 @@
             // addbtn
             // 
             this.addbtn.BackColor = System.Drawing.Color.White;
-            this.addbtn.Location = new System.Drawing.Point(390, 132);
+            this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addbtn.Location = new System.Drawing.Point(390, 249);
             this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(113, 35);
-            this.addbtn.TabIndex = 46;
+            this.addbtn.Size = new System.Drawing.Size(115, 38);
+            this.addbtn.TabIndex = 8;
             this.addbtn.Text = "Update";
             this.addbtn.UseVisualStyleBackColor = false;
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
@@ -174,7 +175,7 @@
             this.desctxt.Multiline = true;
             this.desctxt.Name = "desctxt";
             this.desctxt.Size = new System.Drawing.Size(377, 190);
-            this.desctxt.TabIndex = 44;
+            this.desctxt.TabIndex = 7;
             this.desctxt.Text = "description";
             this.desctxt.Enter += new System.EventHandler(this.desctxt_Enter);
             this.desctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.desctxt_KeyPress);
@@ -186,7 +187,7 @@
             this.headtxt.Multiline = true;
             this.headtxt.Name = "headtxt";
             this.headtxt.Size = new System.Drawing.Size(377, 86);
-            this.headtxt.TabIndex = 43;
+            this.headtxt.TabIndex = 6;
             this.headtxt.Text = "heading";
             this.headtxt.Enter += new System.EventHandler(this.headtxt_Enter);
             this.headtxt.Leave += new System.EventHandler(this.headtxt_Leave);

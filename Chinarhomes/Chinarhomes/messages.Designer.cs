@@ -151,10 +151,11 @@
             // 
             // canbtn
             // 
+            this.canbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.canbtn.Location = new System.Drawing.Point(431, 236);
             this.canbtn.Name = "canbtn";
             this.canbtn.Size = new System.Drawing.Size(113, 35);
-            this.canbtn.TabIndex = 42;
+            this.canbtn.TabIndex = 3;
             this.canbtn.Text = "Cancel";
             this.canbtn.UseVisualStyleBackColor = false;
             this.canbtn.Click += new System.EventHandler(this.canbtn_Click);
@@ -187,7 +188,7 @@
             this.rbtn.Location = new System.Drawing.Point(431, 152);
             this.rbtn.Name = "rbtn";
             this.rbtn.Size = new System.Drawing.Size(113, 35);
-            this.rbtn.TabIndex = 39;
+            this.rbtn.TabIndex = 2;
             this.rbtn.Text = "Send Message";
             this.rbtn.UseVisualStyleBackColor = false;
             this.rbtn.Click += new System.EventHandler(this.rbtn_Click);
@@ -199,7 +200,7 @@
             this.msgtxt.Name = "msgtxt";
             this.msgtxt.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.msgtxt.Size = new System.Drawing.Size(411, 202);
-            this.msgtxt.TabIndex = 25;
+            this.msgtxt.TabIndex = 1;
             // 
             // label2
             // 
@@ -277,6 +278,7 @@
             // 
             // rpbtn
             // 
+            this.rpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rpbtn.Location = new System.Drawing.Point(3, 61);
             this.rpbtn.Name = "rpbtn";
             this.rpbtn.Size = new System.Drawing.Size(50, 23);

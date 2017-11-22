@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 using System.Net;
 using System.IO;
 using System.Security;
+using System.Security.Cryptography;
 
 namespace Chinarhomes
 {
@@ -63,36 +64,103 @@ namespace Chinarhomes
             
 
         }
+        private void pwdtxt_TextChanged(object sender, EventArgs e)
+        {
+            pwdent = true;
+        }
+
+        public static string md5hash(string input)
+        {
+
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input + "Zohan123"));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
         BackgroundWorker bg;
         string pid, loc, name, price, encemail,trueemail,ver;
-
+        bool pwdent = false;
         private void rmpbtn_Click(object sender, EventArgs e)
         {
             try
             {
-                DialogResult dgr = MessageBox.Show("Are you sure you want to remove this property?\n" + loc, "Confirm!", MessageBoxButtons.YesNo);
-                if (dgr == DialogResult.Yes)
+                if (pwdent == false)
                 {
-                    string cmd = "delete from pictures where propertyid='"+pid+"'";
-                    obj.nonQuery(cmd);
-                    string cmd1 = "delete from properties where propertyid='" + pid + "'";
-                    obj.nonQuery(cmd1);
-                    MessageBox.Show("Property deleted successfully.", "Success!");
-                    Cursor = Cursors.WaitCursor;
-                    readproperties();
-                    proplist.DisplayMember = "location";
-                    proplist.DataSource = dt;
-                    Cursor = Cursors.Arrow;
+                    pwdpnl.Visible = true;
+                }
+                else
+                {
+                    DialogResult dgr = MessageBox.Show("Erasing this property will remove it from customer's wishlist/interested list and will remove it from everywhere.\n\nAre you sure you want to remove this property?\n" + loc, "Confirm!", MessageBoxButtons.YesNo);
+                    if (dgr == DialogResult.Yes)
+                    {
+                        Cursor = Cursors.WaitCursor;
+                        
+                            string pwd = md5hash(pwdtxt.Text);
+
+                            dr = obj.Query("Select password from staff where username='" + userinfo.username + "';");
+                            dr.Read();
+                            if (dr[0].Equals(pwd))
+                            {
+                            obj.closeConnection();
+
+                                string cmd = "delete from pictures where propertyid='" + pid + "'";
+                                obj.nonQuery(cmd);
+                                string cmd1 = "delete from interested where propertyid='" + pid + "'";
+                                obj.nonQuery(cmd1);
+                                string cmd2 = "delete from wishlist where propertyid='" + pid + "'";
+                                obj.nonQuery(cmd2);
+                                string cmd3 = "delete from properties where propertyid='" + pid + "'";
+                                obj.nonQuery(cmd3);
+                                MessageBox.Show("Property deleted successfully.", "Success!");
+                                Cursor = Cursors.WaitCursor;
+                                readproperties();
+                                proplist.DisplayMember = "location";
+                                proplist.DataSource = dt;
+                                Cursor = Cursors.Arrow;
+                            obj.closeConnection();
+                            pwdpnl.Visible = false;
+                            pwdtxt.Text = "";
+                            pwdent = false;
+                        }
+                        else
+                            {
+                            Cursor = Cursors.Arrow;
+                            MessageBox.Show("Incorrect Password.", "Error!");
+                            obj.closeConnection();
+                        }
+
+                    }else
+                    {
+                        pwdpnl.Visible = false;
+                        pwdtxt.Text = "";
+                        pwdent = false;
+
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                Cursor = Cursors.Arrow;
+               
                 MessageBox.Show(ex.Message);
+                pwdpnl.Visible = false;
+                pwdtxt.Text = "";
+                pwdent = false;
             }
+        
         }
 
         private void proplist_SelectedIndexChanged(object sender, EventArgs e)
         {
+            pwdent = false;
+            pwdtxt.Text = "";
+            pwdpnl.Visible = false;
             dpnl.Visible = false;
             proplist.Enabled = false;
             loadinglbl.Visible = true;

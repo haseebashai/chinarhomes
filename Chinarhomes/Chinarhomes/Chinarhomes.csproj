@@ -75,6 +75,12 @@
     <Compile Include="dialogcontainer.Designer.cs">
       <DependentUpon>dialogcontainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="forgotpwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forgotpwd.Designer.cs">
+      <DependentUpon>forgotpwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="interests.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialogcontainer.resx">
       <DependentUpon>dialogcontainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forgotpwd.resx">
+      <DependentUpon>forgotpwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="interests.resx">
       <DependentUpon>interests.cs</DependentUpon>

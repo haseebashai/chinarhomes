@@ -186,10 +186,11 @@
             // loadpicbtn
             // 
             this.loadpicbtn.BackColor = System.Drawing.SystemColors.Control;
-            this.loadpicbtn.Location = new System.Drawing.Point(429, 621);
+            this.loadpicbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadpicbtn.Location = new System.Drawing.Point(420, 621);
             this.loadpicbtn.Name = "loadpicbtn";
-            this.loadpicbtn.Size = new System.Drawing.Size(81, 35);
-            this.loadpicbtn.TabIndex = 40;
+            this.loadpicbtn.Size = new System.Drawing.Size(90, 35);
+            this.loadpicbtn.TabIndex = 19;
             this.loadpicbtn.Text = "Load Pictures";
             this.loadpicbtn.UseVisualStyleBackColor = false;
             this.loadpicbtn.Visible = false;
@@ -208,6 +209,8 @@
             // 
             // editpropbtn
             // 
+            this.editpropbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.editpropbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editpropbtn.Location = new System.Drawing.Point(3, 4);
             this.editpropbtn.Name = "editpropbtn";
             this.editpropbtn.Size = new System.Drawing.Size(130, 35);
@@ -218,10 +221,12 @@
             // 
             // updbtn
             // 
+            this.updbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.updbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updbtn.Location = new System.Drawing.Point(121, 4);
             this.updbtn.Name = "updbtn";
             this.updbtn.Size = new System.Drawing.Size(113, 35);
-            this.updbtn.TabIndex = 38;
+            this.updbtn.TabIndex = 17;
             this.updbtn.Text = "Update";
             this.updbtn.UseVisualStyleBackColor = false;
             this.updbtn.Visible = false;
@@ -229,10 +234,11 @@
             // 
             // cancelbtn
             // 
+            this.cancelbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelbtn.Location = new System.Drawing.Point(2, 4);
             this.cancelbtn.Name = "cancelbtn";
             this.cancelbtn.Size = new System.Drawing.Size(113, 35);
-            this.cancelbtn.TabIndex = 39;
+            this.cancelbtn.TabIndex = 18;
             this.cancelbtn.Text = "Cancel";
             this.cancelbtn.UseVisualStyleBackColor = false;
             this.cancelbtn.Visible = false;
@@ -296,7 +302,7 @@
             this.furnishedtxt.Location = new System.Drawing.Point(381, 58);
             this.furnishedtxt.Name = "furnishedtxt";
             this.furnishedtxt.Size = new System.Drawing.Size(89, 21);
-            this.furnishedtxt.TabIndex = 52;
+            this.furnishedtxt.TabIndex = 11;
             // 
             // saletypebox
             // 
@@ -305,21 +311,21 @@
             this.saletypebox.Location = new System.Drawing.Point(207, 305);
             this.saletypebox.Name = "saletypebox";
             this.saletypebox.Size = new System.Drawing.Size(121, 21);
-            this.saletypebox.TabIndex = 51;
+            this.saletypebox.TabIndex = 10;
             // 
             // ptypebox
             // 
             this.ptypebox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ptypebox.FormattingEnabled = true;
-            this.ptypebox.Location = new System.Drawing.Point(16, 165);
+            this.ptypebox.Location = new System.Drawing.Point(16, 215);
             this.ptypebox.Name = "ptypebox";
             this.ptypebox.Size = new System.Drawing.Size(148, 21);
-            this.ptypebox.TabIndex = 50;
+            this.ptypebox.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 197);
+            this.label1.Location = new System.Drawing.Point(13, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 49;
@@ -327,10 +333,10 @@
             // 
             // pnametxt
             // 
-            this.pnametxt.Location = new System.Drawing.Point(16, 214);
+            this.pnametxt.Location = new System.Drawing.Point(16, 165);
             this.pnametxt.Name = "pnametxt";
             this.pnametxt.Size = new System.Drawing.Size(148, 20);
-            this.pnametxt.TabIndex = 48;
+            this.pnametxt.TabIndex = 2;
             // 
             // label21
             // 
@@ -440,7 +446,7 @@
             this.vyes.Location = new System.Drawing.Point(16, 318);
             this.vyes.Name = "vyes";
             this.vyes.Size = new System.Drawing.Size(51, 21);
-            this.vyes.TabIndex = 30;
+            this.vyes.TabIndex = 5;
             this.vyes.Text = "Yes";
             this.vyes.UseVisualStyleBackColor = true;
             this.vyes.CheckedChanged += new System.EventHandler(this.vyes_CheckedChanged);
@@ -450,7 +456,7 @@
             this.distancetxt.Location = new System.Drawing.Point(381, 185);
             this.distancetxt.Name = "distancetxt";
             this.distancetxt.Size = new System.Drawing.Size(148, 20);
-            this.distancetxt.TabIndex = 29;
+            this.distancetxt.TabIndex = 13;
             this.distancetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.distancetxt_KeyPress);
             this.distancetxt.Leave += new System.EventHandler(this.distancetxt_Leave);
             // 
@@ -468,7 +474,7 @@
             this.prioritytxt.Location = new System.Drawing.Point(381, 247);
             this.prioritytxt.Name = "prioritytxt";
             this.prioritytxt.Size = new System.Drawing.Size(148, 20);
-            this.prioritytxt.TabIndex = 27;
+            this.prioritytxt.TabIndex = 14;
             this.prioritytxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prioritytxt_KeyPress);
             this.prioritytxt.Leave += new System.EventHandler(this.prioritytxt_Leave);
             // 
@@ -495,7 +501,7 @@
             this.agetxt.Location = new System.Drawing.Point(381, 123);
             this.agetxt.Name = "agetxt";
             this.agetxt.Size = new System.Drawing.Size(148, 20);
-            this.agetxt.TabIndex = 23;
+            this.agetxt.TabIndex = 12;
             this.agetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.agetxt_KeyPress);
             this.agetxt.Leave += new System.EventHandler(this.agetxt_Leave);
             // 
@@ -520,7 +526,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 146);
+            this.label11.Location = new System.Drawing.Point(13, 196);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 13);
             this.label11.TabIndex = 19;
@@ -531,7 +537,7 @@
             this.floorstxt.Location = new System.Drawing.Point(207, 61);
             this.floorstxt.Name = "floorstxt";
             this.floorstxt.Size = new System.Drawing.Size(87, 20);
-            this.floorstxt.TabIndex = 18;
+            this.floorstxt.TabIndex = 6;
             this.floorstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.floorstxt_KeyPress);
             this.floorstxt.Leave += new System.EventHandler(this.floorstxt_Leave);
             // 
@@ -549,7 +555,7 @@
             this.roomstxt.Location = new System.Drawing.Point(207, 123);
             this.roomstxt.Name = "roomstxt";
             this.roomstxt.Size = new System.Drawing.Size(87, 20);
-            this.roomstxt.TabIndex = 16;
+            this.roomstxt.TabIndex = 7;
             this.roomstxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomstxt_KeyPress);
             this.roomstxt.Leave += new System.EventHandler(this.roomstxt_Leave);
             // 
@@ -567,7 +573,7 @@
             this.pricetxt.Location = new System.Drawing.Point(16, 265);
             this.pricetxt.Name = "pricetxt";
             this.pricetxt.Size = new System.Drawing.Size(148, 20);
-            this.pricetxt.TabIndex = 13;
+            this.pricetxt.TabIndex = 4;
             this.pricetxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pricetxt_KeyPress);
             this.pricetxt.Leave += new System.EventHandler(this.pricetxt_Leave);
             // 
@@ -586,7 +592,7 @@
             this.desctxt.Multiline = true;
             this.desctxt.Name = "desctxt";
             this.desctxt.Size = new System.Drawing.Size(236, 265);
-            this.desctxt.TabIndex = 11;
+            this.desctxt.TabIndex = 16;
             this.desctxt.Leave += new System.EventHandler(this.desctxt_Leave);
             // 
             // label8
@@ -603,7 +609,7 @@
             this.locationtxt.Location = new System.Drawing.Point(16, 112);
             this.locationtxt.Name = "locationtxt";
             this.locationtxt.Size = new System.Drawing.Size(148, 20);
-            this.locationtxt.TabIndex = 9;
+            this.locationtxt.TabIndex = 1;
             // 
             // label6
             // 
@@ -619,7 +625,7 @@
             this.areatxt.Location = new System.Drawing.Point(207, 185);
             this.areatxt.Name = "areatxt";
             this.areatxt.Size = new System.Drawing.Size(124, 20);
-            this.areatxt.TabIndex = 7;
+            this.areatxt.TabIndex = 8;
             this.areatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areatxt_KeyPress);
             this.areatxt.Leave += new System.EventHandler(this.areatxt_Leave);
             // 
@@ -637,7 +643,7 @@
             this.tagstxt.Location = new System.Drawing.Point(381, 304);
             this.tagstxt.Name = "tagstxt";
             this.tagstxt.Size = new System.Drawing.Size(148, 20);
-            this.tagstxt.TabIndex = 5;
+            this.tagstxt.TabIndex = 15;
             // 
             // label4
             // 
@@ -653,7 +659,7 @@
             this.areaptxt.Location = new System.Drawing.Point(207, 247);
             this.areaptxt.Name = "areaptxt";
             this.areaptxt.Size = new System.Drawing.Size(124, 20);
-            this.areaptxt.TabIndex = 3;
+            this.areaptxt.TabIndex = 9;
             this.areaptxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaptxt_KeyPress);
             this.areaptxt.Leave += new System.EventHandler(this.areaptxt_Leave);
             // 

@@ -30,6 +30,7 @@
         {
             this.agentdataview = new System.Windows.Forms.DataGridView();
             this.dpnl = new System.Windows.Forms.Panel();
+            this.errlbl = new System.Windows.Forms.Label();
             this.addtxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.apnl = new System.Windows.Forms.Panel();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
-            this.errlbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.agentdataview)).BeginInit();
             this.dpnl.SuspendLayout();
             this.apnl.SuspendLayout();
@@ -104,6 +104,17 @@
             this.dpnl.Name = "dpnl";
             this.dpnl.Size = new System.Drawing.Size(1162, 352);
             this.dpnl.TabIndex = 4;
+            // 
+            // errlbl
+            // 
+            this.errlbl.AutoSize = true;
+            this.errlbl.ForeColor = System.Drawing.Color.Red;
+            this.errlbl.Location = new System.Drawing.Point(74, 143);
+            this.errlbl.Name = "errlbl";
+            this.errlbl.Size = new System.Drawing.Size(121, 13);
+            this.errlbl.TabIndex = 106;
+            this.errlbl.Text = "Username already exists";
+            this.errlbl.Visible = false;
             // 
             // addtxt
             // 
@@ -164,6 +175,7 @@
             // 
             // canbtn
             // 
+            this.canbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.canbtn.Location = new System.Drawing.Point(271, 307);
             this.canbtn.Name = "canbtn";
             this.canbtn.Size = new System.Drawing.Size(94, 38);
@@ -174,6 +186,7 @@
             // 
             // addbtn
             // 
+            this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Location = new System.Drawing.Point(382, 307);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(94, 38);
@@ -333,17 +346,6 @@
             this.formlbl.TabIndex = 48;
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
-            // 
-            // errlbl
-            // 
-            this.errlbl.AutoSize = true;
-            this.errlbl.ForeColor = System.Drawing.Color.Red;
-            this.errlbl.Location = new System.Drawing.Point(74, 143);
-            this.errlbl.Name = "errlbl";
-            this.errlbl.Size = new System.Drawing.Size(121, 13);
-            this.errlbl.TabIndex = 106;
-            this.errlbl.Text = "Username already exists";
-            this.errlbl.Visible = false;
             // 
             // agents
             // 

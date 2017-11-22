@@ -44,20 +44,28 @@
             // 
             // unverbtn
             // 
+            this.unverbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.unverbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.unverbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.unverbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.unverbtn.Location = new System.Drawing.Point(44, 178);
             this.unverbtn.Name = "unverbtn";
             this.unverbtn.Size = new System.Drawing.Size(162, 35);
-            this.unverbtn.TabIndex = 39;
+            this.unverbtn.TabIndex = 3;
             this.unverbtn.Text = "Check Unverified Properties";
             this.unverbtn.UseVisualStyleBackColor = false;
             this.unverbtn.Click += new System.EventHandler(this.unverbtn_Click);
             // 
             // verbtn
             // 
+            this.verbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.verbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.verbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.verbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.verbtn.Location = new System.Drawing.Point(44, 124);
             this.verbtn.Name = "verbtn";
             this.verbtn.Size = new System.Drawing.Size(162, 35);
-            this.verbtn.TabIndex = 40;
+            this.verbtn.TabIndex = 2;
             this.verbtn.Text = "Check Verified Properties";
             this.verbtn.UseVisualStyleBackColor = false;
             this.verbtn.Click += new System.EventHandler(this.verbtn_Click);
@@ -96,7 +104,7 @@
             // tuvplbl
             // 
             this.tuvplbl.AutoSize = true;
-            this.tuvplbl.Location = new System.Drawing.Point(10, 69);
+            this.tuvplbl.Location = new System.Drawing.Point(10, 57);
             this.tuvplbl.Name = "tuvplbl";
             this.tuvplbl.Size = new System.Drawing.Size(0, 13);
             this.tuvplbl.TabIndex = 1;
@@ -104,17 +112,21 @@
             // tvplbl
             // 
             this.tvplbl.AutoSize = true;
-            this.tvplbl.Location = new System.Drawing.Point(10, 34);
+            this.tvplbl.Location = new System.Drawing.Point(10, 24);
             this.tvplbl.Name = "tvplbl";
             this.tvplbl.Size = new System.Drawing.Size(0, 13);
             this.tvplbl.TabIndex = 0;
             // 
             // addpbtn
             // 
+            this.addpbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.addpbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.addpbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.addpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addpbtn.Location = new System.Drawing.Point(44, 70);
             this.addpbtn.Name = "addpbtn";
             this.addpbtn.Size = new System.Drawing.Size(162, 35);
-            this.addpbtn.TabIndex = 45;
+            this.addpbtn.TabIndex = 1;
             this.addpbtn.Text = "Add New Property";
             this.addpbtn.UseVisualStyleBackColor = false;
             this.addpbtn.Click += new System.EventHandler(this.addpbtn_Click);
@@ -140,7 +152,7 @@
             this.rmpbtn.Location = new System.Drawing.Point(263, 70);
             this.rmpbtn.Name = "rmpbtn";
             this.rmpbtn.Size = new System.Drawing.Size(162, 35);
-            this.rmpbtn.TabIndex = 46;
+            this.rmpbtn.TabIndex = 4;
             this.rmpbtn.Text = "Remove Property";
             this.rmpbtn.UseVisualStyleBackColor = false;
             this.rmpbtn.Click += new System.EventHandler(this.rmpbtn_Click);

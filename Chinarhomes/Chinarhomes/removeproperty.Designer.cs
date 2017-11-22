@@ -49,10 +49,14 @@
             this.proploading = new System.Windows.Forms.PictureBox();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
+            this.pwdtxt = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pwdpnl = new System.Windows.Forms.Panel();
             this.proppnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.proploading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
+            this.pwdpnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // proppnl
@@ -69,6 +73,7 @@
             // 
             // dpnl
             // 
+            this.dpnl.Controls.Add(this.pwdpnl);
             this.dpnl.Controls.Add(this.label6);
             this.dpnl.Controls.Add(this.label5);
             this.dpnl.Controls.Add(this.label4);
@@ -134,7 +139,7 @@
             this.pidlbl.AutoSize = true;
             this.pidlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pidlbl.ForeColor = System.Drawing.Color.Silver;
-            this.pidlbl.Location = new System.Drawing.Point(704, 473);
+            this.pidlbl.Location = new System.Drawing.Point(704, 377);
             this.pidlbl.Name = "pidlbl";
             this.pidlbl.Size = new System.Drawing.Size(0, 13);
             this.pidlbl.TabIndex = 49;
@@ -144,7 +149,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(640, 473);
+            this.label2.Location = new System.Drawing.Point(640, 377);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 48;
@@ -157,7 +162,7 @@
             this.rmpbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
             this.rmpbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.rmpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rmpbtn.Location = new System.Drawing.Point(594, 489);
+            this.rmpbtn.Location = new System.Drawing.Point(594, 393);
             this.rmpbtn.Name = "rmpbtn";
             this.rmpbtn.Size = new System.Drawing.Size(162, 35);
             this.rmpbtn.TabIndex = 47;
@@ -292,6 +297,36 @@
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
             // 
+            // pwdtxt
+            // 
+            this.pwdtxt.Location = new System.Drawing.Point(26, 16);
+            this.pwdtxt.Name = "pwdtxt";
+            this.pwdtxt.PasswordChar = '*';
+            this.pwdtxt.Size = new System.Drawing.Size(116, 20);
+            this.pwdtxt.TabIndex = 54;
+            this.pwdtxt.TextChanged += new System.EventHandler(this.pwdtxt_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(23, 1);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.TabIndex = 55;
+            this.label7.Text = "Enter Password";
+            // 
+            // pwdpnl
+            // 
+            this.pwdpnl.Controls.Add(this.label7);
+            this.pwdpnl.Controls.Add(this.pwdtxt);
+            this.pwdpnl.Location = new System.Drawing.Point(441, 393);
+            this.pwdpnl.Name = "pwdpnl";
+            this.pwdpnl.Size = new System.Drawing.Size(147, 38);
+            this.pwdpnl.TabIndex = 56;
+            this.pwdpnl.Visible = false;
+            // 
             // removeproperty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,6 +345,8 @@
             this.dpnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.proploading)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
+            this.pwdpnl.ResumeLayout(false);
+            this.pwdpnl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +375,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pwdpnl;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox pwdtxt;
     }
 }

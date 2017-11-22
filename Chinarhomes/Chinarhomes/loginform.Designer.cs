@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pwdlbl = new System.Windows.Forms.Label();
             this.namelbl = new System.Windows.Forms.Label();
             this.error = new System.Windows.Forms.Label();
@@ -39,20 +38,11 @@
             this.forgotbtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.loading = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Chinarhomes.Properties.Resources.chinarhomes;
-            this.pictureBox1.Location = new System.Drawing.Point(330, 222);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(296, 233);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 20;
-            this.pictureBox1.TabStop = false;
             // 
             // pwdlbl
             // 
@@ -127,6 +117,8 @@
             // 
             // loginbtn
             // 
+            this.loginbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.loginbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginbtn.Location = new System.Drawing.Point(789, 392);
             this.loginbtn.Name = "loginbtn";
             this.loginbtn.Size = new System.Drawing.Size(96, 35);
@@ -145,6 +137,7 @@
             this.forgotbtn.TabIndex = 24;
             this.forgotbtn.Text = "&Forgot Password?";
             this.forgotbtn.UseVisualStyleBackColor = true;
+            this.forgotbtn.Click += new System.EventHandler(this.forgotbtn_Click);
             // 
             // label2
             // 
@@ -166,10 +159,20 @@
             this.label3.TabIndex = 26;
             this.label3.Text = "_________________________________________";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Chinarhomes.Properties.Resources.chinarhomes;
+            this.pictureBox1.Location = new System.Drawing.Point(330, 222);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(296, 233);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
+            // 
             // loading
             // 
             this.loading.Image = global::Chinarhomes.Properties.Resources.pageload;
-            this.loading.Location = new System.Drawing.Point(613, 337);
+            this.loading.Location = new System.Drawing.Point(611, 337);
             this.loading.Name = "loading";
             this.loading.Size = new System.Drawing.Size(309, 141);
             this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
