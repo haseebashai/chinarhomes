@@ -47,7 +47,7 @@ namespace Chinarhomes
             if (Application.OpenForms.OfType<unverifiedproperties>().Count() == 1)
             {
                 propdataview.DataSource = bsource;
-                propdataview.Columns["ID"].Visible = false;
+             
                 propdataview.Columns["description"].Visible = false;
                 propdataview.Columns["noofstories"].Visible = false;
                 propdataview.Columns["noofrooms"].Visible = false;
@@ -177,6 +177,7 @@ namespace Chinarhomes
 
         private void loadpicbtn_Click(object sender, EventArgs e)
         {
+            iflowpnl.Controls.Clear();
             nopicslbl.Text = "Loading Pictures...";
             nopicslbl.Visible = true;
             nopicslbl.BringToFront();
@@ -196,30 +197,32 @@ namespace Chinarhomes
             try
             {
                 dr = obj.Query("select picture from properties where propertyid='" + pidlbl.Text + "'");
-                dr.Read();
-                dp = dr[0].ToString();
+                while(dr.Read())
+                {
+                   
+                    pathurl.Add(dr[0].ToString());
 
-                pathurl.Add(dr[0].ToString());
-                i++;
-
+                  
+                   
+                }
                 obj.closeConnection();
 
                 dr = obj.Query("select picture from pictures where propertyid='" + pidlbl.Text + "'");
                 while (dr.Read())
                 {
                     pathurl.Add(dr[0].ToString());
-                    i++;
+                  
                 }
 
                 obj.closeConnection();
                 total = i;
-               
-                if (i == 0)
+              
+                if (pathurl.Contains(""))
                 {
                     e.Result = "404";
                    
                 }
-                else
+                else 
                 {
                     e.Result = "success";
                 }
@@ -236,37 +239,39 @@ namespace Chinarhomes
         {
             string result = (string)e.Result;
            
-           
             if (result == "404")
             {
                 nopicslbl.Visible = true;
                 nopicslbl.BringToFront();
+                nopicslbl.Text = "No Pictures found.";
                 dppnl.Visible = false;
+              
                 loadpicbtn.Enabled = true;
             }
             else if (result == "success")
             {
                 Cursor = Cursors.WaitCursor;
-                
-                PopulateListView();
+
+                //    PopulateListView();
+                foreach (String pic in pathurl)
+                {
+                    PictureBox pb = new PictureBox();
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pb.Height = 102;
+                    pb.Width = 132;
+                    pb.ImageLocation = address + pic;
+                    iflowpnl.Controls.Add(pb);
+                    iflowpnl.AutoScroll = true;
+
+                }
+                dppnl.Visible = true;
+                loadpicbtn.Visible = false;
+                loadpicbtn.Enabled = true;
+
                 nopicslbl.Text = "No Pictures found.";
                 nopicslbl.Visible = false;
                 Cursor = Cursors.Arrow;
-                if (picfailed)
-                {
-                   
-                    nopicslbl.Visible = true;
-                    nopicslbl.BringToFront();
-                    dppnl.Visible = false;
-                    loadpicbtn.Enabled = true;
-                }
-                else if(picfailed==false)
-                {
-                  
-                    dppnl.Visible = true;
-                    loadpicbtn.Visible = false;
-                    loadpicbtn.Enabled = true;
-                }
+               
             }
             else if (result == "fail")
             {
@@ -280,69 +285,69 @@ namespace Chinarhomes
             
         }
 
-        private void PopulateListView()
-        {
-            try
-            {
+        //private void PopulateListView()
+        //{
+        //    try
+        //    {
                
 
-                piclist.Clear();
-                ImageList images = new ImageList();
-                piclist.View = View.LargeIcon;
+        //        piclist.Clear();
+        //        ImageList images = new ImageList();
+        //        piclist.View = View.LargeIcon;
 
 
-                images.ImageSize = new Size(112, 112);
-                images.ColorDepth = ColorDepth.Depth32Bit;
-                piclist.LargeImageList = images;
+        //        images.ImageSize = new Size(112, 112);
+        //        images.ColorDepth = ColorDepth.Depth32Bit;
+        //        piclist.LargeImageList = images;
 
 
-                foreach (string str in pathurl)
-                {
-                    images.Images.Add(LoadImage(address + str));
+        //        foreach (string str in pathurl)
+        //        {
+        //            images.Images.Add(LoadImage(address + str));
 
-                }
+        //        }
 
-                for (i = 0; i < total;)
-                {
+        //        for (i = 0; i < total;)
+        //        {
                    
-                    piclist.Items.Add(pathurl[i], i);
-                    i++;
+        //            piclist.Items.Add(pathurl[i], i);
+        //            i++;
               
                     
 
-                }
-            }
-            catch (Exception ex)
-            {
-                picfailed = true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        picfailed = true;
               
-            }
+        //    }
 
-        }
+        //}
 
         bool picfailed = false;
-        private Image LoadImage(string url)
-        {
-            try
-            {
-                WebRequest request = WebRequest.Create(url);
+        //private Image LoadImage(string url)
+        //{
+        //    try
+        //    {
+        //        WebRequest request = WebRequest.Create(url);
 
-                WebResponse response = request.GetResponse();
-                Stream responseStream = response.GetResponseStream();
+        //        WebResponse response = request.GetResponse();
+        //        Stream responseStream = response.GetResponseStream();
 
-                Bitmap bmp = new Bitmap(responseStream);
+        //        Bitmap bmp = new Bitmap(responseStream);
 
-                responseStream.Dispose();
+        //        responseStream.Dispose();
 
-                return bmp;
-            }
-            catch (WebException ex)
-            {
-                picfailed = true;
+        //        return bmp;
+        //    }
+        //    catch (WebException ex)
+        //    {
+        //        picfailed = true;
               
-                return null;
-            }
-        }
+        //        return null;
+        //    }
+        //}
 
         List<string> pics = new List<string>();
         private void updbtn_Click(object sender, EventArgs e)
@@ -405,7 +410,7 @@ namespace Chinarhomes
                 {
                     MessageBox.Show("Please check verify first.");
                     progressBar1.Visible = false;
-                    dppnl.Visible = true;
+              //      dppnl.Visible = true;
 
                 }
                 else
@@ -441,12 +446,12 @@ namespace Chinarhomes
                 StringBuilder pname = (StringBuilder)arg[14];
                 string ver = (string)arg[15];
 
-                DialogResult dgr = MessageBox.Show(loc + "\n\nProperty verified?", "Confirm!", MessageBoxButtons.YesNo);
-                if (dgr == DialogResult.Yes)
+               
+                if (ver == "1")
                 {
-                    if (ver == "1")
-                {
-                   
+                    DialogResult dgr = MessageBox.Show(loc + "\n\nProperty verified?", "Confirm!", MessageBoxButtons.YesNo);
+                    if (dgr == DialogResult.Yes)
+                    {
                         cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
                     + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
                     + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='" + pname + "',`verifiedby`='" + userinfo.email + "' WHERE propertyid='" + pidlbl.Text + "'";
@@ -481,19 +486,21 @@ namespace Chinarhomes
                         }
                         e.Result = "success";
                     }
-                    else if (ver == "0")
-                    {
-                        cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
-                            + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
-                            + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='" + pname + "' WHERE propertyid='" + pidlbl.Text + "'";
-                        obj.nonQuery(cmd);
-                        obj.closeConnection();
-                        e.Result = "success";
-                    }
+                    e.Result = "fail";
                 }
-               
-               
-            }catch(Exception ex)
+                else if (ver == "0")
+                {
+                    cmd = "UPDATE `chinarhomes`.`properties` SET `location`='" + loc + "', `tags`='" + tags + "', `type`='" + type + "', `noofstories`='" + floors + "', `noofrooms`='" + rooms + "',"
+                        + " `area`='" + area + "', `areaofbuilt`='" + areap + "', `price`='" + price + "', `priority`='" + priority + "', `description`='" + desc + "',"
+                        + " `distancefrommain`='" + distance + "', `age`='" + age + "', `furnished`='" + furnished + "', `verified`='" + ver + "', `saletype`='" + saletype + "',`name`='" + pname + "' WHERE propertyid='" + pidlbl.Text + "'";
+                    obj.nonQuery(cmd);
+                    obj.closeConnection();
+                    e.Result = "success";
+                }
+
+
+            }
+            catch(Exception ex)
             {
                 e.Result = "fail";
                 MessageBox.Show(ex.Message);
@@ -505,6 +512,7 @@ namespace Chinarhomes
             string result = (string)e.Result;
             if (result == "success")
             {
+                progressBar1.Visible = false;
                 MessageBox.Show("Property Updated succesfully.", "Success");
                 dpnl.Enabled = false;
                 dpnl.Visible = false;
@@ -514,15 +522,25 @@ namespace Chinarhomes
                 cancelbtn.Visible = false;
                 updbtn.Visible = false;
                 progressBar1.Visible = false;
+                bpnl.Enabled = true;
+                loadpicbtn.Enabled = true;
+                bpnl.Visible = false;
+                loadpicbtn.Visible = false;
+                Cursor = Cursors.WaitCursor;
                 readproperties();
+                
                 propdataview.DataSource = bsource;
-               
+                Cursor = Cursors.Arrow;
+            }else if (result == "fail")
+            {
+                progressBar1.Visible = false;
+                bpnl.Visible = true;
+                bpnl.Enabled = true;
+                loadpicbtn.Visible = true;
+                loadpicbtn.Enabled = true;
             }
-            progressBar1.Visible = false;
-            bpnl.Enabled = true;
-            loadpicbtn.Enabled = true;
-            bpnl.Visible = false;
-            loadpicbtn.Visible = false;
+
+
         }
 
       

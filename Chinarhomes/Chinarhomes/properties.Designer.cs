@@ -174,6 +174,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "properties";
             this.Text = "properties";
+            this.Load += new System.EventHandler(this.properties_Load);
             this.dpnl.ResumeLayout(false);
             this.dpnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();

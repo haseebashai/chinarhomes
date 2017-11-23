@@ -154,14 +154,18 @@ namespace Chinarhomes
             }
             else if (result == "success")
             {
-                
+                mainform mf = new mainform(cn);
+                mf.TopLevel = false;
+                cn.mainpnl.Controls.Clear();
                 if (usertype == "1")
                 {
                     userinfo.admin = true;
+                   
                 }
                 else if (usertype == "0")
                 {
-                    userinfo.admin = false;
+                    userinfo.admin = false;                    
+
                 }
 
 
@@ -173,9 +177,7 @@ namespace Chinarhomes
 
 
                
-                mainform mf = new mainform(cn);
-                mf.TopLevel = false;
-                cn.mainpnl.Controls.Clear();
+              
                 
                 cn.mainpnl.Controls.Add(mf);
                

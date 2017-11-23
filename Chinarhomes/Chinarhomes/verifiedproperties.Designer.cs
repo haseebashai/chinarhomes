@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.propdataview = new System.Windows.Forms.DataGridView();
             this.proppnl = new System.Windows.Forms.Panel();
             this.addnewbtn = new System.Windows.Forms.Button();
@@ -47,9 +47,9 @@
             this.pnametxt = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.dppnl = new System.Windows.Forms.Panel();
+            this.iflowpnl = new System.Windows.Forms.FlowLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.piclist = new System.Windows.Forms.ListView();
             this.label19 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
@@ -107,14 +107,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(11, 4);
             this.propdataview.MultiSelect = false;
@@ -174,9 +174,9 @@
             this.addpicsbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
             this.addpicsbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.addpicsbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addpicsbtn.Location = new System.Drawing.Point(1041, 621);
+            this.addpicsbtn.Location = new System.Drawing.Point(1032, 621);
             this.addpicsbtn.Name = "addpicsbtn";
-            this.addpicsbtn.Size = new System.Drawing.Size(113, 35);
+            this.addpicsbtn.Size = new System.Drawing.Size(122, 35);
             this.addpicsbtn.TabIndex = 47;
             this.addpicsbtn.Text = "Upload";
             this.addpicsbtn.UseVisualStyleBackColor = false;
@@ -349,14 +349,21 @@
             // 
             // dppnl
             // 
+            this.dppnl.Controls.Add(this.iflowpnl);
             this.dppnl.Controls.Add(this.label20);
             this.dppnl.Controls.Add(this.panel3);
-            this.dppnl.Controls.Add(this.piclist);
             this.dppnl.Location = new System.Drawing.Point(802, 7);
             this.dppnl.Name = "dppnl";
             this.dppnl.Size = new System.Drawing.Size(360, 348);
             this.dppnl.TabIndex = 43;
             this.dppnl.Visible = false;
+            // 
+            // iflowpnl
+            // 
+            this.iflowpnl.Location = new System.Drawing.Point(20, 44);
+            this.iflowpnl.Name = "iflowpnl";
+            this.iflowpnl.Size = new System.Drawing.Size(324, 283);
+            this.iflowpnl.TabIndex = 46;
             // 
             // label20
             // 
@@ -375,15 +382,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(5, 300);
             this.panel3.TabIndex = 45;
-            // 
-            // piclist
-            // 
-            this.piclist.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.piclist.Location = new System.Drawing.Point(20, 37);
-            this.piclist.Name = "piclist";
-            this.piclist.Size = new System.Drawing.Size(331, 295);
-            this.piclist.TabIndex = 38;
-            this.piclist.UseCompatibleStateImageBehavior = false;
             // 
             // label19
             // 
@@ -841,7 +839,6 @@
         private System.Windows.Forms.Panel bpnl;
         private System.Windows.Forms.Button editpropbtn;
         private System.Windows.Forms.Button loadpicbtn;
-        private System.Windows.Forms.ListView piclist;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel dppnl;
         private System.Windows.Forms.Panel panel3;
@@ -863,5 +860,6 @@
         private System.Windows.Forms.Label piclbl;
         private System.Windows.Forms.Label label22;
         public System.Windows.Forms.Button addnewbtn;
+        private System.Windows.Forms.FlowLayoutPanel iflowpnl;
     }
 }

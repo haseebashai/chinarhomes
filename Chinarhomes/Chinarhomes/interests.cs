@@ -39,7 +39,6 @@ namespace Chinarhomes
             
             custlist.DisplayMember = "mail";
             custlist.DataSource = dt;
-            custlist.SelectedIndex = -1;
             ipnl.Visible = true;
         }
 
@@ -115,7 +114,7 @@ namespace Chinarhomes
                       },
                       new TextBox
                       {
-                          Text = details.Loc + "\r\n" + "Area: " + details.Area + "\r\n" + "Price: " + details.Price,
+                          Text = details.Loc + "\r\n" + "Area: " + details.Area + "\r\n" + "Price: " + details.Price + "\r\n" + "Propertyid: " + details.Pid,
                           Size = new Size(220, 60),
                           Multiline = true,
                           ReadOnly = true
@@ -184,7 +183,7 @@ namespace Chinarhomes
                     picture = dr[1].ToString();
                     obj.closeConnection();
                    
-                    dobj.Add(new details(loc, area, price,picture));
+                    dobj.Add(new details(loc, area, price,picture,property));
   
                 }
                 success = true;
@@ -223,13 +222,15 @@ namespace Chinarhomes
         private string area;
         private string price;
         private string picture;
+        private string pid;
 
-        public details(string loc, string area, string price, string picture)
+        public details(string loc, string area, string price, string picture,string pid)
         {
             this.loc = loc;
             this.area = area;
             this.price = price;
             this.picture = picture;
+            this.pid = pid;
         }
 
         public string Loc
@@ -252,6 +253,11 @@ namespace Chinarhomes
         {
             get { return picture; }
             set { picture = value; }
+        }
+        public string Pid
+        {
+            get { return pid; }
+            set { pid = value; }
         }
 
     }

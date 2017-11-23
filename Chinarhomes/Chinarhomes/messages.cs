@@ -55,7 +55,7 @@ namespace Chinarhomes
         private void readstaff()
         {
 
-            dr = obj.Query("select distinct username from staff");
+            dr = obj.Query("select distinct username from staff where username !='"+userinfo.username+"'");
 
             dt1 = new DataTable();
             dt1.Columns.Add("username", typeof(String));
@@ -174,6 +174,8 @@ namespace Chinarhomes
                     string cmd = "insert into messages (`sender`,`message`,`username`,`recipient`)values('" + userinfo.email + "','" + msg + "','" + userinfo.username + "','" + totxt.Text + "')";
                     obj.nonQuery(cmd);
                     MessageBox.Show("Message sent.", "Success!");
+                    Pageload_DoWork(null,null);
+                    Pageload_RunWorkerCompleted(null,null);
                     Cursor = Cursors.Arrow;
                 }
                 catch
@@ -187,16 +189,5 @@ namespace Chinarhomes
             }
         }
 
-
-        private void sendbtn_Click(object sender, EventArgs e)
-        {
-
-       /*     mail ml = new mail(emaillbl.Text, sublbl.Text, msgtxt.Text, midlbl.Text);
-            ml.ShowDialog();
-            readmsgs();
-            messagesdataview.DataSource = bsource; */
-        }
-
-       
     }
 }

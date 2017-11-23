@@ -55,7 +55,7 @@ namespace Chinarhomes
 
         private void readproperties()
         {
-            dr = obj.Query("select location from properties");
+            dr = obj.Query("select concat(propertyid,':     ',location) as location from properties");
 
             dt = new DataTable();
             dt.Columns.Add("location", typeof(String));
@@ -158,6 +158,8 @@ namespace Chinarhomes
 
         private void proplist_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+            
             pwdent = false;
             pwdtxt.Text = "";
             pwdpnl.Visible = false;
@@ -168,12 +170,13 @@ namespace Chinarhomes
             iflowpnl.Controls.Clear();
             pathurl.Clear();
             i = 0;
-            string propname = proplist.Text;
+            string propid = proplist.Text.Split(':')[0];
+            
             bg = new BackgroundWorker();
             bg.DoWork += bg_DoWork;
             bg.RunWorkerCompleted += bg_RunWorkerCompleted;
             bg.WorkerSupportsCancellation = true;
-            bg.RunWorkerAsync(propname);
+            bg.RunWorkerAsync(propid);
 
            
         }
@@ -232,10 +235,10 @@ namespace Chinarhomes
         private void bg_DoWork(object sender, DoWorkEventArgs e)
         {
            
-                string propname = e.Argument as string;
+                string propid = e.Argument as string;
                 try
                 {
-                    dr = obj.Query("select propertyid,location,name,price,email,picture,verified from properties where location='" + propname + "'");
+                    dr = obj.Query("select propertyid,location,name,price,email,picture,verified from properties where propertyid='" + propid + "'");
                     dr.Read();
                     pid = dr[0].ToString();
                     loc = dr[1].ToString();

@@ -49,7 +49,7 @@ namespace Chinarhomes
             if (Application.OpenForms.OfType<verifiedproperties>().Count() == 1)
             {
                 propdataview.DataSource = bsource;
-                propdataview.Columns["ID"].Visible = false;
+             
                 propdataview.Columns["description"].Visible = false;
                 propdataview.Columns["noofstories"].Visible = false;
                 propdataview.Columns["noofrooms"].Visible = false;
@@ -174,12 +174,14 @@ namespace Chinarhomes
             editpropbtn.Visible = false;
             cancelbtn.Visible = true;
             addnewbtn.Visible = true;
+            addpicsbtn.Enabled = true;
             updbtn.Visible = true;
             dpnl.Enabled = true;
         }
 
         private void loadpicbtn_Click(object sender, EventArgs e)
         {
+            iflowpnl.Controls.Clear();
             loadpicbtn.Enabled = false;
             nopicslbl.Text = "Loading Pictures...";
             nopicslbl.Visible = true;
@@ -248,7 +250,18 @@ namespace Chinarhomes
             else if (result == "success")
             {
                 Cursor = Cursors.WaitCursor;
-                PopulateListView();
+                //    PopulateListView();
+                foreach (String pic in pathurl)
+                {
+                   PictureBox pb = new PictureBox();
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pb.Height = 102;
+                    pb.Width = 132;
+                    pb.ImageLocation = address+pic;
+                    iflowpnl.Controls.Add(pb);
+                    iflowpnl.AutoScroll = true;
+
+                }
                 nopicslbl.Text = "No Pictures found.";
                 nopicslbl.Visible = false;
                 Cursor = Cursors.Arrow;
@@ -280,74 +293,74 @@ namespace Chinarhomes
             pathurl.Clear();
         }
         bool picfailed = false;
-        private void PopulateListView()
-        {
+        //private void PopulateListView()
+        //{
 
-            try
-            {
-                piclist.Clear();
-                ImageList images = new ImageList();
-                images.Images.Clear();
-                piclist.View = View.LargeIcon;
-
-
-                images.ImageSize = new Size(112, 112);
-                images.ColorDepth = ColorDepth.Depth32Bit;
-                piclist.LargeImageList = images;
+        //    try
+        //    {
+        //        piclist.Clear();
+        //        ImageList images = new ImageList();
+        //        images.Images.Clear();
+        //        piclist.View = View.LargeIcon;
 
 
-                foreach (string str in pathurl)
-                {
+        //        images.ImageSize = new Size(112, 112);
+        //        images.ColorDepth = ColorDepth.Depth32Bit;
+        //        piclist.LargeImageList = images;
+
+
+        //        foreach (string str in pathurl)
+        //        {
 
                    
-                    images.Images.Add(LoadImage(address + str));
+        //            images.Images.Add(LoadImage(address + str));
 
-                }
-                for (i = 0; i < total;)
-                {
+        //        }
+        //        for (i = 0; i < total;)
+        //        {
 
-                    piclist.Items.Add(pathurl[i], i);
-                    i++;
+        //            piclist.Items.Add(pathurl[i], i);
+        //            i++;
 
-                }
+        //        }
 
 
-            }
-            catch (Exception ex)
-            {
-                picfailed = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        picfailed = true;
                
-            }
+        //    }
 
 
 
-        }
+        //}
 
         
-        private Image LoadImage(string url)
-        {
-            try
-            {
+        //private Image LoadImage(string url)
+        //{
+        //    try
+        //    {
                
-                WebRequest request = WebRequest.Create(url);
+        //        WebRequest request = WebRequest.Create(url);
+        //        MessageBox.Show(url);
+        //        WebResponse response = request.GetResponse();
+        //        Stream responseStream = response.GetResponseStream();
 
-                WebResponse response = request.GetResponse();
-                Stream responseStream = response.GetResponseStream();
+        //        Bitmap bmp = new Bitmap(responseStream);
 
-                Bitmap bmp = new Bitmap(responseStream);
+        //        responseStream.Dispose();
 
-                responseStream.Dispose();
+        //        return bmp;
+        //    }
+        //    catch (WebException ex)
+        //    {
 
-                return bmp;
-            }
-            catch (WebException ex)
-            {
-
-                picfailed = true;
+        //        picfailed = true;
                 
-                return null;
-            }
-        }
+        //        return null;
+        //    }
+        //}
 
         private void updbtn_Click(object sender, EventArgs e)
         {
@@ -479,9 +492,10 @@ namespace Chinarhomes
                 cancelbtn.Visible = false;
                 updbtn.Visible = false;
                 progressBar1.Visible = false;
+                Cursor = Cursors.WaitCursor;
                 readproperties();
                 propdataview.DataSource = bsource;
-
+                Cursor = Cursors.Arrow;
             }
             progressBar1.Visible = false;
         }
@@ -714,10 +728,12 @@ namespace Chinarhomes
 
 
 
-            DialogResult dgr = MessageBox.Show("Do you want to upload the pictures now ?", "Confirm!", MessageBoxButtons.YesNo);
+            DialogResult dgr = MessageBox.Show("Do you want to upload the pictures now ?\nThese pictures will replace the old ones.", "Confirm!", MessageBoxButtons.YesNo);
             if (dgr == DialogResult.Yes)
             {
+                iflowpnl.Visible = false;
                 ppnl.Visible = true;
+                ppnl.BringToFront();
                 bpnl.Enabled = false;
                 loadpicbtn.Enabled = false;
                 addpicsbtn.Enabled = false;
@@ -753,6 +769,7 @@ namespace Chinarhomes
                     bpnl.Enabled = true;
                     loadpicbtn.Enabled = true;
                     loadpicbtn_Click(null, null);
+                    iflowpnl.Visible = true;
                     editpropbtn.Visible = false;
                     cancelbtn.Visible = true;
                    
@@ -760,19 +777,6 @@ namespace Chinarhomes
                     dpnl.Enabled = true;
 
                 }
-                else
-                {
-                    if (picupload)
-                    {
-                        MessageBox.Show("Picture upload failed. Please try after sometime.");
-                        loadpicbtn.Visible = true;
-                        editpropbtn.Visible = false;
-                        cancelbtn.Visible = true;
-                        addnewbtn.Visible = true;
-                        updbtn.Visible = true;
-                        dpnl.Enabled = true;
-                        addpicsbtn.Visible = true;
-                    }
                     else if (result == "fail")
                     {
                         MessageBox.Show("Failed to add pictures, please try again.");
@@ -785,7 +789,7 @@ namespace Chinarhomes
                         addpicsbtn.Visible = true;
                     }
 
-                }
+                
 
             }
             ppnl.Visible = false;
@@ -799,10 +803,7 @@ namespace Chinarhomes
         private void Bg_DoWork2(object sender, DoWorkEventArgs e)
         {
             try
-            {
-                int count = newpics.Count;
-                if (count > 1)
-                {
+            {              
                     try
                     {
                         cmd = "delete from pictures where propertyid='" + pidlbl.Text + "'";
@@ -813,7 +814,7 @@ namespace Chinarhomes
                         MessageBox.Show("Something happened, please try again.", "Error!");
                         return;
                     }
-                }
+                
                
                     foreach (string pic in newpics)
                     {

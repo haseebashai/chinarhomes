@@ -215,6 +215,7 @@ namespace Chinarhomes
                 mailtxt.Text= row.Cells["email"].Value.ToString();
                 nametxt.Text = row.Cells["name"].Value.ToString();
                 usertxt.Text = row.Cells["username"].Value.ToString();
+                addtxt.Text= row.Cells["address"].Value.ToString();
                 pwdtxt.Enabled = false;
                 contacttxt.Text = row.Cells["contact"].Value.ToString();
                 string admin= row.Cells["admin"].Value.ToString();
@@ -319,7 +320,7 @@ namespace Chinarhomes
             {
                 int i = 0;
                 i = obj.Count("Select Count(sid) from staff where username='" + usertxt+ "';");
-                MessageBox.Show(i.ToString());
+              
                 if (i == 1)
                 {
                     success = true;

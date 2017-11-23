@@ -446,5 +446,24 @@ namespace Chinarhomes
         {
             arrow.Visible = false;
         }
+
+        private void mainform_Load(object sender, EventArgs e)
+        {
+            if (!userinfo.admin)
+            {
+               
+               customerbtn.Visible = false;
+               intbtn.Visible = false;
+               agentbtn.Visible = false;
+                policybtn.Visible = false;
+                mailbtn.Visible = false;
+                agpic.Visible = false;
+                custpic.Visible = false;
+                label4.Visible = false;
+                label6.Visible = false;
+                msgpic.Location = new Point(240, 330);
+                label5.Location = new Point(295, 475);
+            }
+        }
     }
 }

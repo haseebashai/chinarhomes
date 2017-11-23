@@ -119,7 +119,7 @@
             // 
             // addbtn
             // 
-            this.addbtn.Location = new System.Drawing.Point(434, 302);
+            this.addbtn.Location = new System.Drawing.Point(420, 302);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(94, 38);
             this.addbtn.TabIndex = 7;

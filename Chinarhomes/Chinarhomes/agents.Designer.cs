@@ -186,6 +186,7 @@
             // 
             // addbtn
             // 
+            this.addbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Location = new System.Drawing.Point(382, 307);
             this.addbtn.Name = "addbtn";

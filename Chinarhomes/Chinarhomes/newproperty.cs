@@ -149,7 +149,7 @@ namespace Chinarhomes
             cmd = "INSERT INTO `chinarhomes`.`properties` (`location`, `tags`, `type`, `noofstories`, `noofrooms`, `area`,`areaofbuilt`, " +
           "`price`, `priority`, `description`, `distancefrommain`, `age`, `furnished`, `verified`, `email`, `saletype`,`verifiedby`,`name`)" +
           " VALUES ('" + loc + "', '" + pname + " " + loc + " " + tagstxt.Text + "', '" + ptype + "', '" + floorstxt.Text + "', '" + roomstxt.Text + "', '" + areatxt.Text + "', '" + areaptxt.Text + "','" + pricetxt.Text + "'," +
-          " '" + prioritytxt.Text + "', '" + desc + "', '" + distancetxt.Text + "', '" + agetxt.Text + "', '" + furnished + "', '" + ver + "','258efdc003a5c43825f73ff845ca1348', '" + saletype + "','" + userinfo.email + "','" + pname + "')";
+          " '" + prioritytxt.Text + "', '" + desc + "', '" + distancetxt.Text + "', '" + agetxt.Text + "', '" + furnished + "', '" + ver + "','21c46b0ac82e494ad94106564b411686', '" + saletype + "','" + userinfo.email + "','" + pname + "')";
             obj.nonQuery(cmd);
 
             propertyid = userinfo.lastid;
@@ -366,7 +366,7 @@ namespace Chinarhomes
             saletypebox.DisplayMember = "Text";
             var items2 = new[]
             {
-                new {Text="Sale"},
+                new {Text="Buy"},
                 new {Text="Rent"}
 
             };

@@ -698,6 +698,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "mainform";
             this.Text = "Chinarhomes Homepage";
+            this.Load += new System.EventHandler(this.mainform_Load);
             this.cntpnl.ResumeLayout(false);
             this.cntpnl.PerformLayout();
             this.homepnl.ResumeLayout(false);
@@ -757,8 +758,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox agpic;
-        private System.Windows.Forms.PictureBox custpic;
         private System.Windows.Forms.PictureBox msgpic;
         private System.Windows.Forms.PictureBox unverpic;
         private System.Windows.Forms.PictureBox verpic;
@@ -767,5 +766,7 @@
         private System.Windows.Forms.Label label11;
         public System.Windows.Forms.Button mailbtn;
         public System.Windows.Forms.Label arrow7;
+        public System.Windows.Forms.PictureBox agpic;
+        public System.Windows.Forms.PictureBox custpic;
     }
 }

@@ -81,7 +81,7 @@ namespace Chinarhomes
             try
             {
                 Cursor = Cursors.WaitCursor;
-                dr = obj.Query("select * from about");
+                dr = obj.Query("select * from about where aboutid>1");
                 dt = new DataTable();
                 dt.Load(dr);
                 obj.closeConnection();
@@ -313,7 +313,6 @@ namespace Chinarhomes
             
             if (contact)
             {
-                MessageBox.Show("contact");
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 {
                     e.Handled = true;

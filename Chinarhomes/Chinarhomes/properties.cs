@@ -99,6 +99,14 @@ namespace Chinarhomes
             rmp.Show();
         }
 
+        private void properties_Load(object sender, EventArgs e)
+        {
+            if (!userinfo.admin)
+            {
+                rmpbtn.Visible = false;
+            }
+        }
+
         private void unverbtn_Click(object sender, EventArgs e)
         {
             dialogcontainer dg = new dialogcontainer();

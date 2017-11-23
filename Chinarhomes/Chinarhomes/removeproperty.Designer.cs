@@ -30,6 +30,9 @@
         {
             this.proppnl = new System.Windows.Forms.Panel();
             this.dpnl = new System.Windows.Forms.Panel();
+            this.pwdpnl = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pwdtxt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,18 +52,19 @@
             this.proploading = new System.Windows.Forms.PictureBox();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
-            this.pwdtxt = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pwdpnl = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.proppnl.SuspendLayout();
             this.dpnl.SuspendLayout();
+            this.pwdpnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.proploading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
-            this.pwdpnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // proppnl
             // 
+            this.proppnl.Controls.Add(this.label9);
+            this.proppnl.Controls.Add(this.label8);
             this.proppnl.Controls.Add(this.dpnl);
             this.proppnl.Controls.Add(this.proplist);
             this.proppnl.Controls.Add(this.loadinglbl);
@@ -93,6 +97,36 @@
             this.dpnl.Size = new System.Drawing.Size(782, 537);
             this.dpnl.TabIndex = 1;
             this.dpnl.Visible = false;
+            // 
+            // pwdpnl
+            // 
+            this.pwdpnl.Controls.Add(this.label7);
+            this.pwdpnl.Controls.Add(this.pwdtxt);
+            this.pwdpnl.Location = new System.Drawing.Point(441, 392);
+            this.pwdpnl.Name = "pwdpnl";
+            this.pwdpnl.Size = new System.Drawing.Size(147, 38);
+            this.pwdpnl.TabIndex = 56;
+            this.pwdpnl.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(23, 1);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.TabIndex = 55;
+            this.label7.Text = "Enter Password";
+            // 
+            // pwdtxt
+            // 
+            this.pwdtxt.Location = new System.Drawing.Point(26, 16);
+            this.pwdtxt.Name = "pwdtxt";
+            this.pwdtxt.PasswordChar = '*';
+            this.pwdtxt.Size = new System.Drawing.Size(116, 20);
+            this.pwdtxt.TabIndex = 54;
+            this.pwdtxt.TextChanged += new System.EventHandler(this.pwdtxt_TextChanged);
             // 
             // label6
             // 
@@ -138,7 +172,7 @@
             // 
             this.pidlbl.AutoSize = true;
             this.pidlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pidlbl.ForeColor = System.Drawing.Color.Silver;
+            this.pidlbl.ForeColor = System.Drawing.Color.Black;
             this.pidlbl.Location = new System.Drawing.Point(704, 377);
             this.pidlbl.Name = "pidlbl";
             this.pidlbl.Size = new System.Drawing.Size(0, 13);
@@ -297,35 +331,25 @@
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
             // 
-            // pwdtxt
+            // label8
             // 
-            this.pwdtxt.Location = new System.Drawing.Point(26, 16);
-            this.pwdtxt.Name = "pwdtxt";
-            this.pwdtxt.PasswordChar = '*';
-            this.pwdtxt.Size = new System.Drawing.Size(116, 20);
-            this.pwdtxt.TabIndex = 54;
-            this.pwdtxt.TextChanged += new System.EventHandler(this.pwdtxt_TextChanged);
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label8.Location = new System.Drawing.Point(19, 22);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(18, 13);
+            this.label8.TabIndex = 47;
+            this.label8.Text = "ID";
             // 
-            // label7
+            // label9
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(23, 1);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 13);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Enter Password";
-            // 
-            // pwdpnl
-            // 
-            this.pwdpnl.Controls.Add(this.label7);
-            this.pwdpnl.Controls.Add(this.pwdtxt);
-            this.pwdpnl.Location = new System.Drawing.Point(441, 393);
-            this.pwdpnl.Name = "pwdpnl";
-            this.pwdpnl.Size = new System.Drawing.Size(147, 38);
-            this.pwdpnl.TabIndex = 56;
-            this.pwdpnl.Visible = false;
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label9.Location = new System.Drawing.Point(78, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 48;
+            this.label9.Text = "Location";
             // 
             // removeproperty
             // 
@@ -343,10 +367,10 @@
             this.proppnl.PerformLayout();
             this.dpnl.ResumeLayout(false);
             this.dpnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.proploading)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.pwdpnl.ResumeLayout(false);
             this.pwdpnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.proploading)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,5 +402,7 @@
         private System.Windows.Forms.Panel pwdpnl;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox pwdtxt;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }

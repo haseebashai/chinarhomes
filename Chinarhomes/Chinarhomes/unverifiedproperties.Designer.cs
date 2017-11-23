@@ -43,9 +43,9 @@
             this.pnametxt = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.dppnl = new System.Windows.Forms.Panel();
+            this.iflowpnl = new System.Windows.Forms.FlowLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.piclist = new System.Windows.Forms.ListView();
             this.label19 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
@@ -271,14 +271,21 @@
             // 
             // dppnl
             // 
+            this.dppnl.Controls.Add(this.iflowpnl);
             this.dppnl.Controls.Add(this.label20);
             this.dppnl.Controls.Add(this.panel3);
-            this.dppnl.Controls.Add(this.piclist);
             this.dppnl.Location = new System.Drawing.Point(802, 7);
             this.dppnl.Name = "dppnl";
             this.dppnl.Size = new System.Drawing.Size(360, 348);
             this.dppnl.TabIndex = 43;
             this.dppnl.Visible = false;
+            // 
+            // iflowpnl
+            // 
+            this.iflowpnl.Location = new System.Drawing.Point(18, 47);
+            this.iflowpnl.Name = "iflowpnl";
+            this.iflowpnl.Size = new System.Drawing.Size(324, 283);
+            this.iflowpnl.TabIndex = 47;
             // 
             // label20
             // 
@@ -297,15 +304,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(5, 300);
             this.panel3.TabIndex = 45;
-            // 
-            // piclist
-            // 
-            this.piclist.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.piclist.Location = new System.Drawing.Point(20, 37);
-            this.piclist.Name = "piclist";
-            this.piclist.Size = new System.Drawing.Size(331, 282);
-            this.piclist.TabIndex = 38;
-            this.piclist.UseCompatibleStateImageBehavior = false;
             // 
             // label19
             // 
@@ -763,6 +761,6 @@
         private System.Windows.Forms.Panel dppnl;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ListView piclist;
+        private System.Windows.Forms.FlowLayoutPanel iflowpnl;
     }
 }
