@@ -465,5 +465,21 @@ namespace Chinarhomes
                 label5.Location = new Point(295, 475);
             }
         }
+
+        private void ablbl_Click(object sender, EventArgs e)
+        {
+            dialogcontainer dg = new dialogcontainer();
+
+            AboutBox ab = new AboutBox(dg);
+            ab.TopLevel = false;
+            dg.dialogpnl.Controls.Clear();
+            dg.dialogpnl.Controls.Add(ab);
+            dg.Size = new Size(451, 352);
+            dg.lbl.Text = "About";
+
+            dg.Show();
+            ab.Show();
+            
+        }
     }
 }

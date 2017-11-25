@@ -66,7 +66,10 @@ namespace Chinarhomes
         }
         private void pwdtxt_TextChanged(object sender, EventArgs e)
         {
-            pwdent = true;
+            if (pwdtxt.Text != "")
+            {
+                pwdent = true;
+            }
         }
 
         public static string md5hash(string input)
@@ -94,7 +97,7 @@ namespace Chinarhomes
                 {
                     pwdpnl.Visible = true;
                 }
-                else
+                else if(pwdent==true)
                 {
                     DialogResult dgr = MessageBox.Show("Erasing this property will remove it from customer's wishlist/interested list and will remove it from everywhere.\n\nAre you sure you want to remove this property?\n" + loc, "Confirm!", MessageBoxButtons.YesNo);
                     if (dgr == DialogResult.Yes)

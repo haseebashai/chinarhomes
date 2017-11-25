@@ -355,9 +355,9 @@ namespace Chinarhomes
             ptypebox.DisplayMember = "Text";
             var items = new[]
             {
-                new {Text="Apartments"},
-                new {Text="Houses"},
-                 new {Text="Lands & Plots"},
+                new {Text="Apartment"},
+                new {Text="House"},
+                 new {Text="Land & Plot"},
                 new {Text="Commercial Space"},
                  new {Text="Other"}
             };

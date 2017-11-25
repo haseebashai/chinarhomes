@@ -36,8 +36,8 @@ namespace Chinarhomes
         {
 
 
-            if (Application.OpenForms.OfType<agents>().Count() == 1)
-            {
+            //if (Application.OpenForms.OfType<agents>().Count() == 1)
+            //{
                 agentdataview.DataSource = bsource;
                 agentdataview.Columns["mail"].Visible = false;
                 agentdataview.Columns["password"].Visible = false;
@@ -47,7 +47,7 @@ namespace Chinarhomes
                 formlbl.Text= "Agents";
                 formlbl.BringToFront();
                 apnl.Visible = true;
-            }
+           // }
 
 
         }

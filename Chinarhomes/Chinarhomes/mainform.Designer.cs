@@ -74,6 +74,7 @@
             this.signoutlbl = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.refresh = new System.Windows.Forms.PictureBox();
+            this.ablbl = new System.Windows.Forms.Label();
             this.cntpnl.SuspendLayout();
             this.homepnl.SuspendLayout();
             this.lpnl.SuspendLayout();
@@ -361,6 +362,7 @@
             // navpnl
             // 
             this.navpnl.BackColor = System.Drawing.Color.White;
+            this.navpnl.Controls.Add(this.ablbl);
             this.navpnl.Controls.Add(this.arrow7);
             this.navpnl.Controls.Add(this.mailbtn);
             this.navpnl.Controls.Add(this.arrow6);
@@ -685,6 +687,19 @@
             this.refresh.TabStop = false;
             this.refresh.Click += new System.EventHandler(this.refresh_Click);
             // 
+            // ablbl
+            // 
+            this.ablbl.AutoSize = true;
+            this.ablbl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ablbl.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ablbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.ablbl.Location = new System.Drawing.Point(4, 680);
+            this.ablbl.Name = "ablbl";
+            this.ablbl.Size = new System.Drawing.Size(41, 16);
+            this.ablbl.TabIndex = 11;
+            this.ablbl.Text = "ABOUT";
+            this.ablbl.Click += new System.EventHandler(this.ablbl_Click);
+            // 
             // mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -768,5 +783,6 @@
         public System.Windows.Forms.Label arrow7;
         public System.Windows.Forms.PictureBox agpic;
         public System.Windows.Forms.PictureBox custpic;
+        private System.Windows.Forms.Label ablbl;
     }
 }

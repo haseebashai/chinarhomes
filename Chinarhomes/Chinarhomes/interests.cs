@@ -88,8 +88,7 @@ namespace Chinarhomes
 
         private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (Application.OpenForms.OfType<interests>().Count() == 1)
-            {
+           
                 loadinglbl.Visible = false;
                 proploading.Visible = false;
                 custlist.Enabled = true;
@@ -125,7 +124,7 @@ namespace Chinarhomes
                     }
                     dpnl.Visible = true;
                 }
-            }
+            
         }
 
         private void mailbtn_Click(object sender, EventArgs e)
