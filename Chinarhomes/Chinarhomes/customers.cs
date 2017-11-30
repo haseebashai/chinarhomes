@@ -96,19 +96,20 @@ namespace Chinarhomes
         string intp,wp;
         List<string> ip = new List<string>();
         List<string> wip = new List<string>();
+      
         private void readdetails()
         {
             try
             {
-                dr = obj.Query("select distinct propertyid from interested where email='"+email+"'");
+                dr = obj.Query("select distinct propertyid from interested where email='" + email + "'");
                 while (dr.Read())
                 {
                     intp += dr[0].ToString();
                     intp += "\r\n";
                 }
                 obj.closeConnection();
-               
-
+           
+          
                 dr = obj.Query("select distinct propertyid from wishlist where email='" + email+"'");
                 while (dr.Read())
                 {
@@ -116,44 +117,51 @@ namespace Chinarhomes
                     wp += "\r\n";
                 }
                 obj.closeConnection();
+           
+
+            if (intp!=null)
+            {
 
                 string[] p = intp.Split('\n');
-                string[] p1 = wp.Split('\n');
-                foreach(string pro in p)
+                foreach (string pro in p)
                 {
-                    dr = obj.Query("select location, price from properties where propertyid='" + pro + "'");
+                    dr = obj.Query("select propertyid,location, price from properties where propertyid='" + pro + "'");
                     while (dr.Read())
                     {
-                        ip.Add("Location: "+dr[0].ToString() + "\r\n" + "Price: " + dr[1].ToString());
+                        ip.Add("ID: " + dr[0].ToString() + "\r\n" + "Location: " + dr[1].ToString() + "\r\n" + "Price: " + dr[2].ToString());
 
                     }
                     obj.closeConnection();
                 }
-               
-               
+                }
+           
 
+
+            if (wp!=null)
+            {
+                string[] p1 = wp.Split('\n');
                 foreach (string pro in p1)
                 {
-                    dr = obj.Query("select location, price from properties where propertyid='" + pro + "'");
+                    dr = obj.Query("select propertyid,location, price from properties where propertyid='" + pro + "'");
                     while (dr.Read())
                     {
-                        wip.Add("Location: " + dr[0].ToString() + "\r\n" + "Price: " + dr[1].ToString());
+                        wip.Add("ID: " + dr[0].ToString() + "\r\n" + "Location: " + dr[1].ToString() + "\r\n" + "Price: " + dr[2].ToString());
 
 
                     }
                     obj.closeConnection();
                 }
+            }
+
                 intp = "";
                 wp = "";
-             
-
             }
             catch (Exception ex)
             {
                 obj.closeConnection();
                 MessageBox.Show(ex.Message, "Error!");
             }
-           
+
         }
 
        
@@ -202,51 +210,53 @@ namespace Chinarhomes
 
             loadinglbl.Visible = false;
             proploading.Visible = false;
+          
+                ilbl.Text = namelbl.Text + " is interested in:";
+                wlbl.Text = "and has wishlisted these properties:";
 
-            ilbl.Text = namelbl.Text + " is interested in:";
-            wlbl.Text = "and has wishlisted these properties:";
 
-
-           foreach(string d in ip)
-            {
-                TextBox t = new TextBox()
+                foreach (string d in ip)
                 {
-                    Text = d,
-                    ReadOnly = true,
-                    BackColor = Color.White,
-                    Multiline = true,
-                    Size = new Size(200, 40),
-                    BorderStyle = BorderStyle.None,
                    
-                };
-                iflow.Controls.Add(t);
-                iflow.AutoScroll = true;
-            }
+                    TextBox t = new TextBox()
+                    {
+                        Text = d,
+                        ReadOnly = true,
+                        BackColor = Color.White,
+                        Multiline = true,
+                        Size = new Size(200, 40),
+                        BorderStyle = BorderStyle.None,
+
+                    };
+                    iflow.Controls.Add(t);
+                    iflow.AutoScroll = true;
+                }
 
 
-            foreach (string d in wip)
-            {
-                TextBox t = new TextBox()
+                foreach (string d in wip)
                 {
-                    Text = d,
-                    ReadOnly = true,
-                    BackColor = Color.White,
-                    Multiline = true,
-                    Size =new Size(200,40),
-                    BorderStyle = BorderStyle.None,
+                    
+                    TextBox t = new TextBox()
+                    {
+                        Text = d,
+                        ReadOnly = true,
+                        BackColor = Color.White,
+                        Multiline = true,
+                        Size = new Size(200, 40),
+                        BorderStyle = BorderStyle.None,
 
-                };
-                wflow.Controls.Add(t);
-                wflow.AutoScroll = true;
-            }
+                    };
+                    wflow.Controls.Add(t);
+                    wflow.AutoScroll = true;
+                }
 
 
-
+            
 
             dpnl.Visible = true;
-            ppnl.Visible = true;
-            customerdataview.Enabled = true;
-        
+                ppnl.Visible = true;
+                customerdataview.Enabled = true;
+            
             
         }
 

@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.propdataview = new System.Windows.Forms.DataGridView();
             this.proppnl = new System.Windows.Forms.Panel();
+            this.apnl = new System.Windows.Forms.Panel();
+            this.emaillbl = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.addnewbtn = new System.Windows.Forms.Button();
             this.imgtxt = new System.Windows.Forms.TextBox();
             this.addpicsbtn = new System.Windows.Forms.Button();
@@ -92,8 +95,13 @@
             this.label22 = new System.Windows.Forms.Label();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.namesearch = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.locsearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).BeginInit();
             this.proppnl.SuspendLayout();
+            this.apnl.SuspendLayout();
             this.bpnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.dppnl.SuspendLayout();
@@ -107,25 +115,31 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.propdataview.Location = new System.Drawing.Point(11, 4);
+            this.propdataview.Location = new System.Drawing.Point(11, 24);
             this.propdataview.MultiSelect = false;
             this.propdataview.Name = "propdataview";
             this.propdataview.ReadOnly = true;
-            this.propdataview.Size = new System.Drawing.Size(1141, 255);
+            this.propdataview.Size = new System.Drawing.Size(1141, 235);
             this.propdataview.TabIndex = 0;
             this.propdataview.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.propdataview_CellClick);
+            this.propdataview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.propdataview_CellClick);
             // 
             // proppnl
             // 
+            this.proppnl.Controls.Add(this.label24);
+            this.proppnl.Controls.Add(this.namesearch);
+            this.proppnl.Controls.Add(this.label25);
+            this.proppnl.Controls.Add(this.locsearch);
+            this.proppnl.Controls.Add(this.apnl);
             this.proppnl.Controls.Add(this.addnewbtn);
             this.proppnl.Controls.Add(this.imgtxt);
             this.proppnl.Controls.Add(this.addpicsbtn);
@@ -138,6 +152,34 @@
             this.proppnl.Size = new System.Drawing.Size(1165, 662);
             this.proppnl.TabIndex = 2;
             this.proppnl.Visible = false;
+            // 
+            // apnl
+            // 
+            this.apnl.Controls.Add(this.emaillbl);
+            this.apnl.Controls.Add(this.label23);
+            this.apnl.Location = new System.Drawing.Point(11, 625);
+            this.apnl.Name = "apnl";
+            this.apnl.Size = new System.Drawing.Size(383, 31);
+            this.apnl.TabIndex = 50;
+            this.apnl.Visible = false;
+            // 
+            // emaillbl
+            // 
+            this.emaillbl.AutoSize = true;
+            this.emaillbl.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.emaillbl.Location = new System.Drawing.Point(59, 8);
+            this.emaillbl.Name = "emaillbl";
+            this.emaillbl.Size = new System.Drawing.Size(0, 13);
+            this.emaillbl.TabIndex = 43;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(3, 8);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(55, 13);
+            this.label23.TabIndex = 42;
+            this.label23.Text = "Added by:";
             // 
             // addnewbtn
             // 
@@ -463,9 +505,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(378, 168);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(92, 13);
+            this.label16.Size = new System.Drawing.Size(150, 13);
             this.label16.TabIndex = 28;
-            this.label16.Text = "Distance from City";
+            this.label16.Text = "Distance from Main Road (mtr)";
             // 
             // prioritytxt
             // 
@@ -632,9 +674,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(204, 168);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.Size = new System.Drawing.Size(74, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Area in Sq. ft.";
+            this.label5.Text = "Area in Marlas";
             // 
             // tagstxt
             // 
@@ -768,6 +810,42 @@
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(888, 6);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(86, 13);
+            this.label24.TabIndex = 54;
+            this.label24.Text = "Search by Name";
+            // 
+            // namesearch
+            // 
+            this.namesearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.namesearch.Location = new System.Drawing.Point(974, 1);
+            this.namesearch.Name = "namesearch";
+            this.namesearch.Size = new System.Drawing.Size(178, 20);
+            this.namesearch.TabIndex = 52;
+            this.namesearch.TextChanged += new System.EventHandler(this.namesearch_TextChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(601, 5);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(99, 13);
+            this.label25.TabIndex = 53;
+            this.label25.Text = "Search by Location";
+            // 
+            // locsearch
+            // 
+            this.locsearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.locsearch.Location = new System.Drawing.Point(701, 1);
+            this.locsearch.Name = "locsearch";
+            this.locsearch.Size = new System.Drawing.Size(178, 20);
+            this.locsearch.TabIndex = 51;
+            this.locsearch.TextChanged += new System.EventHandler(this.locsearch_TextChanged);
+            // 
             // verifiedproperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -783,6 +861,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.propdataview)).EndInit();
             this.proppnl.ResumeLayout(false);
             this.proppnl.PerformLayout();
+            this.apnl.ResumeLayout(false);
+            this.apnl.PerformLayout();
             this.bpnl.ResumeLayout(false);
             this.dpnl.ResumeLayout(false);
             this.dpnl.PerformLayout();
@@ -861,5 +941,12 @@
         private System.Windows.Forms.Label label22;
         public System.Windows.Forms.Button addnewbtn;
         private System.Windows.Forms.FlowLayoutPanel iflowpnl;
+        private System.Windows.Forms.Panel apnl;
+        private System.Windows.Forms.Label emaillbl;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox namesearch;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox locsearch;
     }
 }

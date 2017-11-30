@@ -49,7 +49,7 @@ namespace Chinarhomes
 
         private void readinterests()
         {
-            dr = obj.Query("select distinct interested.email, customer.mail from customer inner join interested on interested.email=customer.email;");
+            dr = obj.Query("select distinct concat(customer.id,':    ',customer.mail)as mail from customer inner join interested on interested.email=customer.email;");
            
             dt = new DataTable();
             dt.Columns.Add("mail", typeof(String));
@@ -77,12 +77,15 @@ namespace Chinarhomes
             iflowpnl.Controls.Clear();
             properties.Clear();
             i = 0;
-            string custname = custlist.Text;
+          
+            string propid = custlist.Text.Split(':')[0];
+
+
             bg = new BackgroundWorker();
             bg.DoWork += bg_DoWork;
             bg.RunWorkerCompleted += bg_RunWorkerCompleted;
             bg.WorkerSupportsCancellation = true;
-            bg.RunWorkerAsync(custname);
+            bg.RunWorkerAsync(propid);
        
         }
 
@@ -97,7 +100,7 @@ namespace Chinarhomes
                 {
                     namelbl.Text = name;
                     conlbl.Text = contact;
-                    emaillbl.Text = custlist.Text;
+                    emaillbl.Text = custlist.Text.Substring(custlist.Text.LastIndexOf(' '));
                     List<details> dobj= (List<details>)e.Result;
                   
                     foreach (var details in dobj)
@@ -151,9 +154,9 @@ namespace Chinarhomes
         {
             try
             {
-                string custname = e.Argument as string;
+                string propid = e.Argument as string;
 
-                dr = obj.Query("select name,contact,email from customer where mail='"+custname+"' ");
+                dr = obj.Query("select name,contact,email from customer where id='"+ propid + "' ");
                 dr.Read();
                 name = dr[0].ToString();
                 contact = dr[1].ToString();

@@ -269,9 +269,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(371, 145);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.Size = new System.Drawing.Size(74, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Area in Sq. ft.";
+            this.label5.Text = "Area in Marlas";
             // 
             // areatxt
             // 
@@ -365,9 +365,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(544, 145);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(92, 13);
+            this.label16.Size = new System.Drawing.Size(150, 13);
             this.label16.TabIndex = 28;
-            this.label16.Text = "Distance from City";
+            this.label16.Text = "Distance from Main Road (mtr)";
             // 
             // pricetxt
             // 

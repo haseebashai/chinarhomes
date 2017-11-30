@@ -134,6 +134,7 @@ namespace Chinarhomes
             faq = false;
             about = false;
             contact = false;
+            addnewbtn.Visible = true;
 
             readterms();
 
@@ -149,6 +150,7 @@ namespace Chinarhomes
             faq = true;
             about = false;
             contact = false;
+            addnewbtn.Visible = true;
 
             readfaq();
            
@@ -332,6 +334,7 @@ namespace Chinarhomes
             faq = false;
             about = false;
             contact = true;
+            addnewbtn.Visible = false;
 
             readcontacts();
         }
@@ -400,6 +403,7 @@ namespace Chinarhomes
             faq = false;
             about = true;
             contact = false;
+            addnewbtn.Visible = true;
 
             readabout();
 
