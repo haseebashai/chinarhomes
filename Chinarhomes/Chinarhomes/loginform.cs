@@ -103,94 +103,99 @@ namespace Chinarhomes
 
         private void Login_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            usernametxt.Enabled = true;
-            pwdtxt.Enabled = true;
-            loading.Visible = false;
-            string result = e.Result.ToString();
-           
-            if (result == "404")
+            try
             {
-            
-                error.Text = "Username incorrect";
-                error.Visible = true;
-                namelbl.Visible = true;
-                pwdlbl.Visible = true;
-                usernametxt.Text = "";
-                pwdtxt.Text = "";
-                usernametxt.Focus();
-            }
-            else if (result == "incorrect password")
-            {
-               
-                error.Text = "Please enter correct password";
-                error.Visible = true;
-                pwdtxt.Text = "";
-                pwdtxt.Focus();
-                namelbl.Visible = true;
-                pwdlbl.Visible = true;
-            }else if (result == "Username")
-            {
-               
-                error.Text = "Username does not exist";
-                error.Visible = true;
-                usernametxt.Text = "";
-                pwdtxt.Text = "";
-                namelbl.Visible = true;
-                pwdlbl.Visible = true;
-                usernametxt.Focus();
-            }else if(result=="enter details")
-            {
-               
-                error.Text = "Enter username and password";
-                error.Visible = true;
-                usernametxt.Text = "";
-                pwdtxt.Text = "";
-                namelbl.Visible = true;
-                pwdlbl.Visible = true;
-            }else if (result == "connection")
-            {
-                error.Text = "Please check your internet connection.";
-                error.Visible = true;
-            }
-            else if (result == "success")
-            {
-                mainform mf = new mainform(cn);
-                mf.TopLevel = false;
-                cn.mainpnl.Controls.Clear();
-                if (usertype == "1")
+                usernametxt.Enabled = true;
+                pwdtxt.Enabled = true;
+                loading.Visible = false;
+                string result = e.Result.ToString();
+
+                if (result == "404")
                 {
-                    userinfo.admin = true;
-                   
+
+                    error.Text = "Username incorrect";
+                    error.Visible = true;
+                    namelbl.Visible = true;
+                    pwdlbl.Visible = true;
+                    usernametxt.Text = "";
+                    pwdtxt.Text = "";
+                    usernametxt.Focus();
                 }
-                else if (usertype == "0")
+                else if (result == "incorrect password")
                 {
-                    userinfo.admin = false;                    
+
+                    error.Text = "Please enter correct password";
+                    error.Visible = true;
+                    pwdtxt.Text = "";
+                    pwdtxt.Focus();
+                    namelbl.Visible = true;
+                    pwdlbl.Visible = true;
+                }
+                else if (result == "Username")
+                {
+
+                    error.Text = "Username does not exist";
+                    error.Visible = true;
+                    usernametxt.Text = "";
+                    pwdtxt.Text = "";
+                    namelbl.Visible = true;
+                    pwdlbl.Visible = true;
+                    usernametxt.Focus();
+                }
+                else if (result == "enter details")
+                {
+
+                    error.Text = "Enter username and password";
+                    error.Visible = true;
+                    usernametxt.Text = "";
+                    pwdtxt.Text = "";
+                    namelbl.Visible = true;
+                    pwdlbl.Visible = true;
+                }
+                else if (result == "connection")
+                {
+                    error.Text = "Please check your internet connection.";
+                    error.Visible = true;
+                }
+                else if (result == "success")
+                {
+                    mainform mf = new mainform(cn);
+                    mf.TopLevel = false;
+                    cn.mainpnl.Controls.Clear();
+                    if (usertype == "1")
+                    {
+                        userinfo.admin = true;
+
+                    }
+                    else if (usertype == "0")
+                    {
+                        userinfo.admin = false;
+
+                    }
+
+
+
+                    userinfo.loggedin = true;
+                    userinfo.username = username;
+                    userinfo.email = email;
+                    userinfo.encmail = encmail;
+
+
+
+
+
+                    cn.mainpnl.Controls.Add(mf);
+
+                    this.Close();
+                    mf.Show();
+                    mf.changelabel(username);
+
 
                 }
+                loginbtn.Enabled = true;
+                forgotbtn.Enabled = true;
 
-
-                
-                userinfo.loggedin = true;
-                userinfo.username = username;
-                userinfo.email = email;
-                userinfo.encmail = encmail;
-
-
-               
-              
-                
-                cn.mainpnl.Controls.Add(mf);
-               
-                this.Close();
-                mf.Show();
-                mf.changelabel(username);
-
-               
-            }
-            loginbtn.Enabled = true;
-            forgotbtn.Enabled = true;
-
-
+            }catch { }
         }
 
         string usertype,username,email,encmail;

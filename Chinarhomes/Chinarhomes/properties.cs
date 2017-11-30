@@ -29,13 +29,16 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (Application.OpenForms.OfType<properties>().Count() == 1)
+            try
             {
-                loadinglbl.Text = "Highlights";
-                loading.Visible = false;
-                tvplbl.Text = "Total Verified Properties currently added: " + tvp;
-                tuvplbl.Text = "Total Unverified Properties currently added: " + tuvp;
-            }
+                if (Application.OpenForms.OfType<properties>().Count() == 1)
+                {
+                    loadinglbl.Text = "Highlights";
+                    loading.Visible = false;
+                    tvplbl.Text = "Total Verified Properties currently added: " + tvp;
+                    tuvplbl.Text = "Total Unverified Properties currently added: " + tuvp;
+                }
+            }catch { }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)

@@ -186,52 +186,55 @@ namespace Chinarhomes
 
         private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (Application.OpenForms.OfType<removeproperty>().Count() == 1)
+            try
             {
-                loadinglbl.Visible = false;
-                proploading.Visible = false;
-                proplist.Enabled = true;
-                if (success)
+                if (Application.OpenForms.OfType<removeproperty>().Count() == 1)
                 {
-
-                    namelbl.Text = name;
-                    loclbl.Text = loc;
-                    addedbylbl.Text = trueemail;
-                    pricelbl.Text = "₹ " + price;
-                    verlbl.Text = ver;
-                    pidlbl.Text = pid;
-                    dpnl.Visible = true;
-                    List<string> imageurl = (List<string>)e.Result;
-
-
-
-                    try
+                    loadinglbl.Visible = false;
+                    proploading.Visible = false;
+                    proplist.Enabled = true;
+                    if (success)
                     {
-                        foreach (String pic in imageurl)
+
+                        namelbl.Text = name;
+                        loclbl.Text = loc;
+                        addedbylbl.Text = trueemail;
+                        pricelbl.Text = "₹ " + price;
+                        verlbl.Text = ver;
+                        pidlbl.Text = pid;
+                        dpnl.Visible = true;
+                        List<string> imageurl = (List<string>)e.Result;
+
+
+
+                        try
                         {
-                            pb = new PictureBox();
-                            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                            pb.Height = 132;
-                            pb.Width = 182;
-                            pb.ImageLocation = pic;
-                            iflowpnl.Controls.Add(pb);
-                            iflowpnl.AutoScroll = true;
+                            foreach (String pic in imageurl)
+                            {
+                                pb = new PictureBox();
+                                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                                pb.Height = 132;
+                                pb.Width = 182;
+                                pb.ImageLocation = pic;
+                                iflowpnl.Controls.Add(pb);
+                                iflowpnl.AutoScroll = true;
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Cannot display the image: "
+                             + ". You may not have permission to read the file, or " +
+                            "it may be corrupt.\n\nReported error: " + ex.Message);
 
                         }
                     }
-                    catch (Exception ex)
+                    else if (success == false)
                     {
-                        MessageBox.Show("Cannot display the image: "
-                         + ". You may not have permission to read the file, or " +
-                        "it may be corrupt.\n\nReported error: " + ex.Message);
 
                     }
                 }
-                else if (success == false)
-                {
-
-                }
-            }
+            }catch { }
         }
 
         bool success = false;

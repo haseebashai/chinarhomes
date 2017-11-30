@@ -16,8 +16,8 @@ namespace Chinarhomes
     {
         DBConnect obj = new DBConnect();
         MySqlDataReader dr;
-        DataTable dt,dt1,dt2;
-       
+        DataTable dt, dt1, dt2;
+
         BindingSource bsource, bsource2;
 
         public messages()
@@ -35,7 +35,8 @@ namespace Chinarhomes
         }
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+        { 
+            try{
             formlbl.Text = "Messages";
             formlbl.BringToFront();
             loading.Visible = false;
@@ -43,6 +44,8 @@ namespace Chinarhomes
             messagesdataview.Columns["sender"].Visible = false;
             sentdataview.DataSource = bsource2;
             msgpnl.Visible = true;
+            }
+            catch { }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)

@@ -32,13 +32,16 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            nametxt.Text = name;
-            mailtxt.Text = vmail;
-            contacttxt.Text = con;
-            addtxt.Text = add;
-            loading.Visible = false;
-            loadinglbl.Visible = false;
-            spnl.Visible = true;
+            try
+            {
+                nametxt.Text = name;
+                mailtxt.Text = vmail;
+                contacttxt.Text = con;
+                addtxt.Text = add;
+                loading.Visible = false;
+                loadinglbl.Visible = false;
+                spnl.Visible = true;
+            }catch { }
         }
         string name, vmail, con, add;
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)

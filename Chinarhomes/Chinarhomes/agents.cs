@@ -35,20 +35,22 @@ namespace Chinarhomes
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-
-            //if (Application.OpenForms.OfType<agents>().Count() == 1)
-            //{
+            try
+            {
+                //if (Application.OpenForms.OfType<agents>().Count() == 1)
+                //{
                 agentdataview.DataSource = bsource;
                 agentdataview.Columns["mail"].Visible = false;
                 agentdataview.Columns["password"].Visible = false;
                 agentdataview.Columns["admin"].Visible = false;
                 agentdataview.Columns["sid"].Visible = false;
                 loading.Visible = false;
-                formlbl.Text= "Agents";
+                formlbl.Text = "Agents";
                 formlbl.BringToFront();
                 apnl.Visible = true;
-           // }
-
+                // }
+            }
+            catch { }
 
         }
 

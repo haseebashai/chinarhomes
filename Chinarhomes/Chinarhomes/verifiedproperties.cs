@@ -47,27 +47,31 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (Application.OpenForms.OfType<verifiedproperties>().Count() == 1)
+            try
             {
-                propdataview.DataSource = bsource;
-             
-                propdataview.Columns["description"].Visible = false;
-                propdataview.Columns["noofstories"].Visible = false;
-                propdataview.Columns["noofrooms"].Visible = false;
-                propdataview.Columns["areaofbuilt"].Visible = false;
-                propdataview.Columns["distancefrommain"].Visible = false;
-                propdataview.Columns["furnished"].Visible = false;
-                propdataview.Columns["tags"].Visible = false;
-                propdataview.Columns["picture"].Visible = false;
-                propdataview.Columns["saletype"].Visible = false;
-                propdataview.Columns["priority"].Visible = false;
-                propdataview.Columns["email"].Visible = false;
-                if (!userinfo.admin)
-                    propdataview.Columns["verifiedby"].Visible = false;
-                loading.Visible = false;
-                formlbl.Visible = false;
-                proppnl.Visible = true;
+                if (Application.OpenForms.OfType<verifiedproperties>().Count() == 1)
+                {
+                    propdataview.DataSource = bsource;
+
+                    propdataview.Columns["description"].Visible = false;
+                    propdataview.Columns["noofstories"].Visible = false;
+                    propdataview.Columns["noofrooms"].Visible = false;
+                    propdataview.Columns["areaofbuilt"].Visible = false;
+                    propdataview.Columns["distancefrommain"].Visible = false;
+                    propdataview.Columns["furnished"].Visible = false;
+                    propdataview.Columns["tags"].Visible = false;
+                    propdataview.Columns["picture"].Visible = false;
+                    propdataview.Columns["saletype"].Visible = false;
+                    propdataview.Columns["priority"].Visible = false;
+                    propdataview.Columns["email"].Visible = false;
+                    if (!userinfo.admin)
+                        propdataview.Columns["verifiedby"].Visible = false;
+                    loading.Visible = false;
+                    formlbl.Visible = false;
+                    proppnl.Visible = true;
+                }
             }
+            catch { }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
@@ -1004,7 +1008,7 @@ namespace Chinarhomes
         {
             imgtxt.Text = "";
             OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "Images (*.JPG;*.PNG)|*.JPG;*.PNG|" + "All files (*.*)|*.*";
+            fd.Filter = "Images(*.JPG; *.PNG)| *.JPG; *.PNG";
             fd.Multiselect = true;
             fd.Title = "Image Browser";
             DialogResult dr = fd.ShowDialog();

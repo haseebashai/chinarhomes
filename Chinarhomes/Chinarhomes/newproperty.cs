@@ -85,40 +85,43 @@ namespace Chinarhomes
         
         private void Bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            ppnl.Visible = false;
-            if(!e.Cancelled)
+            try
             {
-                string result = (string)e.Result;
-                if (result == "success")
+                ppnl.Visible = false;
+                if (!e.Cancelled)
                 {
-                    MessageBox.Show("Property added successfully.");
-                    pics.Clear();
-                    flowpnl.Controls.Clear();
-                    flowpnl.Visible = false;
-                    updbtn.Visible = false;
-
-                    clearpicbtn.Visible = false;
-                    updpicbtn.Location = new Point(491, 90);
-                    updpicbtn.Text = "Select Pictures";
-                }
-                else
-                {
-                    if (picfailed)
+                    string result = (string)e.Result;
+                    if (result == "success")
                     {
-                        MessageBox.Show("Picture upload failed. Please try after sometime.");
+                        MessageBox.Show("Property added successfully.");
+                        pics.Clear();
+                        flowpnl.Controls.Clear();
+                        flowpnl.Visible = false;
+                        updbtn.Visible = false;
+
+                        clearpicbtn.Visible = false;
+                        updpicbtn.Location = new Point(491, 90);
+                        updpicbtn.Text = "Select Pictures";
                     }
-                    else if (result == "fail")
+                    else
                     {
-                        MessageBox.Show("Failed to add property, please try again.");
+                        if (picfailed)
+                        {
+                            MessageBox.Show("Picture upload failed. Please try after sometime.");
+                        }
+                        else if (result == "fail")
+                        {
+                            MessageBox.Show("Failed to add property, please try again.");
+                        }
+
                     }
 
                 }
-              
-            }
-            ppnl.Visible = false;
-            updbtn.Enabled = true;
-            clearpicbtn.Enabled = true;
-            updpicbtn.Enabled = true;
+                ppnl.Visible = false;
+                updbtn.Enabled = true;
+                clearpicbtn.Enabled = true;
+                updpicbtn.Enabled = true;
+            }catch { }
         }
 
         private void Bg_DoWork(object sender, DoWorkEventArgs e)
@@ -225,7 +228,7 @@ namespace Chinarhomes
         private void updpicbtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "Images (*.JPG;*.PNG)|*.JPG;*.PNG|" + "All files (*.*)|*.*";
+            fd.Filter = "Images (*.JPG;*.PNG)|*.JPG;*.PNG" ;
 
 
             fd.Multiselect = true;

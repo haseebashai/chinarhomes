@@ -34,17 +34,21 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            loading.Visible = false;
-            formlbl.Text="Customers";
-            formlbl.BringToFront();
-            customerdataview.DataSource = bsource;
-            customerdataview.Columns["email"].Visible = false;
-            customerdataview.Columns["password"].Visible = false;
-            customerdataview.Columns["lastvisit"].Visible = false;
-            customerdataview.Columns["subscribed"].Visible = false;
-            customerdataview.Columns["verified"].Visible = false;
-            countlbl.Text = "Total Registered Customers: " + count;
-            cpnl.Visible = true;
+            try
+            {
+                loading.Visible = false;
+                formlbl.Text = "Customers";
+                formlbl.BringToFront();
+                customerdataview.DataSource = bsource;
+                customerdataview.Columns["email"].Visible = false;
+                customerdataview.Columns["password"].Visible = false;
+                customerdataview.Columns["lastvisit"].Visible = false;
+                customerdataview.Columns["subscribed"].Visible = false;
+                customerdataview.Columns["verified"].Visible = false;
+                countlbl.Text = "Total Registered Customers: " + count;
+                cpnl.Visible = true;
+            }
+            catch { }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)

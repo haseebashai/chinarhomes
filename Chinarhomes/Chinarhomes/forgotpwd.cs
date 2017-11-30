@@ -97,22 +97,26 @@ namespace Chinarhomes
 
         private void Pwd_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            string result = (string)e.Result;
-            if (result == "success")
+            try
             {
-                MessageBox.Show("Password reset successful, please check your registred email for instructions.", "Password Reset");
-                System.Threading.Thread.Sleep(500);
-                this.Close();
-                dg.Close();
-            }else if (result == "fail")
-            {
-                MessageBox.Show("Something happened, please try again","Error!");
-                
-            }
-            timer.Stop();
-            workinglbl.Visible = false;
-            loginbtn.Enabled = true;
+                string result = (string)e.Result;
+                if (result == "success")
+                {
+                    MessageBox.Show("Password reset successful, please check your registred email for instructions.", "Password Reset");
+                    System.Threading.Thread.Sleep(500);
+                    this.Close();
+                    dg.Close();
+                }
+                else if (result == "fail")
+                {
+                    MessageBox.Show("Something happened, please try again", "Error!");
 
+                }
+                timer.Stop();
+                workinglbl.Visible = false;
+                loginbtn.Enabled = true;
+            }
+            catch { }
         }
 
         private void Pwd_DoWork(object sender, DoWorkEventArgs e)

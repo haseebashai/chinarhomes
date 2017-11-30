@@ -91,7 +91,8 @@ namespace Chinarhomes
 
         private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-           
+            try
+            {
                 loadinglbl.Visible = false;
                 proploading.Visible = false;
                 custlist.Enabled = true;
@@ -101,8 +102,8 @@ namespace Chinarhomes
                     namelbl.Text = name;
                     conlbl.Text = contact;
                     emaillbl.Text = custlist.Text.Substring(custlist.Text.LastIndexOf(' '));
-                    List<details> dobj= (List<details>)e.Result;
-                  
+                    List<details> dobj = (List<details>)e.Result;
+
                     foreach (var details in dobj)
                     {
 
@@ -127,7 +128,7 @@ namespace Chinarhomes
                     }
                     dpnl.Visible = true;
                 }
-            
+            }catch { }
         }
 
         private void mailbtn_Click(object sender, EventArgs e)
