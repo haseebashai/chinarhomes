@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.proppnl = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.dpnl = new System.Windows.Forms.Panel();
             this.pwdpnl = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.proploading = new System.Windows.Forms.PictureBox();
             this.loading = new System.Windows.Forms.PictureBox();
             this.formlbl = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.proppnl.SuspendLayout();
             this.dpnl.SuspendLayout();
             this.pwdpnl.SuspendLayout();
@@ -74,6 +74,26 @@
             this.proppnl.Size = new System.Drawing.Size(1145, 603);
             this.proppnl.TabIndex = 2;
             this.proppnl.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label9.Location = new System.Drawing.Point(78, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 48;
+            this.label9.Text = "Location";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label8.Location = new System.Drawing.Point(19, 22);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(18, 13);
+            this.label8.TabIndex = 47;
+            this.label8.Text = "ID";
             // 
             // dpnl
             // 
@@ -115,9 +135,9 @@
             this.label7.ForeColor = System.Drawing.Color.Red;
             this.label7.Location = new System.Drawing.Point(23, 1);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.Size = new System.Drawing.Size(113, 13);
             this.label7.TabIndex = 55;
-            this.label7.Text = "Enter Password";
+            this.label7.Text = "Enter Admin Password";
             // 
             // pwdtxt
             // 
@@ -330,26 +350,6 @@
             this.formlbl.TabIndex = 48;
             this.formlbl.Text = "Gathering Data";
             this.formlbl.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label8.Location = new System.Drawing.Point(19, 22);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(18, 13);
-            this.label8.TabIndex = 47;
-            this.label8.Text = "ID";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label9.Location = new System.Drawing.Point(78, 22);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 48;
-            this.label9.Text = "Location";
             // 
             // removeproperty
             // 
