@@ -655,7 +655,7 @@ namespace Chinarhomes
             {
                 progressBar1.Visible = false;
 
-                MessageBox.Show("Property Verified without pictures!\nPlease upload goto verified properties and upload pictures.", "Warning!");
+                MessageBox.Show("Property Verified without pictures!\nPlease goto verified properties and upload pictures.", "Warning!");
                
                 dpnl.Enabled = false;
                 dpnl.Visible = false; apnl.Visible = false;
