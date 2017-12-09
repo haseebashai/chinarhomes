@@ -577,6 +577,23 @@ namespace Chinarhomes
                                 ftpResponse.Close();
 
                             }
+                            SmtpClient Smtpobj = new SmtpClient();
+                            Smtpobj.Host = "smtp.zoho.com";
+                            Smtpobj.Port = 587;
+                            Smtpobj.UseDefaultCredentials = false;
+                            Smtpobj.EnableSsl = true;
+                            Smtpobj.Credentials = new NetworkCredential("support@chinarhomes.com", "Chinar@123chinar");
+                            Smtpobj.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+
+                            MailMessage mail = new MailMessage("support@chinarhomes.com", emaillbl.Text);
+                            mail.From = new MailAddress("support@chinarhomes.com", "ChinarHomes: Property Listed!");
+                            mail.IsBodyHtml = true;
+                            mail.Subject = "Your listed property is now live.";
+                            mail.Body = "Dear <b>" + name + "</b>,<p><p>Congratulations, your listed property at <b>" + loc + "</b> is now live on ChinarHomes.<p>We will notify you once a customer responds to your listing.<p><p><p>Thanks and warm regards,<p>ChinarHomes.";
+
+                            Smtpobj.Send(mail);
+
                             e.Result = "success";
                           
                         }
