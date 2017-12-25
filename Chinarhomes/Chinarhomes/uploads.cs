@@ -10,14 +10,14 @@ using MySql.Data.MySqlClient;
 
 namespace Chinarhomes
 {
-    public partial class interests : Form
+    public partial class uploads : Form
     {
         DBConnect obj = new DBConnect();
         MySqlDataReader dr;
-        string name,contact,encemail,url="http://chinarhomes.com/chinarhomes/pictures/";
+        string name, contact, url;
         DataTable dt;
 
-        public interests()
+        public uploads()
         {
             InitializeComponent();
             loading.Visible = true;
@@ -26,45 +26,10 @@ namespace Chinarhomes
             pageload.DoWork += Pageload_DoWork;
             pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
             pageload.RunWorkerAsync();
-           
-
         }
 
-        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            formlbl.Visible = false;
-            loading.Visible = false;
-            titlelbl.Location = new Point(1, 1);
-            titlelbl.Visible = true;
-            
-            custlist.DisplayMember = "mail";
-            custlist.DataSource = dt;
-            ipnl.Visible = true;
-        }
-
-        private void Pageload_DoWork(object sender, DoWorkEventArgs e)
-        {
-            readinterests();
-        }
-
-        private void readinterests()
-        {
-            dr = obj.Query("select distinct concat(customer.id,':    ',customer.mail)as mail from customer inner join interested on interested.email=customer.email;");
-           
-            dt = new DataTable();
-            dt.Columns.Add("mail", typeof(String));
-            dt.Load(dr);
-            
-           
-            obj.closeConnection();
-           
-
-
-        }
-
-        List<string> properties = new List<string>();
-        int i = 0;
         BackgroundWorker bg;
+        List<string> properties = new List<string>();
         List<string> details = new List<string>();
 
         private void custlist_SelectedIndexChanged(object sender, EventArgs e)
@@ -76,17 +41,14 @@ namespace Chinarhomes
             proploading.Visible = true;
             iflowpnl.Controls.Clear();
             properties.Clear();
-            i = 0;
-          
-            string propid = custlist.Text.Split(':')[0];
+
 
 
             bg = new BackgroundWorker();
             bg.DoWork += bg_DoWork;
             bg.RunWorkerCompleted += bg_RunWorkerCompleted;
             bg.WorkerSupportsCancellation = true;
-            bg.RunWorkerAsync(propid);
-       
+            bg.RunWorkerAsync(custlist.Text);
         }
 
         private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -101,24 +63,39 @@ namespace Chinarhomes
                 {
                     namelbl.Text = name;
                     conlbl.Text = contact;
-                    emaillbl.Text = custlist.Text.Substring(custlist.Text.LastIndexOf(' '));
-                    List<details> dobj = (List<details>)e.Result;
+                    emaillbl.Text = custlist.Text;
+                    List<pupload> dobj = (List<pupload>)e.Result;
 
+
+                    string ver="";
                     foreach (var details in dobj)
                     {
+                       
+                        if (details.Verified == "True")
+                        {
+                            url= "http://chinarhomes.com/chinarhomes/pictures/";
+                            ver = "Verified";
 
-                        CustomControl c = new CustomControl(
+                        }else if (details.Verified == "False")
+                        {
+                            url = "http://chinarhomes.com/chinarhomes/uploads/";
+                            ver = "Unverified";
+                        }
+                        CustomControl2 c = new CustomControl2(
                       new PictureBox
                       {
+
                           SizeMode = PictureBoxSizeMode.StretchImage,
-                          ImageLocation = url + details.Picture,
+                          
+                            ImageLocation = url + details.Picture,
+                            
                           Height = 150,
                           Width = 220,
                       },
                       new TextBox
                       {
-                          Text = details.Loc + "\r\n" + "Area: " + details.Area + " marlas\r\n" + "Price: " + details.Price + "\r\n" + "Propertyid: " + details.Pid,
-                          Size = new Size(220, 60),
+                          Text = details.Loc + "\r\n" + "Area: " + details.Area + " marlas\r\n" + "Price: " + details.Price + "\r\n" + "Propertyid: " + details.Pid + "\r\n" + "Status: " + ver,
+                          Size = new Size(220, 75),
                           Multiline = true,
                           ReadOnly = true
                       });
@@ -128,12 +105,13 @@ namespace Chinarhomes
                     }
                     dpnl.Visible = true;
                 }
-            }catch { }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
+
 
         private void mailbtn_Click(object sender, EventArgs e)
         {
-
             dialogcontainer dg = new dialogcontainer();
 
             mail ml = new mail(emaillbl.Text);
@@ -142,30 +120,28 @@ namespace Chinarhomes
             dg.dialogpnl.Controls.Add(ml);
             dg.Size = new Size(638, 550);
             dg.lbl.Text = "Send Mail";
-            
+
             dg.Show();
             ml.Show();
-           
-
         }
 
-        string loc, picture, area, price;
+        string loc, picture, area, price, verified;
         bool success = false;
         private void bg_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                string propid = e.Argument as string;
+                string custid = e.Argument as string;
 
-                dr = obj.Query("select name,contact,email from customer where id='"+ propid + "' ");
+                dr = obj.Query("select email,contact,name from customer where mail='" + custid + "'");
                 dr.Read();
-                name = dr[0].ToString();
+                string email = dr[0].ToString();
                 contact = dr[1].ToString();
-                encemail = dr[2].ToString();
+                name = dr[2].ToString();
                 obj.closeConnection();
-              
 
-                dr = obj.Query("select propertyid from interested where email ='" + encemail + "'");
+
+                dr = obj.Query("select propertyid from properties where email ='" + email + "'");
                 while (dr.Read())
                 {
                     properties.Add(dr[0].ToString());
@@ -174,37 +150,79 @@ namespace Chinarhomes
 
                 obj.closeConnection();
 
-                List<details> dobj = new List<details>();
+
+                List<pupload> dobj = new List<pupload>();
                 foreach (String property in properties)
                 {
 
-                    dr = obj.Query("select location,picture,area,price from properties where propertyid='" + property + "' ");
+                    dr = obj.Query("select location,picture,area,price,verified from properties where propertyid='" + property + "' ");
                     dr.Read();
                     loc = dr[0].ToString();
                     area = dr[2].ToString();
                     price = dr[3].ToString();
                     picture = dr[1].ToString();
+                    verified = dr[4].ToString();
                     obj.closeConnection();
-                   
-                    dobj.Add(new details(loc, area, price,picture,property));
-  
+
+
+                    dobj.Add(new pupload(loc, area, price, picture, property, verified));
+                    
                 }
+
+
                 success = true;
                 e.Result = dobj;
-               
-            }catch
+
+            }
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
+
                 success = false;
                 e.Result = "fail";
             }
         }
+
+
+        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            formlbl.Visible = false;
+            loading.Visible = false;
+            titlelbl.Location = new Point(1, 1);
+            titlelbl.Visible = true;
+           
+            custlist.DisplayMember = "email";
+            custlist.DataSource = dt;
+            
+            ipnl.Visible = true;
+        }
+
+        private void Pageload_DoWork(object sender, DoWorkEventArgs e)
+        {
+            readproperties();
+        }
+
+        private void readproperties()
+        {
+            try
+            {
+                dr = obj.Query("select distinct customer.mail as email from customer inner join properties on properties.email=customer.email where customer.email!='21c46b0ac82e494ad94106564b411686';");
+
+                dt = new DataTable();
+                dt.Columns.Add("email", typeof(String));
+                dt.Load(dr);
+
+
+                obj.closeConnection();
+            }catch { obj.closeConnection(); }
+        }
     }
 
-    public class CustomControl : Control
+    public class CustomControl2 : Control
     {
         private PictureBox pb;
         private TextBox label;
-        public CustomControl(PictureBox pic, TextBox lbl)
+        public CustomControl2(PictureBox pic, TextBox lbl)
         {
             pb = pic;
             label = lbl;
@@ -214,26 +232,29 @@ namespace Chinarhomes
             pb.Location = new Point(0, 0);
             Controls.Add(lbl);
             lbl.Location = new Point(0, pb.Height);
-            
-           
+
+
         }
     }
 
-    public class details
+
+    public class pupload
     {
         private string loc;
         private string area;
         private string price;
         private string picture;
         private string pid;
+        private string verified;
 
-        public details(string loc, string area, string price, string picture,string pid)
+        public pupload(string loc, string area, string price, string picture, string pid, string verified)
         {
             this.loc = loc;
             this.area = area;
             this.price = price;
             this.picture = picture;
             this.pid = pid;
+            this.verified = verified;
         }
 
         public string Loc
@@ -262,7 +283,13 @@ namespace Chinarhomes
             get { return pid; }
             set { pid = value; }
         }
+        public string Verified
+        {
+            get { return verified; }
+            set { verified = value; }
+        }
 
     }
 
 }
+

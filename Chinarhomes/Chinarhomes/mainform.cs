@@ -122,6 +122,7 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = false;
             arrow7.Visible = false;
+            arrow8.Visible = false;
             properties prop = new properties();
             prop.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -140,6 +141,7 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = false;
             arrow7.Visible = false;
+            arrow8.Visible = false;
             Cursor = Cursors.WaitCursor;
             policy pol = new policy();
             pol.TopLevel = false;
@@ -158,6 +160,7 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = false;
             arrow7.Visible = false;
+            arrow8.Visible = false;
             customers cust = new customers();
             cust.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -174,6 +177,7 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = true;
             arrow7.Visible = false;
+            arrow8.Visible = false;
             messages msg = new messages();
             msg.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -190,6 +194,7 @@ namespace Chinarhomes
             arrow5.Visible = true;
             arrow6.Visible = false;
             arrow7.Visible = false;
+            arrow8.Visible = false;
             agents ag = new agents();
             ag.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -206,6 +211,7 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = false;
             arrow7.Visible = false;
+            arrow8.Visible = false;
             interests inte = new interests();
             inte.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -427,7 +433,7 @@ namespace Chinarhomes
             arrow5.Visible = false;
             arrow6.Visible = false;
             arrow7.Visible = false;
-
+            arrow8.Visible = false;
 
             dialogcontainer dg = new dialogcontainer();
 
@@ -457,6 +463,7 @@ namespace Chinarhomes
                agentbtn.Visible = false;
                 policybtn.Visible = false;
                 mailbtn.Visible = false;
+                updbtn.Visible = false;
                 agpic.Visible = false;
                 custpic.Visible = false;
                 label4.Visible = false;
@@ -480,6 +487,35 @@ namespace Chinarhomes
             dg.Show();
             ab.Show();
             
+        }
+
+        private void updbtn_Click(object sender, EventArgs e)
+        {
+            arrow1.Visible = false;
+            arrow2.Visible = false;
+            arrow3.Visible = false;
+            arrow4.Visible = false;
+            arrow5.Visible = false;
+            arrow6.Visible = false;
+            arrow7.Visible = false;
+            arrow8.Visible = true;
+            uploads upd = new uploads();
+            upd.TopLevel = false;
+            cntpnl.Controls.Clear();
+            cntpnl.Controls.Add(upd);
+            upd.Show();
+        }
+
+        private void updbtn_MouseEnter(object sender, EventArgs e)
+        {
+
+            arrow.Location = new Point(145, 412);
+            arrow.Visible = true;
+        }
+
+        private void updbtn_MouseLeave(object sender, EventArgs e)
+        {
+            arrow.Visible = false;
         }
     }
 }
