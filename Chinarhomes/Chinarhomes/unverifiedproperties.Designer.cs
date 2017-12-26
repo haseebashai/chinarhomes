@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.proppnl = new System.Windows.Forms.Panel();
+            this.progresspc = new System.Windows.Forms.Label();
+            this.dldlbl = new System.Windows.Forms.Label();
+            this.dldbtn = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.namesearch = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.locsearch = new System.Windows.Forms.TextBox();
             this.apnl = new System.Windows.Forms.Panel();
             this.emaillbl = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -88,10 +95,6 @@
             this.propdataview = new System.Windows.Forms.DataGridView();
             this.formlbl = new System.Windows.Forms.Label();
             this.loading = new System.Windows.Forms.PictureBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.namesearch = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.locsearch = new System.Windows.Forms.TextBox();
             this.proppnl.SuspendLayout();
             this.apnl.SuspendLayout();
             this.bpnl.SuspendLayout();
@@ -103,6 +106,9 @@
             // 
             // proppnl
             // 
+            this.proppnl.Controls.Add(this.progresspc);
+            this.proppnl.Controls.Add(this.dldlbl);
+            this.proppnl.Controls.Add(this.dldbtn);
             this.proppnl.Controls.Add(this.label23);
             this.proppnl.Controls.Add(this.namesearch);
             this.proppnl.Controls.Add(this.label24);
@@ -117,6 +123,76 @@
             this.proppnl.Size = new System.Drawing.Size(1165, 660);
             this.proppnl.TabIndex = 3;
             this.proppnl.Visible = false;
+            // 
+            // progresspc
+            // 
+            this.progresspc.AutoSize = true;
+            this.progresspc.Location = new System.Drawing.Point(909, 638);
+            this.progresspc.Name = "progresspc";
+            this.progresspc.Size = new System.Drawing.Size(47, 13);
+            this.progresspc.TabIndex = 50;
+            this.progresspc.Text = "progress";
+            this.progresspc.Visible = false;
+            // 
+            // dldlbl
+            // 
+            this.dldlbl.AutoSize = true;
+            this.dldlbl.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.dldlbl.Location = new System.Drawing.Point(907, 620);
+            this.dldlbl.Name = "dldlbl";
+            this.dldlbl.Size = new System.Drawing.Size(69, 13);
+            this.dldlbl.TabIndex = 49;
+            this.dldlbl.Text = "Downloading";
+            this.dldlbl.Visible = false;
+            // 
+            // dldbtn
+            // 
+            this.dldbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.dldbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dldbtn.Location = new System.Drawing.Point(1034, 619);
+            this.dldbtn.Name = "dldbtn";
+            this.dldbtn.Size = new System.Drawing.Size(113, 35);
+            this.dldbtn.TabIndex = 48;
+            this.dldbtn.Text = "Download pictures";
+            this.dldbtn.UseVisualStyleBackColor = false;
+            this.dldbtn.Visible = false;
+            this.dldbtn.Click += new System.EventHandler(this.dldbtn_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(890, 6);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(86, 13);
+            this.label23.TabIndex = 47;
+            this.label23.Text = "Search by Name";
+            // 
+            // namesearch
+            // 
+            this.namesearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.namesearch.Location = new System.Drawing.Point(976, 1);
+            this.namesearch.Name = "namesearch";
+            this.namesearch.Size = new System.Drawing.Size(178, 20);
+            this.namesearch.TabIndex = 45;
+            this.namesearch.TextChanged += new System.EventHandler(this.namesearch_TextChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(603, 5);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(99, 13);
+            this.label24.TabIndex = 46;
+            this.label24.Text = "Search by Location";
+            // 
+            // locsearch
+            // 
+            this.locsearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.locsearch.Location = new System.Drawing.Point(703, 1);
+            this.locsearch.Name = "locsearch";
+            this.locsearch.Size = new System.Drawing.Size(178, 20);
+            this.locsearch.TabIndex = 44;
+            this.locsearch.TextChanged += new System.EventHandler(this.locsearch_TextChanged);
             // 
             // apnl
             // 
@@ -680,14 +756,14 @@
             this.propdataview.AllowUserToDeleteRows = false;
             this.propdataview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.propdataview.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.propdataview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.propdataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propdataview.Location = new System.Drawing.Point(14, 24);
             this.propdataview.MultiSelect = false;
@@ -720,44 +796,6 @@
             this.loading.TabIndex = 45;
             this.loading.TabStop = false;
             this.loading.Visible = false;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(890, 6);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(86, 13);
-            this.label23.TabIndex = 47;
-            this.label23.Text = "Search by Name";
-            this.label23.Click += new System.EventHandler(this.label23_Click);
-            // 
-            // namesearch
-            // 
-            this.namesearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.namesearch.Location = new System.Drawing.Point(976, 1);
-            this.namesearch.Name = "namesearch";
-            this.namesearch.Size = new System.Drawing.Size(178, 20);
-            this.namesearch.TabIndex = 45;
-            this.namesearch.TextChanged += new System.EventHandler(this.namesearch_TextChanged);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(603, 5);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(99, 13);
-            this.label24.TabIndex = 46;
-            this.label24.Text = "Search by Location";
-            this.label24.Click += new System.EventHandler(this.label24_Click);
-            // 
-            // locsearch
-            // 
-            this.locsearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.locsearch.Location = new System.Drawing.Point(703, 1);
-            this.locsearch.Name = "locsearch";
-            this.locsearch.Size = new System.Drawing.Size(178, 20);
-            this.locsearch.TabIndex = 44;
-            this.locsearch.TextChanged += new System.EventHandler(this.locsearch_TextChanged);
             // 
             // unverifiedproperties
             // 
@@ -852,5 +890,8 @@
         private System.Windows.Forms.TextBox namesearch;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox locsearch;
+        private System.Windows.Forms.Button dldbtn;
+        private System.Windows.Forms.Label progresspc;
+        private System.Windows.Forms.Label dldlbl;
     }
 }

@@ -278,9 +278,13 @@ namespace Chinarhomes
                     List<string> imageurl = new List<string>();
                     foreach (String pic in pathurl)
                     {
-
+                    if (ver == "True")
+                    {
                         imageurl.Add("http://chinarhomes.com/chinarhomes/pictures/" + pic);
-
+                    }else if (ver == "False")
+                    {
+                        imageurl.Add("http://chinarhomes.com/chinarhomes/uploads/" + pic);
+                    }
 
                     }
                 success = true;

@@ -11,6 +11,8 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Threading.Tasks;
+
 
 namespace Chinarhomes
 {
@@ -23,7 +25,7 @@ namespace Chinarhomes
         List<string> pathurl = new List<string>();
         int i = 0;
         int total;
-        string dp,emailto;
+        string dp, emailto;
         string cmd;
         string ftpadd = "ftp://chinarhomes.com/httpdocs/chinarhomes/uploads/";
         string newadd = "ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/";
@@ -68,68 +70,68 @@ namespace Chinarhomes
                     formlbl.Visible = false;
                     proppnl.Visible = true;
                 }
-            }catch { }
+            } catch { }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
         {
-            
-                readproperties();
-          
+
+            readproperties();
+
         }
         private void readproperties()
         {
-           
-                try
-                {
 
-                    dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
-                        + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, "
-                        + "furnished,tags,picture,saletype,priority,name,email from properties where verified='0'");
-                    dt = new DataTable();
-                    dt.Load(dr);
-                    obj.closeConnection();
-                    bsource = new BindingSource();
-                    bsource.DataSource = dt;
+            try
+            {
 
-                    dr = obj.Query("select distinct type from properties ");
-                    DataTable dt1 = new DataTable();
-                    dt1.Columns.Add("type", typeof(String));
-                    dt1.Load(dr);
-                    obj.closeConnection();
-                    ptypebox.DisplayMember = "type";
-                    ptypebox.DataSource = dt1;
+                dr = obj.Query("select propertyid as ID, location as Location, type as Type, area as Area, description as Description, "
+                    + "price as Price, verified as Verified,noofstories, noofrooms, areaofbuilt, distancefrommain, "
+                    + "furnished,tags,picture,saletype,priority,name,email from properties where verified='0'");
+                dt = new DataTable();
+                dt.Load(dr);
+                obj.closeConnection();
+                bsource = new BindingSource();
+                bsource.DataSource = dt;
 
-
-                    dr = obj.Query("select distinct saletype from properties ");
-                    DataTable dt2 = new DataTable();
-                    dt2.Columns.Add("saletype", typeof(String));
-                    dt2.Load(dr);
-                    obj.closeConnection();
-                    saletypebox.DisplayMember = "saletype";
-                    saletypebox.DataSource = dt2;
+                dr = obj.Query("select distinct type from properties ");
+                DataTable dt1 = new DataTable();
+                dt1.Columns.Add("type", typeof(String));
+                dt1.Load(dr);
+                obj.closeConnection();
+                ptypebox.DisplayMember = "type";
+                ptypebox.DataSource = dt1;
 
 
-                    dr = obj.Query("select distinct furnished from properties ");
-                    DataTable dt3 = new DataTable();
-                    dt3.Columns.Add("furnished", typeof(String));
-                    dt3.Load(dr);
-                    obj.closeConnection();
-                    furnishedtxt.DisplayMember = "furnished";
-                    furnishedtxt.DataSource = dt3;
+                dr = obj.Query("select distinct saletype from properties ");
+                DataTable dt2 = new DataTable();
+                dt2.Columns.Add("saletype", typeof(String));
+                dt2.Load(dr);
+                obj.closeConnection();
+                saletypebox.DisplayMember = "saletype";
+                saletypebox.DataSource = dt2;
 
 
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            
+                dr = obj.Query("select distinct furnished from properties ");
+                DataTable dt3 = new DataTable();
+                dt3.Columns.Add("furnished", typeof(String));
+                dt3.Load(dr);
+                obj.closeConnection();
+                furnishedtxt.DisplayMember = "furnished";
+                furnishedtxt.DataSource = dt3;
+
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void propdataview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+            dldbtn.Visible = false;
             nopicslbl.Visible = false;
             loadpicbtn.Visible = false;
             cancelbtn.Visible = false;
@@ -170,7 +172,7 @@ namespace Chinarhomes
                 tagstxt.Text = row.Cells["tags"].Value.ToString();
                 saletypebox.Text = row.Cells["saletype"].Value.ToString();
                 pnametxt.Text = row.Cells["name"].Value.ToString();
-                emailto= row.Cells["email"].Value.ToString();
+                emailto = row.Cells["email"].Value.ToString();
 
             }
         }
@@ -178,8 +180,8 @@ namespace Chinarhomes
         private void Email_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-          
-                string to = (string)e.Result;
+
+            string to = (string)e.Result;
             if (to == "emailnotfoundfail")
             {
                 apnl.Visible = false;
@@ -195,16 +197,16 @@ namespace Chinarhomes
         {
             try
             {
-                
+
 
                 dr = obj.Query("select mail,name from customer where email='" + emailto + "'");
                 dr.Read();
                 string to = dr[0].ToString();
-                name = dr[1].ToString();          
+                name = dr[1].ToString();
                 obj.closeConnection();
                 e.Result = to;
-                
-            }catch {
+
+            } catch {
                 e.Result = "emailnotfoundfail";
             }
         }
@@ -251,6 +253,156 @@ namespace Chinarhomes
 
         }
 
+        string downloadpath;
+        BackgroundWorker picdld = new BackgroundWorker();
+        
+        private void dldbtn_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+               
+                using (var folderDialog = new FolderBrowserDialog())
+                {
+                    if (folderDialog.ShowDialog() == DialogResult.OK)
+                    {
+
+                        downloadpath = folderDialog.SelectedPath;
+                        
+                        dldlbl.Text = "Downloading " + piclist.Count.ToString() + " pictures";
+                        dldlbl.Visible = true;
+                        dpnl.Enabled = false;
+                        bpnl.Enabled = false;
+                        propdataview.Enabled = false;
+
+                        picdld.DoWork += Picdld_DoWork;
+                        picdld.RunWorkerCompleted += Picdld_RunWorkerCompleted;
+                        picdld.WorkerReportsProgress = true;
+                        picdld.ProgressChanged += Picdld_ProgressChanged;
+                        picdld.RunWorkerAsync();
+                        dldbtn.Enabled = false;
+
+                    }
+                    else
+                    {
+                        dldbtn.Enabled = true;
+                    }
+
+                }
+            }
+            catch { }
+
+        }
+
+        private void Picdld_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void Picdld_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string result = e.Result as string;
+            if (result == "success")
+            {
+               
+                MessageBox.Show("Pictures downloaded at\r\n" + downloadpath,"Success!");
+                dldbtn.Visible = false;
+
+            }else if (result == "fail")
+            {
+                MessageBox.Show("Some files could not be downloaded, please retry.","Error!");
+                
+            }
+           
+            dldbtn.Enabled = true;
+           
+            dldlbl.Visible = false;
+            progresspc.Visible = false;
+            dpnl.Enabled = true;
+            bpnl.Enabled = true;
+            propdataview.Enabled = true;
+        }
+
+        private void Picdld_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+
+                foreach (string pic in piclist)
+                {
+
+                    string url = "ftp://chinarhomes.com/httpdocs/chinarhomes/uploads/" + pic;
+                    string ext = Path.GetExtension(url);
+                    if (ext != "")
+                    {
+
+
+
+                        NetworkCredential credentials = new NetworkCredential("Chinarhomes", "Chinar@123");
+
+                        // Query size of the file to be downloaded
+                        FtpWebRequest sizeRequest = (FtpWebRequest)WebRequest.Create(url);
+                        sizeRequest.Credentials = credentials;
+                        sizeRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+                        long size = sizeRequest.GetResponse().ContentLength / 1000;
+
+
+
+                        // Download the file
+                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
+                        request.Credentials = credentials;
+                        request.Timeout = 10000;
+                        request.Method = WebRequestMethods.Ftp.DownloadFile;
+                        string filename = url.Substring(url.LastIndexOf("/") + 1);
+
+
+
+                        using (Stream ftpStream = request.GetResponse().GetResponseStream())
+                        using (Stream fileStream = File.Create(downloadpath + "\\" + filename))
+                        {
+                            byte[] buffer = new byte[10240];
+                            int read;
+                            int total = 0;
+                            while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                fileStream.Write(buffer, 0, read);
+                                total += read;
+
+                                progresspc.Invoke(
+                                    (MethodInvoker)delegate { progresspc.Visible = true; progresspc.Text = "(" + total / 1000 + "/" + size + ") KB downloaded"; });
+                            }
+                        }
+
+                    }
+
+                }
+
+            
+                e.Result = "success";
+                piclist.Clear();
+                
+                }catch { e.Result = "fail"; }
+        }
+
+
+        private void Download(string path)
+        {
+
+            try
+            {
+              
+                
+
+            }
+            catch (Exception ex)
+            {
+               
+               
+            }
+        }
+
+
+
         private void Bg_DoWork1(object sender, DoWorkEventArgs e)
         {
             try
@@ -294,8 +446,10 @@ namespace Chinarhomes
             }
         }
 
+        List<string> piclist = new List<string>();
         private void Bg_RunWorkerCompleted1(object sender, RunWorkerCompletedEventArgs e)
         {
+            piclist.Clear();
             string result = (string)e.Result;
            
             if (result == "404")
@@ -314,6 +468,7 @@ namespace Chinarhomes
                 //    PopulateListView();
                 foreach (String pic in pathurl)
                 {
+                    piclist.Add(pic);
                     PictureBox pb = new PictureBox();
                     pb.SizeMode = PictureBoxSizeMode.StretchImage;
                     pb.Height = 102;
@@ -326,7 +481,7 @@ namespace Chinarhomes
                 dppnl.Visible = true;
                 loadpicbtn.Visible = false;
                 loadpicbtn.Enabled = true;
-
+                dldbtn.Visible = true;
                 nopicslbl.Text = "No Pictures found.";
                 nopicslbl.Visible = false;
                 Cursor = Cursors.Arrow;
@@ -910,19 +1065,9 @@ namespace Chinarhomes
             }catch { }
         }
 
-        private void label23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label24_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cancelbtn_Click(object sender, EventArgs e)
         {
-
+            dldbtn.Visible=false;
             nopicslbl.Visible = false;
             loadpicbtn.Visible = false;
             cancelbtn.Visible = false;
