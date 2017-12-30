@@ -176,6 +176,7 @@ namespace Chinarhomes
             }
             catch (Exception ex)
             {
+                obj.closeConnection();
                 MessageBox.Show(ex.Message);
 
                 success = false;

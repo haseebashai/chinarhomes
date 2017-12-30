@@ -57,14 +57,15 @@ namespace Chinarhomes
 
         private void readstaff()
         {
+            try
+            {
+                dr = obj.Query("select distinct username from staff where username !='" + userinfo.username + "'");
 
-            dr = obj.Query("select distinct username from staff where username !='"+userinfo.username+"'");
-
-            dt1 = new DataTable();
-            dt1.Columns.Add("username", typeof(String));
-            dt1.Load(dr);
-            obj.closeConnection();
-
+                dt1 = new DataTable();
+                dt1.Columns.Add("username", typeof(String));
+                dt1.Load(dr);
+                obj.closeConnection();
+            }catch { }
         }
 
 

@@ -163,6 +163,12 @@
     <Compile Include="policy.Designer.cs">
       <DependentUpon>policy.cs</DependentUpon>
     </Compile>
+    <Compile Include="profiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="profiles.Designer.cs">
+      <DependentUpon>profiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="properties.cs">
       <SubType>Form</SubType>
@@ -245,6 +251,9 @@
     <EmbeddedResource Include="policy.resx">
       <DependentUpon>policy.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="profiles.resx">
+      <DependentUpon>profiles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="properties.resx">
       <DependentUpon>properties.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,6 +301,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chinarhomes_cion.ico" />
+    <None Include="Resources\user-201.png" />
+    <None Include="Resources\user.png" />
     <None Include="Resources\upload %281%29.png" />
     <None Include="Resources\upload.png" />
     <None Include="Resources\LIFECLICKS.png" />

@@ -209,40 +209,43 @@ namespace Chinarhomes
         bool update = false;
         private void agentdataview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                DataGridViewRow row = this.agentdataview.Rows[e.RowIndex];
-                mail = row.Cells["mail"].Value.ToString();
-                update = true;
-                mailtxt.Text= row.Cells["email"].Value.ToString();
-                nametxt.Text = row.Cells["name"].Value.ToString();
-                usertxt.Text = row.Cells["username"].Value.ToString();
-                addtxt.Text= row.Cells["address"].Value.ToString();
-                pwdtxt.Enabled = false;
-                contacttxt.Text = row.Cells["contact"].Value.ToString();
-                string admin= row.Cells["admin"].Value.ToString();
-                string gender = row.Cells["gender"].Value.ToString();
-                if (admin == "1")
+                if (e.RowIndex >= 0)
                 {
-                    ayes.Checked = true;
-                    ano.Checked = false;
+                    DataGridViewRow row = this.agentdataview.Rows[e.RowIndex];
+                    mail = row.Cells["mail"].Value.ToString();
+                    update = true;
+                    mailtxt.Text = row.Cells["email"].Value.ToString();
+                    nametxt.Text = row.Cells["name"].Value.ToString();
+                    usertxt.Text = row.Cells["username"].Value.ToString();
+                    addtxt.Text = row.Cells["address"].Value.ToString();
+                    pwdtxt.Enabled = false;
+                    contacttxt.Text = row.Cells["contact"].Value.ToString();
+                    string admin = row.Cells["admin"].Value.ToString();
+                    string gender = row.Cells["gender"].Value.ToString();
+                    if (admin == "1")
+                    {
+                        ayes.Checked = true;
+                        ano.Checked = false;
+                    }
+                    else
+                    {
+                        ayes.Checked = false;
+                        ano.Checked = true;
+                    }
+                    if (gender == "Male")
+                    {
+                        genderbox.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        genderbox.SelectedIndex = 1;
+                    }
+                    addbtn.Text = "Update";
+                    addnewbtn.Visible = true;
                 }
-                else
-                {
-                    ayes.Checked = false;
-                    ano.Checked = true;
-                }
-                if (gender == "Male")
-                {
-                    genderbox.SelectedIndex=0;
-                }
-                else
-                {
-                    genderbox.SelectedIndex=1;
-                }
-                addbtn.Text = "Update";
-                addnewbtn.Visible = true;
-            }
+            }catch { }
         }
 
         private void addnewbtn_Click(object sender, EventArgs e)
@@ -303,23 +306,27 @@ namespace Chinarhomes
 
         private void Username_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
-            if (success)
-            {               
-                    errlbl.Visible = true;
-                
-            }else if (success == false)
+            try
             {
-             errlbl.Visible = false;
-            }
+                if (success)
+                {
+                    errlbl.Visible = true;
+
+                }
+                else if (success == false)
+                {
+                    errlbl.Visible = false;
+                }
+            }catch { }
         }
 
         bool success = false;
         private void Username_DoWork(object sender, DoWorkEventArgs e)
         {
-            string usertxt = (string)e.Argument;
             try
             {
+                string usertxt = (string)e.Argument;
+           
                 int i = 0;
                 i = obj.Count("Select Count(sid) from staff where username='" + usertxt+ "';");
               

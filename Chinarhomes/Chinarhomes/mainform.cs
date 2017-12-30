@@ -16,61 +16,95 @@ namespace Chinarhomes
         MySqlDataReader dr;
         DBConnect obj = new DBConnect();
         bool error = false;
+        BackgroundWorker pageload;
 
         private container cn = null;
         public mainform(Form cncopy)
         {
             cn = cncopy as container;
             InitializeComponent();
-            BackgroundWorker pageload = new BackgroundWorker();
+            pageload = new BackgroundWorker();
             pageload.DoWork += Pageload_DoWork;
             pageload.RunWorkerCompleted += Pageload_RunWorkerCompleted;
+            pageload.WorkerReportsProgress = true;
+            pageload.ProgressChanged += Pageload_ProgressChanged;
             pageload.RunWorkerAsync();
 
 
         }
 
-        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void Pageload_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (error)
+            try
             {
-                cntpnl.Visible = false;
-                
-            }
-           else if (!e.Cancelled)
-            {
-                object[] arg = (object[])e.Result;
-                string lpa = (string)arg[0];
-                string verified = (string)arg[1];
-                string addedby = (string)arg[2];
-                int count = (int)arg[3];
+                string count = (string)e.UserState;
 
-                lpalbl.Text = lpa;
-                vlbl.Text = verified;
-                abylbl.Text = addedby;
-                if (count > 0)
+                if (count == "0")
                 {
-                    vcountlbl.Text = count + " Properties need verification.";
+                    msglbl.Visible = false;
                 }
-                else if (count == 0)
+                else
                 {
-                    vcountlbl.Text = "All Properties are verified.";
-                    warningpic.Visible = false;
-                    vcountlbl.Location = new Point(4, 42);
+                    msglbl.Text = count.ToString();
+                    msglbl.Visible = true;
                 }
-                homepnl.Visible = true;
-                loading.Dispose();
-            }
-            else
-            {
-                MessageBox.Show("loading cancelled.","error");
-            }
+            }catch { }
         }
 
+        private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (error)
+                {
+                    cntpnl.Visible = false;
+
+                }
+                else if (!e.Cancelled)
+                {
+                    object[] arg = (object[])e.Result;
+                    string lpa = (string)arg[0];
+                    string verified = (string)arg[1];
+                    string addedby = (string)arg[2];
+                    int count = (int)arg[3];
+
+                    lpalbl.Text = lpa;
+                    vlbl.Text = verified;
+                    abylbl.Text = addedby;
+                    if (count > 0)
+                    {
+                        vcountlbl.Text = count + " Properties need verification.";
+                    }
+                    else if (count == 0)
+                    {
+                        vcountlbl.Text = "All Properties are verified.";
+                        warningpic.Visible = false;
+                        vcountlbl.Location = new Point(4, 42);
+                    }
+                    homepnl.Visible = true;
+                    loading.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show("loading cancelled.", "error");
+                }
+            }catch { }
+        }
+
+        string jobs;
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
+
+                dr = obj.Query("select count(id) from jobs where processed ='0'");
+                dr.Read();
+                jobs = dr[0].ToString();
+                obj.closeConnection();
+
+                pageload.ReportProgress(100,jobs);
+
+
                 dr = obj.Query("select location,email, verified from properties order by propertyid desc limit 1");
                 dr.Read();
                 string lpa = dr[0].ToString();
@@ -123,6 +157,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = false;
+            arrow9.Visible = false;
             properties prop = new properties();
             prop.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -142,6 +177,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = false;
+            arrow9.Visible = false;
             Cursor = Cursors.WaitCursor;
             policy pol = new policy();
             pol.TopLevel = false;
@@ -161,6 +197,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = false;
+            arrow9.Visible = false;
             customers cust = new customers();
             cust.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -178,6 +215,7 @@ namespace Chinarhomes
             arrow6.Visible = true;
             arrow7.Visible = false;
             arrow8.Visible = false;
+            arrow9.Visible = false;
             messages msg = new messages();
             msg.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -195,6 +233,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = false;
+            arrow9.Visible = false;
             agents ag = new agents();
             ag.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -212,6 +251,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = false;
+            arrow9.Visible = false;
             interests inte = new interests();
             inte.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -434,7 +474,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = false;
-
+            arrow9.Visible = false;
             dialogcontainer dg = new dialogcontainer();
 
             mail ml = new mail("");
@@ -464,6 +504,7 @@ namespace Chinarhomes
                 policybtn.Visible = false;
                 mailbtn.Visible = false;
                 updbtn.Visible = false;
+                profbtn.Visible = false;
                 agpic.Visible = false;
                 custpic.Visible = false;
                 label4.Visible = false;
@@ -499,6 +540,7 @@ namespace Chinarhomes
             arrow6.Visible = false;
             arrow7.Visible = false;
             arrow8.Visible = true;
+            arrow9.Visible = false;
             uploads upd = new uploads();
             upd.TopLevel = false;
             cntpnl.Controls.Clear();
@@ -517,5 +559,37 @@ namespace Chinarhomes
         {
             arrow.Visible = false;
         }
+
+        private void profbtn_Click(object sender, EventArgs e)
+        {
+            arrow1.Visible = false;
+            arrow2.Visible = false;
+            arrow3.Visible = false;
+            arrow4.Visible = false;
+            arrow5.Visible = false;
+            arrow6.Visible = false;
+            arrow7.Visible = false;
+            arrow8.Visible = false;
+            arrow9.Visible = true;
+            msglbl.Visible = false;
+            profiles pf = new profiles();
+            pf.TopLevel = false;
+            cntpnl.Controls.Clear();
+            cntpnl.Controls.Add(pf);
+            pf.Show();
+        }
+
+        private void profbtn_MouseEnter(object sender, EventArgs e)
+        {
+            arrow.Location = new Point(145, 462);
+            arrow.Visible = true;
+        }
+
+        private void profbtn_MouseLeave(object sender, EventArgs e)
+        {
+            arrow.Visible = false;
+        }
+
+
     }
 }

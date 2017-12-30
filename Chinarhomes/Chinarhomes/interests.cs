@@ -32,14 +32,17 @@ namespace Chinarhomes
 
         private void Pageload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            formlbl.Visible = false;
-            loading.Visible = false;
-            titlelbl.Location = new Point(1, 1);
-            titlelbl.Visible = true;
-            
-            custlist.DisplayMember = "mail";
-            custlist.DataSource = dt;
-            ipnl.Visible = true;
+            try
+            {
+                formlbl.Visible = false;
+                loading.Visible = false;
+                titlelbl.Location = new Point(1, 1);
+                titlelbl.Visible = true;
+
+                custlist.DisplayMember = "mail";
+                custlist.DataSource = dt;
+                ipnl.Visible = true;
+            }catch { }
         }
 
         private void Pageload_DoWork(object sender, DoWorkEventArgs e)
@@ -49,15 +52,17 @@ namespace Chinarhomes
 
         private void readinterests()
         {
-            dr = obj.Query("select distinct concat(customer.id,':    ',customer.mail)as mail from customer inner join interested on interested.email=customer.email;");
-           
-            dt = new DataTable();
-            dt.Columns.Add("mail", typeof(String));
-            dt.Load(dr);
-            
-           
-            obj.closeConnection();
-           
+            try
+            {
+                dr = obj.Query("select distinct concat(customer.id,':    ',customer.mail)as mail from customer inner join interested on interested.email=customer.email;");
+
+                dt = new DataTable();
+                dt.Columns.Add("mail", typeof(String));
+                dt.Load(dr);
+
+
+                obj.closeConnection();
+            }catch { }
 
 
         }
@@ -69,24 +74,25 @@ namespace Chinarhomes
 
         private void custlist_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                dpnl.Visible = false;
+                custlist.Enabled = false;
+                loadinglbl.Visible = true;
+                proploading.Visible = true;
+                iflowpnl.Controls.Clear();
+                properties.Clear();
+                i = 0;
 
-            dpnl.Visible = false;
-            custlist.Enabled = false;
-            loadinglbl.Visible = true;
-            proploading.Visible = true;
-            iflowpnl.Controls.Clear();
-            properties.Clear();
-            i = 0;
-          
-            string propid = custlist.Text.Split(':')[0];
+                string propid = custlist.Text.Split(':')[0];
 
 
-            bg = new BackgroundWorker();
-            bg.DoWork += bg_DoWork;
-            bg.RunWorkerCompleted += bg_RunWorkerCompleted;
-            bg.WorkerSupportsCancellation = true;
-            bg.RunWorkerAsync(propid);
-       
+                bg = new BackgroundWorker();
+                bg.DoWork += bg_DoWork;
+                bg.RunWorkerCompleted += bg_RunWorkerCompleted;
+                bg.WorkerSupportsCancellation = true;
+                bg.RunWorkerAsync(propid);
+            }catch { }
         }
 
         private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

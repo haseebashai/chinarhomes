@@ -49,6 +49,7 @@ namespace Chinarhomes
 
             catch (Exception ex)
             {
+                obj.closeConnection();
                 Cursor = Cursors.Arrow;
             }
         }
@@ -71,6 +72,7 @@ namespace Chinarhomes
 
             catch (Exception ex)
             {
+                obj.closeConnection();
                 Cursor = Cursors.Arrow;
                
             }
@@ -94,6 +96,7 @@ namespace Chinarhomes
 
             catch (Exception ex)
             {
+                obj.closeConnection();
                 Cursor = Cursors.Arrow;
             }
         }
@@ -116,6 +119,7 @@ namespace Chinarhomes
 
             catch (Exception ex)
             {
+                obj.closeConnection();
                 Cursor = Cursors.Arrow;
             }
         }
@@ -349,51 +353,57 @@ namespace Chinarhomes
 
         private void policydataview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if (terms)
+            try
             {
-                if (e.RowIndex >= 0)
+                if (terms)
                 {
+                    if (e.RowIndex >= 0)
+                    {
 
-                    DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
-                    id = row.Cells["termsid"].Value.ToString();
-                    headtxt.Text = row.Cells["heading"].Value.ToString();
-                    desctxt.Text = row.Cells["description"].Value.ToString();
+                        DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
+                        id = row.Cells["termsid"].Value.ToString();
+                        headtxt.Text = row.Cells["heading"].Value.ToString();
+                        desctxt.Text = row.Cells["description"].Value.ToString();
+                    }
                 }
-            }else if (faq)
-            {
-                if (e.RowIndex >= 0)
+                else if (faq)
                 {
+                    if (e.RowIndex >= 0)
+                    {
 
-                    DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
-                    id = row.Cells["faqid"].Value.ToString();
-                    headtxt.Text = row.Cells["question"].Value.ToString();
-                    desctxt.Text = row.Cells["answer"].Value.ToString();
+                        DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
+                        id = row.Cells["faqid"].Value.ToString();
+                        headtxt.Text = row.Cells["question"].Value.ToString();
+                        desctxt.Text = row.Cells["answer"].Value.ToString();
+                    }
                 }
-            }else if (about)
-            {
-                if (e.RowIndex >= 0)
+                else if (about)
                 {
+                    if (e.RowIndex >= 0)
+                    {
 
-                    DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
-                    id = row.Cells["aboutid"].Value.ToString();
-                    headtxt.Text = row.Cells["heading"].Value.ToString();
-                    desctxt.Text = row.Cells["description"].Value.ToString();
+                        DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
+                        id = row.Cells["aboutid"].Value.ToString();
+                        headtxt.Text = row.Cells["heading"].Value.ToString();
+                        desctxt.Text = row.Cells["description"].Value.ToString();
+                    }
                 }
-            }else if (contact)
-            {
-                if (e.RowIndex >= 0)
+                else if (contact)
                 {
+                    if (e.RowIndex >= 0)
+                    {
 
-                    DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
-                    id = row.Cells["id"].Value.ToString();
-                    headtxt.Text = row.Cells["name"].Value.ToString();
-                    desctxt.Text = row.Cells["contact"].Value.ToString();
+                        DataGridViewRow row = this.policydataview.Rows[e.RowIndex];
+                        id = row.Cells["id"].Value.ToString();
+                        headtxt.Text = row.Cells["name"].Value.ToString();
+                        desctxt.Text = row.Cells["contact"].Value.ToString();
+                    }
                 }
+                epnl.Visible = true;
+                addbtn.Text = "Update";
+                newentry = false;
             }
-            epnl.Visible = true;
-            addbtn.Text = "Update";
-            newentry = false;
+            catch { }
         }
 
         private void aboutbtn_Click(object sender, EventArgs e)

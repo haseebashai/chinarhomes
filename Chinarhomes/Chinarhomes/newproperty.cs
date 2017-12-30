@@ -33,54 +33,58 @@ namespace Chinarhomes
         long propertyid;
         private void updbtn_Click(object sender, EventArgs e)
         {
-            updpicbtn.Enabled = false;
-            updbtn.Enabled = false;
-            clearpicbtn.Enabled = false;
-            StringBuilder loc = new StringBuilder(locationtxt.Text);
-            loc.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder pname = new StringBuilder(pnametxt.Text);
-            pname.Replace(@"\", @"\\").Replace("'", "\\'");
-            StringBuilder desc = new StringBuilder(desctxt.Text);
-            desc.Replace(@"\", @"\\").Replace("'", "\\'");
-
-            if (locationtxt.Text == "")
+            try
             {
-                MessageBox.Show("Please enter location first.", "Error!");
-            }
-            else
-            {
-                object[] arg = { loc, pname, desc, ptypebox.Text, saletypebox.Text, furnishedtxt.Text };
+                updpicbtn.Enabled = false;
+                updbtn.Enabled = false;
+                clearpicbtn.Enabled = false;
+                StringBuilder loc = new StringBuilder(locationtxt.Text);
+                loc.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder pname = new StringBuilder(pnametxt.Text);
+                pname.Replace(@"\", @"\\").Replace("'", "\\'");
+                StringBuilder desc = new StringBuilder(desctxt.Text);
+                desc.Replace(@"\", @"\\").Replace("'", "\\'");
 
-                BackgroundWorker bg = new BackgroundWorker();
-                bg.DoWork += Bg_DoWork;
-                bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
-                bg.WorkerSupportsCancellation = true;
-
-
-
-                DialogResult dgr = MessageBox.Show("Please ensure all the details are filled and correct before proceeding.", "Confirm!", MessageBoxButtons.OKCancel);
-                if (dgr == DialogResult.OK)
+                if (locationtxt.Text == "")
                 {
-                    if (vyes.Checked == false && vno.Checked == false)
-                    {
-                        MessageBox.Show("Please check verification type.", "Error!");
-                        vyes.Focus();
-                    }
-                    else
-                    {
-                        ppnl.Visible = true;
-                        bg.RunWorkerAsync(arg);
-
-                    }
+                    MessageBox.Show("Please enter location first.", "Error!");
                 }
                 else
                 {
-                    ppnl.Visible = false;
-                    updbtn.Enabled = true;
-                    clearpicbtn.Enabled = true;
-                    updpicbtn.Enabled = true;
+                    object[] arg = { loc, pname, desc, ptypebox.Text, saletypebox.Text, furnishedtxt.Text };
+
+                    BackgroundWorker bg = new BackgroundWorker();
+                    bg.DoWork += Bg_DoWork;
+                    bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
+                    bg.WorkerSupportsCancellation = true;
+
+
+
+                    DialogResult dgr = MessageBox.Show("Please ensure all the details are filled and correct before proceeding.", "Confirm!", MessageBoxButtons.OKCancel);
+                    if (dgr == DialogResult.OK)
+                    {
+                        if (vyes.Checked == false && vno.Checked == false)
+                        {
+                            MessageBox.Show("Please check verification type.", "Error!");
+                            vyes.Focus();
+                        }
+                        else
+                        {
+                            ppnl.Visible = true;
+                            bg.RunWorkerAsync(arg);
+
+                        }
+                    }
+                    else
+                    {
+                        ppnl.Visible = false;
+                        updbtn.Enabled = true;
+                        clearpicbtn.Enabled = true;
+                        updpicbtn.Enabled = true;
+                    }
                 }
             }
+            catch { }
         }
         
         private void Bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -126,91 +130,94 @@ namespace Chinarhomes
 
         private void Bg_DoWork(object sender, DoWorkEventArgs e)
         {
-
-            Object[] arg = e.Argument as Object[];
-            StringBuilder loc = (StringBuilder)arg[0];
-            StringBuilder pname = (StringBuilder)arg[1];
-            StringBuilder desc = (StringBuilder)arg[2];
-            string ptype = (string)arg[3];
-            string saletype = (string)arg[4];
-            string furnished = (string)arg[5];
-
-
-
-            int ver = 0;
-
-        if (verified)
-            ver = 1;
-        else
-            ver = 0;
-        try
-        {
-           
-
-
-
-            cmd = "INSERT INTO `chinarhomes`.`properties` (`location`, `tags`, `type`, `noofstories`, `noofrooms`, `area`,`areaofbuilt`, " +
-          "`price`, `priority`, `description`, `distancefrommain`, `age`, `furnished`, `verified`, `email`, `saletype`,`verifiedby`,`name`)" +
-          " VALUES ('" + loc + "', '" + pname + " " + loc + " " + tagstxt.Text + "', '" + ptype + "', '" + floorstxt.Text + "', '" + roomstxt.Text + "', '" + areatxt.Text + "', '" + areaptxt.Text + "','" + pricetxt.Text + "'," +
-          " '" + prioritytxt.Text + "', '" + desc + "', '" + distancetxt.Text + "', '" + agetxt.Text + "', '" + furnished + "', '" + ver + "','21c46b0ac82e494ad94106564b411686', '" + saletype + "','" + userinfo.email + "','" + pname + "')";
-            obj.nonQuery(cmd);
-
-            propertyid = userinfo.lastid;
-
-                foreach (string adr in pics)
-                {
-                    if (picfailed)
-                    {
-                        e.Result = "fail";
-                        e.Cancel = true;
-                        
-                    }
-                    else
-                    {
-
-                        ext = adr.Substring(adr.LastIndexOf("."));
-                        if (ver == 1)
-                        {
-                            UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/", adr);
-                        }
-                        else if (ver == 0)
-                        {
-                            UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/uploads/", adr);
-
-                        }
-
-                        if (dp == 1)
-                        {
-
-                            string dpname = adr.Substring(adr.LastIndexOf("\\"));
-                            cmd = "update properties set picture='" + propertyid + "-" + dp + ext + "' where propertyid='" + propertyid + "'";
-                            obj.nonQuery(cmd);
-                            obj.closeConnection();
-
-                            dp++;
-                        }
-                        else if (dp > 1)
-                        {
-
-                            string picsname = adr.Substring(adr.LastIndexOf("\\"));
-                            cmd = "insert into pictures (`propertyid`,`picture`)values('" + propertyid + "','" + propertyid + "-" + dp + ext + "')";
-                            obj.nonQuery(cmd);
-                            obj.closeConnection();
-                            dp++;
-
-                        }
-                        e.Result = "success";
-                    }
-                }
-                
-                dp = 1;
-            }
-            catch (MySqlException ex)
+            try
             {
-                e.Result =  "fail";
-                obj.closeConnection();
-              
+                Object[] arg = e.Argument as Object[];
+                StringBuilder loc = (StringBuilder)arg[0];
+                StringBuilder pname = (StringBuilder)arg[1];
+                StringBuilder desc = (StringBuilder)arg[2];
+                string ptype = (string)arg[3];
+                string saletype = (string)arg[4];
+                string furnished = (string)arg[5];
+
+
+
+                int ver = 0;
+
+                if (verified)
+                    ver = 1;
+                else
+                    ver = 0;
+                try
+                {
+
+
+
+
+                    cmd = "INSERT INTO `chinarhomes`.`properties` (`location`, `tags`, `type`, `noofstories`, `noofrooms`, `area`,`areaofbuilt`, " +
+                  "`price`, `priority`, `description`, `distancefrommain`, `age`, `furnished`, `verified`, `email`, `saletype`,`verifiedby`,`name`)" +
+                  " VALUES ('" + loc + "', '" + pname + " " + loc + " " + tagstxt.Text + "', '" + ptype + "', '" + floorstxt.Text + "', '" + roomstxt.Text + "', '" + areatxt.Text + "', '" + areaptxt.Text + "','" + pricetxt.Text + "'," +
+                  " '" + prioritytxt.Text + "', '" + desc + "', '" + distancetxt.Text + "', '" + agetxt.Text + "', '" + furnished + "', '" + ver + "','21c46b0ac82e494ad94106564b411686', '" + saletype + "','" + userinfo.email + "','" + pname + "')";
+                    obj.nonQuery(cmd);
+
+                    propertyid = userinfo.lastid;
+
+                    foreach (string adr in pics)
+                    {
+                        if (picfailed)
+                        {
+                            e.Result = "fail";
+                            e.Cancel = true;
+
+                        }
+                        else
+                        {
+
+                            ext = adr.Substring(adr.LastIndexOf("."));
+                            if (ver == 1)
+                            {
+                                UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/pictures/", adr);
+                            }
+                            else if (ver == 0)
+                            {
+                                UploadFileToFtp("ftp://chinarhomes.com/httpdocs/chinarhomes/uploads/", adr);
+
+                            }
+
+                            if (dp == 1)
+                            {
+
+                                string dpname = adr.Substring(adr.LastIndexOf("\\"));
+                                cmd = "update properties set picture='" + propertyid + "-" + dp + ext + "' where propertyid='" + propertyid + "'";
+                                obj.nonQuery(cmd);
+                                obj.closeConnection();
+
+                                dp++;
+                            }
+                            else if (dp > 1)
+                            {
+
+                                string picsname = adr.Substring(adr.LastIndexOf("\\"));
+                                cmd = "insert into pictures (`propertyid`,`picture`)values('" + propertyid + "','" + propertyid + "-" + dp + ext + "')";
+                                obj.nonQuery(cmd);
+                                obj.closeConnection();
+                                dp++;
+
+                            }
+                            e.Result = "success";
+                        }
+                    }
+
+                    dp = 1;
+                }
+                catch (MySqlException ex)
+                {
+                    e.Result = "fail";
+                    obj.closeConnection();
+
+                }
             }
+            catch { }
         }
 
         private void clearpicbtn_Click(object sender, EventArgs e)
@@ -227,57 +234,61 @@ namespace Chinarhomes
 
         private void updpicbtn_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "Images (*.JPG;*.PNG)|*.JPG;*.PNG" ;
-
-
-            fd.Multiselect = true;
-            fd.Title = "Image Browser";
-            DialogResult dr = fd.ShowDialog();
-            if (dr == DialogResult.OK)
+            try
             {
+                OpenFileDialog fd = new OpenFileDialog();
+                fd.Filter = "Images (JPG,JPEG,PNG)|*.JPG;*.JPEG;*.PNG";
 
-                foreach (String file in fd.FileNames)
+
+                fd.Multiselect = true;
+                fd.Title = "Image Browser";
+                DialogResult dr = fd.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
 
-                    try
-                    {
-                        pics.Add(file);
-                        PictureBox pb = new PictureBox();
-                        pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                        Image loadedImage = Image.FromFile(file);
-                        pb.Height = 182;
-                        pb.Width = 242;
-                        pb.Image = loadedImage;
-                        flowpnl.AutoScroll = true;
-                        flowpnl.Controls.Add(pb);
-                    }
-                    catch (SecurityException ex)
+                    foreach (String file in fd.FileNames)
                     {
 
-                        MessageBox.Show("Security error. Please contact your administrator for details.\n\n" +
-                        "Error message: " + ex.Message + "\n\n" +
-                        "Details (send to Support):\n\n" + ex.StackTrace);
-                        pics.Remove(pics.Last());
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\'))
-                         + ". You may not have permission to read the file, or " +
-                        "it may be corrupt.\n\nReported error: " + ex.Message);
-                        pics.Remove(pics.Last());
-                    }
-                    if (pics.Count > 0)
-                    {
-                        updpicbtn.Location = new Point(43, 128);
-                        flowpnl.Visible = true;
-                        updbtn.Visible = true;
+                        try
+                        {
+                            pics.Add(file);
+                            PictureBox pb = new PictureBox();
+                            pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                            Image loadedImage = Image.FromFile(file);
+                            pb.Height = 182;
+                            pb.Width = 242;
+                            pb.Image = loadedImage;
+                            flowpnl.AutoScroll = true;
+                            flowpnl.Controls.Add(pb);
+                        }
+                        catch (SecurityException ex)
+                        {
 
-                        clearpicbtn.Visible = true;
-                        updpicbtn.Text = "Add more Pictures";
+                            MessageBox.Show("Security error. Please contact your administrator for details.\n\n" +
+                            "Error message: " + ex.Message + "\n\n" +
+                            "Details (send to Support):\n\n" + ex.StackTrace);
+                            pics.Remove(pics.Last());
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\'))
+                             + ". You may not have permission to read the file, or " +
+                            "it may be corrupt.\n\nReported error: " + ex.Message);
+                            pics.Remove(pics.Last());
+                        }
+                        if (pics.Count > 0)
+                        {
+                            updpicbtn.Location = new Point(43, 128);
+                            flowpnl.Visible = true;
+                            updbtn.Visible = true;
+
+                            clearpicbtn.Visible = true;
+                            updpicbtn.Text = "Add more Pictures";
+                        }
                     }
                 }
             }
+            catch { }
         }
 
 

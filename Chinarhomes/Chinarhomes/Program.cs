@@ -37,7 +37,7 @@ namespace Chinarhomes
 
         public DBConnect()
         {
-            conn = new MySqlConnection("SERVER=148.72.232.182;DATABASE=chinarhomes;USER=chinarhomes;PASSWORD=Chinar@123chinar;");
+            conn = new MySqlConnection("SERVER=148.72.232.182;DATABASE=chinarhomes;USER=chinarhomes;PASSWORD=Chinar@123chinar;convert zero datetime=true");
 
         }
 

@@ -171,21 +171,23 @@ namespace Chinarhomes
        
         private void customerdataview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            ppnl.Visible = false;
-            dpnl.Visible = false;
-            if (e.RowIndex >= 0)
+            try
             {
-                DataGridViewRow row = this.customerdataview.Rows[e.RowIndex];
-                email = row.Cells["email"].Value.ToString();
-                emaillbl.Text = row.Cells["mail"].Value.ToString();
-                namelbl.Text = row.Cells["name"].Value.ToString();
-                contactlbl.Text = row.Cells["contact"].Value.ToString();
-               
-                loadinglbl.Visible = false;
-                proploading.Visible = false;
-                loadbtn.Visible = true;
-            }
+                ppnl.Visible = false;
+                dpnl.Visible = false;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridViewRow row = this.customerdataview.Rows[e.RowIndex];
+                    email = row.Cells["email"].Value.ToString();
+                    emaillbl.Text = row.Cells["mail"].Value.ToString();
+                    namelbl.Text = row.Cells["name"].Value.ToString();
+                    contactlbl.Text = row.Cells["contact"].Value.ToString();
+
+                    loadinglbl.Visible = false;
+                    proploading.Visible = false;
+                    loadbtn.Visible = true;
+                }
+            }catch { }
         }
 
         private void loadbtn_Click(object sender, EventArgs e)
@@ -211,17 +213,18 @@ namespace Chinarhomes
 
         private void Details_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            try
+            {
+                loadinglbl.Visible = false;
+                proploading.Visible = false;
 
-            loadinglbl.Visible = false;
-            proploading.Visible = false;
-          
                 ilbl.Text = namelbl.Text + " is interested in:";
                 wlbl.Text = "and has wishlisted these properties:";
 
 
                 foreach (string d in ip)
                 {
-                   
+
                     TextBox t = new TextBox()
                     {
                         Text = d,
@@ -239,7 +242,7 @@ namespace Chinarhomes
 
                 foreach (string d in wip)
                 {
-                    
+
                     TextBox t = new TextBox()
                     {
                         Text = d,
@@ -255,20 +258,23 @@ namespace Chinarhomes
                 }
 
 
-            
 
-            dpnl.Visible = true;
+
+                dpnl.Visible = true;
                 ppnl.Visible = true;
                 customerdataview.Enabled = true;
-            
+            }catch { }
             
         }
 
         private void emailtxt_TextChanged(object sender, EventArgs e)
         {
-            DataView dv = new DataView(dt1);
-            dv.RowFilter = string.Format("mail LIKE '%{0}%'", emailtxt.Text);
-            customerdataview.DataSource = dv;
+            try
+            {
+                DataView dv = new DataView(dt1);
+                dv.RowFilter = string.Format("mail LIKE '%{0}%'", emailtxt.Text);
+                customerdataview.DataSource = dv;
+            }catch { }
         }
 
 
@@ -276,9 +282,12 @@ namespace Chinarhomes
 
         private void usertxt_TextChanged(object sender, EventArgs e)
         {
-            DataView dv = new DataView(dt1);
-            dv.RowFilter = string.Format("name LIKE '%{0}%'", usertxt.Text);
-            customerdataview.DataSource = dv;
+            try
+            {
+                DataView dv = new DataView(dt1);
+                dv.RowFilter = string.Format("name LIKE '%{0}%'", usertxt.Text);
+                customerdataview.DataSource = dv;
+            }catch { }
         }
 
     }

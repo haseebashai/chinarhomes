@@ -55,12 +55,16 @@ namespace Chinarhomes
 
         private void readproperties()
         {
-            dr = obj.Query("select concat(propertyid,':     ',location) as location from properties");
+            try
+            {
+                dr = obj.Query("select concat(propertyid,':     ',location) as location from properties");
 
-            dt = new DataTable();
-            dt.Columns.Add("location", typeof(String));
-            dt.Load(dr);
-            obj.closeConnection();
+                dt = new DataTable();
+                dt.Columns.Add("location", typeof(String));
+                dt.Load(dr);
+                obj.closeConnection();
+            }
+            catch { }
             
 
         }
@@ -161,26 +165,28 @@ namespace Chinarhomes
 
         private void proplist_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            
-            pwdent = false;
-            pwdtxt.Text = "";
-            pwdpnl.Visible = false;
-            dpnl.Visible = false;
-            proplist.Enabled = false;
-            loadinglbl.Visible = true;
-            proploading.Visible = true;
-            iflowpnl.Controls.Clear();
-            pathurl.Clear();
-            i = 0;
-            string propid = proplist.Text.Split(':')[0];
-            
-            bg = new BackgroundWorker();
-            bg.DoWork += bg_DoWork;
-            bg.RunWorkerCompleted += bg_RunWorkerCompleted;
-            bg.WorkerSupportsCancellation = true;
-            bg.RunWorkerAsync(propid);
 
+            try
+            {
+                pwdent = false;
+                pwdtxt.Text = "";
+                pwdpnl.Visible = false;
+                dpnl.Visible = false;
+                proplist.Enabled = false;
+                loadinglbl.Visible = true;
+                proploading.Visible = true;
+                iflowpnl.Controls.Clear();
+                pathurl.Clear();
+                i = 0;
+                string propid = proplist.Text.Split(':')[0];
+
+                bg = new BackgroundWorker();
+                bg.DoWork += bg_DoWork;
+                bg.RunWorkerCompleted += bg_RunWorkerCompleted;
+                bg.WorkerSupportsCancellation = true;
+                bg.RunWorkerAsync(propid);
+            }
+            catch { }
            
         }
 
@@ -240,10 +246,10 @@ namespace Chinarhomes
         bool success = false;
         private void bg_DoWork(object sender, DoWorkEventArgs e)
         {
-           
+            try
+            {
                 string propid = e.Argument as string;
-                try
-                {
+                
                     dr = obj.Query("select propertyid,location,name,price,email,picture,verified from properties where propertyid='" + propid + "'");
                     dr.Read();
                     pid = dr[0].ToString();
