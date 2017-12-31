@@ -39,7 +39,7 @@ namespace Chinarhomes
             {
                 string count = (string)e.UserState;
 
-                if (count == "0")
+                if (count == "0" || !userinfo.admin)
                 {
                     msglbl.Visible = false;
                 }
@@ -507,6 +507,7 @@ namespace Chinarhomes
                 profbtn.Visible = false;
                 agpic.Visible = false;
                 custpic.Visible = false;
+                msglbl.Visible = false;
                 label4.Visible = false;
                 label6.Visible = false;
                 msgpic.Location = new Point(240, 330);
