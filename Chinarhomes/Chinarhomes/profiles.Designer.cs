@@ -45,6 +45,7 @@
             this.nametxt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dpnl = new System.Windows.Forms.Panel();
+            this.rmvpbtn = new System.Windows.Forms.Button();
             this.errlbl = new System.Windows.Forms.Label();
             this.uplbl = new System.Windows.Forms.Label();
             this.dp = new System.Windows.Forms.PictureBox();
@@ -57,6 +58,7 @@
             this.jobbtn = new System.Windows.Forms.Button();
             this.profbtn = new System.Windows.Forms.Button();
             this.jdpnl = new System.Windows.Forms.Panel();
+            this.rmvjbtn = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.posttxt = new System.Windows.Forms.TextBox();
             this.umailtxt = new System.Windows.Forms.TextBox();
@@ -73,8 +75,6 @@
             this.usernametxt = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.loading = new System.Windows.Forms.PictureBox();
-            this.rmvjbtn = new System.Windows.Forms.Button();
-            this.rmvpbtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.jobdataview)).BeginInit();
             this.dpnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dp)).BeginInit();
@@ -193,15 +193,16 @@
             // 
             // skilltxt
             // 
-            this.skilltxt.Location = new System.Drawing.Point(244, 120);
+            this.skilltxt.Location = new System.Drawing.Point(244, 191);
+            this.skilltxt.Multiline = true;
             this.skilltxt.Name = "skilltxt";
-            this.skilltxt.Size = new System.Drawing.Size(232, 20);
+            this.skilltxt.Size = new System.Drawing.Size(232, 85);
             this.skilltxt.TabIndex = 4;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(241, 103);
+            this.label9.Location = new System.Drawing.Point(241, 174);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(31, 13);
             this.label9.TabIndex = 17;
@@ -271,6 +272,18 @@
             this.dpnl.TabIndex = 4;
             this.dpnl.Visible = false;
             // 
+            // rmvpbtn
+            // 
+            this.rmvpbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.rmvpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rmvpbtn.Location = new System.Drawing.Point(1059, 7);
+            this.rmvpbtn.Name = "rmvpbtn";
+            this.rmvpbtn.Size = new System.Drawing.Size(92, 30);
+            this.rmvpbtn.TabIndex = 114;
+            this.rmvpbtn.Text = "Remove Profile";
+            this.rmvpbtn.UseVisualStyleBackColor = false;
+            this.rmvpbtn.Click += new System.EventHandler(this.rmvpbtn_Click);
+            // 
             // errlbl
             // 
             this.errlbl.AutoSize = true;
@@ -312,7 +325,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(241, 173);
+            this.label11.Location = new System.Drawing.Point(241, 103);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(40, 13);
             this.label11.TabIndex = 110;
@@ -320,7 +333,7 @@
             // 
             // schooltxt
             // 
-            this.schooltxt.Location = new System.Drawing.Point(244, 190);
+            this.schooltxt.Location = new System.Drawing.Point(244, 120);
             this.schooltxt.Name = "schooltxt";
             this.schooltxt.Size = new System.Drawing.Size(232, 20);
             this.schooltxt.TabIndex = 6;
@@ -328,6 +341,7 @@
             // exptxt
             // 
             this.exptxt.Location = new System.Drawing.Point(22, 190);
+            this.exptxt.Multiline = true;
             this.exptxt.Name = "exptxt";
             this.exptxt.Size = new System.Drawing.Size(169, 20);
             this.exptxt.TabIndex = 5;
@@ -410,6 +424,18 @@
             this.jdpnl.Size = new System.Drawing.Size(1162, 352);
             this.jdpnl.TabIndex = 6;
             this.jdpnl.Visible = false;
+            // 
+            // rmvjbtn
+            // 
+            this.rmvjbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.rmvjbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rmvjbtn.Location = new System.Drawing.Point(1073, 7);
+            this.rmvjbtn.Name = "rmvjbtn";
+            this.rmvjbtn.Size = new System.Drawing.Size(77, 30);
+            this.rmvjbtn.TabIndex = 111;
+            this.rmvjbtn.Text = "Remove Job";
+            this.rmvjbtn.UseVisualStyleBackColor = false;
+            this.rmvjbtn.Click += new System.EventHandler(this.rmvjbtn_Click);
             // 
             // label10
             // 
@@ -582,30 +608,6 @@
             this.loading.TabIndex = 52;
             this.loading.TabStop = false;
             this.loading.Visible = false;
-            // 
-            // rmvjbtn
-            // 
-            this.rmvjbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.rmvjbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rmvjbtn.Location = new System.Drawing.Point(1073, 7);
-            this.rmvjbtn.Name = "rmvjbtn";
-            this.rmvjbtn.Size = new System.Drawing.Size(77, 30);
-            this.rmvjbtn.TabIndex = 111;
-            this.rmvjbtn.Text = "Remove Job";
-            this.rmvjbtn.UseVisualStyleBackColor = false;
-            this.rmvjbtn.Click += new System.EventHandler(this.rmvjbtn_Click);
-            // 
-            // rmvpbtn
-            // 
-            this.rmvpbtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.rmvpbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rmvpbtn.Location = new System.Drawing.Point(1059, 7);
-            this.rmvpbtn.Name = "rmvpbtn";
-            this.rmvpbtn.Size = new System.Drawing.Size(92, 30);
-            this.rmvpbtn.TabIndex = 114;
-            this.rmvpbtn.Text = "Remove Profile";
-            this.rmvpbtn.UseVisualStyleBackColor = false;
-            this.rmvpbtn.Click += new System.EventHandler(this.rmvpbtn_Click);
             // 
             // profiles
             // 
