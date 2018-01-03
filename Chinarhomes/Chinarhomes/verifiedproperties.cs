@@ -622,7 +622,7 @@ namespace Chinarhomes
 
         private void areatxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
             }
@@ -630,7 +630,7 @@ namespace Chinarhomes
 
         private void areaptxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
             }
@@ -717,7 +717,7 @@ namespace Chinarhomes
 
         private void areatxt_Leave(object sender, EventArgs e)
         {
-            if (!Regex.IsMatch(areatxt.Text, @"^([0-9]+)$") && areatxt.Text != "")
+            if (!Regex.IsMatch(areatxt.Text, @"^([0-9.]+)$") && areatxt.Text != "")
             {
 
                 MessageBox.Show("Please enter correct number.", "Error!");
@@ -728,7 +728,7 @@ namespace Chinarhomes
 
         private void areaptxt_Leave(object sender, EventArgs e)
         {
-            if (!Regex.IsMatch(areaptxt.Text, @"^([0-9]+)$") && areaptxt.Text != "")
+            if (!Regex.IsMatch(areaptxt.Text, @"^([0-9.]+)$") && areaptxt.Text != "")
             {
 
                 MessageBox.Show("Please enter correct number.", "Error!");
